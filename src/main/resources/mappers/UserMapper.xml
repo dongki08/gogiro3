@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.user.UserMapper">
+    <insert id="signupUser" useGeneratedKeys="true" keyProperty="iuser">
+        INSERT INTO t_user
+        SET
+        email = #{email},
+        upw = #{upw},
+        name = #{name},
+        nickname = #{nickname},
+        birth = #{birth},
+        gender = #{gender},
+        address = #{address},
+        tel= #{tel}
+    </insert>
+    <update id="updUserPic">
+        UPDATE
+        t_user
+        SET
+            pic = #{pic}
+        WHERE iuser= #{iuser}
+    </update>
+
+    <select id="selIuserForTest">
+        SELECT
+            MAX(iuser)
+        FROM t_user
+    </select>
+
+    <select id="checkNicknameBeforeUpdate">
+        SELECT
+        nickname
+        FROM t_user
+        WHERE iuser= #{iuser}
+    </select>
+    <update id="updateUser">
+        update t_user
+        set nickname = #{nickname},
+        address = #{address},
+        <if test="pic!=null">
+            pic = #{pic},
+        </if>
+        tel = #{tel}
+        where iuser = #{iuser}
+    </update>
+
+    <select id="selUserInfo">
+        SELECT
+        email,
+        name,
+        nickname,
+        birth,
+        gender,
+        address,
+        pic,
+        tel
+        FROM t_user
+        where iuser= #{iuser}
+    </select>
+
+    <!-- entity용 -->
+    <select id="userEntity">
+        SELECT iuser, email, upw, name, nickname
+        , birth, gender, address, pic, tel
+        , created_at as createdAt
+        FROM t_user
+        WHERE email = #{email}
+    </select>
+
+    <select id="checkNickname">
+        SELECT nickname
+        FROM t_user
+        WHERE nickname = #{nickname}
+    </select>
+
+    <select id="checkEmail">
+        SELECT email
+        FROM t_user
+        WHERE email = #{email}
+    </select>
+
+
+
+    <select id="selReservation">
+        SELECT
+        0 AS checkShop,
+        a.ireser,
+        a.ishop,
+        b.name,
+        a.date,
+        a.request,
+        if(TIMESTAMPDIFF(minute,a.`date`,NOW()) >= 0,2,a.confirm) AS confirm,
+        a.created_at AS createdAt,
+        a.head_count AS headCount,
+        if(c.iuser IS NULL, 0 , 1) AS isBook,
+        d.pic
+        FROM t_reservation a
+        JOIN t_shop b
+        ON a.ishop= b.ishop
+        LEFT JOIN t_shop_bookmark c
+        ON a.ishop= c.ishop AND a.iuser= c.iuser
+        LEFT JOIN t_shop_pic d
+        ON a.ishop= d.ishop
+        WHERE a.iuser = #{iuser} AND a.confirm = 0
+        GROUP BY a.ireser
+        UNION
+        SELECT
+        1 AS checkShop,
+        e.ipickup AS ireser,
+        e.ibutcher AS ishop,
+        b.name,
+        e.date,
+        e.request,
+        if(TIMESTAMPDIFF(minute,e.`date`,NOW()) >= 0 ,2 ,e.confirm) AS confirm,
+        e.created_at AS createdAt,
+        0 AS headCount,
+        if(c.iuser IS NULL, 0 , 1) AS isBook,
+        d.pic
+        FROM t_pickup e
+        JOIN t_butcher_shop b
+        ON e.ibutcher= b.ibutcher
+        LEFT JOIN t_but_bookmark c
+        ON e.ibutcher= c.ibutcher AND e.iuser= c.iuser
+        LEFT JOIN t_butcher_pic d
+        ON e.ibutcher= d.ibutcher
+        WHERE e.iuser = #{iuser} AND e.confirm = 0
+        GROUP BY e.ipickup
+        ORDER BY createdAt DESC
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+    <select id="selUserReservationCount">
+        SELECT
+            SUM(count)
+        FROM (
+            SELECT
+                COUNT(*) AS count
+            FROM t_reservation
+            WHERE iuser= #{iuser}
+            union
+            SELECT
+                COUNT(*) AS count
+            FROM t_pickup
+            WHERE iuser= #{iuser}) a
+    </select>
+    <select id="selUserReview">
+        SELECT
+        0 AS checkShop,
+        a.ireview,
+        a.ishop,
+        b.name,
+        a.review,
+        a.star,
+        a.created_at AS createdAt,
+        if(c.iuser IS NULL, 0, 1) AS isBook,
+        d.pic
+        FROM t_shop_review a
+        JOIN t_shop b
+        ON a.ishop= b.ishop
+        LEFT JOIN t_shop_bookmark c
+        ON a.ishop= c.ishop
+        LEFT JOIN t_shop_pic d
+        ON a.ishop= d.ishop
+        WHERE a.iuser = #{iuser}
+        GROUP BY a.ireview
+        UNION
+        SELECT
+        1 AS checkShop,
+        a.ireview,
+        a.ibutcher AS ishop,
+        b.name,
+        a.review,
+        a.star,
+        a.created_at AS createdAt,
+        if(c.iuser IS NULL, 0, 1) AS isBook,
+        d.pic
+        FROM t_but_review a
+        JOIN t_butcher_shop b
+        ON a.ibutcher= b.ibutcher
+        LEFT JOIN t_but_bookmark c
+        ON a.ibutcher= c.ibutcher
+        LEFT JOIN t_butcher_pic d
+        ON a.ibutcher= d.ibutcher
+        WHERE a.iuser = #{iuser}
+        GROUP BY a.ireview
+        ORDER BY createdAt DESC
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+    <select id="selUserReviewCount">
+        SELECT
+            SUM(count)
+        FROM (
+            SELECT
+                COUNT(*) AS count
+            FROM t_shop_review
+            WHERE iuser= #{iuser}
+            union
+            SELECT
+                COUNT(*) AS count
+            FROM t_but_review
+            WHERE iuser= #{iuser}) a
+    </select>
+    <select id="selUserReviewPic">
+        SELECT
+            pic
+        FROM
+        <choose>
+            <when test="checkShop==0">
+                t_shop_review_pic
+            </when>
+            <otherwise>
+                t_but_review_pic
+            </otherwise>
+        </choose>
+        WHERE ireview= #{ireview}
+    </select>
+
+    <select id="selUserBookmark">
+        SELECT
+        a.imeat,
+        a.ishop,
+        a.name,
+        a.location,
+        a.`open`,
+        a.tel,
+        c.mtype,
+        b.created_at AS createdAt,
+        d.pic
+        FROM t_shop a
+        JOIN (SELECT
+        ishop,
+        iuser,
+        created_at
+        FROM t_shop_bookmark
+        ) b
+        ON a.ishop= b.ishop
+        JOIN t_category c
+        ON a.imeat = c.imeat
+        AND b.iuser= #{iuser}
+        LEFT JOIN t_shop_pic d
+        ON a.ishop= d.ishop
+        GROUP BY a.ishop
+        UNION
+        SELECT
+        0 AS imeat,
+        a.ibutcher AS ishop,
+        a.name,
+        a.location,
+        a.`open`,
+        a.tel,
+        NULL mtype,
+        b.created_at AS createdAt,
+        d.pic
+        FROM t_butcher_shop a
+        JOIN (SELECT
+        ibutcher,
+        iuser,
+        created_at
+        FROM t_but_bookmark
+        ) b
+        ON a.ibutcher= b.ibutcher
+        AND b.iuser= #{iuser}
+        LEFT JOIN t_butcher_pic d
+        ON a.ibutcher= d.ibutcher
+        GROUP BY a.ibutcher
+        ORDER BY createdAt DESC
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+    <select id="selUserBookmarkCount">
+        SELECT
+            SUM(count)
+        FROM (
+            SELECT
+                COUNT(*) AS count
+            FROM t_shop_bookmark
+            WHERE iuser= #{iuser}
+            union
+            SELECT
+                COUNT(*) AS count
+            FROM t_but_bookmark
+            WHERE iuser= #{iuser}) a
+    </select>
+    <delete id="delShopReviewPics">
+        DELETE
+        FROM
+        <choose>
+            <when test="check">
+                t_shop_review_pic
+            </when>
+            <otherwise>
+                t_but_review_pic
+            </otherwise>
+        </choose>
+        where ireview= #{ireview}
+    </delete>
+    <delete id="delShopReview">
+        DELETE
+        FROM
+        <choose>
+            <when test="check">
+                t_shop_review
+            </when>
+            <otherwise>
+                t_but_review
+            </otherwise>
+        </choose>
+        where ireview= #{ireview}
+        AND iuser= #{iuser}
+    </delete>
+    <select id="selShopReviewPicForTest1">
+        SELECT
+            MAX(ireview)
+        FROM t_shop_review_pic
+    </select>
+
+    <select id="selShopReviewPicForTest2">
+        SELECT
+            ireview, iuser
+        FROM t_shop_review
+        WHERE ireview= #{ireview}
+    </select>
+    <select id="selButReviewPicForTest1">
+        SELECT
+            MAX(ireview)
+        FROM t_but_review_pic
+    </select>
+    <select id="selButReviewPicForTest2">
+        SELECT
+            ireview, iuser
+        FROM t_but_review
+        WHERE ireview= #{ireview}
+    </select>
+</mapper>

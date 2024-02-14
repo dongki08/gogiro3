@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.butchershop.ButcherShopMapper">
+
+    <select id="selButcherShopAll">
+        SELECT a.ibutcher, a.name, a.location
+        FROM t_butcher_shop a
+        <choose>
+            <when test="filter==1">
+                left join t_but_review b
+                on a.ibutcher = b.ibutcher
+            </when>
+            <when test="filter==2">
+                left join t_but_bookmark b
+                on a.ibutcher = b.ibutcher
+            </when>
+        </choose>
+        <where>
+            <if test="search != null and search != '' ">
+                name like CONCAT('%',#{search},'%')
+            </if>
+        </where>
+        <choose>
+            <when test="filter==1">
+                group by a.ibutcher
+                order by IFNULL(ROUND(avg(b.star)),0) DESC, a.ibutcher desc
+            </when>
+            <when test="filter==2">
+                GROUP BY a.ibutcher
+                ORDER BY count(b.iuser) DESC, a.ibutcher desc
+            </when>
+        </choose>
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selListCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_butcher_shop
+    </select>
+
+    <select id="selReviewCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_but_review
+        WHERE ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selButcherShopPicList">
+        SELECT
+            ibutcher,
+            pic
+        FROM t_butcher_pic
+        WHERE ibutcher in
+        <foreach collection="pk" item="ibutcher" open="(" close=")" separator=",">
+            #{ibutcher}
+        </foreach>
+    </select>
+
+    <select id="selButcherShopPics">
+        SELECT
+            pic
+        FROM t_butcher_pic
+        WHERE ibutcher = #{ibutcher}
+    </select>
+
+    <insert id="insButcherReview" useGeneratedKeys="true" keyProperty="ireview">
+        INSERT INTO t_but_review
+        SET iuser = #{iuser}
+        , ibutcher = #{ibutcher}
+        , star = #{star}
+        <if test="review != null != ' '">
+        , review = #{review}
+        </if>
+    </insert>
+
+
+    <select id="selButcherShopDetail">
+        SELECT A.ibutcher, A.NAME, A.location, A.open, A.tel, ROUND(ifnull(AVG(C.star),0)) AS star,A.`x`, A.`y`
+        ,if(D.ibutcher IS NULL , 0 , 1) AS isBook
+        FROM t_butcher_shop AS A
+        JOIN t_but_menu AS B
+        ON A.ibutcher = B.ibutcher
+        JOIN t_but_review C
+        ON C.ibutcher = A.ibutcher
+        LEFT JOIN t_but_bookmark D
+        ON D.ibutcher= A.ibutcher
+        AND D.iuser= #{iuser}
+        WHERE A.ibutcher = #{ibutcher}
+    </select>
+    <select id="selButcherMenu">
+        SELECT
+        ibut_menu
+        FROM t_but_menu
+        WHERE ibutcher = #{ibutcher}
+    </select>
+    <select id="selButcherMenuAndPk">
+        SELECT
+        ibut_menu as ibutMenu,
+        menu
+        FROM t_but_menu
+        WHERE ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selMenuDetail">
+        SELECT ibutcher,ibut_menu as ibutMenu ,menu,price,pic
+        FROM t_but_menu
+        WHERE ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selReviewDetail">
+        SELECT a.ibutcher ,c.iuser,c.pic as writerPic ,a.ireview,c.nickname,a.star,a.review
+        FROM t_but_review a
+        JOIN t_user c
+        ON a.iuser = c.iuser
+        WHERE a.ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selReviewPicDetail">
+        SELECT a.ireview, a.pic
+        FROM t_but_review_pic a
+        JOIN t_but_review b
+        ON a.ireview = b.ireview
+        WHERE b.ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selButcherEntity">
+        SELECT ibutcher, name, location, x, y,created_at as createdAt
+        FROM t_butcher_shop
+        WHERE ibutcher = #{ibutcher}
+    </select>
+
+    <select id="selButcherPicsForTest">
+        SELECT
+            pic
+        FROM t_butcher_pic
+        WHERE ibutcher= #{ibutcher}
+    </select>
+
+    <select id="selIreviewForTest">
+        SELECT
+            MAX(ireview)+1
+        FROM t_but_review
+    </select>
+
+    <sql id="alterIreviewAutoIncrementForTest">
+        ALTER
+        TABLE t_but_review
+        AUTO_INCREMENT= #{autoIncrement}
+    </sql>
+
+    <select id="selButcherBookmark">
+        SELECT
+            iuser
+        FROM t_but_bookmark
+        where iuser= #{iuser}
+        AND ibutcher= #{ibutcher}
+    </select>
+
+    <insert id="butcherBookmarkOn">
+        INSERT INTO
+        t_but_bookmark
+        SET
+        iuser= #{iuser},
+        ibutcher=#{ibutcher}
+    </insert>
+
+    <delete id="butcherBookmarkOff">
+        DELETE
+        FROM t_but_bookmark
+        WHERE iuser= #{iuser}
+        AND ibutcher= #{ibutcher}
+    </delete>
+
+    <select id="selIbutcherForTest">
+        SELECT
+        MAX(ibutcher)
+        FROM t_butcher_shop
+    </select>
+
+    <select id="selIbutMenuForTest">
+        SELECT
+            ibut_menu
+        FROM t_but_menu
+        WHERE ibutcher= #{ibutcher}
+    </select>
+</mapper>

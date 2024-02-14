@@ -1,0 +1,49 @@
+app:
+  jwt:
+    secret: DaeguGreenArtAcademyClass502RoomForJavaSpringBootFighting
+    header-scheme-name: authorization
+    token-type: Bearer
+    access-token-expiry: 7200000
+    refresh-token-expiry: 1296000000
+
+
+file:
+  dir: D:/gogi/download/gogiro/
+
+
+
+spring:
+  servlet:
+      multipart:
+        max-file-size: 5MB
+        max-request-size: 15MB
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.0.144:3306/db_even_last_1
+    username: even_last_1
+    password: army
+
+mybatis:
+  mapper-locations: mappers/**/*.xml
+
+springdoc:
+  swagger-ui:
+    path: /swagger.html
+
+
+server:
+  port: 8080
+
+
+
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+
+file:
+  dir: /home/download/

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.reservation.ReservationMapper">
+    <insert id="insReservation" useGeneratedKeys="true" keyProperty="ireser">
+        INSERT INTO
+        t_reservation
+        SET
+            iuser= #{iuser},
+            ishop= #{ishop},
+            date= #{date},
+            request= #{request},
+            head_count= #{headCount}
+    </insert>
+
+    <insert id="insPickup" useGeneratedKeys="true" keyProperty="ipickup">
+        INSERT INTO
+        t_pickup
+        SET
+            iuser= #{iuser},
+            ibutcher= #{ibutcher},
+            date= #{date},
+            request= #{request}
+    </insert>
+
+    <insert id="insPickupMenu">
+        INSERT INTO
+        t_pickup_menu
+        SET
+            ipickup= #{ipickup},
+            ibut_menu= #{ibutMenu},
+            count= #{count}
+    </insert>
+
+    <update id="cancelReservation">
+        UPDATE
+        t_reservation
+        SET
+            confirm= 1
+        WHERE ireser= #{ireser}
+        AND iuser= #{iuser}
+    </update>
+
+    <update id="cancelPickup">
+        UPDATE
+        t_pickup
+        SET
+            confirm= 1
+        WHERE ipickup= #{ireser}
+        AND iuser= #{iuser}
+    </update>
+
+    <select id="checkReservation">
+        <choose>
+            <when test="checkShop == 0">
+                SELECT ireser
+                FROM t_reservation
+                WHERE ireser = #{ireser}
+                AND iuser = #{iuser}
+            </when>
+            <when test="checkShop == 1">
+                SELECT ipickup as ireser
+                FROM t_pickup
+                WHERE ipickup = #{ireser}
+                AND iuser = #{iuser}
+            </when>
+        </choose>
+    </select>
+
+    <insert id="insReview" useGeneratedKeys="true" keyProperty="ireview">
+        <choose>
+            <when test="checkShop == 0">
+                INSERT INTO
+                t_shop_review
+                SET
+                ishop = #{ishop},
+                iuser = #{iuser},
+                star = #{star}
+                <if test="review != null != ' '">
+                    , review = #{review}
+                </if>
+            </when>
+            <when test="checkShop == 1">
+                INSERT INTO t_but_review
+                SET iuser = #{iuser}
+                , ibutcher = #{ishop}
+                , star = #{star}
+                <if test="review != null != ' '">
+                    , review = #{review}
+                </if>
+            </when>
+        </choose>
+
+    </insert>
+
+    <update id="updReservation">
+        <choose>
+            <when test="checkShop == 0">
+        UPDATE t_reservation
+        SET
+        date = #{date},
+        request = #{request},
+        head_count = #{headCount}
+        WHERE ireser = #{ireser}
+            </when>
+            <when test="checkShop == 1">
+                UPDATE t_pickup
+                SET
+                date = #{date}
+                ,request = #{request}
+                WHERE ipickup = #{ireser}
+            </when>
+        </choose>
+    </update>
+
+    <select id="selReservationForTest">
+        SELECT
+            iuser,
+            ishop,
+            date,
+            request,
+            head_count AS headCount
+        FROM t_reservation
+        where ireser= #{ireser}
+    </select>
+    <select id="selPickupMenusForTest">
+        SELECT
+            count(*)
+        FROM t_pickup_menu
+        WHERE ipickup = #{ipickup}
+    </select>
+    <select id="selReservationForCancelTest">
+        SELECT
+            ireser,
+            iuser
+        FROM t_reservation
+        WHERE confirm= 0
+        LIMIT 1
+    </select>
+    <select id="selReservationConfirmForTest">
+        SELECT
+            confirm
+        FROM t_reservation
+        where ireser= #{ireser}
+    </select>
+    <select id="selPickupForCancelTest">
+        SELECT
+            ipickup as ireser,
+            iuser
+        FROM t_pickup
+        WHERE confirm= 0
+        LIMIT 1
+    </select>
+    <select id="selPickupConfirmForTest">
+        SELECT
+            confirm
+        FROM t_pickup
+        where ipickup= #{ireser}
+    </select>
+
+    <select id="checkReservationController">
+        <choose>
+            <when test="checkShop == 0">
+        SELECT iuser
+        FROM t_reservation
+        WHERE ireser = #{ireser}
+            </when>
+            <when test="checkShop == 1">
+                SELECT iuser
+                FROM t_pickup
+                WHERE ipickup = #{ireser}
+            </when>
+        </choose>
+    </select>
+
+    <insert id="insReviewPics">
+        <choose>
+            <when test="checkShop == 0">
+                INSERT INTO
+                t_shop_review_pic
+                (ireview, pic)
+                VALUES
+                <foreach collection="pics" item="pic" open="(" close=")" separator="),( ">
+                    #{ireview}, #{pic}
+                </foreach>
+            </when>
+            <when test="checkShop == 1">
+                INSERT INTO t_but_review_pic
+                (ireview,pic)
+                VALUES
+                <foreach collection="pics" item="pic" open="(" close=")" separator="),( ">
+                    #{ireview}, #{pic}
+                </foreach>
+            </when>
+        </choose>
+    </insert>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.admin.AdminMapper">
+
+    
+    <insert id="insStoreRegistration" useGeneratedKeys="true" keyProperty="ishop">
+        INSERT INTO
+        t_shop
+        (imeat,name,location,open,tel,x,y)
+        VALUES
+        (#{imeat},#{name},#{location},#{open},#{tel},#{x},#{y})
+    </insert>
+    
+    <insert id="insStoreRegistrationPics">
+        INSERT INTO
+        t_shop_pic
+        (ishop, pic)
+        VALUES
+        <foreach collection="pics" item="pic" open="(" close=")" separator="),( ">
+            #{ishop}, #{pic}
+        </foreach>
+    </insert>
+
+    <insert id="insShopMenu" useGeneratedKeys="true" keyProperty="imenu">
+        INSERT INTO
+        t_shop_menu
+        (ishop,menu,price,pic)
+        VALUES
+        (#{ishop},#{menu},#{price},#{fileNm})
+    </insert>
+
+    <update id="updShopMenu">
+        UPDATE t_shop_menu
+        SET pic = #{fileNm}
+        WHERE imenu = #{imenu}
+    </update>
+
+    <select id="selPicNm">
+        SELECT pic
+        FROM t_shop_menu
+        WHERE imenu = #{imenu}
+    </select>
+
+    <insert id="insButcherShop" useGeneratedKeys="true" keyProperty="ibutcher">
+        INSERT INTO
+        t_butcher_shop
+        (name,location,open,tel,x,y)
+        VALUES
+        (#{name},#{location},#{open},#{tel},#{x},#{y})
+    </insert>
+
+    <insert id="insButcherPics">
+        INSERT INTO
+        t_butcher_pic
+        (ibutcher, pic)
+        VALUES
+        <foreach collection="pics" item="pic" open="(" close=")" separator="),( ">
+            #{ibutcher}, #{pic}
+        </foreach>
+    </insert>
+
+    <insert id="insButcherMenu" useGeneratedKeys="true" keyProperty="ibutMenu">
+        INSERT INTO
+        t_but_menu
+        (ibutcher,menu,price,pic)
+        VALUES
+        (#{ibutcher},#{menu},#{price},#{fileNm})
+    </insert>
+
+    <select id="selButcherMenuPicNm">
+        SELECT pic
+        FROM t_but_menu
+        WHERE ibut_menu = #{ibutMenu}
+    </select>
+
+    <update id="updButcherMenu">
+        UPDATE t_but_menu
+        SET pic = #{fileNm}
+        WHERE ibut_menu = #{ibutMenu}
+    </update>
+
+    <insert id="insShopFacility">
+        INSERT INTO t_shop_facilities
+        (ishop,ifacil)
+        VALUES
+        <foreach collection="ifacil" item="ifacil" separator=",">
+            (#{ishop},#{ifacil})
+        </foreach>
+    </insert>
+
+    <insert id="insShopPic">
+        INSERT INTO t_shop_pic
+        ( ishop, pic )
+        VALUES
+        <foreach collection="pics" item="pic" separator=",">
+            ( #{ishop}, #{pic} )
+        </foreach>
+    </insert>
+
+    <delete id="delShopPics">
+        delete from t_shop_pic
+        where ishop_pics  in (
+        <foreach collection="ishopPics" item="ishopPics" separator=",">
+            #{ishopPics}
+        </foreach>
+        )
+    </delete>
+
+    <select id="selShopPics">
+        SELECT ishop_pics as ishopPics, pic
+        FROM t_shop_pic
+        WHERE ishop_pics in (
+        <foreach collection="ishopPics" item="ishopPics" separator=",">
+            #{ishopPics}
+        </foreach>
+        )
+    </select>
+
+    <delete id="delButcherPics">
+        DELETE
+        FROM t_butcher_pic
+        WHERE ibut_pics IN
+        <foreach collection="ibutPics" item="ibutPics" open="(" close=")" separator=",">
+            #{ibutPics}
+        </foreach>
+    </delete>
+    <select id="selButcherPics">
+        SELECT
+        ibut_pics,
+        pic
+        FROM t_butcher_pic
+        WHERE ibut_pics IN
+        <foreach collection="ibutPics" item="ibutPics" open="(" close=")" separator=",">
+            #{ibutPics}
+        </foreach>
+    </select>
+
+</mapper>

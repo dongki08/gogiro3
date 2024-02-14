@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.community.CommunityMapper">
+
+    <insert id="insCommunity" useGeneratedKeys="true" keyProperty="iboard">
+        insert into t_community
+        set iuser = #{iuser},
+        title = #{title},
+        contents = #{contents}
+    </insert>
+
+    <insert id="insCommunityPics">
+        INSERT INTO t_commu_pics
+        ( iboard, pic )
+        VALUES
+        <foreach collection="pics" item="pic" separator=",">
+            ( #{iboard}, #{pic} )
+        </foreach>
+    </insert>
+    <select id="selIuserIboardForTest">
+        select iuser, iboard
+        from t_community
+        limit 0, 1
+    </select>
+
+    <update id="updCommunity">
+        update t_community
+        set title = #{title},
+        contents = #{contents}
+        where iboard = #{iboard}
+        and iuser = #{iuser}
+    </update>
+
+    <select id="selCommunityCount">
+        SELECT
+        COUNT(*)
+        FROM t_community
+        <where>
+            <if test="search != null and search != '' ">
+                title like CONCAT('%',#{search},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selCommunity">
+        SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic as writerPic, a.title, a.contents, date(a.created_at) AS createdAt
+        FROM t_community a
+        JOIN t_user b
+        ON a.iuser = b.iuser
+        <if test="filter==1">
+            LEFT JOIN t_community_fav c
+            ON a.iboard= c.iboard
+        </if>
+        <where>
+            <if test="search != null and search != '' ">
+                a.title like CONCAT('%',#{search},'%')
+            </if>
+        </where>
+        <choose>
+            <when test="filter==0">
+                ORDER BY a.iboard DESC
+            </when>
+            <when test="filter==1">
+                GROUP BY a.iboard
+                ORDER BY COUNT(c.iuser) DESC, a.iboard desc
+            </when>
+        </choose>
+
+        limit #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selPicCommunity">
+        select iboard, pic
+        from t_commu_pics
+        where iboard in (
+        <foreach collection="iboard" item="iboard" separator=",">
+            #{iboard}
+        </foreach>
+        )
+    </select>
+
+    <select id="selCommunityComments">
+        SELECT b.iboard, b.icomment , b.iuser AS writerPk,c.nickname AS writerName, b.`contents` as comment, b.created_at as createdAt
+        FROM t_community a
+        JOIN t_community_comment b
+        ON a.iboard = b.iboard
+        JOIN t_user c
+        ON b.iuser = c.iuser
+        WHERE a.iboard = #{iboard}
+    </select>
+
+    <select id="selDetailCommunity">
+        SELECT a.iboard, a.iuser, b.nickname AS name,b.pic as writerPic, a.title, a.contents, a.created_at AS createdAt
+        FROM t_community a
+        JOIN t_user b
+        ON a.iuser = b.iuser
+        WHERE iboard = #{iboard}
+    </select>
+
+    <!-- entity용 -->
+    <select id="entityCommunity">
+        SELECT *
+        FROM t_community
+        WHERE iboard = #{iboard}
+    </select>
+
+    <delete id="delCommunity">
+        delete from t_community
+        where iuser = #{iuser}
+        and iboard = #{iboard}
+    </delete>
+
+    <delete id="delCommunityPic">
+        delete from t_commu_pics
+        where icommu_pics  in (
+        <foreach collection="icommuPics" item="icommuPics" separator=",">
+        #{icommuPics}
+        </foreach>
+        )
+    </delete>
+
+    <delete id="delCommunityAllComment">
+        DELETE
+        FROM t_community_comment
+        WHERE iboard= #{iboard}
+    </delete>
+
+    <select id="checkCommunity">
+        SELECT iboard
+        FROM t_community
+        WHERE iboard = #{iboard}
+    </select>
+
+    <insert id="insCommunityComment">
+        INSERT INTO
+        t_community_comment
+        SET
+            iboard= #{iboard},
+            iuser= #{iuser},
+            contents= #{contents}
+    </insert>
+
+    <delete id="delCommunityComment">
+        DELETE
+        FROM t_community_comment
+        WHERE iuser= #{iuser}
+        AND icomment= #{icomment}
+    </delete>
+
+    <select id="selByCommunityPics">
+        SELECT icommu_pics as icommuPics, pic
+        FROM t_commu_pics
+        WHERE iboard = #{iboard}
+    </select>
+
+    <select id="selCommunityPics">
+        SELECT icommu_pics as icommuPics, pic
+        FROM t_commu_pics
+        WHERE icommu_pics in (
+        <foreach collection="icommuPics" item="icommuPics" separator=",">
+        #{icommuPics}
+        </foreach>
+        )
+    </select>
+    
+<!--    <select id="beforeTitleNextTitle">-->
+<!--        (SELECT-->
+<!--        iboard, title-->
+<!--        FROM t_community-->
+<!--        WHERE iboard <![CDATA[<=]]> #{iboard}-->
+<!--        ORDER BY iboard DESC-->
+<!--        LIMIT 1)-->
+<!--        UNION-->
+<!--        (SELECT-->
+<!--        iboard, title-->
+<!--        FROM t_community-->
+<!--        WHERE iboard >= #{iboard}-->
+<!--        ORDER BY iboard-->
+<!--        LIMIT 1)-->
+<!--    </select>-->
+
+
+    <select id="selCommunityDel1">
+        select iboard
+        from t_community
+        limit 0, 1
+    </select>
+
+    <select id="selCommunityDel2">
+        select icommu_pics
+        from t_commu_pics
+        where iboard = #{iboard}
+    </select>
+
+    <delete id="delCommunityDel">
+        delete from t_commu_pics
+        where iboard = #{iboard}
+    </delete>
+
+    <select id="beforeTitle">
+        SELECT
+        iboard, title
+        FROM t_community
+        WHERE iboard <![CDATA[<]]> #{iboard}
+        ORDER BY iboard desc
+        LIMIT 1
+    </select>
+
+    <select id="afterTitle">
+        SELECT
+        iboard, title
+        FROM t_community
+        WHERE iboard > #{iboard}
+        ORDER BY iboard
+        LIMIT 1
+    </select>
+
+    <!--커뮤니티 좋아요 삽입 -->
+    <insert id="insCommunityFav">
+        INSERT INTO t_community_fav
+        SET iuser = #{iuser},
+        iboard = #{iboard}
+    </insert>
+
+    <!--커뮤니티 좋아요 해제 -->
+    <delete id="delCommunityFav">
+        DELETE FROM t_community_fav
+        WHERE iuser = #{iuser}
+        AND iboard = #{iboard}
+    </delete>
+</mapper>

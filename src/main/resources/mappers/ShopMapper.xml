@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.shop.ShopMapper">
+
+    <select id="selShopAll">
+        SELECT a.ishop, a.name, a.location
+        FROM t_shop a
+        <choose>
+            <when test="filter==1">
+                left join t_shop_review b
+                on a.ishop= b.ishop
+            </when>
+            <when test="filter==2">
+                left join t_shop_bookmark b
+                on a.ishop= b.ishop
+            </when>
+        </choose>
+        <where>
+            <if test="search != null and search != '' ">
+                a.name like CONCAT('%',#{search},'%')
+            </if>
+            <if test="category != 0">
+                and a.imeat = #{category}
+            </if>
+        </where>
+        <choose>
+            <when test="filter==1">
+                group by a.ishop
+                order by IFNULL(ROUND(avg(b.star)),0) DESC, a.ishop desc
+            </when>
+            <when test="filter==2">
+                GROUP BY a.ishop
+                ORDER BY count(b.iuser) DESC, a.ishop desc
+            </when>
+        </choose>
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selShopPicList">
+        SELECT ishop, pic
+        FROM t_shop_pic
+        WHERE ishop in (
+        <foreach collection="pk" item="ishop"  separator=",">
+            #{ishop}
+        </foreach>
+        )
+    </select>
+
+    <select id="selReviewCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_shop_review
+        WHERE ishop = #{ishop}
+    </select>
+
+    <select id="selShopListCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_shop
+        <if test="category > 0">
+            WHERE imeat = #{category}
+        </if>
+    </select>
+
+    <select id="selShopPics">
+        SELECT pic
+        FROM t_shop_pic
+        WHERE ishop = #{ishop}
+    </select>
+
+    <select id="selShopFacility">
+        SELECT a.ishop, b.facility
+        FROM t_shop_facilities a
+        JOIN t_facilities b
+        ON a.ifacil = b.ifacil
+        WHERE a.ishop in (
+        <foreach collection="ishop" item="ishop" separator=",">
+         #{ishop}
+        </foreach>
+        )
+    </select>
+
+    <select id="selShopDetail">
+        SELECT A.ishop, A.NAME, A.location, A.`open`,A.tel, ifnull(round(AVG(C.star)),0) AS star,A.`x`, A.`y`,if(D.ishop IS NULL , 0 , 1) AS isBook
+        FROM t_shop AS A
+        JOIN t_shop_review C
+        ON C.ishop = A.ishop
+        LEFT JOIN t_shop_bookmark D
+        ON A.ishop = D.ishop
+        AND D.iuser = #{iuser}
+        WHERE A.ishop = #{ishop}
+    </select>
+
+    <select id="selMenuDetail">
+        SELECT ishop,menu,price,pic
+        FROM t_shop_menu
+        WHERE ishop = #{ishop}
+    </select>
+
+    <select id="selReviewDetail">
+        SELECT a.ishop,c.iuser,c.pic as writerPic ,a.ireview,c.nickname,a.star,a.review
+        FROM t_shop_review a
+        JOIN t_user c
+        ON a.iuser = c.iuser
+        WHERE a.ishop = #{ishop}
+    </select>
+
+    <select id="selReviewPicDetail">
+        SELECT a.ireview, a.pic
+        FROM t_shop_review_pic a
+        JOIN t_shop_review b
+        on a.ireview = b.ireview
+        WHERE b.ishop = #{ishop}
+    </select>
+
+    <insert id="insShopReview" useGeneratedKeys="true" keyProperty="ireview">
+        INSERT INTO
+        t_shop_review
+        SET
+        ishop = #{ishop},
+        iuser = #{iuser},
+        star = #{star},
+        review = #{review}
+    </insert>
+
+
+
+    <select id="selShopBookmark">
+        SELECT
+            iuser
+        FROM t_shop_bookmark
+        where iuser= #{iuser}
+        AND ishop= #{ishop}
+    </select>
+
+    <insert id="shopBookmarkOn">
+        INSERT INTO
+        t_shop_bookmark
+        SET
+            iuser= #{iuser},
+            ishop=#{ishop}
+    </insert>
+
+    <delete id="shopBookmarkOff">
+        DELETE
+        FROM t_shop_bookmark
+        WHERE iuser= #{iuser}
+        AND ishop= #{ishop}
+    </delete>
+    
+    <select id="shopFacilities">
+        SELECT b.facility
+        FROM t_shop_facilities a
+        JOIN t_facilities b
+        ON a.ifacil = b.ifacil
+        WHERE a.ishop = #{ishop}
+    </select>
+
+    <select id="selShopEntity">
+        SELECT ishop, name, location, x, y,created_at as createdAt
+        FROM t_shop
+        WHERE ishop = #{ishop}
+    </select>
+
+    <select id="selShopCategory">
+        SELECT imeat
+        FROM t_category
+        WHERE imeat = #{imeat}
+    </select>
+
+    <select id="selIshopForTest">
+        SELECT
+            MAX(ishop)
+        FROM t_shop
+    </select>
+
+    <select id="selMainShop">
+        SELECT a.ishop, a.NAME, b.menu, b.price, c.pic
+        FROM t_shop a
+        JOIN t_shop_menu b
+        ON a.ishop = b.ishop
+        JOIN t_shop_pic c
+        ON a.ishop = c.ishop
+        GROUP BY a.ishop
+        ORDER BY RAND() LIMIT 4
+    </select>
+
+    <select id="selMainCommunity">
+        SELECT a.iboard,b.pic
+        FROM t_community a
+        JOIN t_commu_pics b
+        ON a.iboard = b.iboard
+        GROUP BY b.iboard
+        ORDER BY RAND() LIMIT 5
+    </select>
+</mapper>
