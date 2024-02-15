@@ -3,7 +3,7 @@ package com.green.gogiro.shop.model;
 import lombok.Data;
 
 @Data
-public class ShopEntity {
+public class ShopModel {
     private int ishop;
     private String name;
     private String location;
