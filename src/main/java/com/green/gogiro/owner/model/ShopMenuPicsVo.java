@@ -1,4 +1,4 @@
-package com.green.gogiro.admin.model;
+package com.green.gogiro.owner.model;
 
 import lombok.Data;
 

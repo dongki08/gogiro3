@@ -1,4 +1,4 @@
-package com.green.gogiro.admin.model;
+package com.green.gogiro.owner.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;

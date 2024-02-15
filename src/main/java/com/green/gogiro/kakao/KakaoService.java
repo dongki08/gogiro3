@@ -32,7 +32,7 @@ public class KakaoService {
 
     private String getKakaoAxis(String query) {
         System.out.println(query);
-//        대구시 북구 침산로21길 10
+        //대구시 북구 침산로21길 10
         if (query.contains("%")) {
             query = query.replaceAll("%", " ");
         }

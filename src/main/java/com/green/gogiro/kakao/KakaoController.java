@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class KakaoController {
-
-
-
     private final KakaoService service;
 
     @GetMapping("/kakao")
