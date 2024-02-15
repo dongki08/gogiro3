@@ -1,12 +1,14 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.community;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "t_community")
-public class CommunityEntity extends BaseEntity{
+public class CommunityEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT UNSIGNED")

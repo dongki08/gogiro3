@@ -1,4 +1,4 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
 import jakarta.persistence.Embeddable;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @Embeddable
 @EqualsAndHashCode
-public class ShopBookmarkIds implements Serializable {
-    private Long iuser;
+public class FacilityIds implements Serializable {
     private Long ishop;
+    private Long ifacil;
 }

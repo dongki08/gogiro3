@@ -1,4 +1,4 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.community;
 
 import jakarta.persistence.*;
 import lombok.Data;

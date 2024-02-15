@@ -1,5 +1,7 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.butcher;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.checkerframework.checker.units.qual.C;
@@ -7,7 +9,7 @@ import org.checkerframework.checker.units.qual.C;
 @Data
 @Entity
 @Table(name = "t_butcher")
-public class ButcherEntity extends BaseEntity{
+public class ButcherEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

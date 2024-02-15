@@ -1,8 +1,9 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.butcher;
 
+import com.green.gogiro.entity.CreatedAtEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.checkerframework.checker.units.qual.C;
 
 @Data
 @Entity

@@ -1,27 +1,28 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.checkerframework.checker.units.qual.C;
 import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @Entity
-@Table(name = "t_but_review")
-public class ButcherReviewEntity extends BaseEntity{
+@Table(name = "t_shop_review")
+public class ShopReviewEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ireview", columnDefinition = "BIGINT UNSIGNED")
+    @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long ireview;
 
     @ManyToOne
-    @JoinColumn(name = "i_butcher", nullable = false)
-    private ButcherEntity butcherEntity;
+    @JoinColumn(name = "ishop", nullable = false)
+    private ShopEntity ishop;
 
     @ManyToOne
     @JoinColumn(name = "iuser", nullable = false)
-    private UserEntity userEntity;
+    private UserEntity iuser;
 
     @Column(nullable = false)
     @ColumnDefault("1")
@@ -32,5 +33,4 @@ public class ButcherReviewEntity extends BaseEntity{
 
     @Column(length = 30)
     private String comment;
-
 }

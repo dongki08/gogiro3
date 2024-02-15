@@ -1,5 +1,7 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "t_reservation")
-public class ShopReservationEntity extends BaseEntity{
+public class ShopReservationEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
