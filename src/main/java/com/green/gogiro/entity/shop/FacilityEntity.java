@@ -1,4 +1,4 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "t_facilities")
 public class FacilityEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,7 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 

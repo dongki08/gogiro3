@@ -1,27 +1,21 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.shop;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "t_shop_menu")
-public class ShopMenuEntity extends BaseEntity{
+@Table(name = "t_shop_pic")
+public class ShopPicEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT UNSIGNED")
-    private Long imenu;
+    @Column(name = "ishop_pics", columnDefinition = "BIGINT UNSIGNED")
+    private Long ishopPics;
 
     @ManyToOne
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity ishop;
-
-    @Column(length = 30, nullable = false)
-    private String menu;
-
-    @Column
-    private int price;
 
     @Column(length = 50, nullable = false)
     private String pic;

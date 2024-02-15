@@ -1,12 +1,12 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.butcher;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "t_shop_tag")
-public class ShopTagEntity {
+@Table(name = "t_butcher_tag")
+public class ButcherTagEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,9 +14,10 @@ public class ShopTagEntity {
     private Long itag;
 
     @ManyToOne
-    @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity shop;
+    @JoinColumn(name = "ibutcher", nullable = false)
+    private ButcherEntity butcherEntity;
 
     @Column(length = 10, nullable = false)
     private String tag;
+
 }

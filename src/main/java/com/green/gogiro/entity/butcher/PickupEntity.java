@@ -1,16 +1,18 @@
-package com.green.gogiro.entity;
+package com.green.gogiro.entity.butcher;
 
+import com.green.gogiro.entity.BaseEntity;
+import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.butcher.ButcherEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "t_pickup")
-public class PickupEntity extends BaseEntity{
+public class PickupEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
