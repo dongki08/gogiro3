@@ -1,5 +1,7 @@
 package com.green.gogiro.entity;
 
+import com.green.gogiro.entity.butcher.ButcherMenuEntity;
+import com.green.gogiro.entity.butcher.PickupEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,7 +22,7 @@ public class PickupMenuEntity extends BaseEntity{
     @ManyToOne
     @MapsId("ibutMenu")
     @JoinColumn(name = "ibut_menu", columnDefinition = "BIGINT UNSIGNED")
-    private PickupEntity ibutMenu;
+    private ButcherMenuEntity ibutMenu;
 
     @Column(name = "count", nullable = false)
     @ColumnDefault("1")
