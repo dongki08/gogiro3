@@ -12,5 +12,4 @@ import java.io.Serializable;
 public class FacilityIds implements Serializable {
     private Long ishop;
     private Long ifacil;
-
 }
