@@ -19,7 +19,7 @@ public interface UserMapper {
 
     UserInfoVo selUserInfo(int iuser);
 
-    UserEntity userEntity(String email);
+    UserModel userEntity(String email);
 
     String checkNickname(String nickname);
 

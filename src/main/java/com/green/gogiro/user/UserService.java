@@ -88,7 +88,7 @@ public class UserService {
     public UserSignVo signin(HttpServletRequest req,
                              HttpServletResponse res,
                              UserSigninDto dto) {
-        UserEntity entity = mapper.userEntity(dto.getEmail());
+        UserModel entity = mapper.userEntity(dto.getEmail());
         if (entity == null) {
             throw new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID);
         } else if (!passwordEncoder.matches(dto.getUpw(), entity.getUpw())) {
