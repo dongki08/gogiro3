@@ -1,12 +1,9 @@
 package com.green.gogiro.reservation;
 
 import com.green.gogiro.common.ResVo;
-import com.green.gogiro.exception.AuthErrorCode;
-import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
-import com.green.gogiro.shop.model.ShopEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
-import static com.green.gogiro.common.Const.REGEXP_PATTERN_SPACE_CHAR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)

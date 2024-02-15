@@ -11,4 +11,11 @@ public class ShopReviewPicEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ireview_pics", columnDefinition = "BIGINT UNSIGNED")
     private Long ireviewPics;
+
+    @ManyToOne
+    @JoinColumn(name = "ireview", nullable = false)
+    private ShopReviewEntity ireview;
+
+    @Column(length = 50, nullable = false)
+    private String pic;
 }

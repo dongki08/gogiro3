@@ -30,7 +30,7 @@ public interface ShopMapper {
     int shopBookmarkOn(ShopBookmarkDto dto);
     int shopBookmarkOff(ShopBookmarkDto dto);
 
-    ShopEntity selShopEntity(int ishop);
+    ShopModel selShopEntity(int ishop);
     Integer selShopCategory(int imeat);
 
     int selIshopForTest();

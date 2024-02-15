@@ -4,8 +4,6 @@ import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.*;
 
 import com.green.gogiro.butchershop.ButcherShopMapper;
-import com.green.gogiro.butchershop.model.ButcherEntity;
-import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.exception.AuthErrorCode;
@@ -13,17 +11,14 @@ import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
-import com.green.gogiro.shop.model.ShopEntity;
+import com.green.gogiro.shop.model.ShopModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -36,7 +31,7 @@ public class ReservationService {
 
 
     public ResVo postReservation(ReservationInsDto dto) {
-        ShopEntity entity = shopMapper.selShopEntity(dto.getIshop());
+        ShopModel entity = shopMapper.selShopEntity(dto.getIshop());
         if (entity == null) {
             throw new RestApiException(VALID_SHOP);
         } else if (entity.getIshop() != dto.getIshop()) {
