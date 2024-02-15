@@ -3,7 +3,7 @@ package com.green.gogiro.user.model;
 import lombok.Data;
 
 @Data
-public class UserEntity {
+public class UserModel {
     private int iuser;
     private String email;
     private String upw;
