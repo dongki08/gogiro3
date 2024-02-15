@@ -22,7 +22,7 @@ public class UserUpdDto {
 
     @Schema(title = "닉네임")
     @NotBlank
-    @Size( min = 1,max= 10,message = "닉네임은 한 글자 이상 10자 이하 이여야 합니다")
+    @Size(min = 1,max= 10,message = "닉네임은 한 글자 이상 10자 이하 이여야 합니다")
     private String nickname;
     @Schema(title = "주소")
     @NotBlank
