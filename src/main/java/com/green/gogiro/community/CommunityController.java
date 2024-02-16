@@ -21,7 +21,12 @@ public class CommunityController {
     private final CommunityService service;
 
     @PostMapping()
-    @Operation(summary = "커뮤니티 등록",description = "커뮤니티 등록 처리")
+    @Operation(summary = "커뮤니티 등록",description = "커뮤니티 등록 처리<br>" +
+            "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
+            "contents(NOT NULL) : 내용(1~300자)<br>" +
+            "pics : 사진(최대 5장까지 등록가능)<br>" +
+            "--응답데이터<br>iboard : 보드pk<br>" +
+            "pics : 사진리스트")
     public CommunityPicsInsVo postCommunity(@RequestPart(required = false)@Valid List<MultipartFile> pics
             , @RequestPart @Valid CommunityInsDto dto) {
         //사진을 5장 초과했을 경우
@@ -35,7 +40,12 @@ public class CommunityController {
     }
 
     @PutMapping()
-    @Operation(summary = "커뮤니티 수정", description = "커뮤니티 수정 처리")
+    @Operation(summary = "커뮤니티 수정", description = "커뮤니티 수정 처리<br>" +
+            "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
+            "contents(NOT NULL) : 내용(1~300자)<br>" +
+            "pics : 사진(최대 5장까지 등록가능)<br>" +
+            "--응답데이터<br>iboard : 보드pk<br>" +
+            "pics : 사진리스트")
     public CommunityPicsInsVo putCommunity(@Valid @RequestPart(required = false) List<MultipartFile> pics
             ,@Valid @RequestPart CommunityUpdDto dto) {
         //사진을 5장 초과했을 경우
