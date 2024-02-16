@@ -4,6 +4,7 @@ import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @Entity
@@ -21,4 +22,7 @@ public class CommunityCommentEntity extends BaseEntity {
     private UserEntity userEntity;
     @Column(length = 50,nullable = false)
     private String contents;
+
+    @ColumnDefault("0")
+    private int count;
 }
