@@ -4,9 +4,11 @@ import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.shop.ShopPicEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 import org.checkerframework.checker.units.qual.C;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,12 @@ public class ButcherEntity extends BaseEntity {
     @Column(length = 15)
     private String tel;
 
-    @Column(nullable = false, unique = true)
-    private int number;
+    @Column(length = 20,nullable = false, unique = true)
+    private String number;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int confirm; // 0:대기 1:승인 2:거절(퇴출)
 
     @ToString.Exclude
     @OneToMany(mappedBy = "butcherEntity",cascade = CascadeType.PERSIST)
