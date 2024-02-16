@@ -44,6 +44,9 @@ public class ShopEntity extends BaseEntity {
     @Column(length = 15)
     private String tel;
 
+    @Column(nullable = false, unique = true)
+    private int number;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
     List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
