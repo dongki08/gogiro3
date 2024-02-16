@@ -20,7 +20,7 @@ public class OwnerController {
 
     @PostMapping
     @Operation(summary = "가게 주인 회원 가입",description = "--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
-            "<br>num: 사업자 등록 번호(사이트에서 쓸 일 없으면 db에 저장할 필요 없을 듯?)<br>name: 주인의 실명<br>shopName:가게 이름<br>x:경도" +
+            "<br>number: 사업자 등록 번호(사이트에서 쓸 일 없으면 db에 저장할 필요 없을 듯?)<br>name: 주인의 실명<br>shopName:가게 이름<br>x:경도" +
             "<br>y:위도<br>location:위치(가게 주인이 직접 입력하는)<br>imeat:고기 종류(0:정육점, 1:돼지, 2:소, 3:닭, 4:오리, 5:양)" +
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
             "<br>(성공)result: 가게 주인pk(사용자랑 같은 테이블이기 때문에 다른 주소에서 쓸 때도 유저pk명(iuser)과 동일할 수 있습니다)" +

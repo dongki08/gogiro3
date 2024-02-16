@@ -16,8 +16,8 @@ public class ReservationUpdDto {
     private int iuser;
 
     @Schema(title = "가게 구분 0:고기 1:정육")
-    @Min(value = 0)
-    @Max(value = 1)
+    @Min(value = 0, message = "가게구분 값이 잘못되었습니다")
+    @Max(value = 1, message = "가게구분 값이 잘못되었습니다")
     private int checkShop;
     @Schema(title = "예약pk")
     @Min(value = 1)
@@ -29,6 +29,6 @@ public class ReservationUpdDto {
     @Schema(title = "요청 사항")
     private String request;
     @Schema(title = "인원수",defaultValue = "1")
-    @Min(value = 1)
+    @Min(value = 1,message="인원 수를 입력해주세요")
     private int headCount;
 }
