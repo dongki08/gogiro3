@@ -5,6 +5,8 @@ import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,10 @@ public class ShopEntity extends BaseEntity {
 
     @Column(length = 20,nullable = false, unique = true)
     private String number;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int confirm; // 0:대기 1:승인 2:거절(퇴출)
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)

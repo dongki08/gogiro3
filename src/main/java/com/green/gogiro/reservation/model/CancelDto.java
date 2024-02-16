@@ -15,7 +15,7 @@ public class CancelDto {
     @Max(value = 1, message = "가게구분 값이 잘못되었습니다")
     private int checkShop;
     @Schema(title = "예약pk")
-    @Min(value = 0, message = "예약pk가 없습니다")
+    @Min(value = 1, message = "예약pk가 없습니다")
     private int ireser;
     @JsonIgnore
     private boolean isReservation;
