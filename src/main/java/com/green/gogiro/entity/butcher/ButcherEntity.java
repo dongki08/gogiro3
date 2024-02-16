@@ -2,9 +2,14 @@ package com.green.gogiro.entity.butcher;
 
 import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.shop.ShopPicEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.checkerframework.checker.units.qual.C;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,5 +42,9 @@ public class ButcherEntity extends BaseEntity {
 
     @Column(length = 15)
     private String tel;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "butcherEntity",cascade = CascadeType.PERSIST)
+    List<ButcherPicEntity> butcherPicEntityList = new ArrayList<>();
 
 }

@@ -4,6 +4,9 @@ import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,4 +43,8 @@ public class ShopEntity extends BaseEntity {
 
     @Column(length = 15)
     private String tel;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
+    List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
 }

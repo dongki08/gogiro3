@@ -27,5 +27,6 @@ public class StoreRegistrationDto {
     private String tel;
     private String x;
     private String y;
+    @JsonIgnore
     private List<MultipartFile> pics = new ArrayList<>();
 }
