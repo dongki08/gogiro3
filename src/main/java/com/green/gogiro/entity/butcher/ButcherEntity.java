@@ -43,8 +43,8 @@ public class ButcherEntity extends BaseEntity {
     @Column(length = 15)
     private String tel;
 
-    @Column(nullable = false, unique = true)
-    private int number;
+    @Column(length = 20,nullable = false, unique = true)
+    private String number;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "butcherEntity",cascade = CascadeType.PERSIST)
