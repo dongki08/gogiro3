@@ -135,7 +135,9 @@ public class CommunityController {
             "iuser : 유저pk<br>" +
             "iboard : 커뮤니티pk<br>" +
             "--응답데이터<br>" +
-            "result : 1(좋아요), 0(좋아요취소)")
+            "result : <select>" +
+            "    <option>1(좋아요)</option>" +
+            "    <option>0(좋아요취소)</option>")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }
