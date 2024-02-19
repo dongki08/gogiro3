@@ -1,6 +1,6 @@
 package com.green.gogiro.common;
 
-public enum ProviderType {
+public enum RoleEnum {
     ADMIN,
     USER,
     OWNER,
