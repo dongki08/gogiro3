@@ -133,13 +133,20 @@ public class CommunityService {
     }
 
     public CommunityDetailVo getDetailCommunity(int iboard) {
+        int iuser;
+        try {
+            iuser= authenticationFacade.getLoginUserPk();
+        } catch(Exception e) {
+            iuser = 0;
+        }
+
         CommunityEntity entity = mapper.entityCommunity(iboard);
         if (entity == null) {
             throw new RestApiException(VALID_BOARD);
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
-        CommunityDetailVo vo = mapper.selDetailCommunity(iboard);
+        CommunityDetailVo vo = mapper.selDetailCommunity(iboard,iuser);
         List<CommunityBySelPicsDto> pics = mapper.selByCommunityPics(iboard);
         vo.setPics(pics);
         List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard);
