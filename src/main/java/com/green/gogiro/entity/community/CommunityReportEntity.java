@@ -1,13 +1,12 @@
 package com.green.gogiro.entity.community;
 
-import com.green.gogiro.entity.CreatedAtEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "t_report")
-public class CommunityReportEntity extends CreatedAtEntity {
+public class CommunityReportEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT UNSIGNED")

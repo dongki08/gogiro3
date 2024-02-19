@@ -54,6 +54,6 @@ public class ButcherEntity extends BaseEntity {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "butcherEntity",cascade = CascadeType.PERSIST)
-    List<ButcherPicEntity> butcherPicEntityList = new ArrayList<>();
+    private List<ButcherPicEntity> butcherPicEntityList = new ArrayList<>();
 
 }
