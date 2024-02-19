@@ -137,8 +137,8 @@ public class ShopService {
                     saveShopBookmarkEntity.setBookmarkIds(ids);
                     UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
                     ShopEntity shopEntity = shopRepository.getReferenceById((long)dto.getIshop());
-                    saveShopBookmarkEntity.setIuser(userEntity);
-                    saveShopBookmarkEntity.setIshop(shopEntity);
+                    saveShopBookmarkEntity.setUserEntity(userEntity);
+                    saveShopBookmarkEntity.setShopEntity(shopEntity);
                     bookmarkRepository.save(saveShopBookmarkEntity);
                 }
         );
