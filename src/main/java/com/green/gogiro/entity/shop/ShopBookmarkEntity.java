@@ -16,10 +16,10 @@ public class ShopBookmarkEntity extends CreatedAtEntity {
     @OneToOne
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED")
-    private UserEntity iuser;
+    private UserEntity userEntity;
 
     @OneToOne
     @MapsId("ishop")
     @JoinColumn(name = "ishop", columnDefinition = "BIGINT UNSIGNED")
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 }

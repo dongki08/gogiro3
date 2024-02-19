@@ -1,10 +1,8 @@
 package com.green.gogiro.entity;
 
-import com.green.gogiro.common.ProviderType;
+import com.green.gogiro.common.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Value;
-import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ColumnDefault;
 
 
@@ -48,7 +46,7 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @ColumnDefault("'USER'")
-    private ProviderType role;
+    private RoleEnum role;
 
     @Column(nullable = false)
     @ColumnDefault("0")
