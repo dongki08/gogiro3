@@ -2,13 +2,19 @@ package com.green.gogiro.entity;
 
 import com.green.gogiro.common.RoleEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 
 @Data
 @Entity
 @Table(name = "t_user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity extends BaseEntity {
 
     @Id
@@ -49,6 +55,6 @@ public class UserEntity extends BaseEntity {
     private RoleEnum role;
 
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private int check_shop;
+    @ColumnDefault("2")
+    private int checkShop;
 }
