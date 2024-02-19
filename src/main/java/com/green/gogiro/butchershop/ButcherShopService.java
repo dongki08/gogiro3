@@ -89,7 +89,7 @@ public class ButcherShopService {
     }
 
     public ResVo toggleButcherBookmark(ButcherBookmarkDto dto) {
-        ButcherEntity entity = mapper.selButcherEntity(dto.getIbutcher());
+        ButcherModel entity = mapper.selButcherEntity(dto.getIbutcher());
         dto.setIuser(authenticationFacade.getLoginUserPk());
         if (entity == null) {
             throw new RestApiException(VALID_SHOP);
