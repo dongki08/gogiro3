@@ -59,5 +59,5 @@ public class ShopEntity extends BaseEntity {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
-    List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
+    private List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
 }

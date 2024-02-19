@@ -145,4 +145,27 @@ public class CommunityController {
         return service.favCommunity(dto);
     }
 
+    @PostMapping("/report")
+    @Operation(summary = "커뮤니티 신고 기능", description = "커뮤니티 신고 처리<br>" +
+            "--요청데이터<br>" +
+            "iboard : 커뮤니티pk<br>" +
+            "ireport : 신고pk<br>" +
+            "--응답데이터<br>" +
+            "result : 1(성공), 나머진 에러")
+    public ResVo reportCommunity(CommunityReportDto dto) {
+        return null;
+    }
+
+    @PostMapping("/comment/report")
+    @Operation(summary = "커뮤니티 댓글 신고 기능", description = "커뮤니티 댓글 신고 처리<br>" +
+            "--요청데이터<br>" +
+            "icomment : 댓글pk<br>" +
+            "ireport : 신고pk(신고 사유 pk입니다, 신고 사유는 나중에 저희가 정리해서 보내드리겠습니다)<br>" +
+            "(그리고 한 번 신고할 때 하나의 사유만 할 건지 여러 사유를 추가할 수 있게 할 건지 정하면 좋을 거 같습니다" +
+            "--응답데이터<br>" +
+            "result : 1(성공), 나머진 에러")
+    public ResVo reportCommentCommunity(CommunityCommentReportDto dto) {
+        return null;
+    }
+
 }

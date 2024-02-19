@@ -39,6 +39,7 @@ public class OwnerService {
     private final ShopCategoryRepository categoryRepository;
     private final ButcherRepository butcherRepository;
 
+    @Transactional
     public ResVo ownerSignup(List<MultipartFile> pics, OwnerSignupDto dto) {
         if (!dto.getUpw().equals(dto.getCheckPw())) {
             throw new RestApiException(UserErrorCode.NOT_PASSWORD_CHECK);
@@ -47,11 +48,12 @@ public class OwnerService {
         UserEntity entity = new UserEntity();
         entity.setAddress(dto.getLocation());
         if (dto.getImeat() > 0) {
-            entity.setCheckShop(1);
+            entity.setCheckShop(0);
         } else {
             entity.setCheckShop(1);
         }
         entity.setUpw(hashedPw);
+        entity.setEmail(dto.getId());
         entity.setName(dto.getName());
         entity.setRole(RoleEnum.OWNER);
         userRepository.save(entity);
@@ -81,7 +83,7 @@ public class OwnerService {
             shopEntity.getShopPicEntityList().addAll(shopPicEntityList);
             return new ResVo(shopEntity.getIshop().intValue());
         }
-        if (entity.getCheckShop() >= 1) {
+        if (entity.getCheckShop() == 1) {
             ButcherEntity butcherEntity = new ButcherEntity();
             butcherEntity.setUserEntity(userEntity);
             butcherEntity.setLocation(dto.getLocation());
