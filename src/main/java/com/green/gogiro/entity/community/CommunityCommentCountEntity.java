@@ -12,12 +12,12 @@ import lombok.Data;
 public class CommunityCommentCountEntity extends CreatedAtEntity {
 
     @EmbeddedId
-    private CommunityCountIds communityCountIds;
+    private CommunityCommentCountIds communityCommentCountIds;
 
     @ManyToOne
     @MapsId("icomment")
     @JoinColumn(name = "icomment",nullable = false,columnDefinition = "BIGINT UNSIGNED")
-    private CommunityEntity communityEntity;
+    private CommunityCommentEntity communityCommentEntity;
 
     @ManyToOne
     @MapsId("iuser")

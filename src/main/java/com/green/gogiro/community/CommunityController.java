@@ -88,6 +88,8 @@ public class CommunityController {
             "writerName : 작성자 이름<br>" +
             "writerPic : 작성자 프로필 사진<br>" +
             "title : 제목<br>" +
+            "totalFav : 총 좋아요 수<br>" +
+            "isFav : 좋아요 여부 1(좋아요), 0(좋아요취소)<br>" +
             "contents : 내용<br>" +
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
