@@ -62,8 +62,11 @@ public class AdminController {
     2)글을 숨기기 전에 컨펌 창 하나 띄워주는 건 어떤가요*/
     @PatchMapping("/hide")
     @Operation(summary="글 숨김",description="총 관리자가 신고받은 글(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기 중 신고당한 글)을 숨긴다" +
-            "<br>1)")
-    public ResVo hide(){return null;}
+            "<br>1)신고가 3개 이상이 되거나 총 관리자가 글 숨김 처리를 하면 리스트나 후기에서 글이 안 보이게 된다" +
+            "<br><br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
+            "<br>pk:해당 글 pk<br>--응답 데이터<br>(성공)result: 1<br>(실패)" +
+            "<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
+    public ResVo hide(@RequestBody HideDto dto){return null;}
     /*5.게시물 신고 취소
     1)신고 수 1 이상인 게시 글의 신고 수를 0으로 만든다(관리자니까)
     2)신고를 취소하기 전에 컨펌 창 하나 띄워주는 건 어떤가요?*/
