@@ -3,16 +3,23 @@ package com.green.gogiro.shop;
 import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
+import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.shop.ShopBookmarkEntity;
+import com.green.gogiro.entity.shop.ShopBookmarkIds;
+import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.model.*;
+import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import static com.green.gogiro.exception.AuthErrorCode.*;
@@ -25,6 +32,9 @@ public class ShopService {
 
     private final AuthenticationFacade authenticationFacade;
     private final MyFileUtils myFileUtils;
+    private final ShopBookmarkRepository bookmarkRepository;
+    private final UserRepository userRepository;
+    private final ShopRepository shopRepository;
 
     public List<ShopSelVo> getShopList(ShopSelDto dto) {
         if(Pattern.matches(Const.REGEXP_PATTERN_SPACE_CHAR_TYPE_2,dto.getSearch())){
@@ -97,22 +107,44 @@ public class ShopService {
         return shopDetailList;
     }
 
+//
+//    public ResVo toggleShopBookmark(ShopBookmarkDto dto) {
+//        ShopModel entity = mapper.selShopEntity(dto.getIshop());
+//        dto.setIuser(authenticationFacade.getLoginUserPk());
+//        if(entity == null) {
+//            throw new RestApiException(VALID_SHOP);
+//        }
+//        dto.setOn(mapper.selShopBookmark(dto) == null);
+//        if(dto.isOn()) {
+//            mapper.shopBookmarkOn(dto);
+//            return new ResVo(Const.ON);
+//        } else {
+//            mapper.shopBookmarkOff(dto);
+//            return new ResVo(Const.OFF);
+//        }
+//    }
 
+    @Transactional
     public ResVo toggleShopBookmark(ShopBookmarkDto dto) {
-        ShopModel entity = mapper.selShopEntity(dto.getIshop());
-        dto.setIuser(authenticationFacade.getLoginUserPk());
-        if(entity == null) {
-            throw new RestApiException(VALID_SHOP);
-        }
-        dto.setOn(mapper.selShopBookmark(dto) == null);
-        if(dto.isOn()) {
-            mapper.shopBookmarkOn(dto);
-            return new ResVo(Const.ON);
-        } else {
-            mapper.shopBookmarkOff(dto);
-            return new ResVo(Const.OFF);
-        }
+        ShopBookmarkIds ids = new ShopBookmarkIds();
+        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIshop((long)dto.getIshop());
+
+        AtomicInteger atomic = new AtomicInteger(0);
+        bookmarkRepository.findById(ids).ifPresentOrElse(entity -> bookmarkRepository.delete(entity), () -> {
+                    atomic.set(1);
+                    ShopBookmarkEntity saveShopBookmarkEntity = new ShopBookmarkEntity();
+                    saveShopBookmarkEntity.setBookmarkIds(ids);
+                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    ShopEntity shopEntity = shopRepository.getReferenceById((long)dto.getIshop());
+                    saveShopBookmarkEntity.setIuser(userEntity);
+                    saveShopBookmarkEntity.setIshop(shopEntity);
+                    bookmarkRepository.save(saveShopBookmarkEntity);
+                }
+        );
+        return new ResVo(atomic.get());
     }
+    // 리터럴 바꾸기****************
 
     public ShopMainVo selMainPage() {
         List<ShopMainGogiVo> gogiVoList = mapper.selMainShop();
