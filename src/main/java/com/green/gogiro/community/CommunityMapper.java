@@ -38,7 +38,7 @@ public interface CommunityMapper {
 
     List<CommunityCommentVo> selCommunityComments(int iboard);
 
-    CommunityDetailVo selDetailCommunity(int iboard);
+    CommunityDetailVo selDetailCommunity(int iboard, int iuser);
 
     CommunityEntity entityCommunity(int iboard);
 
