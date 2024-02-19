@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "t_comment_fav")
+@Table(name = "t_community_fav")
 public class CommunityFavEntity extends CreatedAtEntity {
 
     @EmbeddedId
