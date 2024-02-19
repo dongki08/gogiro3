@@ -39,6 +39,7 @@ public class OwnerService {
     private final ShopCategoryRepository categoryRepository;
     private final ButcherRepository butcherRepository;
 
+    @Transactional
     public ResVo ownerSignup(List<MultipartFile> pics, OwnerSignupDto dto) {
         if (!dto.getUpw().equals(dto.getCheckPw())) {
             throw new RestApiException(UserErrorCode.NOT_PASSWORD_CHECK);
