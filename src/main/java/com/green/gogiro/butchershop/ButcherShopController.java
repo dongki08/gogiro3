@@ -6,6 +6,7 @@ import com.green.gogiro.common.Const;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
+import com.green.gogiro.shop.model.ShopReportDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -61,6 +62,18 @@ public class ButcherShopController {
             "<br>(실패)")
     public ResVo toggleButcherBookmark(@Valid @RequestBody ButcherBookmarkDto dto) {
         return service.toggleButcherBookmark(dto);
+    }
+
+    @PostMapping("/report")
+    @Operation(summary = "정육점 후기 신고", description = "정육점 후기 신고 처리"+
+            "<br>--요청데이터"+
+            "<br>ireview(리뷰pk)"+
+            "<br>ireport(신고사유pk)"+
+            "<br>--응답데이터"+
+            "<br>(성공)result:1"+
+            "<br>(실패)result:0")
+    public ResVo postButcherReport(@RequestBody ButcherReportDto dto) {
+        return null;
     }
 
 }
