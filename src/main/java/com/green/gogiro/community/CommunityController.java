@@ -129,7 +129,7 @@ public class CommunityController {
         return service.delCommunityComment(dto);
     }
 
-    @GetMapping("/fav")
+    @PostMapping("/fav")
     @Operation(summary = "좋아요 기능", description = "좋아요 처리<br>" +
             "--요청데이터<br>" +
             "iuser : 유저pk<br>" +

@@ -8,6 +8,7 @@ import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.community.model.*;
+import com.green.gogiro.entity.community.CommunityFavIds;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
@@ -189,11 +190,18 @@ public class CommunityService {
 
     //커뮤니티 좋아요 삽입 시 1 해제 시 0
     public ResVo favCommunity(CommunityInsFavDto dto) {
-        int delCommunityFav = mapper.delCommunityFav(dto);
-        if(delCommunityFav == 1) {
-            return new ResVo(0);
-        }
-        mapper.insCommunityFav(dto);
-        return new ResVo(1);
+        CommunityFavIds ids = new CommunityFavIds();
+        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIboard((long)dto.getIboard());
+        return null;
     }
+//    public ResVo favCommunity(CommunityInsFavDto dto) {
+//        dto.setIuser(authenticationFacade.getLoginUserPk());
+//        int delCommunityFav = mapper.delCommunityFav(dto);
+//        if(delCommunityFav == 1) {
+//            return new ResVo(0);
+//        }
+//        mapper.insCommunityFav(dto);
+//        return new ResVo(1);
+//    }
 }
