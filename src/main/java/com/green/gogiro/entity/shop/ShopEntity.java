@@ -53,6 +53,10 @@ public class ShopEntity extends BaseEntity {
     @ColumnDefault("0")
     private int confirm; // 0:대기 1:승인 2:거절(퇴출)
 
+    @Column
+    @ColumnDefault("0")
+    private int deposit;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
     List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
