@@ -145,4 +145,26 @@ public class CommunityController {
         return service.favCommunity(dto);
     }
 
+    @PostMapping("/report")
+    @Operation(summary = "커뮤니티 신고 기능", description = "커뮤니티 신고 처리<br>" +
+            "--요청데이터<br>" +
+            "iboard : 커뮤니티pk<br>" +
+            "ireport : 신고pk<br>" +
+            "--응답데이터<br>" +
+            "result : 1(성공), 나머진 에러")
+    public ResVo reportCommunity(CommunityReportDto dto) {
+        return null;
+    }
+
+    @PostMapping("/comment/report")
+    @Operation(summary = "커뮤니티 댓글 신고 기능", description = "커뮤니티 댓글 신고 처리<br>" +
+            "--요청데이터<br>" +
+            "icomment : 댓글pk<br>" +
+            "ireport : 신고pk<br>" +
+            "--응답데이터<br>" +
+            "result : 1(성공), 나머진 에러")
+    public ResVo reportCommentCommunity(CommunityCommentReportDto dto) {
+        return null;
+    }
+
 }
