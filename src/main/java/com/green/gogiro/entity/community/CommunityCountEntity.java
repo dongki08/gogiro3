@@ -23,5 +23,7 @@ public class CommunityCountEntity extends CreatedAtEntity {
     @JoinColumn(name = "iboard", nullable = false, columnDefinition = "BIGINT UNSIGNED")
     private CommunityEntity communityEntity;
 
-
+    @ManyToOne
+    @JoinColumn(name = "ireport", nullable = false)
+    private CommunityReportEntity ireport;
 }
