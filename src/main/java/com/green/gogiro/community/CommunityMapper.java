@@ -40,7 +40,7 @@ public interface CommunityMapper {
 
     CommunityDetailVo selDetailCommunity(int iboard, int iuser);
 
-    CommunityEntity entityCommunity(int iboard);
+    CommunityModel entityCommunity(int iboard);
 
     int delCommunity(CommunityDelDto dto);
 
