@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class CommunityCommentReportDto {
     private int icomment;
-    private int iboard;
+    private int ireport;
 }
