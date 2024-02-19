@@ -3,7 +3,7 @@ package com.green.gogiro.butchershop.model;
 import lombok.Data;
 
 @Data
-public class ButcherEntity {
+public class ButcherModel {
     private int ibutcher;
     private String name;
     private String location;
