@@ -4,6 +4,7 @@ import com.green.gogiro.common.ProviderType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Value;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ColumnDefault;
 
 
@@ -40,6 +41,9 @@ public class UserEntity extends BaseEntity {
 
     @Column(length = 100)
     private String pic;
+
+    @Column(length = 15)
+    private String tel;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
