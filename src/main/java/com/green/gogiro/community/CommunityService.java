@@ -37,7 +37,7 @@ public class CommunityService {
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
 //        //제목을 입력하지 않는 경우
 //        if(dto.getTitle() == null || Pattern.matches(Const.REGEXP_PATTERN_SPACE_CHAR, dto.getTitle())) {
 //            throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_TITLE);
@@ -82,7 +82,7 @@ public class CommunityService {
         } else if (totalSize > 5) {
             throw new RestApiException(SIZE_PHOTO);
         }
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.updCommunity(dto);
         String target = "/community/" + dto.getIboard();
         if (dto.getIcommuPics() != null && !dto.getIcommuPics().isEmpty()) {
@@ -139,7 +139,7 @@ public class CommunityService {
     }
 
     public CommunityDetailVo getDetailCommunity(int iboard) {
-        int iuser;
+        long iuser;
         try {
             iuser= authenticationFacade.getLoginUserPk();
         } catch(Exception e) {
@@ -152,7 +152,7 @@ public class CommunityService {
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
-        CommunityDetailVo vo = mapper.selDetailCommunity(iboard,iuser);
+        CommunityDetailVo vo = mapper.selDetailCommunity(iboard,(int)iuser);
         List<CommunityBySelPicsDto> pics = mapper.selByCommunityPics(iboard);
         vo.setPics(pics);
         List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard);
@@ -171,7 +171,7 @@ public class CommunityService {
         }
         String target = "/community/" + dto.getIboard();
         myFileUtils.delFolderTrigger(target);
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.delCommunityAllComment(dto);
         mapper.delCommunityDel(dto.getIboard());
         mapper.delCommunity(dto);
@@ -180,7 +180,7 @@ public class CommunityService {
 
 
     public ResVo postCommunityComment(CommunityCommentInsDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
 //        //내용을 입력하지 않는 경우
 //        if(dto.getContents() == null) {
 //            throw new RestApiException(AuthErrorCode.NOT_CONTENT);
@@ -189,7 +189,7 @@ public class CommunityService {
     }
 
     public ResVo delCommunityComment(CommunityCommentDelDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         return new ResVo(mapper.delCommunityComment(dto));
     }
 

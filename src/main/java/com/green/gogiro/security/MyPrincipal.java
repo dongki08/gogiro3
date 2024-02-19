@@ -8,5 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyPrincipal {
-    private int iuser;
+    private Long iuser;
+    private Long ishop;
+    private int checkShop;
+    private String role;
 }

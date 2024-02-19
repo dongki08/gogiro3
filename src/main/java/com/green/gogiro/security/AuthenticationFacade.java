@@ -12,12 +12,19 @@ public class AuthenticationFacade {
                 .getPrincipal();
     }
 
-    public int getLoginUserPk() {
+    public long getLoginUserPk() {
         MyUserDetails myUserDetails = getLoginUser();
         return myUserDetails == null ? 0 : myUserDetails
                 .getMyPrincipal()
                 .getIuser();
 
+    }
+
+    public long getLoginOwnerShopPk() {
+        MyUserDetails myUserDetails = getLoginUser();
+        return myUserDetails == null ? 0 : myUserDetails
+                .getMyPrincipal()
+                .getIshop();
     }
 
 

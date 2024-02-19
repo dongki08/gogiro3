@@ -28,6 +28,7 @@ public class SecurityConfiguration {
                                                                     , "/api/user/signup"
                                                                     , "/api/user/signup/**"
                                                                     , "/api/owner/signup/**"
+                                                                    , "/api/owner/signin/**"
                                                                     , "/login"
                                                                     , "/join"
                                                                     , "/join/**"

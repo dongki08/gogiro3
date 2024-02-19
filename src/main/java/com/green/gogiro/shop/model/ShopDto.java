@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ShopDto {
-    private int iuser;
+    private Long iuser;
     private int ishop;
 }

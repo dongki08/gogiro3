@@ -95,7 +95,7 @@ public class UserService {
             throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
         }
         MyPrincipal myPrincipal = MyPrincipal.builder()
-                .iuser(entity.getIuser())
+                .iuser((long)entity.getIuser())
                 .build();
         String at = jwtTokenProvider.generateAccessToken(myPrincipal);
         String rt = jwtTokenProvider.generateRefreshToken(myPrincipal);
@@ -151,7 +151,7 @@ public class UserService {
 
     //유저 정보 수정
     public ResVo updateUser(UserUpdDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
 
         //null이 아닌데(이미있다) 본인이 아닐 때
         if (mapper.checkNickname(dto.getNickname()) != null
@@ -169,13 +169,13 @@ public class UserService {
     }
 
     public UserInfoVo selUserInfo() {
-        UserInfoVo vo = mapper.selUserInfo(authenticationFacade.getLoginUserPk());
-        vo.setIuser(authenticationFacade.getLoginUserPk());
+        UserInfoVo vo = mapper.selUserInfo((int)authenticationFacade.getLoginUserPk());
+        vo.setIuser((int)authenticationFacade.getLoginUserPk());
         return vo;
     }
 
     public List<ReservationVo> getReservation(UserMyPageDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         int count = mapper.selUserReservationCount(dto.getIuser());
         List<ReservationVo> list = mapper.selReservation(dto);
         if (!list.isEmpty()) {
@@ -187,7 +187,7 @@ public class UserService {
     }
 
     public List<ReviewVo> getUserReview(UserMyPageDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         List<ReviewVo> reviews = mapper.selUserReview(dto);
         int count = mapper.selUserReviewCount(dto.getIuser());
         List<ReviewPk> reviewPkList = new ArrayList<>();
@@ -207,7 +207,7 @@ public class UserService {
     }
 
     public List<BookmarkShopVo> getUserBookmark(UserMyPageDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         List<BookmarkShopVo> list = mapper.selUserBookmark(dto);
         List<Integer> ishopList = new ArrayList<>();
         Map<Integer, BookmarkShopVo> shopMap = new HashMap<>();
@@ -230,7 +230,7 @@ public class UserService {
     }
 
     public ResVo delShopReview(ReviewDelDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.delShopReviewPics(dto);
         return new ResVo(mapper.delShopReview(dto));
     }

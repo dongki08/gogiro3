@@ -40,7 +40,7 @@ public class ReservationService {
         if (dto.getDate().equals("0000-00-00 00:00:00")) {
             throw new RestApiException(AuthErrorCode.NOT_DATE);
         }
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.insReservation(dto);
         return new ResVo(dto.getIreser());
     }
@@ -80,7 +80,7 @@ public class ReservationService {
             }
         }
 
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.insPickup(dto);
         for (PickupMenuDto m : dto.getMenus()) {
             PickupMenuDto menu = PickupMenuDto.builder()
@@ -95,7 +95,7 @@ public class ReservationService {
 
 
     public ResVo cancelReservation(CancelDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         Integer checkReservation = mapper.checkReservation(dto);
         if (checkReservation == null) {
             throw new RestApiException(AuthErrorCode.INVALID_RESERVATION);
@@ -112,7 +112,7 @@ public class ReservationService {
         if (dto.getDate().equals("0000-00-00 00:00:00")) {
             throw new RestApiException(AuthErrorCode.NOT_DATE);
         }
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.updReservation(dto);
         return new ResVo(SUCCESS);
     }
@@ -120,7 +120,7 @@ public class ReservationService {
     public ReviewPicsInsVo postReview(ReviewDto dto) {
         ReviewPicsInsVo vo = new ReviewPicsInsVo();
         vo.setCheckShop(dto.getCheckShop());
-        dto.setIuser(authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
 
         Integer check = mapper.checkReservationController(dto);
         if (check != null) {

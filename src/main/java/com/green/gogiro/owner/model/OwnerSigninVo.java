@@ -1,13 +1,16 @@
-package com.green.gogiro.butchershop.model;
+package com.green.gogiro.owner.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ButDto {
+public class OwnerSigninVo {
+    private Long ishop;
     private Long iuser;
-    private int ibutcher;
+    private String accessToken;
 }

@@ -73,7 +73,7 @@ public class ShopService {
         if (entity == null) {
             throw new RestApiException(VALID_SHOP);
         }
-        int i;
+        long i;
         try {
             i= authenticationFacade.getLoginUserPk();
         } catch(Exception e) {
