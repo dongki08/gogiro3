@@ -11,7 +11,8 @@
         birth = #{birth},
         gender = #{gender},
         address = #{address},
-        tel= #{tel}
+        tel= #{tel},
+        role = #{role}
     </insert>
     <update id="updUserPic">
         UPDATE

@@ -2,6 +2,7 @@ package com.green.gogiro.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.green.gogiro.common.Const;
+import com.green.gogiro.common.ProviderType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -52,6 +53,8 @@ public class UserSignupDto {
     private String tel;
     @JsonIgnore
     private String pic;
+    @JsonIgnore
+    private ProviderType role;
     @JsonIgnore
     private MultipartFile file;
 }
