@@ -88,6 +88,8 @@ public class CommunityController {
             "writerName : 작성자 이름<br>" +
             "writerPic : 작성자 프로필 사진<br>" +
             "title : 제목<br>" +
+            "totalFav : 총 좋아요 수<br>" +
+            "isFav : 좋아요 여부 1(좋아요), 0(좋아요취소)<br>" +
             "contents : 내용<br>" +
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
@@ -129,7 +131,7 @@ public class CommunityController {
         return service.delCommunityComment(dto);
     }
 
-    @GetMapping("/fav")
+    @PostMapping("/fav")
     @Operation(summary = "좋아요 기능", description = "좋아요 처리<br>" +
             "--요청데이터<br>" +
             "iuser : 유저pk<br>" +
@@ -137,7 +139,8 @@ public class CommunityController {
             "--응답데이터<br>" +
             "result : <select>" +
             "    <option>1(좋아요)</option>" +
-            "    <option>0(좋아요취소)</option>")
+            "    <option>0(좋아요취소)</option>" +
+            "</select>")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }

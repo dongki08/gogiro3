@@ -1,15 +1,20 @@
 package com.green.gogiro.entity;
 
-import com.green.gogiro.common.ProviderType;
+import com.green.gogiro.common.RoleEnum;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Value;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 
 @Data
 @Entity
 @Table(name = "t_user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity extends BaseEntity {
 
     @Id
@@ -41,12 +46,15 @@ public class UserEntity extends BaseEntity {
     @Column(length = 100)
     private String pic;
 
+    @Column(length = 15)
+    private String tel;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @ColumnDefault("'USER'")
-    private ProviderType role;
+    private RoleEnum role;
 
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private int check_shop;
+    @ColumnDefault("2")
+    private int checkShop;
 }

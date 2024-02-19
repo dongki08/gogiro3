@@ -22,7 +22,7 @@ public class ShopEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "iuser", nullable = false)
-    private UserEntity iuser;
+    private UserEntity userEntity;
 
     @ManyToOne
     @JoinColumn(name = "imeat", nullable = false)
@@ -52,6 +52,10 @@ public class ShopEntity extends BaseEntity {
     @Column(nullable = false)
     @ColumnDefault("0")
     private int confirm; // 0:대기 1:승인 2:거절(퇴출)
+
+    @Column
+    @ColumnDefault("0")
+    private int deposit;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)

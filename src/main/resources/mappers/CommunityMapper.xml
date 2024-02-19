@@ -90,11 +90,14 @@
     </select>
 
     <select id="selDetailCommunity">
-        SELECT a.iboard, a.iuser, b.nickname AS name,b.pic as writerPic, a.title, a.contents, a.created_at AS createdAt
+        SELECT a.iboard, a.iuser, b.nickname AS `name`,b.pic as writerPic, a.title,(SELECT count(iboard) FROM t_community_fav WHERE iboard = #{iboard}) AS totalFav ,if(c.iuser IS null,0,1) isFav,a.contents, a.created_at AS createdAt
         FROM t_community a
         JOIN t_user b
         ON a.iuser = b.iuser
-        WHERE iboard = #{iboard}
+        left JOIN t_community_fav c
+        ON a.iboard = c.iboard
+        AND c.iuser = #{iuser}
+        WHERE a.iboard = #{iboard}
     </select>
 
     <!-- entity용 -->

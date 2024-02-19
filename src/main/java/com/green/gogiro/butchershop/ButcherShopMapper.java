@@ -31,7 +31,7 @@ public interface ButcherShopMapper {
 
     List<ReviewPicVo> selReviewPicDetail(int ibutcher);
 
-    ButcherEntity selButcherEntity(int ibutcher);
+    ButcherModel selButcherEntity(int ibutcher);
 
     List<String> selButcherPicsForTest(int ibutcher);
 

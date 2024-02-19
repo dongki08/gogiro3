@@ -18,6 +18,10 @@ public class CommunityDetailVo {
     private String writerPic;
     @Schema(title = "제목")
     private String title;
+    @Schema(title = "총 좋아요 갯수")
+    private int totalFav;
+    @Schema(title = "나의 좋아요 여부")
+    private int isFav;
     @Schema(title = "내용")
     private String contents;
     @Schema(title = "작성일")

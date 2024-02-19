@@ -1,15 +1,31 @@
 package com.green.gogiro.owner;
 
+import com.green.gogiro.butchershop.ButcherRepository;
+import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
+import com.green.gogiro.common.ResVo;
+import com.green.gogiro.common.RoleEnum;
+import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.butcher.ButcherEntity;
+import com.green.gogiro.entity.butcher.ButcherPicEntity;
+import com.green.gogiro.entity.shop.ShopCategoryEntity;
+import com.green.gogiro.entity.shop.ShopEntity;
+import com.green.gogiro.entity.shop.ShopPicEntity;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
+import com.green.gogiro.exception.UserErrorCode;
 import com.green.gogiro.owner.model.*;
+import com.green.gogiro.shop.ShopRepository;
+import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +33,78 @@ import java.util.List;
 public class OwnerService {
     private final OwnerMapper mapper;
     private final MyFileUtils myFileUtils;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ShopRepository shopRepository;
+    private final ShopCategoryRepository categoryRepository;
+    private final ButcherRepository butcherRepository;
+
+    public ResVo ownerSignup(List<MultipartFile> pics, OwnerSignupDto dto) {
+        if (!dto.getUpw().equals(dto.getCheckPw())) {
+            throw new RestApiException(UserErrorCode.NOT_PASSWORD_CHECK);
+        }
+        String hashedPw = passwordEncoder.encode(dto.getUpw());
+        UserEntity entity = new UserEntity();
+        entity.setAddress(dto.getLocation());
+        if (dto.getImeat() > 0) {
+            entity.setCheckShop(1);
+        } else {
+            entity.setCheckShop(1);
+        }
+        entity.setUpw(hashedPw);
+        entity.setName(dto.getName());
+        entity.setRole(RoleEnum.OWNER);
+        userRepository.save(entity);
+        UserEntity userEntity = userRepository.getReferenceById(entity.getIuser());
+        if (entity.getCheckShop() == 0) {
+            ShopEntity shopEntity = new ShopEntity();
+            ShopCategoryEntity shopCategoryEntity = new ShopCategoryEntity();
+            shopCategoryEntity = categoryRepository.getReferenceById(dto.getImeat());
+            shopEntity.setUserEntity(userEntity);
+            shopEntity.setImeat(shopCategoryEntity);
+            shopEntity.setLocation(dto.getLocation());
+            shopEntity.setX(dto.getX());
+            shopEntity.setY(dto.getY());
+            shopEntity.setNumber(dto.getNum());
+            shopEntity.setName(dto.getShopName());
+            shopRepository.save(shopEntity);
+            String target = "/shop/" + shopEntity.getIshop() + "/shop_pic";
+            StoreRegistrationPicsVo vo = new StoreRegistrationPicsVo();
+            for (MultipartFile file : pics) {
+                String saveFileNm = myFileUtils.transferTo(file, target);
+                vo.getPics().add(saveFileNm);
+            }
+            List<ShopPicEntity> shopPicEntityList = vo.getPics().stream().map(item -> ShopPicEntity.builder()
+                    .ishop(shopEntity)
+                    .pic(item)
+                    .build()).collect(Collectors.toList());
+            shopEntity.getShopPicEntityList().addAll(shopPicEntityList);
+            return new ResVo(shopEntity.getIshop().intValue());
+        }
+        if (entity.getCheckShop() >= 1) {
+            ButcherEntity butcherEntity = new ButcherEntity();
+            butcherEntity.setUserEntity(userEntity);
+            butcherEntity.setLocation(dto.getLocation());
+            butcherEntity.setX(dto.getX());
+            butcherEntity.setY(dto.getY());
+            butcherEntity.setNumber(dto.getNum());
+            butcherEntity.setName(dto.getShopName());
+            butcherRepository.save(butcherEntity);
+            String target = "/butcher/" + butcherEntity.getIbutcher() + "/butchershop_pic";
+            ButcherPicVo vo = new ButcherPicVo();
+            for (MultipartFile file : pics) {
+                String saveFileNm = myFileUtils.transferTo(file, target);
+                vo.getPics().add(saveFileNm);
+            }
+            List<ButcherPicEntity> butcherPicEntityList = vo.getPics().stream().map(item -> ButcherPicEntity.builder()
+                    .pic(item)
+                    .butcherEntity(butcherEntity)
+                    .build()).collect(Collectors.toList());
+            butcherEntity.getButcherPicEntityList().addAll(butcherPicEntityList);
+            return new ResVo(butcherEntity.getIbutcher().intValue());
+        }
+        return new ResVo(Const.FAIL);
+    }
 
     public StoreRegistrationPicsVo insRegistration(StoreRegistrationDto dto) {
 
@@ -40,7 +128,7 @@ public class OwnerService {
     }
 
     public ShopPicsVo updShopPics(ShopUpdDto dto) {
-        if (dto.getFiles()!=null && dto.getFiles().size() > 5) {
+        if (dto.getFiles() != null && dto.getFiles().size() > 5) {
             throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
         }
         String target = "/shop/" + dto.getIshop() + "/shop_pic";
@@ -93,6 +181,7 @@ public class OwnerService {
         vo.setImenu(dto.getImenu());
         return vo;
     }
+
     @Transactional
     public ButcherPicVo insButcherShop(ButcherInsDto dto) {
         mapper.insButcherShop(dto);
@@ -140,20 +229,20 @@ public class OwnerService {
     }
 
     public ButcherPicVo updButcherPic(ButcherPicsUpdDto dto) {
-        if (dto.getFiles()!=null && dto.getFiles().size() > 5) {
+        if (dto.getFiles() != null && dto.getFiles().size() > 5) {
             throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
         }
         String path = "/butcher/" + dto.getIbutcher() + "/butchershop_pic";
         if (dto.getIbutPics() != null && !dto.getIbutPics().isEmpty()) {
             List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIbutPics());
-            if(!picList.isEmpty()) {
+            if (!picList.isEmpty()) {
                 for (ButcherPicsProcVo vo : picList) {
-                    myFileUtils.delFolderTrigger2(path + "/" +vo.getPic());
+                    myFileUtils.delFolderTrigger2(path + "/" + vo.getPic());
                 }
                 mapper.delButcherPics(dto.getIbutPics());
             }
         }
-        if(dto.getFiles() != null) {
+        if (dto.getFiles() != null) {
             for (MultipartFile pic : dto.getFiles()) {
                 String fileNm = myFileUtils.transferTo(pic, path);
                 dto.getPics().add(fileNm);

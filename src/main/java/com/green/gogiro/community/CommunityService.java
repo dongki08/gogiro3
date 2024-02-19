@@ -8,10 +8,12 @@ import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.community.model.*;
+import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.community.*;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
-import jakarta.validation.constraints.Size;
+import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 @RequiredArgsConstructor
@@ -28,6 +31,9 @@ public class CommunityService {
     private final CommunityMapper mapper;
     private final MyFileUtils myFileUtils;
     private final AuthenticationFacade authenticationFacade;
+    private final UserRepository userRepository;
+    private final CommunityRepository communityRepository;
+    private final CommunityFavRepository communityFavRepository;
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
@@ -133,13 +139,20 @@ public class CommunityService {
     }
 
     public CommunityDetailVo getDetailCommunity(int iboard) {
-        CommunityEntity entity = mapper.entityCommunity(iboard);
+        int iuser;
+        try {
+            iuser= authenticationFacade.getLoginUserPk();
+        } catch(Exception e) {
+            iuser = 0;
+        }
+
+        CommunityModel entity = mapper.entityCommunity(iboard);
         if (entity == null) {
             throw new RestApiException(VALID_BOARD);
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
-        CommunityDetailVo vo = mapper.selDetailCommunity(iboard);
+        CommunityDetailVo vo = mapper.selDetailCommunity(iboard,iuser);
         List<CommunityBySelPicsDto> pics = mapper.selByCommunityPics(iboard);
         vo.setPics(pics);
         List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard);
@@ -181,12 +194,34 @@ public class CommunityService {
     }
 
     //커뮤니티 좋아요 삽입 시 1 해제 시 0
+    @Transactional
     public ResVo favCommunity(CommunityInsFavDto dto) {
-        int delCommunityFav = mapper.delCommunityFav(dto);
-        if(delCommunityFav == 1) {
-            return new ResVo(0);
-        }
-        mapper.insCommunityFav(dto);
-        return new ResVo(1);
+        CommunityFavIds ids = new CommunityFavIds();
+        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIboard((long)dto.getIboard());
+
+        AtomicInteger atomic = new AtomicInteger(FAIL);
+        communityFavRepository
+                .findById(ids)
+                .ifPresentOrElse( entity -> communityFavRepository.delete(entity), () -> {
+                    atomic.set(SUCCESS);
+                    CommunityFavEntity saveFavEntity = new CommunityFavEntity();
+                    saveFavEntity.setCommunityFavIds(ids);
+                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
+                    saveFavEntity.setUserEntity(userEntity);
+                    saveFavEntity.setCommunityEntity(communityEntity);
+                    communityFavRepository.save(saveFavEntity);
+                });
+        return new ResVo(atomic.get());
     }
+//    public ResVo favCommunity(CommunityInsFavDto dto) {
+//        dto.setIuser(authenticationFacade.getLoginUserPk());
+//        int delCommunityFav = mapper.delCommunityFav(dto);
+//        if(delCommunityFav == 1) {
+//            return new ResVo(0);
+//        }
+//        mapper.insCommunityFav(dto);
+//        return new ResVo(1);
+//    }
 }

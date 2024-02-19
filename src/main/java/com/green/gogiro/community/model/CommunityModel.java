@@ -2,10 +2,8 @@ package com.green.gogiro.community.model;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class CommunityEntity {
+public class CommunityModel {
     private int iboard;
     private int iuser;
     private String title;

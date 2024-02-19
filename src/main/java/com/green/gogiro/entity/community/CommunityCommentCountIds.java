@@ -9,7 +9,8 @@ import java.io.Serializable;
 @Data
 @Embeddable
 @EqualsAndHashCode
-public class CommunityCountIds implements Serializable {
+public class CommunityCommentCountIds implements Serializable {
+
+    private Long icomment;
     private Long iuser;
-    private Long iboard;
 }

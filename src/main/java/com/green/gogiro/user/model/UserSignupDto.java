@@ -1,14 +1,12 @@
 package com.green.gogiro.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.green.gogiro.common.Const;
+import com.green.gogiro.common.RoleEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import static com.green.gogiro.common.Const.*;
@@ -52,6 +50,8 @@ public class UserSignupDto {
     private String tel;
     @JsonIgnore
     private String pic;
+    @JsonIgnore
+    private RoleEnum role;
     @JsonIgnore
     private MultipartFile file;
 }
