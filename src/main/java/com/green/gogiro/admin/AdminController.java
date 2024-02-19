@@ -36,7 +36,7 @@ public class AdminController {
     1)대기 상태의 가게->승인 혹은 거절
     2)승인 상태의 가게->퇴출
     3)거절 상태의 가게->재승인*/
-    @PatchMapping("/cofirm")
+    @PatchMapping("/confirm")
     @Operation(summary="가게 승인 여부 변경",description="총 관리자의 가게 승인/거절/퇴출" +
             "<br>1)대기 상태의 가게->승인 혹은 거절<br>2)승인 상태의 가게->퇴출<br>3)거절 상태의 가게->재승인" +
             "<br>--요구 데이터<br>checkShop(0 또는 1): 가게 구분(0:고기집, 1:정육점)<br>ishop(최소 1 이상): 가게 pk" +
