@@ -43,7 +43,7 @@ public class OwnerService {
     private final AppProperties appProperties;
     private final CookieUtils cookieUtils;
 
-
+    @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getId());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
@@ -53,7 +53,6 @@ public class OwnerService {
         if (!passwordEncoder.matches(dto.getUpw(), userEntity.getUpw())) {
             throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
         }
-        int iuser = userEntity.getIuser().intValue();
         MyPrincipal mp = new MyPrincipal();
         if (userEntity.getCheckShop() == 0) {
         ShopEntity entity = shopRepository.findByUserEntity(userEntity);
@@ -78,6 +77,7 @@ public class OwnerService {
         return OwnerSigninVo.builder()
                 .accessToken(at)
                 .iuser(userEntity.getIuser())
+                .checkShop(userEntity.getCheckShop())
                 .ishop(mp.getIshop())
                 .build();
     }

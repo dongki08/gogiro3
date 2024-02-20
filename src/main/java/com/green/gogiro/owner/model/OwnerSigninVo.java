@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OwnerSigninVo {
     private Long ishop;
+    private int checkShop;
     private Long iuser;
     private String accessToken;
 }
