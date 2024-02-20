@@ -34,6 +34,8 @@ public class CommunityService {
     private final UserRepository userRepository;
     private final CommunityRepository communityRepository;
     private final CommunityFavRepository communityFavRepository;
+    private final CommunityCountRepository communityCountRepository;
+    private final CommunityReportRepository communityReportRepository;
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
@@ -224,4 +226,38 @@ public class CommunityService {
 //        mapper.insCommunityFav(dto);
 //        return new ResVo(1);
 //    }
+    @Transactional
+    public ResVo reportCommunity(CommunityReportDto dto) {
+
+        CommunityCountIds ids = new CommunityCountIds();
+        ids.setIuser(authenticationFacade.getLoginUserPk());
+        ids.setIboard(dto.getIboard());
+        CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
+
+        Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
+        if(optEntity.isPresent()) {
+            throw new RestApiException(REPORT_COMMUNITY_ENTITY);
+        }
+
+        UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+
+        userEntity.setIuser(authenticationFacade.getLoginUserPk());
+        CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
+
+        if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(REPORT_COMMUNITY_MYUSER);
+        }
+
+        CommunityCountEntity countEntity = new CommunityCountEntity();
+        countEntity.setCommunityCountIds(ids);
+        countEntity.setIreport(reportEntity);
+        countEntity.setUserEntity(userEntity);
+        countEntity.setCommunityEntity(communityEntity);
+        communityCountRepository.save(countEntity);
+
+        communityEntity.setCount(communityEntity.getCount() + 1);
+        communityRepository.save(communityEntity);
+
+        return new ResVo(SUCCESS);
+    }
 }

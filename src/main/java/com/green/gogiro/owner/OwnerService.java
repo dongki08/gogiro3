@@ -2,12 +2,11 @@ package com.green.gogiro.owner;
 
 import com.green.gogiro.butchershop.ButcherRepository;
 import com.green.gogiro.common.*;
+import com.green.gogiro.entity.QUserEntity;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
-import com.green.gogiro.entity.shop.ShopCategoryEntity;
-import com.green.gogiro.entity.shop.ShopEntity;
-import com.green.gogiro.entity.shop.ShopPicEntity;
+import com.green.gogiro.entity.shop.*;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -16,6 +15,7 @@ import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 import com.green.gogiro.shop.ShopRepository;
 import com.green.gogiro.user.UserRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,12 +42,15 @@ public class OwnerService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AppProperties appProperties;
     private final CookieUtils cookieUtils;
+    private final JPAQueryFactory queryFactory;
 
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
+
+
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getId());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
-        if(!userEntity.getRole().toString().equals("OWNER")){
+        if (!userEntity.getRole().toString().equals("OWNER")) {
             throw new RestApiException(AuthErrorCode.NOT_ROLE);
         }
         if (!passwordEncoder.matches(dto.getUpw(), userEntity.getUpw())) {
@@ -55,22 +58,23 @@ public class OwnerService {
         }
         MyPrincipal mp = new MyPrincipal();
         if (userEntity.getCheckShop() == 0) {
-        ShopEntity entity = shopRepository.findByUserEntity(userEntity);
+            ShopEntity entity = shopRepository.findByUserEntity(userEntity);
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
+            mp.setCheckShop(userEntity.getCheckShop());
             mp.setIshop(entity.getIshop());
             mp.setCheckShop(userEntity.getCheckShop());
 
         }
-        if(userEntity.getCheckShop() == 1) {
+        if (userEntity.getCheckShop() == 1) {
             ButcherEntity entity = butcherRepository.findByUserEntity(userEntity);
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
             mp.setIshop(entity.getIbutcher());
             mp.setCheckShop(userEntity.getCheckShop());
         }
-            String at = jwtTokenProvider.generateAccessToken(mp);
-            String rt = jwtTokenProvider.generateRefreshToken(mp);
+        String at = jwtTokenProvider.generateAccessToken(mp);
+        String rt = jwtTokenProvider.generateRefreshToken(mp);
 
 //rt를 cookie에 담는다
         int rtCookieMaxAge = appProperties.getJwt().getRefreshTokenCookieMaxAge();
@@ -85,7 +89,7 @@ public class OwnerService {
     }
 
     @Transactional
-    public ResVo ownerSignup(List<MultipartFile> pics, OwnerSignupDto dto) {
+    public ResVo ownerSignup(MultipartFile pic, OwnerSignupDto dto) {
         if (!dto.getUpw().equals(dto.getCheckPw())) {
             throw new RestApiException(UserErrorCode.NOT_PASSWORD_CHECK);
         }
@@ -105,8 +109,7 @@ public class OwnerService {
         UserEntity userEntity = userRepository.getReferenceById(entity.getIuser());
         if (entity.getCheckShop() == 0) {
             ShopEntity shopEntity = new ShopEntity();
-            ShopCategoryEntity shopCategoryEntity = new ShopCategoryEntity();
-            shopCategoryEntity = categoryRepository.getReferenceById(dto.getImeat());
+            ShopCategoryEntity shopCategoryEntity = categoryRepository.getReferenceById(dto.getImeat());
             shopEntity.setUserEntity(userEntity);
             shopEntity.setImeat(shopCategoryEntity);
             shopEntity.setLocation(dto.getLocation());
@@ -117,16 +120,16 @@ public class OwnerService {
             shopRepository.save(shopEntity);
             String target = "/shop/" + shopEntity.getIshop() + "/shop_pic";
             StoreRegistrationPicsVo vo = new StoreRegistrationPicsVo();
-            for (MultipartFile file : pics) {
-                String saveFileNm = myFileUtils.transferTo(file, target);
-                vo.getPics().add(saveFileNm);
-            }
+
+            String saveFileNm = myFileUtils.transferTo(pic, target);
+            vo.getPics().add(saveFileNm);
+
             List<ShopPicEntity> shopPicEntityList = vo.getPics().stream().map(item -> ShopPicEntity.builder()
                     .ishop(shopEntity)
                     .pic(item)
                     .build()).collect(Collectors.toList());
             shopEntity.getShopPicEntityList().addAll(shopPicEntityList);
-            return new ResVo(shopEntity.getIshop().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         if (entity.getCheckShop() == 1) {
             ButcherEntity butcherEntity = new ButcherEntity();
@@ -139,16 +142,14 @@ public class OwnerService {
             butcherRepository.save(butcherEntity);
             String target = "/butcher/" + butcherEntity.getIbutcher() + "/butchershop_pic";
             ButcherPicVo vo = new ButcherPicVo();
-            for (MultipartFile file : pics) {
-                String saveFileNm = myFileUtils.transferTo(file, target);
-                vo.getPics().add(saveFileNm);
-            }
+            String saveFileNm = myFileUtils.transferTo(pic, target);
+            vo.getPics().add(saveFileNm);
             List<ButcherPicEntity> butcherPicEntityList = vo.getPics().stream().map(item -> ButcherPicEntity.builder()
                     .pic(item)
                     .butcherEntity(butcherEntity)
                     .build()).collect(Collectors.toList());
             butcherEntity.getButcherPicEntityList().addAll(butcherPicEntityList);
-            return new ResVo(butcherEntity.getIbutcher().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         return new ResVo(Const.FAIL);
     }

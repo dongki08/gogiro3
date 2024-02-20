@@ -135,7 +135,7 @@ public class ShopService {
                     atomic.set(1);
                     ShopBookmarkEntity saveShopBookmarkEntity = new ShopBookmarkEntity();
                     saveShopBookmarkEntity.setBookmarkIds(ids);
-                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
                     ShopEntity shopEntity = shopRepository.getReferenceById((long)dto.getIshop());
                     saveShopBookmarkEntity.setUserEntity(userEntity);
                     saveShopBookmarkEntity.setShopEntity(shopEntity);

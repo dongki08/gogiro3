@@ -31,6 +31,14 @@ public class AuthenticationFacade {
                 .getMyPrincipal()
                 .getIshop();
     }
+//    public int getCheckShop(){
+//        MyUserDetails myUserDetails = getLoginUser();
+//        if(myUserDetails.getMyPrincipal().getRoles().get(0).equals("OWNER")){
+//            return myUserDetails.getMyPrincipal().getCheckShop();
+//        }
+//        return 2;
+//        // 0:고기집, 1:정육점, 2: 사용자 혹은 총 관리자
+//    }
 
     public String getLoginUserRole(){
         MyUserDetails myUserDetails = getLoginUser();

@@ -3,6 +3,7 @@ package com.green.gogiro.user;
 import static com.green.gogiro.common.Const.*;
 
 import com.green.gogiro.common.*;
+import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.ArrayList;
@@ -44,10 +46,11 @@ public class UserService {
     private final CookieUtils cookeUtils;
     private final AuthenticationFacade authenticationFacade;
     private final MyFileUtils myFileUtils;
+    private final UserRepository userRepository;
 
 
     @Transactional
-    public ResVo signup(UserSignupDto dto) {
+    public ResVo signup(MultipartFile pic, UserSignupDto dto) {
         if (mapper.checkNickname(dto.getNickname()) != null) {
             throw new RestApiException(UserErrorCode.NEED_NICK_NAME_CHECK);
         }
@@ -65,16 +68,27 @@ public class UserService {
             throw new RestApiException(UserErrorCode.REGEXP_TEL);
         }
 
-        mapper.signupUser(dto);
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(dto.getEmail());
+        userEntity.setName(dto.getName());
+        userEntity.setAddress(dto.getAddress());
+        userEntity.setBirth(dto.getBirth());
+        userEntity.setUpw(hashedPw);
+        userEntity.setTel(dto.getTel());
+        userEntity.setGender(dto.getGender());
+        userEntity.setNickname(dto.getNickname());
+        userEntity.setRole(RoleEnum.USER);
 
-        if (dto.getFile() != null) {
+
+        if (pic != null) {
             String path = "/user/" + dto.getIuser();
-            String savedPicFileNm = myFileUtils.transferTo(dto.getFile(), path);
+            String savedPicFileNm = myFileUtils.transferTo(pic, path);
             dto.setPic(savedPicFileNm);
             mapper.updUserPic(dto);
+            userEntity.setPic(dto.getPic());
         }
-
-        return new ResVo(dto.getIuser());
+        userRepository.save(userEntity);
+        return new ResVo(userEntity.getIuser().intValue());
     }
 
     public ResVo checkNickName(String nickName) {
