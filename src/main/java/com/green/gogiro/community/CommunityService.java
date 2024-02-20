@@ -34,6 +34,7 @@ public class CommunityService {
     private final UserRepository userRepository;
     private final CommunityRepository communityRepository;
     private final CommunityFavRepository communityFavRepository;
+    private final CommunityCountRepository communityCountRepository;
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
@@ -224,4 +225,14 @@ public class CommunityService {
 //        mapper.insCommunityFav(dto);
 //        return new ResVo(1);
 //    }
+
+    public ResVo reportCommunity(CommunityReportDto dto) {
+
+        CommunityCountIds ids = new CommunityCountIds();
+        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIboard((long)dto.getIboard());
+
+        Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
+        return  null;
+    }
 }
