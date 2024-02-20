@@ -2,12 +2,11 @@ package com.green.gogiro.owner;
 
 import com.green.gogiro.butchershop.ButcherRepository;
 import com.green.gogiro.common.*;
+import com.green.gogiro.entity.QUserEntity;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
-import com.green.gogiro.entity.shop.ShopCategoryEntity;
-import com.green.gogiro.entity.shop.ShopEntity;
-import com.green.gogiro.entity.shop.ShopPicEntity;
+import com.green.gogiro.entity.shop.*;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -16,6 +15,7 @@ import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 import com.green.gogiro.shop.ShopRepository;
 import com.green.gogiro.user.UserRepository;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +42,12 @@ public class OwnerService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AppProperties appProperties;
     private final CookieUtils cookieUtils;
+    private final JPAQueryFactory queryFactory;
 
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
+
+
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getId());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
         if(!userEntity.getRole().toString().equals("OWNER")){

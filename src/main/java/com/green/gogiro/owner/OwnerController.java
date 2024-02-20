@@ -37,6 +37,8 @@ public class OwnerController {
     public ResVo ownerSignup(@RequestPart List<MultipartFile> pics, @RequestPart OwnerSignupDto dto){
         return service.ownerSignup(pics,dto);
     }
+
+
     @GetMapping("/signin")
     @Operation(summary = "가게 주인 로그인",description = "<h2>가게 주인 로그인 처리</h2>" +
     "<h3>---요구 데이터<br>id: 아이디<br>upw: 비밀번호</h3>" +
