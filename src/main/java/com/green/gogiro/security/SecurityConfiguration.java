@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                                                                     , "/join/**"
                                                                     , "/error"
                                                                     , "/err"
-                                                                    , "/"
+                                                                    , "/api/confirm"
                                                                     , "/static"
                                                                     , "/static/**"
                                                                     , "/asset-manifest.json"
