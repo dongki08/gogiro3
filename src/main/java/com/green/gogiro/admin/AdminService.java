@@ -38,7 +38,10 @@ public class AdminService{
     //JPA 2.가게 승인 여부 변경
     public ResVo confirmShop2(){return null;}
     //Mybatis 3.신고 글 리스트
-    public List<ReportedVo> reportList1(){return null;}
+    public List<ReportedVo> reportList1(){
+
+        return null;
+    }
     //JPA 3.신고 글 리스트
     @Transactional
     public List<ReportedVo> reportList2(){
