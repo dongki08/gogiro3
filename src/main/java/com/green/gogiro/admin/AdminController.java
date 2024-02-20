@@ -61,7 +61,7 @@ public class AdminController {
             "--응답 데이터<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
             "<br>state:상태(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
     public List<ReportedVo> reportList(@PathVariable int check){//글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)
-        return null;
+        return service.reportList1();
     }
     /*4.신고받은 글 숨김
     1)DB에 해당 글이 있는 지 확인 후 숨김(관리자니까)

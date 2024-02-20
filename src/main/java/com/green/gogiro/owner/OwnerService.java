@@ -2,7 +2,6 @@ package com.green.gogiro.owner;
 
 import com.green.gogiro.butchershop.ButcherRepository;
 import com.green.gogiro.common.*;
-import com.green.gogiro.entity.QUserEntity;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
