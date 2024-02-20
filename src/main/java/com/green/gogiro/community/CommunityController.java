@@ -153,7 +153,7 @@ public class CommunityController {
             "--응답데이터<br>" +
             "result : 1(성공), 나머진 에러")
     public ResVo reportCommunity(CommunityReportDto dto) {
-        return null;
+        return service.reportCommunity(dto);
     }
 
     @PostMapping("/comment/report")
