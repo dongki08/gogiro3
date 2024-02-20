@@ -165,8 +165,8 @@ public class CommunityController {
             "(그리고 한 번 신고할 때 하나의 사유만 할 건지 여러 사유를 추가할 수 있게 할 건지 정하면 좋을 거 같습니다" +
             "--응답데이터<br>" +
             "result : 1(성공), 나머진 에러")
-    public ResVo reportCommentCommunity(CommunityCommentReportDto dto) {
-        return null;
+    public ResVo reportCommentCommunity(CommentReportDto dto) {
+        return service.reportcomment(dto);
     }
 
 }
