@@ -58,12 +58,12 @@ public class AdminService{
     @Transactional
     public ResVo cancelReport2(CancelReportDto dto){return null;}
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
-    public List<BlackVo> blackList1(){return null;}
+    public List<BlackVo> blackList1(){return mapper.blackList();}
     //JPA 6.사용자(USER,OWNER)블랙 리스트(정지)
     @Transactional
     public List<BlackVo> blackList2(){return null;}
     //Mybatis 7.계정 정지/정지 해제(토글로 처리)
-    public ResVo suspendAccount1(int iuser){return null;}
+    public ResVo suspendAccount1(int iuser){return new ResVo(mapper.suspendAccount(new CheckDto(iuser)));}
     //JPA 7.계정 정지/정지 해제(토글로 처리)
     @Transactional
     public ResVo suspendAccount2(int iuser){return null;}

@@ -93,7 +93,7 @@ public class AdminController {
             "<br>2.이름 부분을 실명으로 하고 싶으신지 닉네임으로 하고 싶으신지 궁금합니다<br><br>--요구 데이터: 없음" +
             "<br>--응답 데이터<br>name: 이름(실명?닉네임?)<br>id:아이디<br>number:사업자등록번호" +
             "<br>state:상태(잠금여부 0:정상 1:잠금)<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<BlackVo> blackList(){return null;}
+    public List<BlackVo> blackList(){return service.blackList1();}
     /*7.계정 정지/정지 해제(토글로 처리)
     1)이거 실행하기 전에 경고 문구 같은 거 있는 컨펌 창 하나 띄워주는 건 어떤가요*/
     @PatchMapping("/{iuser}")
@@ -101,6 +101,6 @@ public class AdminController {
             "<br>1)이거 실행하기 전에 경고 문구 같은 거 있는 컨펌 창 하나 띄워주는 건 어떤가요" +
             "<br>--요구 데이터<br>iuser:유저 pk<br>--응답 데이터<br>(성공)<br>result: 1(잠금) or 0(해제)" +
             "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo suspendAccount(@PathVariable int iuser){return null;}
+    public ResVo suspendAccount(@PathVariable int iuser){return service.suspendAccount1(iuser);}
     //잠금 여부 확인 후 토글로 처리(select result->update)
 }
