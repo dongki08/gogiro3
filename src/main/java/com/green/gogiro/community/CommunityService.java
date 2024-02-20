@@ -35,6 +35,7 @@ public class CommunityService {
     private final CommunityRepository communityRepository;
     private final CommunityFavRepository communityFavRepository;
     private final CommunityCountRepository communityCountRepository;
+    private final CommunityReportRepository communityReportRepository;
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
@@ -225,14 +226,28 @@ public class CommunityService {
 //        mapper.insCommunityFav(dto);
 //        return new ResVo(1);
 //    }
-
+    @Transactional
     public ResVo reportCommunity(CommunityReportDto dto) {
 
         CommunityCountIds ids = new CommunityCountIds();
-        ids.setIuser((long)authenticationFacade.getLoginUserPk());
-        ids.setIboard((long)dto.getIboard());
+        ids.setIuser(authenticationFacade.getLoginUserPk());
+        ids.setIboard(dto.getIboard());
+        CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
-        Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
-        return  null;
+
+        Optional<CommunityCountEntity> optEntity = communityCountRepository.findAllByCommunityCountIds(ids);
+        if(optEntity.isPresent()) {
+            throw new RestApiException(REPORT_COMMUNITY_ENTITY);
+        }
+        UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+        CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
+        CommunityCountEntity countEntity = new CommunityCountEntity();
+        countEntity.setCommunityCountIds(ids);
+        countEntity.setIreport(reportEntity);
+        countEntity.setUserEntity(userEntity);
+        countEntity.setCommunityEntity(communityEntity);
+        communityCountRepository.save(countEntity);
+
+        return new ResVo(SUCCESS);
     }
 }

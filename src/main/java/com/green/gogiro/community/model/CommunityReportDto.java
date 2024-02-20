@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CommunityReportDto {
-    private int iboard;
-    private int ireport;
+    private Long iboard;
+    private Long ireport;
 }
+

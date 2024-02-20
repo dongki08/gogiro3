@@ -2,6 +2,10 @@ package com.green.gogiro.entity.community;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,4 +18,5 @@ public class CommunityReportEntity {
 
     @Column(length = 30, nullable = false)
     private String report;
+
 }
