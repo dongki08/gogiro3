@@ -234,19 +234,25 @@ public class CommunityService {
         ids.setIboard(dto.getIboard());
         CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
-
-        Optional<CommunityCountEntity> optEntity = communityCountRepository.findAllByCommunityCountIds(ids);
+        Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
         if(optEntity.isPresent()) {
             throw new RestApiException(REPORT_COMMUNITY_ENTITY);
         }
+
         UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+
+        userEntity.setIuser(authenticationFacade.getLoginUserPk());
         CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
+
         CommunityCountEntity countEntity = new CommunityCountEntity();
         countEntity.setCommunityCountIds(ids);
         countEntity.setIreport(reportEntity);
         countEntity.setUserEntity(userEntity);
         countEntity.setCommunityEntity(communityEntity);
         communityCountRepository.save(countEntity);
+
+        communityEntity.setCount(communityEntity.getCount() + 1);
+        communityRepository.save(communityEntity);
 
         return new ResVo(SUCCESS);
     }
