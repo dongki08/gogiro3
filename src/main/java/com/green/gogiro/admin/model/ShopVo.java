@@ -1,5 +1,6 @@
 package com.green.gogiro.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -14,8 +15,18 @@ public class ShopVo {
     private String name;//가게 이름
     private String x;//경도
     private String y;//위도
-    private String pic;
-    //가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)
     private String tel;//전화번호
     private int confirm;//승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)
+    private String pic;
+    @JsonIgnore
+    private String createdAt;
+    private boolean isShop;
+
+    //가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)
+
+    public void setCheckShop(int checkShop){
+        this.checkShop= checkShop;
+        this.isShop=(checkShop==0);
+    }
+
 }

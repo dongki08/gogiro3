@@ -23,6 +23,7 @@ public class CommunityCommentEntity extends BaseEntity {
     @Column(length = 50,nullable = false)
     private String contents;
 
+    @Column(nullable = false)
     @ColumnDefault("0")
     private int count;
 }

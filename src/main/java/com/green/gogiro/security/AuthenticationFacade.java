@@ -19,7 +19,12 @@ public class AuthenticationFacade {
                 .getIuser();
 
     }
-
+    public int getLoginOwnerCheckShop(){
+        MyUserDetails myUserDetails = getLoginUser();
+        return myUserDetails == null ? 0 : myUserDetails
+                .getMyPrincipal()
+                .getCheckShop();
+    }
     public long getLoginOwnerShopPk() {
         MyUserDetails myUserDetails = getLoginUser();
         return myUserDetails == null ? 0 : myUserDetails
@@ -27,5 +32,11 @@ public class AuthenticationFacade {
                 .getIshop();
     }
 
+    public String getLoginUserRole(){
+        MyUserDetails myUserDetails = getLoginUser();
+        return myUserDetails == null ? null : myUserDetails
+                .getMyPrincipal()
+                .getRole();
+    }
 
 }

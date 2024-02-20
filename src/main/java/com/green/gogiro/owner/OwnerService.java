@@ -59,6 +59,7 @@ public class OwnerService {
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
             mp.setIshop(entity.getIshop());
+            mp.setCheckShop(userEntity.getCheckShop());
 
         }
         if(userEntity.getCheckShop() == 1) {
@@ -66,6 +67,7 @@ public class OwnerService {
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
             mp.setIshop(entity.getIbutcher());
+            mp.setCheckShop(userEntity.getCheckShop());
         }
             String at = jwtTokenProvider.generateAccessToken(mp);
             String rt = jwtTokenProvider.generateRefreshToken(mp);

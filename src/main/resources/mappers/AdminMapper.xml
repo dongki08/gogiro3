@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.gogiro.admin.AdminMapper">
+    <select id="shopList">
+        SELECT
+            0 AS checkShop,
+            a.ishop,
+            a.name,
+            a.x, a.y,
+            a.tel,
+            a.confirm,
+            b.pic,
+            a.created_at AS createdAt
+        FROM t_shop a
+        JOIN t_shop_pic b
+        ON a.ishop=b.ishop
+        GROUP BY a.ishop
+        UNION
+        SELECT
+            1 AS checkShop,
+            a.ibutcher AS ishop,
+            a.name,
+            a.x, a.y,
+            a.tel,
+            a.confirm,
+            b.pic,
+            a.created_at AS createdAt
+        FROM t_butcher_shop a
+        JOIN t_butcher_pic b
+        ON a.ibutcher=b.ibutcher
+        GROUP BY a.ibutcher
+        ORDER BY createdAt DESC;
+    </select>
+    <update id="confirmShop">
+        UPDATE
+        t_${table}
+        SET
+            confirm= #{confirm}
+        WHERE i${column}= #{ishop}
+    </update>
+</mapper>
