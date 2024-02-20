@@ -23,7 +23,7 @@ public class OwnerController {
     private final OwnerService service;
 
     @PostMapping(value = "/signup",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @Operation(summary = "가게 주인 회원 가입",description = "--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
+    @Operation(summary = "가게 주인 회원 가입",description = "<h2>가게 주인 회원 가입 처리</h2><br>--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
             "<br>number: 사업자 등록 번호(사이트에서 쓸 일 없으면 db에 저장할 필요 없을 듯?)<br>name: 주인의 실명<br>shopName:가게 이름<br>x:경도" +
             "<br>y:위도<br>location:위치(가게 주인이 직접 입력하는)<br>imeat:고기 종류(0:정육점, 1:돼지, 2:소, 3:닭, 4:오리, 5:양)" +
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
@@ -36,6 +36,14 @@ public class OwnerController {
 //                             @RequestPart int imeat){
     public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart OwnerSignupDto dto){
         return service.ownerSignup(pic,dto);
+    }
+
+    @GetMapping("/reservation")
+    @Operation(summary = "고깃집 예약 내역 및 노쇼 내역",description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>"+
+    "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>" +
+    "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수")
+    public OwnerReservationVo getReservation(){
+        return null;
     }
 
 
