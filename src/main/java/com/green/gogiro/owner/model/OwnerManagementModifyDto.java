@@ -3,7 +3,7 @@ package com.green.gogiro.owner.model;
 import lombok.Data;
 
 @Data
-public class OwnerManagementDto {
+public class OwnerManagementModifyDto {
     private Long imeat;
     private String name;
     private String location;
