@@ -46,6 +46,12 @@ public class OwnerController {
         return null;
     }
 
+    @PutMapping("/management")
+    @Operation()
+    public OwnerManagementVo putManagement(@RequestPart List<MultipartFile> pics,OwnerManagementDto dto){
+        return null;
+    }
+
 
     @GetMapping("/signin")
     @Operation(summary = "가게 주인 로그인",description = "<h2>가게 주인 로그인 처리</h2>" +
@@ -73,6 +79,12 @@ public class OwnerController {
             dto.setPic(pic);
         }
         return service.insShopMenu(dto);
+    }
+
+    @PutMapping("/modify")
+    @Operation(summary = "매장 정보 수정",description = "<h2>매장 정보 수정 처리</h2><h3>--request<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
+    public OwnerManagementVo updModify(OwnerManagementDto dto){
+        return null;
     }
 
     @PutMapping("/shop")

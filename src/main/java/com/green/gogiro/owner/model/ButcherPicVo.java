@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 public class ButcherPicVo {
     private int ibutcher;
-    private List<String> pics;
+    private List<String> pics = new ArrayList<>();
 }
