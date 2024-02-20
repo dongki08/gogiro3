@@ -1,6 +1,6 @@
 package com.green.gogiro.reservation;
 
-import com.green.gogiro.butchershop.model.ReviewPicVo;
+
 import com.green.gogiro.common.Const;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.exception.AuthErrorCode;
@@ -12,7 +12,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -82,4 +85,27 @@ public class ReservationController {
         dto.setFiles(pics);
         return service.postReview(dto);
     }
+    @PostMapping("/confirm")
+    @Operation(summary="결제 승인",description="결제 승인 처리<br>" +
+            "--요청 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID" +
+            "<br>--응답 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID")
+    public PaymentDto confirmPayment(@RequestBody PaymentDto dto) throws Exception {
+        String widgetSecretKey = "test_ck_6bJXmgo28eD0pPL4knJXrLAnGKWx";
+        Base64.Encoder encoder = Base64.getEncoder();
+        byte[] encodedBytes = encoder.encode((widgetSecretKey + ":").getBytes("UTF-8"));
+        String authorizations = "Basic " + new String(encodedBytes);
+
+        URL url = new URL("https://api.tosspayments.com/v1/payments/confirm");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("Authorization", authorizations);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+
+        OutputStream outputStream = connection.getOutputStream();
+        outputStream.write(dto.toString().getBytes("UTF-8"));
+
+        return dto;
+    }
+
 }

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +27,7 @@ public class UserController {
     private final UserService service;
 
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "사용자 회원 가입", description = "<h2>사용자 회원 가입 처리</h2><h3>--요청 데이터<br>pic(프로필 사진): 폼 데이터 형식" +
             "<br>email(이메일)(NOT NULL): 이메일 형식을 만족해야 한다<br>upw(비밀번호)(NOT NULL): 빈 칸 불가" +
             "<br>checkUpw(비밀번호 확인)(NOT NULL): 빈 칸 불가<br>name(실명)(NOT NULL): 빈 칸 불가<br>nickname(닉네임)(NOT NULL): 1~10글자" +
@@ -35,10 +36,8 @@ public class UserController {
             "<br>(400)INVALID_PARAMETER<br>REGEXP_TEL<br>DUPLICATION_EMAIL<br>NOT_PASSWORD_CHECK<br>NEED_NICK_NAME_CHECK")
     public ResVo signup(@RequestPart(required = false) MultipartFile pic,
                         @RequestPart @Valid UserSignupDto dto) {
-        if (pic != null) {
-            dto.setFile(pic);
-        }
-        return service.signup(dto);
+
+        return service.signup(pic,dto);
     }
 
     @PostMapping("/signin")

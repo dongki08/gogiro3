@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ButDto {
-    private int iuser;
+    private Long iuser;
     private int ibutcher;
 }

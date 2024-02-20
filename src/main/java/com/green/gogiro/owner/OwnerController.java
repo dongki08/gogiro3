@@ -5,6 +5,7 @@ import com.green.gogiro.owner.model.*;
 import com.green.gogiro.exception.RestApiException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -34,8 +35,14 @@ public class OwnerController {
 //                             @RequestPart String x, @RequestPart String y, @RequestPart String location,
 //                             @RequestPart int imeat){
     public ResVo ownerSignup(@RequestPart List<MultipartFile> pics, @RequestPart OwnerSignupDto dto){
-
         return service.ownerSignup(pics,dto);
+    }
+    @GetMapping("/signin")
+    @Operation(summary = "가게 주인 로그인",description = "<h2>가게 주인 로그인 처리</h2>" +
+    "<h3>---요구 데이터<br>id: 아이디<br>upw: 비밀번호</h3>" +
+    "<h3>--응답 데이터<br>ishop: 가게pk<br>iuser: 유저pk<br>checkShop: (0: 고기집, 1:정육점)<br>accessToken: 엑세스 토큰")
+    public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto){
+        return service.ownerSignin(res,dto);
     }
     @PostMapping("/shop")
     @Operation(summary = "가게 등록",description = "가게 등록 처리")

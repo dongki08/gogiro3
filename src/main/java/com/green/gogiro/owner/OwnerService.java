@@ -1,10 +1,7 @@
 package com.green.gogiro.owner;
 
 import com.green.gogiro.butchershop.ButcherRepository;
-import com.green.gogiro.common.Const;
-import com.green.gogiro.common.MyFileUtils;
-import com.green.gogiro.common.ResVo;
-import com.green.gogiro.common.RoleEnum;
+import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
@@ -15,8 +12,11 @@ import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
 import com.green.gogiro.owner.model.*;
+import com.green.gogiro.security.JwtTokenProvider;
+import com.green.gogiro.security.MyPrincipal;
 import com.green.gogiro.shop.ShopRepository;
 import com.green.gogiro.user.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +39,51 @@ public class OwnerService {
     private final ShopRepository shopRepository;
     private final ShopCategoryRepository categoryRepository;
     private final ButcherRepository butcherRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AppProperties appProperties;
+    private final CookieUtils cookieUtils;
 
+    @Transactional
+    public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
+        Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getId());
+        UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
+        if(!userEntity.getRole().toString().equals("OWNER")){
+            throw new RestApiException(AuthErrorCode.NOT_ROLE);
+        }
+        if (!passwordEncoder.matches(dto.getUpw(), userEntity.getUpw())) {
+            throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
+        }
+        MyPrincipal mp = new MyPrincipal();
+        if (userEntity.getCheckShop() == 0) {
+        ShopEntity entity = shopRepository.findByUserEntity(userEntity);
+            mp.setIuser(userEntity.getIuser());
+            mp.setRole(userEntity.getRole().toString());
+            mp.setCheckShop(userEntity.getCheckShop());
+            mp.setIshop(entity.getIshop());
+
+        }
+        if(userEntity.getCheckShop() == 1) {
+            ButcherEntity entity = butcherRepository.findByUserEntity(userEntity);
+            mp.setIuser(userEntity.getIuser());
+            mp.setRole(userEntity.getRole().toString());
+            mp.setIshop(entity.getIbutcher());
+        }
+            String at = jwtTokenProvider.generateAccessToken(mp);
+            String rt = jwtTokenProvider.generateRefreshToken(mp);
+
+//rt를 cookie에 담는다
+        int rtCookieMaxAge = appProperties.getJwt().getRefreshTokenCookieMaxAge();
+        cookieUtils.deleteCookie(res, "rt");
+        cookieUtils.setCookie(res, "rt", rt, rtCookieMaxAge);
+        return OwnerSigninVo.builder()
+                .accessToken(at)
+                .iuser(userEntity.getIuser())
+                .checkShop(userEntity.getCheckShop())
+                .ishop(mp.getIshop())
+                .build();
+    }
+
+    @Transactional
     public ResVo ownerSignup(List<MultipartFile> pics, OwnerSignupDto dto) {
         if (!dto.getUpw().equals(dto.getCheckPw())) {
             throw new RestApiException(UserErrorCode.NOT_PASSWORD_CHECK);
@@ -80,7 +125,7 @@ public class OwnerService {
                     .pic(item)
                     .build()).collect(Collectors.toList());
             shopEntity.getShopPicEntityList().addAll(shopPicEntityList);
-            return new ResVo(shopEntity.getIshop().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         if (entity.getCheckShop() == 1) {
             ButcherEntity butcherEntity = new ButcherEntity();
@@ -102,7 +147,7 @@ public class OwnerService {
                     .butcherEntity(butcherEntity)
                     .build()).collect(Collectors.toList());
             butcherEntity.getButcherPicEntityList().addAll(butcherPicEntityList);
-            return new ResVo(butcherEntity.getIbutcher().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         return new ResVo(Const.FAIL);
     }

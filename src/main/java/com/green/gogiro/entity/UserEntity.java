@@ -34,13 +34,13 @@ public class UserEntity extends BaseEntity {
     @Column(length = 10)
     private String nickname;
 
-    @Column(length = 10)
+    @Column(length = 20)
     private String birth;
 
-    @Column(length = 10)
+    @Column(length = 2)
     private String gender;
 
-    @Column(length = 10)
+    @Column(length = 50)
     private String address;
 
     @Column(length = 100)

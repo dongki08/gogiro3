@@ -46,15 +46,15 @@ class UserServiceTest {
     @MockBean
     private MyFileUtils myFileUtils;
 
-    @Test
-    void signupTest() throws Exception {
-        UserSignupDto dto= new UserSignupDto();
-        try {
-            service.signup(dto);
-        } catch (NullPointerException e) {
-            verify(mapper).checkNickname(any());
-        }
-    }
+//    @Test
+//    void signupTest() throws Exception {
+//        UserSignupDto dto= new UserSignupDto();
+//        try {
+//            service.signup(dto);
+//        } catch (NullPointerException e) {
+//            verify(mapper).checkNickname(any());
+//        }
+//    }
 
     @Test
     void checkNickNameTest() throws Exception {

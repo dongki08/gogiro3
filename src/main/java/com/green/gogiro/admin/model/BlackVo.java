@@ -10,6 +10,6 @@ public class BlackVo {
     궁금합니다*/
     private String name;//이름
     private String id;//USER: EMAIL 형식, OWNER: 일반 형식
-    private String number;
-    private int state;
+    private String number;//사업자 등록 번호(가게 주인만)
+    private int state;//상태(잠금여부 0:정상 1:잠금)
 }

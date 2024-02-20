@@ -70,7 +70,7 @@ public class ButcherShopService {
         if(mapper.selButcherEntity(ibutcher) == null) {
             throw new RestApiException(AuthErrorCode.VALID_SHOP);
         }
-        int i;
+        long i;
         try {
             i= authenticationFacade.getLoginUserPk();
         } catch(Exception e) {
