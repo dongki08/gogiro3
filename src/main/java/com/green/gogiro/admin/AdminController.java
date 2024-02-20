@@ -60,8 +60,9 @@ public class AdminController {
             "<br>4.상태는 어떤 상태를 나타내는 건가요?<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)<br>" +
             "--응답 데이터<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
             "<br>state:상태(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<ReportedVo> reportList(@PathVariable int check){//글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)
-        return service.reportList1();
+    public List<ReportedVo> reportList(@PathVariable int check){
+        //글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)
+        return service.reportList1(check);
     }
     /*4.신고받은 글 숨김
     1)DB에 해당 글이 있는 지 확인 후 숨김(관리자니까)
@@ -72,7 +73,7 @@ public class AdminController {
             "<br><br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
             "<br>pk:해당 글 pk<br>--응답 데이터<br>(성공)result: 1<br>(실패)" +
             "<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo hide(@RequestBody HideDto dto){return null;}
+    public ResVo hide(@RequestBody HideDto dto){return service.hide1(dto);}
     /*5.게시물 신고 취소
     1)신고 수 1 이상인 게시 글의 신고 수를 0으로 만든다(관리자니까)
     2)신고를 취소하기 전에 컨펌 창 하나 띄워주는 건 어떤가요?*/
@@ -82,7 +83,7 @@ public class AdminController {
             "<br>2)신고를 취소하기 전에 컨펌 창 하나 띄워주는 건 어떤가요?" +
             "<br>--요청 데이터<br>check: 글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
             "<br>pk: 해당 글 pk")
-    public ResVo cancelReport(@RequestBody CancelReportDto dto){return null;}
+    public ResVo cancelReport(@RequestBody CancelReportDto dto){return service.cancelReport1(dto);}
     /*6.사용자(USER,OWNER)블랙 리스트(정지)
     1)신고 글 리스트에 오른 글의 작성자
     2)노쇼 카운트 2회 이상인 사용자*/

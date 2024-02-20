@@ -29,7 +29,7 @@
         JOIN t_butcher_pic b
         ON a.ibutcher=b.ibutcher
         GROUP BY a.ibutcher
-        ORDER BY createdAt DESC;
+        ORDER BY createdAt DESC
     </select>
     <update id="confirmShop">
         UPDATE
@@ -37,5 +37,31 @@
         SET
             confirm= #{confirm}
         WHERE i${column}= #{ishop}
+    </update>
+    <select id="reportList">
+        SELECT
+            a.i${column1} AS pk,
+            a.${column2} AS contents,
+            b.nickname,
+            a.count
+        FROM t_${table} a
+        JOIN t_user b
+        ON a.iuser=b.iuser
+        WHERE a.COUNT<![CDATA[>]]>=1
+        ORDER BY a.created_at
+    </select>
+    <update id="hide">
+        UPDATE
+        t_${table}
+        SET
+            count= 3
+        WHERE i${column}= #{pk}
+    </update>
+    <update id="cancelReport">
+        UPDATE
+        t_${table}
+        SET
+            count= 0
+        WHERE i${column}= #{pk}
     </update>
 </mapper>
