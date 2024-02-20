@@ -38,5 +38,4 @@
             confirm= #{confirm}
         WHERE i${column}= #{ishop}
     </update>
-    <select id=""
 </mapper>

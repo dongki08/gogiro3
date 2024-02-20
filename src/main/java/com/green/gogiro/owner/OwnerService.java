@@ -146,7 +146,7 @@ public class OwnerService {
             List<ButcherPicEntity> butcherPicEntityList = vo.getPics().stream().map(item -> ButcherPicEntity.builder()
                     .pic(item)
                     .butcherEntity(butcherEntity)
-                    .build()).collect(Collectors.toList());
+                    .build()).toList();
             butcherEntity.getButcherPicEntityList().addAll(butcherPicEntityList);
             return new ResVo(userEntity.getIuser().intValue());
         }
