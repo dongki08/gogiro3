@@ -34,8 +34,8 @@ public class OwnerController {
 //                             @RequestPart String num, @RequestPart String name, @RequestPart String shopName,
 //                             @RequestPart String x, @RequestPart String y, @RequestPart String location,
 //                             @RequestPart int imeat){
-    public ResVo ownerSignup(@RequestPart List<MultipartFile> pics, @RequestPart OwnerSignupDto dto){
-        return service.ownerSignup(pics,dto);
+    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart OwnerSignupDto dto){
+        return service.ownerSignup(pic,dto);
     }
 
 
@@ -55,6 +55,8 @@ public class OwnerController {
         }
         return service.insRegistration(dto);
     }
+
+
 
     @PostMapping("/shop/menu")
     @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
