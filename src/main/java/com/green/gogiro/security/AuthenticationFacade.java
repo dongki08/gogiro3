@@ -19,7 +19,12 @@ public class AuthenticationFacade {
                 .getIuser();
 
     }
-
+    public int getLoginOwnerCheckShop(){
+        MyUserDetails myUserDetails = getLoginUser();
+        return myUserDetails == null ? 0 : myUserDetails
+                .getMyPrincipal()
+                .getCheckShop();
+    }
     public long getLoginOwnerShopPk() {
         MyUserDetails myUserDetails = getLoginUser();
         return myUserDetails == null ? 0 : myUserDetails
@@ -35,5 +40,11 @@ public class AuthenticationFacade {
 //        // 0:고기집, 1:정육점, 2: 사용자 혹은 총 관리자
 //    }
 
+    public String getLoginUserRole(){
+        MyUserDetails myUserDetails = getLoginUser();
+        return myUserDetails == null ? null : myUserDetails
+                .getMyPrincipal()
+                .getRole();
+    }
 
 }

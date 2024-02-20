@@ -124,7 +124,7 @@ public class ButcherShopService {
             atomic.set(1);
                     ButcherBookmarkEntity saveButcherBookmarkEntity = new ButcherBookmarkEntity();
                     saveButcherBookmarkEntity.setButcherBookmarkIds(ids);
-                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
                     ButcherEntity butcherEntity = butcherRepository.getReferenceById((long)dto.getIbutcher());
                     saveButcherBookmarkEntity.setUserEntity(userEntity);
                     saveButcherBookmarkEntity.setButcherEntity(butcherEntity);

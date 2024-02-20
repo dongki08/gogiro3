@@ -33,4 +33,8 @@ public class ShopReviewEntity extends BaseEntity {
 
     @Column(length = 30)
     private String comment;
+
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int count;
 }

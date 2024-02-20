@@ -4,6 +4,9 @@ package com.green.gogiro.admin;
 
 import com.green.gogiro.admin.model.*;
 import com.green.gogiro.common.ResVo;
+import com.green.gogiro.exception.CommonErrorCode;
+import com.green.gogiro.exception.RestApiException;
+import com.green.gogiro.security.AuthenticationFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
 public class AdminController {
+    private final AdminService service;
     /*1.매장 관리 리스트
     1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트
     2)각 가게의 가게 승인 여부 표시
@@ -31,7 +35,9 @@ public class AdminController {
             "<br>name:가게 이름<br>x:경도, y:위도<br>pic:가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)" +
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<ShopVo> shopList(@PathVariable(required = false) String search){return null;}
+    public List<ShopVo> shopList(@PathVariable(required = false) String search){
+        return service.shopList1();
+    }
     /*2.가게 승인 여부 변경
     1)대기 상태의 가게->승인 혹은 거절
     2)승인 상태의 가게->퇴출
@@ -42,21 +48,21 @@ public class AdminController {
             "<br>--요구 데이터<br>checkShop(0 또는 1): 가게 구분(0:고기집, 1:정육점)<br>ishop(최소 1 이상): 가게 pk" +
             "<br>confirm:변경하고 싶은 승인 여부(1:확정, 2:거절, 3:퇴출)<br>--응답 데이터<br>(성공)" +
             "<br>result: 1<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo confirmShop(@RequestBody ConfirmDto dto){return null;}
-    //switch문으로 해볼까?
+    public ResVo confirmShop(@RequestBody ConfirmDto dto){return service.confirmShop1(dto);}
     /*3.신고 글 리스트(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기)
     1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가
     2)계정 제재는 총 관리자 재량으로*/
-    @GetMapping("/report")
+    @GetMapping("/report/{check}")
     @Operation(summary="신고 글 리스트",description="고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기 중 신고당한 글 리스트" +
             "<br>1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가<br>2)계정 제재는 총 관리자 재량으로" +
             "<br><br>1.contents에 신고 글 내용이나 제목 중 어떤 걸 보내드리는 게 좋을까요?" +
             "<br>2.게시물 작성자 이름을 실명이나 닉네임 중 어떤 걸 보내드리는 게 좋을까요?<br>3.이 리스트는 어떤 순서로 보내드릴까요?" +
-            "<br>4.상태는 어떤 상태를 나타내는 건가요?" +
-            "<br><br>--요구 데이터: 없음<br>--응답 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
-            "<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
+            "<br>4.상태는 어떤 상태를 나타내는 건가요?<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)<br>" +
+            "--응답 데이터<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
             "<br>state:상태(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<ReportedVo> reportList(){return null;}
+    public List<ReportedVo> reportList(@PathVariable int check){//글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)
+        return service.reportList1();
+    }
     /*4.신고받은 글 숨김
     1)DB에 해당 글이 있는 지 확인 후 숨김(관리자니까)
     2)글을 숨기기 전에 컨펌 창 하나 띄워주는 건 어떤가요*/
