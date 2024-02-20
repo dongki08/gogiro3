@@ -16,7 +16,7 @@ import static com.green.gogiro.common.Const.*;
 public class UserSignupDto {
     @JsonIgnore
     private int iuser;
-    @Schema(title = "이메일")
+    @Schema(title = "이메일",example = " ")
     @NotBlank(message = "아이디를 입력해주세요")
     @Pattern(regexp = REGEXP_USER_ID, message = "이메일 형식이 틀렸습니다")
     private String email;
@@ -52,6 +52,4 @@ public class UserSignupDto {
     private String pic;
     @JsonIgnore
     private RoleEnum role;
-    @JsonIgnore
-    private MultipartFile file;
 }

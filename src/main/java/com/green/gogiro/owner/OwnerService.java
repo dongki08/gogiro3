@@ -58,6 +58,7 @@ public class OwnerService {
         ShopEntity entity = shopRepository.findByUserEntity(userEntity);
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
+            mp.setCheckShop(userEntity.getCheckShop());
             mp.setIshop(entity.getIshop());
 
         }
@@ -124,7 +125,7 @@ public class OwnerService {
                     .pic(item)
                     .build()).collect(Collectors.toList());
             shopEntity.getShopPicEntityList().addAll(shopPicEntityList);
-            return new ResVo(shopEntity.getIshop().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         if (entity.getCheckShop() == 1) {
             ButcherEntity butcherEntity = new ButcherEntity();
@@ -146,7 +147,7 @@ public class OwnerService {
                     .butcherEntity(butcherEntity)
                     .build()).collect(Collectors.toList());
             butcherEntity.getButcherPicEntityList().addAll(butcherPicEntityList);
-            return new ResVo(butcherEntity.getIbutcher().intValue());
+            return new ResVo(userEntity.getIuser().intValue());
         }
         return new ResVo(Const.FAIL);
     }
