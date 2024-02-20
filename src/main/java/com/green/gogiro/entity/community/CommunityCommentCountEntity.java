@@ -23,4 +23,8 @@ public class CommunityCommentCountEntity extends CreatedAtEntity {
     @MapsId("iuser")
     @JoinColumn(name = "iuser",nullable = false,columnDefinition = "BIGINT UNSIGNED")
     private UserEntity userEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "ireport", nullable = false)
+    private CommunityReportEntity ireport;
 }

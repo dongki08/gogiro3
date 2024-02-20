@@ -36,6 +36,8 @@ public class CommunityService {
     private final CommunityFavRepository communityFavRepository;
     private final CommunityCountRepository communityCountRepository;
     private final CommunityReportRepository communityReportRepository;
+    private final CommunityCommentCountRepository communityCommentCountRepository;
+    private final CommunityCommentRepository communityCommentRepository;
 
     @Transactional
     public CommunityPicsInsVo insCommunity(CommunityInsDto dto) {
@@ -226,6 +228,8 @@ public class CommunityService {
 //        mapper.insCommunityFav(dto);
 //        return new ResVo(1);
 //    }
+
+    //커뮤니티 게시글 신고
     @Transactional
     public ResVo reportCommunity(CommunityReportDto dto) {
 
@@ -240,8 +244,6 @@ public class CommunityService {
         }
 
         UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
-
-        userEntity.setIuser(authenticationFacade.getLoginUserPk());
         CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
 
         if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
@@ -257,6 +259,38 @@ public class CommunityService {
 
         communityEntity.setCount(communityEntity.getCount() + 1);
         communityRepository.save(communityEntity);
+
+        return new ResVo(SUCCESS);
+    }
+
+    //커뮤니티 댓글 신고
+    @Transactional
+    public ResVo reportcomment(CommentReportDto dto) {
+        CommunityCommentCountIds ids = new CommunityCommentCountIds();
+        ids.setIuser(authenticationFacade.getLoginUserPk());
+        ids.setIcomment(dto.getIcomment());
+        CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
+
+        Optional<CommunityCommentCountEntity> optEntity = communityCommentCountRepository.findByCommunityCommentCountIds(ids);
+        if(optEntity.isPresent()) {
+            throw new RestApiException(REPORT_COMMUNITY_ENTITY);
+        }
+
+        UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+        CommunityCommentEntity communityCommentEntity = communityCommentRepository.getReferenceById(dto.getIcomment());
+
+        if(communityCommentEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(REPORT_COMMUNITY_MYUSER);
+        }
+        CommunityCommentCountEntity commentCountEntity = new CommunityCommentCountEntity();
+        commentCountEntity.setUserEntity(userEntity);
+        commentCountEntity.setCommunityCommentEntity(communityCommentEntity);
+        commentCountEntity.setCommunityCommentCountIds(ids);
+        commentCountEntity.setIreport(reportEntity);
+        communityCommentCountRepository.save(commentCountEntity);
+
+        communityCommentEntity.setCount(communityCommentEntity.getCount() + 1);
+        communityCommentRepository.save(communityCommentEntity);
 
         return new ResVo(SUCCESS);
     }
