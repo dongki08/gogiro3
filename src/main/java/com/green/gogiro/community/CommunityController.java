@@ -151,7 +151,8 @@ public class CommunityController {
             "iboard : 커뮤니티pk<br>" +
             "ireport : 신고pk<br>" +
             "--응답데이터<br>" +
-            "result : 1(성공), 나머진 에러")
+            "result : 1(성공), 중복신고(이미 신고된 게시글입니다)" +
+            ", 본인게시글 신고(본인 게시글은 신고가 불가능합니다)")
     public ResVo reportCommunity(CommunityReportDto dto) {
         return service.reportCommunity(dto);
     }

@@ -31,6 +31,7 @@ public enum AuthErrorCode implements ErrorCode{
     NOT_ROLE(HttpStatus.NOT_FOUND,"권한이 없습니다"),
     REGEXP_PIC(HttpStatus.BAD_REQUEST,"이미지 파일이 아닙니다"),
     REPORT_COMMUNITY_ENTITY(HttpStatus.NOT_FOUND, "이미 신고된 게시글입니다"),
+    REPORT_COMMUNITY_MYUSER(HttpStatus.BAD_REQUEST, "본인 게시글은 신고가 불가능합니다"),
 
 
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND, "refresh-token이 없습니다.");
