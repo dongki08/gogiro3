@@ -38,9 +38,8 @@ public class AdminService{
     //JPA 2.가게 승인 여부 변경
     public ResVo confirmShop2(){return null;}
     //Mybatis 3.신고 글 리스트
-    public List<ReportedVo> reportList1(){
-
-        return null;
+    public List<ReportedVo> reportList1(int check){
+        return mapper.reportList(new ReportDto(check));
     }
     //JPA 3.신고 글 리스트
     @Transactional
@@ -49,12 +48,12 @@ public class AdminService{
         return null;
     }
     //Mybatis 4.글 숨김
-    public ResVo hide1(@RequestBody HideDto dto){return null;}
+    public ResVo hide1(@RequestBody HideDto dto){return new ResVo(mapper.hide(dto));}
     //JPA 4.글 숨김
     @Transactional
     public ResVo hide2(@RequestBody HideDto dto){return null;}
     //Mybatis 5.게시물 신고 취소
-    public ResVo cancelReport1(CancelReportDto dto){return null;}
+    public ResVo cancelReport1(CancelReportDto dto){return new ResVo(mapper.cancelReport(dto));}
     //JPA 5.게시물 신고 취소
     @Transactional
     public ResVo cancelReport2(CancelReportDto dto){return null;}
