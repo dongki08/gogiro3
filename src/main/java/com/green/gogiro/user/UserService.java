@@ -26,10 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 
@@ -50,6 +47,7 @@ public class UserService {
 
     @Transactional
     public ResVo signup(MultipartFile pic, UserSignupDto dto) {
+
         if (mapper.checkNickname(dto.getNickname()) != null) {
             throw new RestApiException(UserErrorCode.NEED_NICK_NAME_CHECK);
         }
@@ -101,14 +99,17 @@ public class UserService {
     public UserSignVo signin(HttpServletRequest req,
                              HttpServletResponse res,
                              UserSigninDto dto) {
-        UserModel entity = mapper.userEntity(dto.getEmail());
-        if (entity == null) {
-            throw new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID);
-        } else if (!passwordEncoder.matches(dto.getUpw(), entity.getUpw())) {
+        Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getEmail());
+        UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
+        if(!userEntity.getRole().toString().equals("USER")){
+            throw new RestApiException(AuthErrorCode.NOT_ROLE);
+        }
+        if (!passwordEncoder.matches(dto.getUpw(), userEntity.getUpw())) {
             throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
         }
         MyPrincipal myPrincipal = MyPrincipal.builder()
-                .iuser((long)entity.getIuser())
+                .iuser(userEntity.getIuser())
+                .role(userEntity.getRole().toString())
                 .build();
         String at = jwtTokenProvider.generateAccessToken(myPrincipal);
         String rt = jwtTokenProvider.generateRefreshToken(myPrincipal);
@@ -119,14 +120,14 @@ public class UserService {
 
         return UserSignVo.builder()
                 .result(SUCCESS)
-                .iuser(entity.getIuser())
-                .name(entity.getName())
-                .pic(entity.getPic())
-                .nickname(entity.getNickname())
-                .tel(entity.getTel())
-                .birth(entity.getBirth())
-                .address(entity.getAddress())
-                .gender(entity.getGender())
+                .iuser(userEntity.getIuser())
+                .name(userEntity.getName())
+                .pic(userEntity.getPic())
+                .nickname(userEntity.getNickname())
+                .tel(userEntity.getTel())
+                .birth(userEntity.getBirth())
+                .address(userEntity.getAddress())
+                .gender(userEntity.getGender())
                 .accessToken(at)
                 .build();
     }
