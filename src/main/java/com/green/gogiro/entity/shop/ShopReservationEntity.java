@@ -3,6 +3,7 @@ package com.green.gogiro.entity.shop;
 import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 

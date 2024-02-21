@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,14 +21,14 @@ import java.util.List;
 public class CommunityController {
     private final CommunityService service;
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "커뮤니티 등록",description = "커뮤니티 등록 처리<br>" +
             "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
             "--응답데이터<br>iboard : 보드pk<br>" +
             "pics : 사진리스트")
-    public CommunityPicsInsVo postCommunity(@RequestPart(required = false)@Valid List<MultipartFile> pics
+    public CommunityPicsInsVo postCommunity(@RequestPart(required = false) List<MultipartFile> pics
             , @RequestPart @Valid CommunityInsDto dto) {
         //사진을 5장 초과했을 경우
         if(pics!=null){
@@ -36,7 +37,7 @@ public class CommunityController {
                 throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
             }
         }
-        return service.insCommunity(dto);
+        return service.insCommunity(pics, dto);
     }
 
     @PutMapping()

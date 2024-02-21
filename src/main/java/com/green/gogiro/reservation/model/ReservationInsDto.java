@@ -5,6 +5,7 @@ import com.green.gogiro.common.Const;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class ReservationInsDto {
     @Min(value = 1)
     private int ishop;
     @Schema(title = "예약날짜")
+    @NotBlank
     @Pattern(regexp= Const.REGEXP_DATE_TYPE5, message= "날짜 형식이 올바르지 않습니다")
     private String date;
     @Schema(title = "요청 사항")

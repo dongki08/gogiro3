@@ -15,9 +15,9 @@ import java.util.List;
 @Schema(title = "커뮤니티 등록 Dto")
 public class CommunityInsDto {
     @JsonIgnore
-    private int iboard;
+    private Long iboard;
     @JsonIgnore
-    private int iuser;
+    private Long iuser;
     @Schema(title = "제목")
     @NotBlank
     @Size(min = 1, max = 50, message = "50자 초과 작성 할 수 없습니다.")

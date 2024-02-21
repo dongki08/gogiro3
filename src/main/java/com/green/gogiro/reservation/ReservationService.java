@@ -6,17 +6,23 @@ import static com.green.gogiro.exception.AuthErrorCode.*;
 import com.green.gogiro.butchershop.ButcherShopMapper;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
+import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.shop.ShopEntity;
+import com.green.gogiro.entity.shop.ShopReservationEntity;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
+import com.green.gogiro.shop.ShopRepository;
 import com.green.gogiro.shop.model.ShopModel;
+import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,62 +30,56 @@ import java.util.List;
 @Service
 public class ReservationService {
     private final ReservationMapper mapper;
-    private final AuthenticationFacade authenticationFacade;
     private final ShopMapper shopMapper;
     private final ButcherShopMapper butMapper;
     private final MyFileUtils myFileUtils;
+    private final AuthenticationFacade authenticationFacade;
+    private final ReservationRepository repository;
+    private final UserRepository userRepository;
+    private final ShopRepository shopRepository;
 
-
-    public ResVo postReservation(ReservationInsDto dto) {
+    //Mybatis 1.예약 등록
+    @Transactional
+    public ResVo postReservation1(ReservationInsDto dto) {
         ShopModel entity = shopMapper.selShopEntity(dto.getIshop());
         if (entity == null) {
             throw new RestApiException(VALID_SHOP);
-        } else if (entity.getIshop() != dto.getIshop()) {
-            throw new RestApiException(CHECK_SHOP);
-        }
-        if (dto.getDate().equals("0000-00-00 00:00:00")) {
-            throw new RestApiException(AuthErrorCode.NOT_DATE);
         }
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.insReservation(dto);
         return new ResVo(dto.getIreser());
     }
-
+    //JPA 1.예약 등록
     @Transactional
-    public ResVo postPickup(PickupInsDto dto) {
-        if (dto.getDate() == null || dto.getDate().equals("0000-00-00 00:00:00")) {
-            throw new RestApiException(AuthErrorCode.REGEXP_DATE_TYPE);
+    public ResVo postReservation2(ReservationInsDto dto){
+        ShopEntity shopEntity=shopRepository.getReferenceById((long)dto.getIshop());
+        if(shopEntity.getIshop().intValue()==0){
+            throw new RestApiException(VALID_SHOP);
         }
-        if (dto.getMenus() == null || dto.getMenus().isEmpty()) {
+        ShopReservationEntity entity= new ShopReservationEntity();
+        entity.setIuser(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
+        entity.setIshop(shopEntity);
+        entity.setDate(LocalDateTime.parse(dto.getDate()));
+        entity.setRequest(dto.getRequest());
+        entity.setHeadCount(dto.getHeadCount());
+        repository.save(entity);
+        return new ResVo(entity.getIreser().intValue());
+    }
+    //Mybatis 2.픽업 등록
+    @Transactional
+    public ResVo postPickup1(PickupInsDto dto) {
+        List<Integer> menuList = butMapper.selButcherMenu(dto.getIbutcher());
+        List<Integer> list= menuList.stream().filter(item->{
+            for(PickupMenuDto menu: dto.getMenus()){
+                if(item==menu.getIbutMenu()){
+                    return true;
+                }
+            }
+            return false;
+        }).toList();
+        if(list.size()!=dto.getMenus().size()){
             throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
-        } else {
-            List<Integer> menuList = butMapper.selButcherMenu(dto.getIbutcher());
-            /*
-            List<Integer> list= menuList.stream().filter(item->{
-                for(PickupMenuDto menu: dto.getMenus()){
-                    if(item==menu.getIbutMenu()){
-                        return true;
-                    }
-                }
-                return false;
-            }).toList();
-            if(list.size()!=dto.getMenus().size()){
-                throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
-            }
-            */
-            List<Boolean> check = new ArrayList<>();
-            for (PickupMenuDto menu : dto.getMenus()) {
-                for (Integer menuPk : menuList) {
-                    if (menu.getIbutMenu() == menuPk) {
-                        check.add(true);
-                    }
-                }
-            }
-            if (check.size() != dto.getMenus().size()) {
-                throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
-            }
         }
-
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.insPickup(dto);
         for (PickupMenuDto m : dto.getMenus()) {
@@ -92,8 +92,11 @@ public class ReservationService {
         }
         return new ResVo(dto.getIpickup());
     }
-
-
+    //JPA 2.픽업 등록
+    @Transactional
+    public ResVo postPickup2(){
+        return null;
+    }
     public ResVo cancelReservation(CancelDto dto) {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         Integer checkReservation = mapper.checkReservation(dto);
