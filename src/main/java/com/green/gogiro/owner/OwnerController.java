@@ -55,6 +55,8 @@ public class OwnerController {
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto){
         return service.ownerSignin(res,dto);
     }
+
+   // public OwnerReviewVo
 //    @PostMapping("/shop")
 //    @Operation(summary = "가게 등록",description = "가게 등록 처리")
 //    public StoreRegistrationPicsVo insRegistration(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart StoreRegistrationDto dto){

@@ -15,7 +15,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "t_butcher")
+@Table(name = "t_butcher_shop")
 public class ButcherEntity extends BaseEntity {
 
     @Id
