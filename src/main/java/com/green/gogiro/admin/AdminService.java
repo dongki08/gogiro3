@@ -7,7 +7,7 @@ import com.green.gogiro.common.AppProperties;
 import com.green.gogiro.common.CookieUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.entity.UserEntity;
-import com.green.gogiro.entity.community.CommunityRepository;
+import com.green.gogiro.entity.community.repository.CommunityRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.CommonErrorCode;
 import com.green.gogiro.exception.RestApiException;

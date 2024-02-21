@@ -10,6 +10,7 @@ import com.green.gogiro.common.ResVo;
 import com.green.gogiro.community.model.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.community.*;
+import com.green.gogiro.entity.community.repository.*;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
@@ -59,7 +60,7 @@ public class CommunityService {
         communityRepository.save(communityentity);
 
 
-        String target = "/community/" + dto.getIboard();
+        String target = "/community/" + communityentity.getIboard();
         CommunityPicsInsVo vo = new CommunityPicsInsVo();
         vo.setIboard(communityentity.getIboard().intValue());
         for(MultipartFile file : pics) {
