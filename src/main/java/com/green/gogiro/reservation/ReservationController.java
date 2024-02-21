@@ -33,7 +33,7 @@ public class ReservationController {
             "<br>(실패)<br>(400)NOT_DATE(0000-00-00 00:00:00)<br>INVALID_PARAMETER(날짜 형식이 올바르지 않습니다)" +
             "<br>(404)VALID_SHOP(DB에 없는 고기집)<br>(500)INTERNAL_SERVER_ERROR")
     public ResVo postReservation(@RequestBody @Valid ReservationInsDto dto){
-        return service.postReservation(dto);
+        return service.postReservation1(dto);
     }
 
     @PostMapping("/pickup")
@@ -45,7 +45,7 @@ public class ReservationController {
             "<br>INVALID_PARAMETER<br>(날짜 형식이 올바르지 않습니다)<br>(메뉴를 입력해주세요)" +
             "<br>(500)INTERNAL_SERVER_ERROR")
     public ResVo postPickup(@RequestBody @Valid PickupInsDto dto){
-        return service.postPickup(dto);
+        return service.postPickup1(dto);
     }
 
     @PatchMapping("/reservation")

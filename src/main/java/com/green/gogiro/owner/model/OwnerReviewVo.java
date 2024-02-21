@@ -17,7 +17,7 @@ public class OwnerReviewVo {
     private Long iuser;
     private String comment;
     private String review;
-
+    private String createdAt;
     private List<String> pics = new ArrayList<>();
 
 }

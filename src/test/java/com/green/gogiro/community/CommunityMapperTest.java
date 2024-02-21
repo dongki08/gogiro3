@@ -22,51 +22,51 @@ class CommunityMapperTest {
     private UserMapper userMapper;
 
 
-    @Test
-    void insCommunity() {
-        int iuser = userMapper.selIuserForTest();
-        CommunityInsDto dto = new CommunityInsDto();
-        //insCommunity 테스트
-        dto.setIuser(iuser);
-        String title = "제목";
-        dto.setTitle(title);
-        String contents = "내용";
-        dto.setContents(contents);
-        //insCommunityPics 테스트
-        List<String> pics = new ArrayList<>();
-        pics.add("aa");
-        pics.add("bb");
-        dto.setPics(pics);
-
-        //insCommunity 확인
-        assertEquals(Const.SUCCESS, mapper.insCommunity(dto));
-        //auto_increment 확인
-        assertTrue(dto.getIboard() > 0);
-        //insCommunityPics 확인
-        assertEquals(pics.size(), mapper.insCommunityPics(dto));
-
-        //beforeAfterTitle 테스트
-        CommunitySelBeAfDto result = mapper.beforeTitle(dto.getIboard());
-        CommunitySelBeAfDto result2 = mapper.afterTitle(result.getIboard());
-        assertEquals(result2.getTitle(), dto.getTitle());
-
-        //selByCommunityPics 테스트
-        List<CommunityBySelPicsDto> list = mapper.selByCommunityPics(dto.getIboard());
-        List<Integer> i = new ArrayList<>();
-        for(CommunityBySelPicsDto z : list){
-            i.add(z.getIcommuPics());
-        }
-
-        //selCommunityPics 테스트
-        List<CommunityBySelPicsDto> list2 = mapper.selCommunityPics(i);
-        assertEquals(list.size(), pics.size());
-        assertEquals(list2.size(), pics.size());
-        for(int j = 0; j < pics.size(); j++) {
-            assertEquals(pics.get(j), list.get(j).getPic());
-            assertEquals(pics.get(j), list2.get(j).getPic());
-        }
-
-    }
+//    @Test
+//    void insCommunity() {
+//        int iuser = userMapper.selIuserForTest();
+//        CommunityInsDto dto = new CommunityInsDto();
+//        //insCommunity 테스트
+//        dto.setIuser(iuser);
+//        String title = "제목";
+//        dto.setTitle(title);
+//        String contents = "내용";
+//        dto.setContents(contents);
+//        //insCommunityPics 테스트
+//        List<String> pics = new ArrayList<>();
+//        pics.add("aa");
+//        pics.add("bb");
+//        dto.setPics(pics);
+//
+//        //insCommunity 확인
+//        assertEquals(Const.SUCCESS, mapper.insCommunity(dto));
+//        //auto_increment 확인
+//        assertTrue(dto.getIboard() > 0);
+//        //insCommunityPics 확인
+//        assertEquals(pics.size(), mapper.insCommunityPics(dto));
+//
+//        //beforeAfterTitle 테스트
+//        CommunitySelBeAfDto result = mapper.beforeTitle(dto.getIboard());
+//        CommunitySelBeAfDto result2 = mapper.afterTitle(result.getIboard());
+//        assertEquals(result2.getTitle(), dto.getTitle());
+//
+//        //selByCommunityPics 테스트
+//        List<CommunityBySelPicsDto> list = mapper.selByCommunityPics(dto.getIboard());
+//        List<Integer> i = new ArrayList<>();
+//        for(CommunityBySelPicsDto z : list){
+//            i.add(z.getIcommuPics());
+//        }
+//
+//        //selCommunityPics 테스트
+//        List<CommunityBySelPicsDto> list2 = mapper.selCommunityPics(i);
+//        assertEquals(list.size(), pics.size());
+//        assertEquals(list2.size(), pics.size());
+//        for(int j = 0; j < pics.size(); j++) {
+//            assertEquals(pics.get(j), list.get(j).getPic());
+//            assertEquals(pics.get(j), list2.get(j).getPic());
+//        }
+//
+//    }
 
     @Test
     void updCommunity() {

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,7 +57,10 @@ public class OwnerController {
         return service.ownerSignin(res,dto);
     }
 
-   // public OwnerReviewVo
+    @GetMapping("/review")
+    public OwnerReviewVo getAllReview(Pageable pageable){
+        return null;
+    }
 //    @PostMapping("/shop")
 //    @Operation(summary = "가게 등록",description = "가게 등록 처리")
 //    public StoreRegistrationPicsVo insRegistration(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart StoreRegistrationDto dto){

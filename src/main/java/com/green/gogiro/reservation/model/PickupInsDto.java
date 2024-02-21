@@ -25,6 +25,7 @@ public class PickupInsDto {
     private String request;
     @Schema(title = "메뉴pk")
     @NotNull(message = "메뉴를 입력해주세요")
+    @Size(min=1)
     private List<PickupMenuDto> menus;
     @JsonIgnore
     private int ipickup;

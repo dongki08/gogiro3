@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.gogiro.admin.AdminMapper">
+    <select id="checkAdmin">
+        SELECT
+            iuser,
+            upw,
+            role
+        FROM t_user
+        WHERE email= #{email}
+    </select>
     <select id="shopList">
         SELECT
             0 AS checkShop,

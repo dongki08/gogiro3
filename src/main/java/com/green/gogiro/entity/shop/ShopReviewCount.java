@@ -20,6 +20,6 @@ public class ShopReviewCount extends CreatedAtEntity {
     @ManyToOne
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED", nullable = false)
-    private UserEntity iuser;
+    private UserEntity userEntity;
 
 }

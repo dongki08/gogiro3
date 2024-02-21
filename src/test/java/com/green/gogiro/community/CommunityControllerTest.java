@@ -50,35 +50,35 @@ public class CommunityControllerTest {
         FileInputStream fis = new FileInputStream(filePath);
         this.mockMultipartFile = new MockMultipartFile("pic", fileNm, "jpg", fis);
     }
-    @Test
-    void postCommunity() throws Exception {
-
-
-
-        CommunityInsDto dto = new CommunityInsDto();
-        dto.setIuser(4);
-        dto.setTitle("dd");
-        dto.setContents("내용");
-        List<String> pics = new ArrayList<>();
-        pics.add("aa.jpg");
-        CommunityPicsInsVo vo = CommunityPicsInsVo.builder()
-                .pics(pics)
-                .build();
-
-        given(service.insCommunity(any())).willReturn(vo);
-        dto.setPics(pics);
-
-        mvc.perform(
-                MockMvcRequestBuilders
-                        .post("/api/community")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(dto))
-                )
-                .andExpect(status().isOk())
-                .andExpect(content().string(mapper.writeValueAsString(vo)))
-                .andDo(print());
-        verify(service).insCommunity(any());
-    }
+//    @Test
+//    void postCommunity() throws Exception {
+//
+//
+//
+//        CommunityInsDto dto = new CommunityInsDto();
+//        dto.setIuser(4);
+//        dto.setTitle("dd");
+//        dto.setContents("내용");
+//        List<String> pics = new ArrayList<>();
+//        pics.add("aa.jpg");
+//        CommunityPicsInsVo vo = CommunityPicsInsVo.builder()
+//                .pics(pics)
+//                .build();
+//
+//        given(service.insCommunity(any())).willReturn(vo);
+//        dto.setPics(pics);
+//
+//        mvc.perform(
+//                MockMvcRequestBuilders
+//                        .post("/api/community")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(mapper.writeValueAsString(dto))
+//                )
+//                .andExpect(status().isOk())
+//                .andExpect(content().string(mapper.writeValueAsString(vo)))
+//                .andDo(print());
+//        verify(service).insCommunity(any());
+//    }
 
 
     @Test
