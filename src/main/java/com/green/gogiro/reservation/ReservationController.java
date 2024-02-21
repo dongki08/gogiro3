@@ -54,7 +54,7 @@ public class ReservationController {
             "<br>(실패)<br>(400)<br>INVALID_PARAMETER<br>(가게구분 값이 잘못되었습니다)<br>(예약pk가 없습니다)" +
             "<br>INVALID_RESERVATION(존재하지 않는 예약입니다)<br>(500)INTERNAL_SERVER_ERROR(서버에서 에러가 발생하였습니다)")
     public ResVo cancelReservation(@RequestBody @Valid CancelDto dto){
-        return service.cancelReservation(dto);
+        return service.cancelReservation1(dto);
     }
 
     @PutMapping("/reservation")

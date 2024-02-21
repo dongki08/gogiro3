@@ -2,12 +2,14 @@ package com.green.gogiro.entity.butcher;
 
 import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
-import com.green.gogiro.entity.butcher.ButcherEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,4 +39,7 @@ public class PickupEntity extends BaseEntity {
     @ColumnDefault("0")
     private int confirm;
 
+    @ToString.Exclude
+    @OneToMany(mappedBy="ipickup",cascade=CascadeType.PERSIST)
+    private List<PickupMenuEntity> pickupMenuEntityList= new ArrayList<>();
 }
