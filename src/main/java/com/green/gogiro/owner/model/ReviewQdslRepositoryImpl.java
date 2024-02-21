@@ -38,6 +38,7 @@ public class ReviewQdslRepositoryImpl implements ReviewQdslRepository {
                     .createdAt(item.getCreatedAt().toString())
                     .ishop(item.getIreview())
                     .comment(item.getComment())
+                    .star(item.getStar())
                     .build()).collect(Collectors.toList());
         }
         if (checkShop == 1) {
@@ -56,6 +57,7 @@ public class ReviewQdslRepositoryImpl implements ReviewQdslRepository {
                     .comment(item.getComment())
                     .ishop(item.getButcherEntity().getIbutcher())
                     .createdAt(item.getCreatedAt().toString())
+                    .star(item.getStar())
                     .build()).collect(Collectors.toList());
         }
 
