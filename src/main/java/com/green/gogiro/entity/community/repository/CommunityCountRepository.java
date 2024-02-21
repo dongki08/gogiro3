@@ -1,5 +1,7 @@
-package com.green.gogiro.entity.community;
+package com.green.gogiro.entity.community.repository;
 
+import com.green.gogiro.entity.community.CommunityCountEntity;
+import com.green.gogiro.entity.community.CommunityCountIds;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

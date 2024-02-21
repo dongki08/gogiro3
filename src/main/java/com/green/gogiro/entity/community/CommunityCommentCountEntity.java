@@ -26,5 +26,5 @@ public class CommunityCommentCountEntity extends CreatedAtEntity {
 
     @ManyToOne
     @JoinColumn(name = "ireport", nullable = false)
-    private CommunityReportEntity ireport;
+    private ReportEntity ireport;
 }
