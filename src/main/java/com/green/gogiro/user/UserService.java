@@ -1,13 +1,16 @@
 package com.green.gogiro.user;
 
 import static com.green.gogiro.common.Const.*;
+import static com.green.gogiro.exception.AuthErrorCode.REPORT_COMMUNITY_MYUSER;
 
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherReviewCountIds;
 import com.green.gogiro.entity.community.ReportEntity;
+import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountIds;
+import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -15,8 +18,7 @@ import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 import com.green.gogiro.security.MyUserDetails;
-import com.green.gogiro.shop.ShopMapper;
-import com.green.gogiro.shop.ShopReportRepository;
+import com.green.gogiro.shop.*;
 import com.green.gogiro.shop.model.ShopFacilityVo;
 import com.green.gogiro.user.model.ReservationVo;
 import com.green.gogiro.user.model.*;
@@ -49,6 +51,9 @@ public class UserService {
     private final MyFileUtils myFileUtils;
     private final UserRepository userRepository;
     private final ShopReportRepository shopReportRepository;
+    private final ShopReviewCountRepository shopReviewCountRepository;
+    private final ShopRepository shopRepository;
+    private final ShopReviewRepository shopReviewRepository;
 
 
     @Transactional
@@ -256,26 +261,51 @@ public class UserService {
     }
 
     // 리뷰 신고
-//    @Transactional
-//    public ResVo reportShopReview(ReportDto dto) {
-//        ShopReviewCountIds shopReview = new ShopReviewCountIds();
-//        ButcherReviewCountIds butcherReview = new ButcherReviewCountIds();
-//
-//        // 고깃집 리뷰 신고
-//        if (dto.getCheckShop() == 0) {
-//            shopReview.setIuser(authenticationFacade.getLoginOwnerShopPk());
-//            shopReview.setIreview(dto.getIreview());
-//            ReportEntity shopReportEntity = shopReportRepository.getReferenceById(dto.getIreport());
-//
-//
-//        }
-//
-//        // 정육점 리뷰 신고
+    @Transactional
+    public ResVo reportShopReview(ReportDto dto) {
+        ShopReviewCountIds shopReview = new ShopReviewCountIds();
+        ButcherReviewCountIds butcherReview = new ButcherReviewCountIds();
+
+        // 고깃집 리뷰 신고
+        if (dto.getCheckShop() == 0) {
+            shopReview.setIuser(authenticationFacade.getLoginOwnerShopPk());
+            shopReview.setIreview(dto.getIreview());
+            ReportEntity shopReportEntity = shopReportRepository.getReferenceById(dto.getIreport());
+
+            Optional<ShopReviewCountEntity> reviewCountEntity = shopReviewCountRepository.findByShopReviewCountIds(shopReview);
+            if (reviewCountEntity.isPresent()) {
+                throw new RestApiException(AuthErrorCode.REPORT_COMMUNITY_ENTITY);
+                // ******에러코드 변경**********
+            }
+
+            UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+            ShopEntity shopEntity = shopRepository.getReferenceById(dto.getIreview());
+            ShopReviewEntity shopReviewEntity = shopReviewRepository.getReferenceById(dto.getIreview());
+
+            if (shopEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+                throw new RestApiException(REPORT_COMMUNITY_MYUSER);
+                // ************에러코드 변경 및 확인
+            }
+
+            ShopReviewCountEntity shopReviewCountEntity = new ShopReviewCountEntity();
+            shopReviewCountEntity.setShopReviewCountIds(shopReview);
+            shopReviewCountEntity.setIreport(shopReportEntity);
+            shopReviewCountEntity.setUserEntity(userEntity);
+            shopReviewCountEntity.setShopReviewEntity(shopReviewEntity);
+            shopReviewCountRepository.save(shopReviewCountEntity);
+
+            shopReviewEntity.setCount(shopReviewEntity.getCount() + 1);
+            shopRepository.save(shopEntity);
+
+            return new ResVo(SUCCESS);
+        }
+
+        // 정육점 리뷰 신고
 //        if (dto.getCheckShop() == 1) {
 //
 //        }
-//
-//
-//    }
+
+        return null;
+    }
 
 }
