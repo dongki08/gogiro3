@@ -29,7 +29,7 @@
         JOIN t_butcher_pic b
         ON a.ibutcher=b.ibutcher
         GROUP BY a.ibutcher
-        ORDER BY createdAt DESC;
+        ORDER BY createdAt DESC
     </select>
     <update id="confirmShop">
         UPDATE
@@ -38,4 +38,75 @@
             confirm= #{confirm}
         WHERE i${column}= #{ishop}
     </update>
+    <select id="reportList">
+        SELECT
+            a.i${column1} AS pk,
+            a.${column2} AS contents,
+            b.nickname,
+            a.count
+        FROM t_${table} a
+        JOIN t_user b
+        ON a.iuser=b.iuser
+        WHERE a.COUNT<![CDATA[>]]>=1
+        ORDER BY a.created_at
+    </select>
+    <update id="hide">
+        UPDATE
+        t_${table}
+        SET
+            count= 3
+        WHERE i${column}= #{pk}
+    </update>
+    <update id="cancelReport">
+        UPDATE
+        t_${table}
+        SET
+            count= 0
+        WHERE i${column}= #{pk}
+    </update>
+    <select id="blackList">
+        SELECT
+            a.iuser,
+            a.nickname AS name,
+            a.email AS id,
+            b.number,
+            a.`check` AS state
+        FROM t_user a
+        LEFT JOIN t_shop b
+        ON a.iuser=b.iuser
+        AND a.check_shop=0
+        WHERE a.`check`=1
+        UNION
+        SELECT
+            a.iuser,
+            a.nickname AS name,
+            a.email AS id,
+            b.number,
+            a.`check` AS state
+        FROM t_user a
+        LEFT JOIN t_butcher b
+        ON a.iuser=b.iuser
+        AND a.check_shop=1
+        WHERE a.`check`=1
+        order by iuser
+    </select>
+
+    <update id="suspendAccount">
+        <selectKey resultType="int" keyProperty="check" order="BEFORE">
+            SELECT
+                `check`
+            FROM t_user
+            WHERE iuser= #{iuser}
+        </selectKey>
+        UPDATE
+        t_user
+        SET
+            `check`=
+        <choose>
+            <when test="isCheck">1</when>
+            <otherwise>0</otherwise>
+        </choose>
+        WHERE iuser= #{iuser}
+    </update>
+
 </mapper>

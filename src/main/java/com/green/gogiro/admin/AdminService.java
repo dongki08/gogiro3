@@ -38,9 +38,8 @@ public class AdminService{
     //JPA 2.가게 승인 여부 변경
     public ResVo confirmShop2(){return null;}
     //Mybatis 3.신고 글 리스트
-    public List<ReportedVo> reportList1(){
-
-        return null;
+    public List<ReportedVo> reportList1(int check){
+        return mapper.reportList(new ReportDto(check));
     }
     //JPA 3.신고 글 리스트
     @Transactional
@@ -49,22 +48,22 @@ public class AdminService{
         return null;
     }
     //Mybatis 4.글 숨김
-    public ResVo hide1(@RequestBody HideDto dto){return null;}
+    public ResVo hide1(@RequestBody HideDto dto){return new ResVo(mapper.hide(dto));}
     //JPA 4.글 숨김
     @Transactional
     public ResVo hide2(@RequestBody HideDto dto){return null;}
     //Mybatis 5.게시물 신고 취소
-    public ResVo cancelReport1(CancelReportDto dto){return null;}
+    public ResVo cancelReport1(CancelReportDto dto){return new ResVo(mapper.cancelReport(dto));}
     //JPA 5.게시물 신고 취소
     @Transactional
     public ResVo cancelReport2(CancelReportDto dto){return null;}
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
-    public List<BlackVo> blackList1(){return null;}
+    public List<BlackVo> blackList1(){return mapper.blackList();}
     //JPA 6.사용자(USER,OWNER)블랙 리스트(정지)
     @Transactional
     public List<BlackVo> blackList2(){return null;}
     //Mybatis 7.계정 정지/정지 해제(토글로 처리)
-    public ResVo suspendAccount1(int iuser){return null;}
+    public ResVo suspendAccount1(int iuser){return new ResVo(mapper.suspendAccount(new CheckDto(iuser)));}
     //JPA 7.계정 정지/정지 해제(토글로 처리)
     @Transactional
     public ResVo suspendAccount2(int iuser){return null;}

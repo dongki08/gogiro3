@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class UserSignVo {
     private final int result;
-    private int iuser;
+    private Long iuser;
     private String name;
     private String nickname;
     private String birth;

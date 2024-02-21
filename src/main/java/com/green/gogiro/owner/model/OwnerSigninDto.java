@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class OwnerSigninDto {
-    private String id;
+    private String email;
     private String upw;
 }
