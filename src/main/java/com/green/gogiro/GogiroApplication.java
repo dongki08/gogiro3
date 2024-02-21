@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
@@ -18,7 +19,7 @@ public class GogiroApplication {
     }
 
     @Bean
-    public JPAQueryFactory jpaQueryFactory(EntityManager em) {
-        return new JPAQueryFactory(em);
+    public PageableHandlerMethodArgumentResolverCustomizer customizer() {
+        return p -> p.setOneIndexedParameters(true);
     }
 }

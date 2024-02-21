@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
 public class UserService {
     private final UserMapper mapper;
     private final ShopMapper shopMapper;
-
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final AppProperties appProperties;
