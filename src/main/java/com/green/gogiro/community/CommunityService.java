@@ -284,7 +284,7 @@ public class CommunityService {
         CommunityCountIds ids = new CommunityCountIds();
         ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIboard(dto.getIboard());
-        CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
+        ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
         Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
         if(optEntity.isPresent()) {
@@ -317,7 +317,7 @@ public class CommunityService {
         CommunityCommentCountIds ids = new CommunityCommentCountIds();
         ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIcomment(dto.getIcomment());
-        CommunityReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
+        ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
         Optional<CommunityCommentCountEntity> optEntity = communityCommentCountRepository.findByCommunityCommentCountIds(ids);
         if(optEntity.isPresent()) {

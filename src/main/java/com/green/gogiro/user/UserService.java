@@ -4,6 +4,10 @@ import static com.green.gogiro.common.Const.*;
 
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.butcher.ButcherReviewCountIds;
+import com.green.gogiro.entity.community.ReportEntity;
+import com.green.gogiro.entity.shop.ShopReviewCountEntity;
+import com.green.gogiro.entity.shop.ShopReviewCountIds;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -12,6 +16,7 @@ import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 import com.green.gogiro.security.MyUserDetails;
 import com.green.gogiro.shop.ShopMapper;
+import com.green.gogiro.shop.ShopReportRepository;
 import com.green.gogiro.shop.model.ShopFacilityVo;
 import com.green.gogiro.user.model.ReservationVo;
 import com.green.gogiro.user.model.*;
@@ -43,6 +48,7 @@ public class UserService {
     private final AuthenticationFacade authenticationFacade;
     private final MyFileUtils myFileUtils;
     private final UserRepository userRepository;
+    private final ShopReportRepository shopReportRepository;
 
 
     @Transactional
@@ -248,4 +254,28 @@ public class UserService {
         mapper.delShopReviewPics(dto);
         return new ResVo(mapper.delShopReview(dto));
     }
+
+    // 리뷰 신고
+//    @Transactional
+//    public ResVo reportShopReview(ReportDto dto) {
+//        ShopReviewCountIds shopReview = new ShopReviewCountIds();
+//        ButcherReviewCountIds butcherReview = new ButcherReviewCountIds();
+//
+//        // 고깃집 리뷰 신고
+//        if (dto.getCheckShop() == 0) {
+//            shopReview.setIuser(authenticationFacade.getLoginOwnerShopPk());
+//            shopReview.setIreview(dto.getIreview());
+//            ReportEntity shopReportEntity = shopReportRepository.getReferenceById(dto.getIreport());
+//
+//
+//        }
+//
+//        // 정육점 리뷰 신고
+//        if (dto.getCheckShop() == 1) {
+//
+//        }
+//
+//
+//    }
+
 }

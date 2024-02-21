@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "t_shop_review_count")
-public class ShopReviewCount extends CreatedAtEntity {
+public class ShopReviewCountEntity extends CreatedAtEntity {
     @EmbeddedId
     private ShopReviewCountIds shopReviewCountIds;
 

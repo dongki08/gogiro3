@@ -127,4 +127,13 @@ public class UserController {
     public ResVo delShopReview(@RequestBody @Valid ReviewDelDto dto) {
         return service.delShopReview(dto);
     }
+
+    @PostMapping("review/report")
+    @Operation(summary = "가게 후기 신고", description = "체크샵 까먹지말고")
+    public ResVo reportShopReview(ReportDto dto) {
+        return null;
+    }
+
+
+
 }
