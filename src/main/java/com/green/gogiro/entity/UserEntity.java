@@ -58,7 +58,6 @@ public class UserEntity extends BaseEntity {
     @ColumnDefault("2")
     private int checkShop;
 
-    @Column(nullable = false)
-    @ColumnDefault("0")
+    @Column(name = "`check`",columnDefinition = "int default 0")
     private int check;
 }
