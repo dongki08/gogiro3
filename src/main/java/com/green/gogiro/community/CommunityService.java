@@ -44,9 +44,9 @@ public class CommunityService {
     //커뮤니티 게시글 등록
     @Transactional
     public CommunityPicsInsVo insCommunity(List<MultipartFile> pics, CommunityInsDto dto) {
-        dto.setIuser(authenticationFacade.getLoginUserPk());
 
         CommunityEntity communityentity = new CommunityEntity();
+        communityentity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
 
         if(authenticationFacade.getLoginUserRole().equals("ADMIN")) {
             communityentity.setAnnounce(1);

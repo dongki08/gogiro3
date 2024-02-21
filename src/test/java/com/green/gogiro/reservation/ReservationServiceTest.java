@@ -1,26 +1,26 @@
-//package com.green.gogiro.reservation;
-//
-//import com.green.gogiro.common.ResVo;
-//import com.green.gogiro.reservation.model.*;
-//import com.green.gogiro.security.AuthenticationFacade;
-//import com.green.gogiro.shop.ShopMapper;
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.context.annotation.Import;
-//import org.springframework.test.context.junit.jupiter.SpringExtension;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.verify;
-//
-//@ExtendWith(SpringExtension.class)
-//@Import({ReservationService.class})
-//class ReservationServiceTest {
+package com.green.gogiro.reservation;
+
+import com.green.gogiro.common.ResVo;
+import com.green.gogiro.reservation.model.*;
+import com.green.gogiro.security.AuthenticationFacade;
+import com.green.gogiro.shop.ShopMapper;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(SpringExtension.class)
+@Import({ReservationService.class})
+class ReservationServiceTest {
 //    @MockBean
 //    private ReservationMapper mapper;
 //    @MockBean
@@ -29,7 +29,7 @@
 //    private ShopMapper shopMapper;
 //    @Autowired
 //    private ReservationService service;
-//
+
 //    @Test
 //    void postReservationTest() throws Exception {
 //        ReservationInsDto dto = new ReservationInsDto();
@@ -83,4 +83,4 @@
 //        verify(mapper).updReservation(any());
 //        assertEquals(1, vo.getResult());
 //    }
-//}
+}
