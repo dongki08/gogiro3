@@ -9,6 +9,7 @@ import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -19,6 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService service;
+    //0.총 관리자 로그인
+    @PostMapping("/signin")
+    public AdminSigninVo adminSignin(HttpServletResponse res, @RequestBody AdminSigninDto dto){
+        return service.adminSignin1(res,dto);
+    }
     /*1.매장 관리 리스트
     1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트
     2)각 가게의 가게 승인 여부 표시

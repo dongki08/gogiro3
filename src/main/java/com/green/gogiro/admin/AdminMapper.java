@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface AdminMapper {
+    AdminSigninProcVo checkAdmin(String email);
     List<ShopVo> shopList();
     int confirmShop(ConfirmDto dto);
     List<ReportedVo> reportList(ReportDto dto);

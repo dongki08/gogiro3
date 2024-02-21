@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public enum AuthErrorCode implements ErrorCode{
-
     INVALID_EXIST_USER_ID(HttpStatus.NOT_FOUND,"아이디가 존재하지 않습니다."),
     INVALID_PASSWORD(HttpStatus.NOT_FOUND,"비밀번호를 확인해주세요."),
     NEED_SIGNIN(HttpStatus.UNAUTHORIZED,"로그인이 필요합니다."),
