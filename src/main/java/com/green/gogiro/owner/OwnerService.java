@@ -1,6 +1,6 @@
 package com.green.gogiro.owner;
 
-import com.green.gogiro.entity.butcher.repository.ButcherRepository;
+import com.green.gogiro.butchershop.ButcherRepository;
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
@@ -10,17 +10,21 @@ import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
 import com.green.gogiro.owner.model.*;
+import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
-import com.green.gogiro.entity.shop.repository.ShopRepository;
+import com.green.gogiro.shop.ShopRepository;
 import com.green.gogiro.user.UserRepository;
+
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -40,8 +44,15 @@ public class OwnerService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AppProperties appProperties;
     private final CookieUtils cookieUtils;
+    private final OwnerShopReviewRepository reviewRepository;
+    private final AuthenticationFacade authenticationFacade;
 
 
+    @Transactional
+    public List<OwnerReviewVo> getAllReview(Pageable pageable) {
+        List<OwnerReviewVo> vo =reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(),authenticationFacade.getLoginOwnerCheckShop(),pageable);
+        return vo;
+    }
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
 

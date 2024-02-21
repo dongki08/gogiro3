@@ -2,6 +2,7 @@ package com.green.gogiro.entity.shop;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.http.MediaType;
 
 @Data
 @Entity
@@ -14,8 +15,10 @@ public class ShopReviewPicEntity {
 
     @ManyToOne
     @JoinColumn(name = "ireview", nullable = false)
-    private ShopReviewEntity ireview;
+    private ShopReviewEntity shopReviewEntity;
 
     @Column(length = 50, nullable = false)
     private String pic;
+
+
 }
