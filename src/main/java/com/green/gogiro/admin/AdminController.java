@@ -102,4 +102,6 @@ public class AdminController {
             "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
     public ResVo suspendAccount(@PathVariable int iuser){return null;}
     //잠금 여부 확인 후 토글로 처리(select result->update)
+
+
 }

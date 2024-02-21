@@ -1,10 +1,16 @@
 package com.green.gogiro.entity.community;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="t_commu_pics")
 public class CommunityPicsEntity {
     @Id
