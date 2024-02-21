@@ -18,6 +18,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     private final String imgFolder;
 
+
     public WebMvcConfiguration(@Value("${file.dir}")String imgFolder) {
         this.imgFolder = imgFolder;
     }

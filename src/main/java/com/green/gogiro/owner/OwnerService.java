@@ -41,13 +41,13 @@ public class OwnerService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AppProperties appProperties;
     private final CookieUtils cookieUtils;
-    private final JPAQueryFactory queryFactory;
+
 
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
 
 
-        Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getId());
+        Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getEmail());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
         if (!userEntity.getRole().toString().equals("OWNER")) {
             throw new RestApiException(AuthErrorCode.NOT_ROLE);

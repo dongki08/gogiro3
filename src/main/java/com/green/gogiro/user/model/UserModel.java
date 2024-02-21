@@ -15,4 +15,5 @@ public class UserModel {
     private String pic;
     private String tel;
     private String createdAt;
+    private String role;
 }
