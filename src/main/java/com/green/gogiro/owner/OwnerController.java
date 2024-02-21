@@ -58,8 +58,8 @@ public class OwnerController {
     }
 
     @GetMapping("/review")
-    public OwnerReviewVo getAllReview(Pageable pageable){
-        return null;
+    public List<OwnerReviewVo> getAllReview(Pageable pageable){
+        return service.getAllReview(pageable);
     }
 //    @PostMapping("/shop")
 //    @Operation(summary = "가게 등록",description = "가게 등록 처리")

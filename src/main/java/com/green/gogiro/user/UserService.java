@@ -74,6 +74,7 @@ public class UserService {
         userEntity.setTel(dto.getTel());
         userEntity.setGender(dto.getGender());
         userEntity.setNickname(dto.getNickname());
+        userEntity.setCheckShop(2);
         userEntity.setRole(RoleEnum.USER);
 
 

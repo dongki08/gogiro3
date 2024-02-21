@@ -4,7 +4,11 @@ import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,11 +22,11 @@ public class ShopReviewEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 
     @ManyToOne
     @JoinColumn(name = "iuser", nullable = false)
-    private UserEntity iuser;
+    private UserEntity userEntity;
 
     @Column(nullable = false)
     @ColumnDefault("1")
@@ -37,4 +41,8 @@ public class ShopReviewEntity extends BaseEntity {
     @Column(nullable = false)
     @ColumnDefault("0")
     private int count;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "shopReviewEntity",cascade = CascadeType.PERSIST)
+    private List<ShopReviewPicEntity> shopReviewPicEntityList = new ArrayList<>();
 }

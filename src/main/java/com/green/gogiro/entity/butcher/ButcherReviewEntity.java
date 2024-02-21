@@ -4,7 +4,11 @@ import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,4 +41,8 @@ public class ButcherReviewEntity extends BaseEntity {
     @Column(nullable = false)
     @ColumnDefault("0")
     private int count;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "butcherReviewEntity",cascade = CascadeType.PERSIST)
+    private List<ButcherReviewPicEntity> butcherReviewPicEntityList = new ArrayList<>();
 }
