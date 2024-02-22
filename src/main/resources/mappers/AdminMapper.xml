@@ -22,6 +22,9 @@
         FROM t_shop a
         JOIN t_shop_pic b
         ON a.ishop=b.ishop
+        <if test="search!=null">
+            WHERE a.name LIKE '%${search}%'
+        </if>
         GROUP BY a.ishop
         UNION
         SELECT
@@ -36,6 +39,9 @@
         FROM t_butcher_shop a
         JOIN t_butcher_pic b
         ON a.ibutcher=b.ibutcher
+        <if test="search!=null">
+            WHERE a.name LIKE '%${search}%'
+        </if>
         GROUP BY a.ibutcher
         ORDER BY createdAt DESC
     </select>

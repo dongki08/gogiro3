@@ -1,9 +1,15 @@
 package com.green.gogiro.entity.butcher;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "t_but_review_pic")
 public class ButcherReviewPicEntity {
