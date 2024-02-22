@@ -27,12 +27,10 @@ public enum AuthErrorCode implements ErrorCode{
     INVALID_MENU_OR_COUNT(HttpStatus.BAD_REQUEST,"메뉴 혹은 수량이 잘못되었습니다."),
     SEARCH_COMMUNITY(HttpStatus.NOT_FOUND, "해당하는 검색 결과가 없습니다."),
     INVALID_RESERVATION(HttpStatus.NOT_FOUND, "존재하지 않는 예약입니다."),
-    NOT_ROLE(HttpStatus.NOT_FOUND,"권한이 없습니다"),
+    NOT_ROLE(HttpStatus.UNAUTHORIZED,"권한이 없습니다"),
     REGEXP_PIC(HttpStatus.BAD_REQUEST,"이미지 파일이 아닙니다"),
     REPORT_COMMUNITY_ENTITY(HttpStatus.NOT_FOUND, "이미 신고된 게시글입니다"),
     REPORT_COMMUNITY_MYUSER(HttpStatus.BAD_REQUEST, "본인 게시글은 신고가 불가능합니다"),
-
-
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND, "refresh-token이 없습니다.");
 
     private final HttpStatus httpStatus;

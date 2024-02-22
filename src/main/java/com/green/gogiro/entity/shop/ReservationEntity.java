@@ -3,7 +3,6 @@ package com.green.gogiro.entity.shop;
 import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "t_reservation")
-public class ShopReservationEntity extends BaseEntity {
+public class ReservationEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +20,11 @@ public class ShopReservationEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
-    private UserEntity iuser;
+    private UserEntity userEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 
     @Column(nullable = false)
     private LocalDateTime date;

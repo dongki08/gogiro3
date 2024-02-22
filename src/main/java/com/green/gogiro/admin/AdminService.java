@@ -2,7 +2,7 @@ package com.green.gogiro.admin;
 
 
 import com.green.gogiro.admin.model.*;
-import com.green.gogiro.butchershop.ButcherRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherRepository;
 import com.green.gogiro.common.AppProperties;
 import com.green.gogiro.common.CookieUtils;
 import com.green.gogiro.common.ResVo;
@@ -13,7 +13,7 @@ import com.green.gogiro.exception.CommonErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
-import com.green.gogiro.shop.ShopRepository;
+import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.user.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
