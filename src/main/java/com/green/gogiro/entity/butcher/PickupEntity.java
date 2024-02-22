@@ -40,6 +40,6 @@ public class PickupEntity extends BaseEntity {
     private int confirm;
 
     @ToString.Exclude
-    @OneToMany(mappedBy="ipickup",cascade=CascadeType.PERSIST)
-    private List<PickupMenuEntity> pickupMenuEntityList= new ArrayList<>();
+    @OneToMany(mappedBy="pickupEntity",cascade=CascadeType.PERSIST)
+    private List<PickupMenuEntity> pickupMenuEntityList = new ArrayList<>();
 }

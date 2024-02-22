@@ -11,6 +11,7 @@ import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountIds;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
+import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;

@@ -1,11 +1,13 @@
 package com.green.gogiro.owner;
 
-import com.green.gogiro.butchershop.ButcherRepository;
+
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
+import com.green.gogiro.entity.butcher.repository.ButcherRepository;
 import com.green.gogiro.entity.shop.*;
+import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -13,7 +15,7 @@ import com.green.gogiro.owner.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
-import com.green.gogiro.shop.ShopRepository;
+
 import com.green.gogiro.user.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
