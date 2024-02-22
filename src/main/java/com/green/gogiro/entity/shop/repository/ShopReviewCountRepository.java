@@ -1,4 +1,4 @@
-package com.green.gogiro.shop;
+package com.green.gogiro.entity.shop.repository;
 
 import com.green.gogiro.entity.shop.ShopReviewCountEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountIds;

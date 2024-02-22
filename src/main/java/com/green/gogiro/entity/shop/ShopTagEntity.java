@@ -15,7 +15,7 @@ public class ShopTagEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity shop;
+    private ShopEntity shopEntity;
 
     @Column(length = 10, nullable = false)
     private String tag;
