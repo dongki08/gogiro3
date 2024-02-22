@@ -2,6 +2,7 @@ package com.green.gogiro.entity.butcher;
 
 import com.green.gogiro.entity.CreatedAtEntity;
 import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.community.ReportEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,4 +22,8 @@ public class ButcherReviewCountEntity extends CreatedAtEntity {
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private UserEntity userEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ireport", nullable = false)
+    private ReportEntity ireport;
 }
