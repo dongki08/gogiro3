@@ -5,8 +5,10 @@ import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
+import com.green.gogiro.entity.butcher.repository.ButcherMenuRepository;
 import com.green.gogiro.entity.butcher.repository.ButcherRepository;
 import com.green.gogiro.entity.shop.*;
+import com.green.gogiro.entity.shop.repository.ShopMenuRepository;
 import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
@@ -48,13 +50,16 @@ public class OwnerService {
     private final CookieUtils cookieUtils;
     private final OwnerShopReviewRepository reviewRepository;
     private final AuthenticationFacade authenticationFacade;
+    private final ButcherMenuRepository butcherMenuRepository;
+    private final ShopMenuRepository shopMenuRepository;
 
 
     @Transactional
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
-        List<OwnerReviewVo> vo =reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(),authenticationFacade.getLoginOwnerCheckShop(),pageable);
+        List<OwnerReviewVo> vo = reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
         return vo;
     }
+
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
 
@@ -163,6 +168,13 @@ public class OwnerService {
             return new ResVo(userEntity.getIuser().intValue());
         }
         return new ResVo(Const.FAIL);
+    }
+
+    public List<OwnerMenuVo> getMenu() {
+        ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
+        ButcherEntity butcherEntity = new ButcherEntity();
+        log.info("pk: {}",authenticationFacade.getLoginOwnerShopPk());
+        return butcherMenuRepository.selMenu(authenticationFacade.getLoginOwnerShopPk(),authenticationFacade.getLoginOwnerCheckShop());
     }
 
     public StoreRegistrationPicsVo insRegistration(StoreRegistrationDto dto) {

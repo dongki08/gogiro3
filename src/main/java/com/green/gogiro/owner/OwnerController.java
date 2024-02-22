@@ -73,9 +73,13 @@ public class OwnerController {
 //        return service.insRegistration(dto);
 //    }
 
+    @GetMapping("/menu")
+    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기",description = "메뉴 보기 처리")
+    public List<OwnerMenuVo> getMenu(){
+        return service.getMenu();
+    }
 
-
-    @PostMapping("/menu")
+    @PostMapping(value = "/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
     public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto){
         if(pic != null) {
