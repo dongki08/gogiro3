@@ -87,6 +87,7 @@
         AND D.iuser= #{iuser}
         WHERE A.ibutcher = #{ibutcher}
     </select>
+
     <select id="selButcherMenu">
         SELECT
         ibut_menu
@@ -113,6 +114,7 @@
         JOIN t_user c
         ON a.iuser = c.iuser
         WHERE a.ibutcher = #{ibutcher}
+        AND a.count <![CDATA[<]]> 3
     </select>
 
     <select id="selReviewPicDetail">
@@ -121,6 +123,7 @@
         JOIN t_but_review b
         ON a.ireview = b.ireview
         WHERE b.ibutcher = #{ibutcher}
+        AND b.count <![CDATA[<]]> 3
     </select>
 
     <select id="selButcherEntity">
