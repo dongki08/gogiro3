@@ -21,7 +21,7 @@ public class ShopPicEntity {
 
     @ManyToOne
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 
     @Column(length = 50, nullable = false)
     private String pic;
