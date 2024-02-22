@@ -50,6 +50,7 @@ public class ShopService {
             throw new RestApiException(INVALID_CATEGORY);
         }
         List<ShopSelVo> shopList = mapper.selShopAll(dto);
+        if(shopList.size() != 0){
         List<Integer> shopPk = new ArrayList<>();
         Map<Integer, ShopSelVo> shopMap = new HashMap<>();
         for (ShopSelVo vo : shopList) {
@@ -67,6 +68,7 @@ public class ShopService {
             shopMap.get(vo.getIshop()).getFacilities().add(vo.getFacility());
         }
 
+        }
         return shopList;
     }
 

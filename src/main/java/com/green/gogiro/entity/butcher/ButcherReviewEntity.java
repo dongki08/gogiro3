@@ -20,11 +20,11 @@ public class ButcherReviewEntity extends BaseEntity {
     @Column(name = "ireview", columnDefinition = "BIGINT UNSIGNED")
     private Long ireview;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "i_butcher", nullable = false)
     private ButcherEntity butcherEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 

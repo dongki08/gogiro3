@@ -19,7 +19,7 @@ public class ButcherPicEntity {
     @Column(name = "ibut_pics", columnDefinition = "BIGINT UNSIGNED")
     private Long ibutPics;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 

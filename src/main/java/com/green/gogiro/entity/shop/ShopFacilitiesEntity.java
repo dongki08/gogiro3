@@ -11,12 +11,12 @@ public class ShopFacilitiesEntity {
     @EmbeddedId
     private FacilityIds facilityIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ishop")
     @JoinColumn(name = "ishop",columnDefinition = "BIGINT UNSIGNED")
     private ShopEntity shopEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ifacil")
     @JoinColumn(name = "ifacil",columnDefinition = "BIGINT UNSIGNED")
     private FacilityEntity facilityEntity;

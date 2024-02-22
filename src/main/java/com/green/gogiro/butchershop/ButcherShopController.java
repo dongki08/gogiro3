@@ -64,16 +64,4 @@ public class ButcherShopController {
         return service.toggleButcherBookmark(dto);
     }
 
-    @PostMapping("/report")
-    @Operation(summary = "정육점 후기 신고", description = "정육점 후기 신고 처리"+
-            "<br>--요청데이터"+
-            "<br>ireview(리뷰pk)"+
-            "<br>ireport(신고사유pk)"+
-            "<br>--응답데이터"+
-            "<br>(성공)result:1"+
-            "<br>(실패)result:0")
-    public ResVo postButcherReport(@RequestBody ButcherReportDto dto) {
-        return null;
-    }
-
 }

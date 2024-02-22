@@ -23,7 +23,7 @@ public class ButcherEntity extends BaseEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long ibutcher;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 

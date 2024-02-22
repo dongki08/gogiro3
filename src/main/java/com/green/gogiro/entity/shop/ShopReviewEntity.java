@@ -20,11 +20,11 @@ public class ShopReviewEntity extends BaseEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long ireview;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity shopEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 

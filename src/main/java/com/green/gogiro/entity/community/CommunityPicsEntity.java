@@ -17,7 +17,7 @@ public class CommunityPicsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long icommuPics;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iboard", nullable = false)
     private CommunityEntity communityEntity;
     @Column(nullable = false)

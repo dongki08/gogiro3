@@ -19,9 +19,9 @@ public class ShopPicEntity {
     @Column(name = "ishop_pics", columnDefinition = "BIGINT UNSIGNED")
     private Long ishopPics;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 
     @Column(length = 50, nullable = false)
     private String pic;

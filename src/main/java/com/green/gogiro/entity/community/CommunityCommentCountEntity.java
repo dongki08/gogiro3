@@ -14,17 +14,17 @@ public class CommunityCommentCountEntity extends CreatedAtEntity {
     @EmbeddedId
     private CommunityCommentCountIds communityCommentCountIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("icomment")
     @JoinColumn(name = "icomment",nullable = false,columnDefinition = "BIGINT UNSIGNED")
     private CommunityCommentEntity communityCommentEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name = "iuser",nullable = false,columnDefinition = "BIGINT UNSIGNED")
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ireport", nullable = false)
     private ReportEntity ireport;
 }

@@ -13,7 +13,7 @@ public class ButcherTagEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long itag;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 

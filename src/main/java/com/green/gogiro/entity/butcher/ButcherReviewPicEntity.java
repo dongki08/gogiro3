@@ -19,7 +19,7 @@ public class ButcherReviewPicEntity {
     @Column(name = "ireview_pics", columnDefinition = "BIGINT UNSIGNED")
     private Long ireviewPics;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ireview", nullable = false)
     private ButcherReviewEntity butcherReviewEntity;
 

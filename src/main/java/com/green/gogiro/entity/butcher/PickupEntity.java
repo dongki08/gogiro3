@@ -21,11 +21,11 @@ public class PickupEntity extends BaseEntity {
     @Column(name = "ipickup", columnDefinition = "BIGINT UNSIGNED")
     private Long ipickup;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 
@@ -40,6 +40,6 @@ public class PickupEntity extends BaseEntity {
     private int confirm;
 
     @ToString.Exclude
-    @OneToMany(mappedBy="ipickup",cascade=CascadeType.PERSIST)
-    private List<PickupMenuEntity> pickupMenuEntityList= new ArrayList<>();
+    @OneToMany(mappedBy="pickupEntity",cascade=CascadeType.PERSIST)
+    private List<PickupMenuEntity> pickupMenuEntityList = new ArrayList<>();
 }

@@ -23,7 +23,7 @@ public class CommunityEntity extends BaseEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long iboard;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 

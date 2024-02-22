@@ -20,11 +20,11 @@ public class ShopEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ishop;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imeat", nullable = false)
     private ShopCategoryEntity imeat;
 
@@ -58,6 +58,6 @@ public class ShopEntity extends BaseEntity {
     private int deposit;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shopEntity",cascade = CascadeType.PERSIST)
     private List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
 }
