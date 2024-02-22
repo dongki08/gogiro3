@@ -14,7 +14,7 @@ public class ShopMenuEntity extends BaseEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long imenu;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity ishop;
 

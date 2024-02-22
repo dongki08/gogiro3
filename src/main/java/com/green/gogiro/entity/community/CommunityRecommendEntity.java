@@ -12,11 +12,11 @@ import lombok.Data;
 public class CommunityRecommendEntity extends BaseEntity {
     @EmbeddedId
     private CommunityRecommendIds communityRecommendIds;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iboard")
     @JoinColumn(name="iboard", columnDefinition="BIGINT UNSIGNED")
     private CommunityEntity communityEntity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name="iuser", columnDefinition="BIGINT UNSIGNED")
     private UserEntity userEntity;

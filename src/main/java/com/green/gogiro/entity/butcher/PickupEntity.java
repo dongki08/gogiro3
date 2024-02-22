@@ -21,11 +21,11 @@ public class PickupEntity extends BaseEntity {
     @Column(name = "ipickup", columnDefinition = "BIGINT UNSIGNED")
     private Long ipickup;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 

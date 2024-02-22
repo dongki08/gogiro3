@@ -12,12 +12,12 @@ public class ButcherReviewCountEntity extends CreatedAtEntity {
     @EmbeddedId
     private ButcherReviewCountIds butcherReviewCountIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ireview")
     @JoinColumn(name = "ireview", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private ButcherReviewEntity butcherReviewEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private UserEntity userEntity;

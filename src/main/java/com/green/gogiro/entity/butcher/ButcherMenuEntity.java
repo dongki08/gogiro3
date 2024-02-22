@@ -14,7 +14,7 @@ public class ButcherMenuEntity extends BaseEntity {
     @Column(name = "ibut_menu", columnDefinition = "BIGINT UNSIGNED")
     private Long ibutMenu;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 

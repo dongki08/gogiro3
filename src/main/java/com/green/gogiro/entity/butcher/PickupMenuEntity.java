@@ -19,12 +19,12 @@ public class PickupMenuEntity extends BaseEntity {
     @EmbeddedId
     private PickupMenuIds pickupMenuIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ipickup")
     @JoinColumn(name = "ipickup", columnDefinition = "BIGINT UNSIGNED")
     private PickupEntity pickupEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ibutMenu")
     @JoinColumn(name = "ibut_menu", columnDefinition = "BIGINT UNSIGNED")
     private ButcherMenuEntity butcherMenuEntity;
