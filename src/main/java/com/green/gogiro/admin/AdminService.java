@@ -99,7 +99,7 @@ public class AdminService{
                             .build();
     }
     //Mybatis 1.매장 관리 리스트
-    public List<ShopVo> shopList1(){return mapper.shopList();}
+    public List<ShopVo> shopList1(String search){return mapper.shopList(search);}
     //JPA 1.매장 관리 리스트
     @Transactional
     public List<ShopVo> shopList2(){

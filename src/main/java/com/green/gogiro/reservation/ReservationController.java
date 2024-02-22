@@ -64,7 +64,7 @@ public class ReservationController {
             "<br>(실패)<br>(400)<br>NOT_DATE(예약날짜를 입력해 주세요)<br>INVALID_PARAMETER<br>(날짜 형식이 올바르지 않습니다)<br>(예약날짜를 입력해 주세요)" +
             "<br>(인원 수를 입력해주세요)<br>(가게구분 값이 잘못되었습니다)<br>(500)INTERNAL_SERVER_ERROR")
     public ResVo putReservation(@RequestBody @Valid ReservationUpdDto dto) {
-        return service.putReservation(dto);
+        return service.putReservation1(dto);
     }
 
     @PostMapping("/review")
@@ -83,7 +83,7 @@ public class ReservationController {
             throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
         }
         dto.setFiles(pics);
-        return service.postReview(dto);
+        return service.postReview1(dto);
     }
     @PostMapping("/confirm")
     @Operation(summary="결제 승인",description="결제 승인 처리<br>" +

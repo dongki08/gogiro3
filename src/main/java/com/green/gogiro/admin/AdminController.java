@@ -42,7 +42,7 @@ public class AdminController {
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
     public List<ShopVo> shopList(@PathVariable(required = false) String search){
-        return service.shopList1();
+        return service.shopList1(search);
     }
     /*2.가게 승인 여부 변경
     1)대기 상태의 가게->승인 혹은 거절
