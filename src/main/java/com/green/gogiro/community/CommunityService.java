@@ -63,9 +63,11 @@ public class CommunityService {
         String target = "/community/" + communityentity.getIboard();
         CommunityPicsInsVo vo = new CommunityPicsInsVo();
         vo.setIboard(communityentity.getIboard().intValue());
-        for(MultipartFile file : pics) {
-            String saveFileNm = myFileUtils.transferTo(file, target);
-            vo.getPics().add(saveFileNm);
+        if(pics != null) {
+            for(MultipartFile file : pics) {
+                String saveFileNm = myFileUtils.transferTo(file, target);
+                vo.getPics().add(saveFileNm);
+            }
         }
         List<CommunityPicsEntity> communityPicsEntityList = vo.getPics()
                 .stream()
