@@ -4,9 +4,7 @@ package com.green.gogiro.admin;
 
 import com.green.gogiro.admin.model.*;
 import com.green.gogiro.common.ResVo;
-import com.green.gogiro.exception.CommonErrorCode;
-import com.green.gogiro.exception.RestApiException;
-import com.green.gogiro.security.AuthenticationFacade;
+import jakarta.validation.Valid;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,7 +40,7 @@ public class AdminController {
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
     public List<ShopVo> shopList(@PathVariable(required = false) String search){
-        return service.shopList1();
+        return service.shopList1(search);
     }
     /*2.가게 승인 여부 변경
     1)대기 상태의 가게->승인 혹은 거절
@@ -54,7 +52,7 @@ public class AdminController {
             "<br>--요구 데이터<br>checkShop(0 또는 1): 가게 구분(0:고기집, 1:정육점)<br>ishop(최소 1 이상): 가게 pk" +
             "<br>confirm:변경하고 싶은 승인 여부(1:확정, 2:거절, 3:퇴출)<br>--응답 데이터<br>(성공)" +
             "<br>result: 1<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo confirmShop(@RequestBody ConfirmDto dto){return service.confirmShop1(dto);}
+    public ResVo confirmShop(@Valid @RequestBody ConfirmDto dto){return service.confirmShop1(dto);}
     /*3.신고 글 리스트(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기)
     1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가
     2)계정 제재는 총 관리자 재량으로*/

@@ -2,7 +2,6 @@ package com.green.gogiro.owner;
 
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.owner.model.*;
-import com.green.gogiro.exception.RestApiException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
-import static com.green.gogiro.exception.AuthErrorCode.MUST_PHOTO;
 
 @Tag(name = "가게 주인", description = "가게 주인 API")
 @RestController
@@ -99,6 +97,10 @@ public class OwnerController {
     public OwnerManagementVo getShop() {
         return service.getShop();
     }
+
+    @PutMapping("/review")
+    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "배용진이 작성해")
+    public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {return service.postReviewComment(dto);}
 
 //    @PutMapping("/shop")
 //    @Operation(summary = "가게 사진 수정",description = "가게 사진 수정 처리")

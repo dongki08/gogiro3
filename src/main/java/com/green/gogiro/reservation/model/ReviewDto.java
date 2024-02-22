@@ -18,7 +18,6 @@ public class ReviewDto {
     private int iuser;
     @JsonIgnore
     private int ireview;
-
     @Schema(title = "고기집 0,정육점 1")
     @Min(value = 0,message="가게구분 값이 잘못되었습니다")
     @Max(value = 1,message="가게구분 값이 잘못되었습니다")
@@ -40,7 +39,12 @@ public class ReviewDto {
     @Schema(title = "리뷰 사진",description = "최대 5장")
     @JsonIgnore
     private List<String> pics = new ArrayList<>();
-
     @JsonIgnore
     private List<MultipartFile> files = new ArrayList<>();
+    @JsonIgnore
+    private boolean isReservation;
+    public void setCheckShop(int checkShop){
+        this.checkShop=checkShop;
+        this.isReservation=(checkShop==0);
+    }
 }
