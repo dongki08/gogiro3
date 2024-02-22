@@ -17,12 +17,10 @@ public class HideDto {
             case 0:
                 this.table="community";
                 this.column="board";
-
                 break;
             case 1:
                 this.table="community_comment";
                 this.column="comment";
-
                 break;
             case 2:
                 this.table="shop_review";

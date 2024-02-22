@@ -16,6 +16,7 @@ import com.green.gogiro.entity.shop.ReservationEntity;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.entity.shop.ShopReviewPicEntity;
 import com.green.gogiro.entity.shop.repository.ReservationRepository;
+import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.CommonErrorCode;
 import com.green.gogiro.exception.RestApiException;
@@ -23,17 +24,13 @@ import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
 import com.green.gogiro.entity.shop.repository.ShopRepository;
-import com.green.gogiro.shop.ShopReviewRepository;
 import com.green.gogiro.shop.model.ShopModel;
 import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -163,7 +160,7 @@ public class ReservationService {
     public ResVo cancelReservation2(CancelDto dto){
         ReservationEntity entity= reservationRepository.getReferenceById((long)dto.getIreser());
         if(entity.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
-            new RestApiException(CANT_CANCEL);
+            throw new RestApiException(CANT_CANCEL);
         }
         if(dto.isReservation()){
             //예약 취소
