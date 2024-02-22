@@ -21,7 +21,6 @@ public class ShopSelDto {
     private int startIdx;
 
 
-
     @JsonIgnore
     private final int rowCount = 10;
 

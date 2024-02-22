@@ -72,15 +72,5 @@ public class ShopController {
         return service.selMainPage();
     }
 
-    @PostMapping("/report")
-    @Operation(summary = "고깃집 후기 신고", description = "고깃집 후기 신고 처리"+
-    "<br>--요청데이터"+
-    "<br>ireview(리뷰pk)"+
-    "<br>ireport(신고사유pk)"+
-    "<br>--응답데이터"+
-    "<br>(성공)result:1"+
-    "<br>(실패)result:0")
-    public ResVo postShopReport(@RequestBody ShopReportDto dto) {
-        return null;
-    }
+
 }
