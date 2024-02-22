@@ -5,9 +5,12 @@ import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
+import com.green.gogiro.entity.butcher.ButcherReviewEntity;
 import com.green.gogiro.entity.butcher.repository.ButcherRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherReviewRepository;
 import com.green.gogiro.entity.shop.*;
 import com.green.gogiro.entity.shop.repository.ShopRepository;
+import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.exception.UserErrorCode;
@@ -48,13 +51,16 @@ public class OwnerService {
     private final CookieUtils cookieUtils;
     private final OwnerShopReviewRepository reviewRepository;
     private final AuthenticationFacade authenticationFacade;
+    private final ShopReviewRepository shopReviewRepository;
+    private final ButcherReviewRepository butcherReviewRepository;
 
 
     @Transactional
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
-        List<OwnerReviewVo> vo =reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(),authenticationFacade.getLoginOwnerCheckShop(),pageable);
+        List<OwnerReviewVo> vo = reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
         return vo;
     }
+
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
 
@@ -315,5 +321,22 @@ public class OwnerService {
         vo.setPics(dto.getPics());
 
         return vo;
+    }
+
+    @Transactional
+    public ResVo postReviewComment(ReviewCommentDto dto) {
+        if (dto.getCheckShop() == 0) {
+            Optional<ShopReviewEntity> optReview = Optional.of(shopReviewRepository.getReferenceById((long) dto.getIreview()));
+            ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() ->  new RestApiException(AuthErrorCode.NOT_CONTENT));
+            shopReviewEntity.setComment(dto.getComment());
+            shopReviewRepository.save(shopReviewEntity);
+            return new ResVo(Const.SUCCESS);
+        } else {
+            Optional<ButcherReviewEntity> optReview = Optional.of(butcherReviewRepository.getReferenceById((long) dto.getIreview()));
+            ButcherReviewEntity butcherReviewEntity = optReview.orElseThrow(() ->  new RestApiException(AuthErrorCode.NOT_CONTENT));
+            butcherReviewEntity.setComment(dto.getComment());
+            butcherReviewRepository.save(butcherReviewEntity);
+            return new ResVo(Const.SUCCESS);
+        }
     }
 }
