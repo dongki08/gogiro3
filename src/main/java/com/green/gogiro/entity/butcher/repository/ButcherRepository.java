@@ -1,4 +1,4 @@
-package com.green.gogiro.butchershop;
+package com.green.gogiro.entity.butcher.repository;
 
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;

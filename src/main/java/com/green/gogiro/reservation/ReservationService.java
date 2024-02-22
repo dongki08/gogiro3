@@ -2,19 +2,25 @@ package com.green.gogiro.reservation;
 
 import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.*;
-
+import static com.green.gogiro.exception.ReservationErrorCode.CANT_CANCEL;
 import com.green.gogiro.butchershop.ButcherShopMapper;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
-import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.butcher.ButcherEntity;
+import com.green.gogiro.entity.butcher.PickupEntity;
+import com.green.gogiro.entity.butcher.PickupMenuEntity;
+import com.green.gogiro.entity.butcher.repository.ButcherMenuRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherRepository;
+import com.green.gogiro.entity.butcher.repository.PickupRepository;
 import com.green.gogiro.entity.shop.ShopEntity;
-import com.green.gogiro.entity.shop.ShopReservationEntity;
+import com.green.gogiro.entity.shop.ReservationEntity;
+import com.green.gogiro.entity.shop.repository.ReservationRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
-import com.green.gogiro.shop.ShopRepository;
+import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.shop.model.ShopModel;
 import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -37,6 +42,10 @@ public class ReservationService {
     private final ReservationRepository repository;
     private final UserRepository userRepository;
     private final ShopRepository shopRepository;
+    private final ButcherRepository butcherRepository;
+    private final ButcherMenuRepository butcherMenuRepository;
+    private final PickupRepository pickupRepository;
+    private final ReservationRepository reservationRepository;
 
     //Mybatis 1.예약 등록
     @Transactional
@@ -56,9 +65,9 @@ public class ReservationService {
         if(shopEntity.getIshop().intValue()==0){
             throw new RestApiException(VALID_SHOP);
         }
-        ShopReservationEntity entity= new ShopReservationEntity();
-        entity.setIuser(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
-        entity.setIshop(shopEntity);
+        ReservationEntity entity= new ReservationEntity();
+        entity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
+        entity.setShopEntity(shopEntity);
         entity.setDate(LocalDateTime.parse(dto.getDate()));
         entity.setRequest(dto.getRequest());
         entity.setHeadCount(dto.getHeadCount());
@@ -94,10 +103,42 @@ public class ReservationService {
     }
     //JPA 2.픽업 등록
     @Transactional
-    public ResVo postPickup2(){
-        return null;
+    public ResVo postPickup2(PickupInsDto dto){
+        ButcherEntity butcherEntity=butcherRepository.getReferenceById((long)dto.getIbutcher());
+        List<Integer> menuList= butcherMenuRepository.findByButcherEntity(butcherEntity)
+                .stream().map(item->item.getIbutMenu().intValue()).toList();
+        List<Integer> list= menuList.stream().filter(item->{
+                for(PickupMenuDto menu: dto.getMenus()){
+                    if(item==menu.getIbutMenu()){return true;}
+                }
+                return false;
+            }
+        ).toList();
+        if(list.size()!=dto.getMenus().size()){
+            throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
+        }
+        PickupEntity entity= new PickupEntity();
+        entity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
+        entity.setButcherEntity(butcherEntity);
+        entity.setDate(LocalDateTime.parse(dto.getDate()));
+        entity.setRequest(dto.getRequest());
+        pickupRepository.save(entity);
+        entity.getPickupMenuEntityList().addAll(
+                dto.getMenus().stream().map(item->
+                        PickupMenuEntity.builder()
+                                .pickupEntity(entity)
+                                .butcherMenuEntity(butcherMenuRepository.getReferenceById(
+                                        (long)item.getIbutMenu()
+                                        )
+                                )
+                                .count(item.getCount())
+                                .build()).toList()
+        );
+        return new ResVo(entity.getIpickup().intValue());
     }
-    public ResVo cancelReservation(CancelDto dto) {
+    //Mybatis 3.예약 취소
+    @Transactional
+    public ResVo cancelReservation1(CancelDto dto) {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         Integer checkReservation = mapper.checkReservation(dto);
         if (checkReservation == null) {
@@ -110,7 +151,22 @@ public class ReservationService {
         }
         return new ResVo(SUCCESS);
     }
-
+    //JPA 3.예약 취소
+    @Transactional
+    public ResVo cancelReservation2(CancelDto dto){
+        ReservationEntity entity= reservationRepository.getReferenceById((long)dto.getIreser());
+        if(entity.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
+            new RestApiException(CANT_CANCEL);
+        }
+        if(dto.isReservation()){
+            //예약 취소
+        }else{
+            //픽업 취소
+        }
+        return null;
+    }
+    //Mybatis 4.예약 변경
+    @Transactional
     public ResVo putReservation(ReservationUpdDto dto) {
         if (dto.getDate().equals("0000-00-00 00:00:00")) {
             throw new RestApiException(AuthErrorCode.NOT_DATE);
@@ -119,6 +175,8 @@ public class ReservationService {
         mapper.updReservation(dto);
         return new ResVo(SUCCESS);
     }
+    //JPA 4.예약 변경
+    //Mybatis 5.후기 작성
     @Transactional
     public ReviewPicsInsVo postReview(ReviewDto dto) {
         ReviewPicsInsVo vo = new ReviewPicsInsVo();
@@ -145,5 +203,6 @@ public class ReservationService {
             //해당 유저의 예약 혹은 픽업이 아닌 경우
             throw new RestApiException(INVALID_RESERVATION);
     }
+    //JPA 5.후기 작성
 }
 

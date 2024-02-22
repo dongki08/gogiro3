@@ -15,6 +15,7 @@ import java.util.List;
 public class OwnerReviewVo {
     private Long ishop;
     private Long iuser;
+    private int star;
     private String comment;
     private String review;
     private String createdAt;

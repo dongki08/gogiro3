@@ -4,11 +4,12 @@ import com.green.gogiro.butchershop.model.*;
 import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
-import com.green.gogiro.entity.BaseEntity;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherBookmarkEntity;
 import com.green.gogiro.entity.butcher.ButcherBookmarkIds;
 import com.green.gogiro.entity.butcher.ButcherEntity;
+import com.green.gogiro.entity.butcher.repository.ButcherBookmarkRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
@@ -25,7 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import static com.green.gogiro.exception.AuthErrorCode.NOT_CONTENT;
-import static com.green.gogiro.exception.AuthErrorCode.VALID_SHOP;
 
 @Service
 @RequiredArgsConstructor

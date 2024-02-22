@@ -7,6 +7,8 @@ import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.shop.ShopBookmarkEntity;
 import com.green.gogiro.entity.shop.ShopBookmarkIds;
 import com.green.gogiro.entity.shop.ShopEntity;
+import com.green.gogiro.entity.shop.repository.ShopBookmarkRepository;
+import com.green.gogiro.entity.shop.repository.ShopRepository;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.model.*;

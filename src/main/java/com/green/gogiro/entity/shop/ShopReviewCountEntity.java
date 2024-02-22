@@ -2,13 +2,14 @@ package com.green.gogiro.entity.shop;
 
 import com.green.gogiro.entity.CreatedAtEntity;
 import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.community.ReportEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "t_shop_review_count")
-public class ShopReviewCount extends CreatedAtEntity {
+public class ShopReviewCountEntity extends CreatedAtEntity {
     @EmbeddedId
     private ShopReviewCountIds shopReviewCountIds;
 
@@ -22,4 +23,7 @@ public class ShopReviewCount extends CreatedAtEntity {
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private UserEntity userEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "ireport", nullable = false)
+    private ReportEntity ireport;
 }
