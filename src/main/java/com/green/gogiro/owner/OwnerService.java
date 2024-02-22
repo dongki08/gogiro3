@@ -136,7 +136,7 @@ public class OwnerService {
             vo.getPics().add(saveFileNm);
 
             List<ShopPicEntity> shopPicEntityList = vo.getPics().stream().map(item -> ShopPicEntity.builder()
-                    .ishop(shopEntity)
+                    .shopEntity(shopEntity)
                     .pic(item)
                     .build()).collect(Collectors.toList());
             shopEntity.getShopPicEntityList().addAll(shopPicEntityList);

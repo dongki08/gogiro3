@@ -58,6 +58,6 @@ public class ShopEntity extends BaseEntity {
     private int deposit;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shopEntity",cascade = CascadeType.PERSIST)
     private List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
 }
