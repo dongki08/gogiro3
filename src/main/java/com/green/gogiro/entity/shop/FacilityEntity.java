@@ -2,6 +2,10 @@ package com.green.gogiro.entity.shop;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,4 +20,9 @@ public class FacilityEntity {
 
     @Column(length = 10,nullable = false)
     private String facility;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "facilityEntity",cascade = CascadeType.PERSIST)
+    List<ShopFacilitiesEntity> facilitiesEntityList = new ArrayList<>();
+
 }

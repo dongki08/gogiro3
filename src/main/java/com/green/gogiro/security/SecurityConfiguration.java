@@ -31,6 +31,7 @@ public class SecurityConfiguration {
                                                                     , "/api/owner/signin/**"
                                                                     , "/api/admin/signin/**"
                                                                     , "/api/admin/menu/**"
+                                                                    , "/api/admin/management/**"
                                                                     , "/api/owner/reservation/**"
                                                                     , "/login"
                                                                     , "/join"

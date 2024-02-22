@@ -90,14 +90,14 @@ public class OwnerController {
 
     @PutMapping(value = "/modify",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "매장 정보 관리(수정)",description = "<h2>매장 정보 수정 처리</h2><h3>--request<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
-    public OwnerManagementModifyVo updModify(@RequestPart List<MultipartFile> pics,@RequestPart OwnerManagementModifyDto dto){
+    public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics,@RequestPart OwnerManagementModifyDto dto){
         return null;
     }
 
     @GetMapping("/management")
     @Operation(summary = "매장 정보",description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
     public OwnerManagementVo getShop() {
-        return null;
+        return service.getShop();
     }
 
 //    @PutMapping("/shop")

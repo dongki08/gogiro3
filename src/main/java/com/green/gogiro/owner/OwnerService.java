@@ -18,6 +18,7 @@ import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 
+import com.green.gogiro.shop.model.ShopFacilityVo;
 import com.green.gogiro.user.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,6 +59,15 @@ public class OwnerService {
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
         List<OwnerReviewVo> vo = reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
         return vo;
+    }
+
+    @Transactional
+    public OwnerManagementVo getShop() {
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        OwnerManagementVo ownerManagementVo = shopRepository.selDetailShop(ishop,authenticationFacade.getLoginOwnerCheckShop());
+        ownerManagementVo.setFacilities(shopRepository.selFacilityByShop(ishop));
+        log.info("a: {}",ownerManagementVo);
+        return ownerManagementVo;
     }
 
     @Transactional
@@ -127,7 +137,7 @@ public class OwnerService {
             ShopEntity shopEntity = new ShopEntity();
             ShopCategoryEntity shopCategoryEntity = categoryRepository.getReferenceById(dto.getImeat());
             shopEntity.setUserEntity(userEntity);
-            shopEntity.setImeat(shopCategoryEntity);
+            shopEntity.setShopCategoryEntity(shopCategoryEntity);
             shopEntity.setLocation(dto.getLocation());
             shopEntity.setX(dto.getX());
             shopEntity.setY(dto.getY());
