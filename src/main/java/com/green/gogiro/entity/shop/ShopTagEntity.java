@@ -13,7 +13,7 @@ public class ShopTagEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long itag;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity shop;
 

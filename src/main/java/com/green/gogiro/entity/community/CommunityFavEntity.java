@@ -15,13 +15,13 @@ public class CommunityFavEntity extends CreatedAtEntity {
     private CommunityFavIds communityFavIds;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name = "iuser",columnDefinition = "BIGINT UNSIGNED",nullable = false)
     private UserEntity userEntity;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iboard")
     @JoinColumn(name = "iboard",columnDefinition = "BIGINT UNSIGNED",nullable = false)
     private CommunityEntity communityEntity;

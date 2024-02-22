@@ -14,10 +14,10 @@ public class CommunityCommentEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long icomment;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iboard", nullable = false)
     private CommunityEntity communityEntity;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity userEntity;
     @Column(length = 50,nullable = false)

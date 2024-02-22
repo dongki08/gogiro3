@@ -13,12 +13,12 @@ public class ButcherBookmarkEntity extends CreatedAtEntity {
     @EmbeddedId
     private ButcherBookmarkIds butcherBookmarkIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED")
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ibutcher")
     @JoinColumn(name = "ibutcher", columnDefinition = "BIGINT UNSIGNED")
     private ButcherEntity butcherEntity;

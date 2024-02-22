@@ -13,17 +13,17 @@ public class ShopReviewCountEntity extends CreatedAtEntity {
     @EmbeddedId
     private ShopReviewCountIds shopReviewCountIds;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("ireview")
     @JoinColumn(name = "ireview", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private ShopReviewEntity shopReviewEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("iuser")
     @JoinColumn(name = "iuser", columnDefinition = "BIGINT UNSIGNED", nullable = false)
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ireport", nullable = false)
     private ReportEntity ireport;
 }

@@ -19,11 +19,11 @@ public class ShopReservationEntity extends BaseEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long ireser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser", nullable = false)
     private UserEntity iuser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity ishop;
 

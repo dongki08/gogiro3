@@ -17,11 +17,11 @@ public class ButcherPaymentEntity extends CreatedAtEntity {
     @Column(columnDefinition = "BIGINT UNSIGNED")
     private Long ipayment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ibutcher")
     private ButcherEntity butcherEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iuser")
     private UserEntity userEntity;
 
