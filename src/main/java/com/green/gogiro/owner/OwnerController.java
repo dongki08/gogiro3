@@ -129,9 +129,11 @@ public class OwnerController {
         return service.updMenu(pic,dto);
     }
 
-//    @PostMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리")
-//    private
+    @PostMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리")
+    private ResVo postMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuInsDto dto){
+        return null;
+    }
 
 //    @PostMapping("/butcher-shop")
 //    @Operation(summary = "정육점 등록",description = "정육점 가게 등록 처리")
