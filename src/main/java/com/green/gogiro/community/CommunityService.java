@@ -115,10 +115,25 @@ public class CommunityService {
 //    }
 
 
+//    public CommunityPicsInsVo updCommunity(CommunityUpdDto dto) {
+//        Optional<CommunityEntity> optComu = communityRepository.findByIboard((long)dto.getIboard());
+//        CommunityEntity communityEntity = optComu.orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+//
+//        if(communityEntity.getUserEntity().getIuser() != authenticationFacade.getLoginUserPk()) {
+//            throw new RestApiException(NOT_COMMUNITY_ENTITY);
+//        }
+//        int boardSize = communityEntity.getCommunityPicsEntityList().size();
+//        int fileSize = dto.getFiles() != null ? dto.getFiles().size() : 0;
+//        int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
+//        int totalSize = boardSize + fileSize - delSize;
+//
+//    }
+
     //커뮤니티 게시글 수정
     @Transactional
     public CommunityPicsInsVo updCommunity(CommunityUpdDto dto) {
-        Integer check = mapper.checkCommunity(dto.getIboard());
+        //Integer check = mapper.checkCommunity(dto.getIboard());
+        CommunityModel model = mapper.entityCommunity(dto.getIboard());
         List<CommunityBySelPicsDto> bDto = mapper.selByCommunityPics(dto.getIboard());
 
         int boardSize = bDto != null ? bDto.size() : 0;
@@ -126,7 +141,10 @@ public class CommunityService {
         int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
         int totalSize = boardSize + fileSize - delSize;
 
-        if (check == null) {
+        if(model.getIuser() == authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(NOT_COMMUNITY_ENTITY);
+        }
+        if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
         } else if (totalSize > 5) {
             throw new RestApiException(SIZE_PHOTO);
