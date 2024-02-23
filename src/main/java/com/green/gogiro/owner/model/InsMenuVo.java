@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class OwnerMenuUpdVo {
-    private int checkShop;
-    private int imenu;
-    private Long ishop;
+@NoArgsConstructor
+public class InsMenuVo {
+    private Long imenu;
+    private int price;
     private String pic;
 }

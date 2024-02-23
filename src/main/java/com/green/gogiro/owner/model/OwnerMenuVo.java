@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OwnerMenuVo {
     private int checkShop;
+    private Long imenu;
     private Long ishop;
     @Schema(title = "가격")
     private int price;

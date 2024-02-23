@@ -32,6 +32,7 @@ public class OwnerMenuQdslRepositoryImpl implements OwnerMenuQdslRepository{
                     .price(item.getPrice())
                     .ishop(item.getShopEntity().getIshop())
                     .checkShop(checkShop)
+                    .imenu(item.getImenu())
                     .build()).collect(Collectors.toList());
         }
         if(checkShop == 1){
@@ -43,6 +44,7 @@ public class OwnerMenuQdslRepositoryImpl implements OwnerMenuQdslRepository{
                     .menu(item.getMenu())
                     .pic(item.getPic())
                     .price(item.getPrice())
+                    .imenu(item.getIbutMenu())
                     .ishop(item.getButcherEntity().getIbutcher())
                     .checkShop(checkShop)
                     .build()).collect(Collectors.toList());
