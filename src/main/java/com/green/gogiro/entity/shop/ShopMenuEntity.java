@@ -24,6 +24,6 @@ public class ShopMenuEntity extends BaseEntity {
     @Column
     private int price;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String pic;
 }

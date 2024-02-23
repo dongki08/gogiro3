@@ -4,6 +4,7 @@ package com.green.gogiro.owner;
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
+import com.green.gogiro.entity.butcher.ButcherMenuEntity;
 import com.green.gogiro.entity.butcher.ButcherPicEntity;
 import com.green.gogiro.entity.butcher.ButcherReviewEntity;
 import com.green.gogiro.entity.butcher.repository.ButcherMenuRepository;
@@ -69,11 +70,11 @@ public class OwnerService {
     @Transactional
     public OwnerManagementVo getShop() {
         long ishop = authenticationFacade.getLoginOwnerShopPk();
-        OwnerManagementVo ownerManagementVo = shopRepository.selDetailShop(ishop,authenticationFacade.getLoginOwnerCheckShop());
-        if(authenticationFacade.getLoginOwnerCheckShop() == 0) {
+        OwnerManagementVo ownerManagementVo = shopRepository.selDetailShop(ishop, authenticationFacade.getLoginOwnerCheckShop());
+        if (authenticationFacade.getLoginOwnerCheckShop() == 0) {
             ownerManagementVo.setFacilities(shopRepository.selFacilityByShop(ishop));
         }
-        log.info("a: {}",ownerManagementVo);
+        log.info("a: {}", ownerManagementVo);
         return ownerManagementVo;
     }
 
@@ -190,8 +191,66 @@ public class OwnerService {
     public List<OwnerMenuVo> getMenu() {
         ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
         ButcherEntity butcherEntity = new ButcherEntity();
-        log.info("pk: {}",authenticationFacade.getLoginOwnerShopPk());
-        return butcherMenuRepository.selMenu(authenticationFacade.getLoginOwnerShopPk(),authenticationFacade.getLoginOwnerCheckShop());
+        log.info("pk: {}", authenticationFacade.getLoginOwnerShopPk());
+        return butcherMenuRepository.selMenu(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop());
+    }
+
+    @Transactional
+    public OwnerMenuUpdVo updMenu(MultipartFile pic, OwnerMenuUpdDto dto) {
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        ShopEntity shopEntity = new ShopEntity();
+        shopEntity.setIshop(ishop);
+        ButcherEntity butcherEntity = new ButcherEntity();
+        butcherEntity.setIbutcher(ishop);
+        ShopMenuEntity shopMenuEntity = shopMenuRepository.getReferenceById(dto.getImenu());
+        shopMenuEntity.setImenu(dto.getImenu());
+        shopMenuEntity.setShopEntity(shopEntity);
+        ButcherMenuEntity butcherMenuEntity = butcherMenuRepository.getReferenceById(dto.getImenu());
+        butcherMenuEntity.setButcherEntity(butcherEntity);
+        String savedName = null;
+        if (checkShop == 0) {
+            if (pic != null) {
+                myFileUtils.delFolderTrigger2(shopMenuEntity.getPic());
+                String target = "/shop/" + ishop + "/menu";
+                savedName = myFileUtils.transferTo(pic, target);
+                shopMenuEntity.setPic(savedName);
+            }
+            if (dto.getMenu() == null) {
+                shopMenuEntity.setMenu(shopMenuEntity.getMenu());
+            }
+            if (dto.getPrice() == null) {
+                shopMenuEntity.setPrice(shopMenuEntity.getPrice());
+            }
+            shopMenuRepository.save(shopMenuEntity);
+            return OwnerMenuUpdVo.builder()
+                    .checkShop(checkShop)
+                    .ishop(ishop)
+                    .pic(savedName)
+                    .build();
+        }
+        if (checkShop == 1) {
+            if (pic != null) {
+                myFileUtils.delFolderTrigger2(butcherMenuEntity.getPic());
+                String target = "/butcher/" + ishop + "/menu";
+                savedName = myFileUtils.transferTo(pic, target);
+                butcherMenuEntity.setPic(savedName);
+            }
+            if (dto.getMenu() == null) {
+                butcherMenuEntity.setMenu(butcherMenuEntity.getMenu());
+            }
+            if (dto.getPrice() == null) {
+                butcherMenuEntity.setPrice(butcherMenuEntity.getPrice());
+
+            }
+            butcherMenuRepository.save(butcherMenuEntity);
+            return OwnerMenuUpdVo.builder()
+                    .ishop(ishop)
+                    .pic(savedName)
+                    .checkShop(checkShop)
+                    .build();
+        }
+        return null;
     }
 
     public StoreRegistrationPicsVo insRegistration(StoreRegistrationDto dto) {
@@ -345,17 +404,18 @@ public class OwnerService {
 
         return vo;
     }
+
     @Transactional
     public ResVo postReviewComment(ReviewCommentDto dto) {
         if (dto.getCheckShop() == 0) {
             Optional<ShopReviewEntity> optReview = Optional.of(shopReviewRepository.getReferenceById((long) dto.getIreview()));
-            ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() ->  new RestApiException(AuthErrorCode.NOT_CONTENT));
+            ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
             shopReviewEntity.setComment(dto.getComment());
             shopReviewRepository.save(shopReviewEntity);
             return new ResVo(Const.SUCCESS);
         } else {
             Optional<ButcherReviewEntity> optReview = Optional.of(butcherReviewRepository.getReferenceById((long) dto.getIreview()));
-            ButcherReviewEntity butcherReviewEntity = optReview.orElseThrow(() ->  new RestApiException(AuthErrorCode.NOT_CONTENT));
+            ButcherReviewEntity butcherReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
             butcherReviewEntity.setComment(dto.getComment());
             butcherReviewRepository.save(butcherReviewEntity);
             return new ResVo(Const.SUCCESS);
