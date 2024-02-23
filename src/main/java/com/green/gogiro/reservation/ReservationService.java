@@ -2,7 +2,7 @@ package com.green.gogiro.reservation;
 
 import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.*;
-import static com.green.gogiro.exception.ReservationErrorCode.CANT_CANCEL;
+import static com.green.gogiro.exception.ReservationErrorCode.*;
 import com.green.gogiro.butchershop.ButcherShopMapper;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
@@ -32,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -146,7 +147,7 @@ public class ReservationService {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         Integer checkReservation = mapper.checkReservation(dto);
         if (checkReservation == null) {
-            throw new RestApiException(AuthErrorCode.INVALID_RESERVATION);
+            throw new RestApiException(INVALID_RESERVATION);
         }
         if (dto.isReservation()) {
             mapper.cancelReservation(dto);
@@ -290,5 +291,25 @@ public class ReservationService {
         }
         return vo;
     }
+    public ResVo confirmReservation(ConfirmDto dto){
+        if(authenticationFacade.getLoginOwnerCheckShop()!=dto.getCheckShop()){
+            throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);
+        }
+        if(dto.isReservation()){
+            Optional<ReservationEntity> optional=reservationRepository.findById((long)dto.getIreser());
+            ReservationEntity entity=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            if(entity.getIreser()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
+            if(entity.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            entity.setConfirm(2);
+        }else{
+            Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
+            PickupEntity entity=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            if(entity.getIpickup()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
+            if(entity.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            entity.setConfirm(2);
+        }
+        return new ResVo(SUCCESS);
+    }
+
 }
 

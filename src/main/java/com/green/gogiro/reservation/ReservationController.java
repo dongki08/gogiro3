@@ -85,6 +85,13 @@ public class ReservationController {
         dto.setFiles(pics);
         return service.postReview1(dto);
     }
+
+    @PatchMapping("/reservation/confirm")
+    @Operation(summary="예약 확정",description="가게 주인의 예약 및 픽업 확정")
+    public ResVo confirmReservation(ConfirmDto dto){
+        return service.confirmReservation(dto);
+    }
+
     @PostMapping("/confirm")
     @Operation(summary="결제 승인",description="결제 승인 처리<br>" +
             "--요청 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID" +
@@ -107,5 +114,4 @@ public class ReservationController {
 
         return dto;
     }
-
 }
