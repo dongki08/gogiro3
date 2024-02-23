@@ -13,6 +13,7 @@
         address = #{address},
         tel= #{tel},
         role = #{role}
+        created_at = NOW()
     </insert>
     <update id="updUserPic">
         UPDATE
@@ -38,6 +39,7 @@
         update t_user
         set nickname = #{nickname},
         address = #{address},
+        updated_at = NOW()
         <if test="pic!=null">
             pic = #{pic},
         </if>
@@ -90,7 +92,7 @@
         b.name,
         a.date,
         a.request,
-        if(TIMESTAMPDIFF(minute,a.`date`,NOW()) >= 0,2,a.confirm) AS confirm,
+        a.confirm,
         a.created_at AS createdAt,
         a.head_count AS headCount,
         if(c.iuser IS NULL, 0 , 1) AS isBook,
@@ -102,7 +104,7 @@
         ON a.ishop= c.ishop AND a.iuser= c.iuser
         LEFT JOIN t_shop_pic d
         ON a.ishop= d.ishop
-        WHERE a.iuser = #{iuser} AND a.confirm = 0
+        WHERE a.iuser = #{iuser}
         GROUP BY a.ireser
         UNION
         SELECT
@@ -112,7 +114,7 @@
         b.name,
         e.date,
         e.request,
-        if(TIMESTAMPDIFF(minute,e.`date`,NOW()) >= 0 ,2 ,e.confirm) AS confirm,
+        e.confirm,
         e.created_at AS createdAt,
         0 AS headCount,
         if(c.iuser IS NULL, 0 , 1) AS isBook,
@@ -124,7 +126,7 @@
         ON e.ibutcher= c.ibutcher AND e.iuser= c.iuser
         LEFT JOIN t_butcher_pic d
         ON e.ibutcher= d.ibutcher
-        WHERE e.iuser = #{iuser} AND e.confirm = 0
+        WHERE e.iuser = #{iuser}
         GROUP BY e.ipickup
         ORDER BY createdAt DESC
         LIMIT #{startIdx}, #{rowCount}

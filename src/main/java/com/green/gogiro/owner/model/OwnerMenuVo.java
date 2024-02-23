@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnerMenuVo {
-    @JsonIgnore
-    private int ishop;
+    private int checkShop;
+    private Long imenu;
+    private Long ishop;
     @Schema(title = "가격")
     private int price;
     @Schema(title = "메뉴")

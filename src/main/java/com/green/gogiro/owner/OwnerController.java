@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @Tag(name = "가게 주인", description = "가게 주인 API")
@@ -21,8 +22,8 @@ import java.util.List;
 public class OwnerController {
     private final OwnerService service;
 
-    @PostMapping(value = "/signup",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @Operation(summary = "가게 주인 회원 가입",description = "<h2>가게 주인 회원 가입 처리</h2><br>--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
+    @PostMapping(value = "/signup", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @Operation(summary = "가게 주인 회원 가입", description = "<h2>가게 주인 회원 가입 처리</h2><br>--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
             "<br>number: 사업자 등록 번호(사이트에서 쓸 일 없으면 db에 저장할 필요 없을 듯?)<br>name: 주인의 실명<br>shopName:가게 이름<br>x:경도" +
             "<br>y:위도<br>location:위치(가게 주인이 직접 입력하는)<br>imeat:고기 종류(0:정육점, 1:돼지, 2:소, 3:닭, 4:오리, 5:양)" +
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
@@ -33,32 +34,35 @@ public class OwnerController {
 //                             @RequestPart String num, @RequestPart String name, @RequestPart String shopName,
 //                             @RequestPart String x, @RequestPart String y, @RequestPart String location,
 //                             @RequestPart int imeat){
-    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart OwnerSignupDto dto){
-        return service.ownerSignup(pic,dto);
+    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart OwnerSignupDto dto) {
+        return service.ownerSignup(pic, dto);
     }
 
     @GetMapping("/reservation")
-    @Operation(summary = "고깃집 예약 내역 및 노쇼 내역",description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>"+
-    "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>" +
-    "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수")
-    public OwnerReservationVo getReservation(){
-        return null;
+    @Operation(summary = "고깃집 예약 내역 및 노쇼 내역", description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>" +
+            "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>confirm: 예약 상태" +
+            "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
+    "정육점은 pickupList배열추가 노쇼는 배열값 null<br> count[int]:갯수<br>" +
+            "ibutMenu[int]:메뉴pk<br>" +
+            "ireser[int]: 예약pk<br>" +
+            "menu[String]: 메뉴이름<br>")
+    public OwnerSelReservationVo getReservation() {
+        return service.getReservation();
     }
-
 
 
     @GetMapping("/signin")
-    @Operation(summary = "가게 주인 로그인",description = "<h2>가게 주인 로그인 처리</h2>" +
-    "<h3>---요구 데이터<br>email: 아이디<br>upw: 비밀번호</h3>" +
-    "<h3>--응답 데이터<br>ishop: 가게pk<br>iuser: 유저pk<br>checkShop: (0: 고기집, 1:정육점)<br>accessToken: 엑세스 토큰")
-    public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto){
-        return service.ownerSignin(res,dto);
+    @Operation(summary = "가게 주인 로그인", description = "<h2>가게 주인 로그인 처리</h2>" +
+            "<h3>---요구 데이터<br>email: 아이디<br>upw: 비밀번호</h3>" +
+            "<h3>--응답 데이터<br>ishop: 가게pk<br>iuser: 유저pk<br>checkShop: (0: 고기집, 1:정육점)<br>accessToken: 엑세스 토큰")
+    public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
+        return service.ownerSignin(res, dto);
     }
 
     @GetMapping("/review")
-    @Operation(summary = "매장 리뷰 관리",description = "<h2>매장 리뷰 관리 처리</h2>" +
-    "<h3>--요구 데이터<br>페이지(sort는 지우고 써주세요)<br>--응답 데이터<br>ishop: 가게pk<br>iuser: 작성자 pk<br>comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>pics: 리뷰 사진(배열)")
-    public List<OwnerReviewVo> getAllReview(Pageable pageable){
+    @Operation(summary = "매장 리뷰 관리", description = "<h2>매장 리뷰 관리 처리</h2>" +
+            "<h3>--요구 데이터<br>페이지(sort는 지우고 써주세요)<br>--응답 데이터<br>ishop: 가게pk<br>iuser: 작성자 pk<br>comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>pics: 리뷰 사진(배열)")
+    public List<OwnerReviewVo> getAllReview(Pageable pageable) {
         return service.getAllReview(pageable);
     }
 //    @PostMapping("/shop")
@@ -72,37 +76,39 @@ public class OwnerController {
 //    }
 
     @GetMapping("/menu")
-    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기",description = "메뉴 보기 처리")
-    public List<OwnerMenuVo> getMenu(){
+    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기", description = "메뉴 보기 처리")
+    public List<OwnerMenuVo> getMenu() {
         return service.getMenu();
     }
 
-    @PostMapping(value = "/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
-    public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto){
-        if(pic != null) {
-            dto.setPic(pic);
-        }
-        return service.insShopMenu(dto);
-    }
+//    @PostMapping(value = "/menu", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
+//    public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto) {
+//        if (pic != null) {
+//            dto.setPic(pic);
+//        }
+//        return service.insShopMenu(dto);
+//    }
 
-    @PutMapping(value = "/modify",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "매장 정보 관리(수정)",description = "<h2>매장 정보 수정 처리</h2><h3>--request<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
-    public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics,@RequestPart OwnerManagementModifyDto dto){
+    @PutMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--request<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
+    public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart OwnerManagementModifyDto dto) {
         return null;
     }
 
     @GetMapping("/management")
-    @Operation(summary = "매장 정보",description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
+    @Operation(summary = "매장 정보", description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
     public OwnerManagementVo getShop() {
         return service.getShop();
     }
 
     @PutMapping("/review")
-    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "배용진이 작성해")
-    public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {return service.postReviewComment(dto);}
+    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리")
+    public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {
+        return service.postReviewComment(dto);
+    }
 
-//    @PutMapping("/shop")
+    //    @PutMapping("/shop")
 //    @Operation(summary = "가게 사진 수정",description = "가게 사진 수정 처리")
 //    public ShopPicsVo updShopPics(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart ShopUpdDto dto){
 //        if(pics != null) {
@@ -111,15 +117,28 @@ public class OwnerController {
 //        return service.updShopPics(dto);
 //    }
 //
-//    @PutMapping("/shop/menu")
+//    @PutMapping(value = "/shop/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 //    @Operation(summary = "가게 메뉴 사진 등록", description = "가게 메뉴 사진 등록 처리")
 //    public ShopMenuPicsVo updShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuUpdDto dto) {
-//        if(pic != null) {
+//        if (pic != null) {
 //            dto.setPic(pic);
 //        }
 //        return service.updShopMenu(dto);
 //    }
-//
+
+    @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>imenu는 필수로 보내고 나머지는 안보내면 원래 값으로 들어감"
+    )
+    private OwnerMenuUpdVo updMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuUpdDto dto) {
+        return service.updMenu(pic,dto);
+    }
+
+    @PostMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리")
+    private InsMenuVo postMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuInsDto dto){
+        return service.postMenu(pic,dto);
+    }
+
 //    @PostMapping("/butcher-shop")
 //    @Operation(summary = "정육점 등록",description = "정육점 가게 등록 처리")
 //    public ButcherPicVo postButcherShop(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart ButcherInsDto dto){
