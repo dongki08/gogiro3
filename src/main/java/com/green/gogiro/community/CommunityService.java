@@ -236,18 +236,23 @@ public class CommunityService {
     //커뮤니티 삭제
     @Transactional
     public ResVo delCommunity(CommunityDelDto dto) {
-        Integer check = mapper.checkCommunity(dto.getIboard());
+        //Integer check = mapper.checkCommunity(dto.getIboard());
+        CommunityModel model = mapper.entityCommunity(dto.getIboard());
         //게시글 여부 확인
-        if (check == null) {
+        if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
+        }
+        //본인 게시글 확인
+        if(model.getIuser() != authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
         String target = "/community/" + dto.getIboard();
         myFileUtils.delFolderTrigger(target);
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
+
         CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
-        List<CommunityCommentEntity> commentEntity = communityCommentRepository.findAllByCommunityEntity(communityEntity);
-        communityCommentRepository.delete((CommunityCommentEntity) commentEntity.stream().toList());
         communityRepository.delete(communityEntity);
+
 //        mapper.delCommunityAllComment(dto);
 //        mapper.delCommunityDel(dto.getIboard());
 //        mapper.delCommunity(dto);

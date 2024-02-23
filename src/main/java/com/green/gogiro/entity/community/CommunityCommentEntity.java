@@ -35,6 +35,6 @@ public class CommunityCommentEntity extends BaseEntity {
     private int count;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityCommentEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "communityCommentEntity", cascade = CascadeType.ALL)
     private List<CommunityCommentCountEntity> communityCommentCountEntityList = new ArrayList<>();
 }
