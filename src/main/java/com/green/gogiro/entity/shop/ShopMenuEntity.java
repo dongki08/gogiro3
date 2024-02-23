@@ -16,7 +16,7 @@ public class ShopMenuEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ishop", nullable = false)
-    private ShopEntity ishop;
+    private ShopEntity shopEntity;
 
     @Column(length = 30, nullable = false)
     private String menu;

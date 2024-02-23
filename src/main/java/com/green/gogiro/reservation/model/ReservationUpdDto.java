@@ -14,7 +14,6 @@ import lombok.Data;
 public class ReservationUpdDto {
     @JsonIgnore
     private int iuser;
-
     @Schema(title = "가게 구분 0:고기 1:정육")
     @Min(value = 0, message = "가게구분 값이 잘못되었습니다")
     @Max(value = 1, message = "가게구분 값이 잘못되었습니다")
@@ -31,4 +30,10 @@ public class ReservationUpdDto {
     @Schema(title = "인원수",defaultValue = "1")
     @Min(value = 1,message="인원 수를 입력해주세요")
     private int headCount;
+    @JsonIgnore
+    private boolean isReservation;
+    public void setCheckShop(int checkShop){
+        this.checkShop=checkShop;
+        this.isReservation=(checkShop==0);
+    }
 }

@@ -2,6 +2,9 @@ package com.green.gogiro.owner.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class OwnerManagementModifyDto {
     private Long imeat;
@@ -12,4 +15,5 @@ public class OwnerManagementModifyDto {
     private String x;
     private String y;
     private int deposit;
+    private List<Integer> facility = new ArrayList<>();
 }

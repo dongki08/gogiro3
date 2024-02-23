@@ -2,7 +2,6 @@ package com.green.gogiro.owner;
 
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.owner.model.*;
-import com.green.gogiro.exception.RestApiException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
-import static com.green.gogiro.exception.AuthErrorCode.MUST_PHOTO;
 
 @Tag(name = "가게 주인", description = "가게 주인 API")
 @RestController
@@ -73,9 +71,13 @@ public class OwnerController {
 //        return service.insRegistration(dto);
 //    }
 
+    @GetMapping("/menu")
+    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기",description = "메뉴 보기 처리")
+    public List<OwnerMenuVo> getMenu(){
+        return service.getMenu();
+    }
 
-
-    @PostMapping("/menu")
+    @PostMapping(value = "/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
     public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto){
         if(pic != null) {
@@ -86,15 +88,19 @@ public class OwnerController {
 
     @PutMapping(value = "/modify",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "매장 정보 관리(수정)",description = "<h2>매장 정보 수정 처리</h2><h3>--request<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
-    public OwnerManagementModifyVo updModify(@RequestPart List<MultipartFile> pics,@RequestPart OwnerManagementModifyDto dto){
+    public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics,@RequestPart OwnerManagementModifyDto dto){
         return null;
     }
 
     @GetMapping("/management")
     @Operation(summary = "매장 정보",description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
     public OwnerManagementVo getShop() {
-        return null;
+        return service.getShop();
     }
+
+    @PutMapping("/review")
+    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "배용진이 작성해")
+    public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {return service.postReviewComment(dto);}
 
 //    @PutMapping("/shop")
 //    @Operation(summary = "가게 사진 수정",description = "가게 사진 수정 처리")

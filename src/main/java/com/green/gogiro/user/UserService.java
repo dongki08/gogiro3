@@ -2,10 +2,18 @@ package com.green.gogiro.user;
 
 import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.REPORT_COMMUNITY_MYUSER;
+import static com.green.gogiro.exception.AuthErrorCode.REPORT_REVIEW_MYUSER;
 
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
+import com.green.gogiro.entity.butcher.ButcherEntity;
+import com.green.gogiro.entity.butcher.ButcherReviewCountEntity;
 import com.green.gogiro.entity.butcher.ButcherReviewCountIds;
+import com.green.gogiro.entity.butcher.ButcherReviewEntity;
+import com.green.gogiro.entity.butcher.repository.ButcherReportRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherReviewCountRepository;
+import com.green.gogiro.entity.butcher.repository.ButcherReviewRepository;
 import com.green.gogiro.entity.community.ReportEntity;
 import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.entity.shop.ShopReviewCountEntity;
@@ -58,6 +66,10 @@ public class UserService {
     private final ShopReviewCountRepository shopReviewCountRepository;
     private final ShopRepository shopRepository;
     private final ShopReviewRepository shopReviewRepository;
+    private final ButcherRepository butcherRepository;
+    private final ButcherReviewRepository butcherReviewRepository;
+    private final ButcherReportRepository butcherReportRepository;
+    private final ButcherReviewCountRepository butcherReviewCountRepository;
 
 
     @Transactional
@@ -273,23 +285,21 @@ public class UserService {
 
         // 고깃집 리뷰 신고
         if (dto.getCheckShop() == 0) {
-            shopReview.setIuser(authenticationFacade.getLoginOwnerShopPk());
+            shopReview.setIuser(authenticationFacade.getLoginUserPk());
             shopReview.setIreview(dto.getIreview());
             ReportEntity shopReportEntity = shopReportRepository.getReferenceById(dto.getIreport());
 
             Optional<ShopReviewCountEntity> reviewCountEntity = shopReviewCountRepository.findByShopReviewCountIds(shopReview);
             if (reviewCountEntity.isPresent()) {
                 throw new RestApiException(AuthErrorCode.REPORT_COMMUNITY_ENTITY);
-                // ******에러코드 변경**********
             }
 
             UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
-            ShopEntity shopEntity = shopRepository.getReferenceById(dto.getIreview());
+            ShopEntity shopEntity = shopRepository.getReferenceById(dto.getIshop());
             ShopReviewEntity shopReviewEntity = shopReviewRepository.getReferenceById(dto.getIreview());
 
             if (shopEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
                 throw new RestApiException(REPORT_COMMUNITY_MYUSER);
-                // ************에러코드 변경 및 확인
             }
 
             ShopReviewCountEntity shopReviewCountEntity = new ShopReviewCountEntity();
@@ -306,11 +316,36 @@ public class UserService {
         }
 
         // 정육점 리뷰 신고
-//        if (dto.getCheckShop() == 1) {
-//
-//        }
+        else {
+            butcherReview.setIuser(authenticationFacade.getLoginUserPk());
+            butcherReview.setIuser(dto.getIreview());
+            ReportEntity butcherReportEntity = butcherReportRepository.getReferenceById(dto.getIreport());
 
-        return null;
+            Optional<ButcherReviewCountEntity> reviewCountEntity = butcherReviewCountRepository.findByButcherReviewCountIds(butcherReview);
+            if (reviewCountEntity.isPresent()) {
+                throw new RestApiException(AuthErrorCode.REPORT_REVIEW_ENTITY);
+            }
+
+            UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+            ButcherEntity butcherEntity = butcherRepository.getReferenceById(dto.getIshop());
+            ButcherReviewEntity butcherReviewEntity = butcherReviewRepository.getReferenceById(dto.getIreview());
+
+            if (butcherEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+                throw new RestApiException(REPORT_REVIEW_MYUSER);
+            }
+
+            ButcherReviewCountEntity butcherReviewCountEntity = new ButcherReviewCountEntity();
+            butcherReviewCountEntity.setButcherReviewCountIds(butcherReview);
+            butcherReviewCountEntity.setIreport(butcherReportEntity);
+            butcherReviewCountEntity.setUserEntity(userEntity);
+            butcherReviewCountEntity.setButcherReviewEntity(butcherReviewEntity);
+            butcherReviewCountRepository.save(butcherReviewCountEntity);
+
+            butcherReviewEntity.setCount(butcherReviewEntity.getCount() + 1);
+            butcherRepository.save(butcherEntity);
+
+            return new ResVo(SUCCESS);
+        }
     }
 
 }

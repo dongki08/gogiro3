@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ButcherRepository extends JpaRepository<ButcherEntity,Long> {
     ButcherEntity findByUserEntity(UserEntity entity);
+
+
 }

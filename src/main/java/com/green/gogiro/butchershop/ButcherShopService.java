@@ -48,18 +48,20 @@ public class ButcherShopService {
         }
         int count = mapper.selListCount();
         List<ButcherSelVo> list = mapper.selButcherShopAll(dto);
-        List<Integer> pk = new ArrayList<>();
-        Map<Integer, ButcherSelVo> butMap = new HashMap<>();
-        for (ButcherSelVo vo : list) {
-            pk.add(vo.getIbutcher());
-            butMap.put(vo.getIbutcher(), vo);
-            vo.setCount(count);
-            List<ButcherMenuVo> menuList= mapper.selButcherMenuAndPk(vo.getIbutcher());
-            vo.setMenuList(menuList);
-        }
-        List<ButcherPicsVo> pics = mapper.selButcherShopPicList(pk);
-        for (ButcherPicsVo pic : pics) {
-            butMap.get(pic.getIbutcher()).getPics().add(pic.getPic());
+        if (list.size() != 0) {
+            List<Integer> pk = new ArrayList<>();
+            Map<Integer, ButcherSelVo> butMap = new HashMap<>();
+            for (ButcherSelVo vo : list) {
+                pk.add(vo.getIbutcher());
+                butMap.put(vo.getIbutcher(), vo);
+                vo.setCount(count);
+                List<ButcherMenuVo> menuList= mapper.selButcherMenuAndPk(vo.getIbutcher());
+                vo.setMenuList(menuList);
+            }
+            List<ButcherPicsVo> pics = mapper.selButcherShopPicList(pk);
+            for (ButcherPicsVo pic : pics) {
+                butMap.get(pic.getIbutcher()).getPics().add(pic.getPic());
+            }
         }
         return list;
     }

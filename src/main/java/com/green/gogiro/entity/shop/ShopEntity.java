@@ -26,7 +26,7 @@ public class ShopEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imeat", nullable = false)
-    private ShopCategoryEntity imeat;
+    private ShopCategoryEntity shopCategoryEntity;
 
     @Column(length = 30, nullable = false)
     private String name;
@@ -58,6 +58,10 @@ public class ShopEntity extends BaseEntity {
     private int deposit;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "ishop",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "shopEntity",cascade = CascadeType.PERSIST)
     private List<ShopPicEntity> shopPicEntityList = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "shopEntity",cascade = CascadeType.PERSIST)
+    private List<ShopFacilitiesEntity> shopFacilitiesEntityList = new ArrayList<>();
 }

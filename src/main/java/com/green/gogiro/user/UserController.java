@@ -131,7 +131,7 @@ public class UserController {
     @PostMapping("review/report")
     @Operation(summary = "가게 후기 신고", description = "체크샵 까먹지말고")
     public ResVo reportShopReview(ReportDto dto) {
-        return null;
+        return service.reportShopReview(dto);
     }
 
 
