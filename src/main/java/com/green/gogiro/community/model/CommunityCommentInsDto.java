@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class CommunityCommentInsDto {
     @Schema(title = "커뮤니티pk")
-    private int iboard;
+    private Long iboard;
 
     @JsonIgnore
     private int iuser;

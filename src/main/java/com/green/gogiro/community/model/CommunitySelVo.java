@@ -23,11 +23,13 @@ public class CommunitySelVo {
     private String title;
     @Schema(title = "내용")
     private String contents;
+    @Schema(title = "신고 횟수")
+    private int count;
     @Schema(title = "작성일")
     private String createdAt;
     @Schema(title = "사진")
     private List<String> pics = new ArrayList<>();
 
     @Schema(title = "게시글 총 갯수")
-    private int count;
+    private int boardAllCount;
 }

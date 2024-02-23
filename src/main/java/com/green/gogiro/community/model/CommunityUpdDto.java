@@ -32,6 +32,6 @@ public class CommunityUpdDto {
     @JsonIgnore
     @Schema(title = "사진")
     private List<String> pics = new ArrayList<>();
-
+    @JsonIgnore
     private List<MultipartFile> files;
 }
