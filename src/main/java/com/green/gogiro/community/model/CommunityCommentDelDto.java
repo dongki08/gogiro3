@@ -9,5 +9,5 @@ public class CommunityCommentDelDto {
     @JsonIgnore
     private int iuser;
     @Schema(title = "댓글pk")
-    private int icomment;
+    private Long icomment;
 }

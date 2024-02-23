@@ -40,14 +40,14 @@ public class CommunityController {
         return service.insCommunity(pics, dto);
     }
 
-    @PutMapping()
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "커뮤니티 수정", description = "커뮤니티 수정 처리<br>" +
             "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
             "--응답데이터<br>iboard : 보드pk<br>" +
             "pics : 사진리스트")
-    public CommunityPicsInsVo putCommunity(@Valid @RequestPart(required = false) List<MultipartFile> pics
+    public CommunityPicsInsVo putCommunity(@RequestPart(required = false) List<MultipartFile> pics
             ,@Valid @RequestPart CommunityUpdDto dto) {
         //사진을 5장 초과했을 경우
         if(pics!=null){
@@ -72,9 +72,10 @@ public class CommunityController {
             "writerPic : 작성자 프로필 사진<br>" +
             "title : 제목<br>" +
             "contents : 내용<br>" +
+            "count : 신고 횟수" +
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
-            "count : 게시글 총 갯수")
+            "boardAllCount : 게시글 총 갯수")
     public List<CommunitySelVo> getCommunity(CommunitySelDto dto) {
         return service.selCommunity(dto);
     }

@@ -26,14 +26,15 @@
     <update id="updCommunity">
         update t_community
         set title = #{title},
-        contents = #{contents}
+        contents = #{contents},
+        updated_at = NOW()
         where iboard = #{iboard}
         and iuser = #{iuser}
     </update>
 
     <select id="selCommunityCount">
         SELECT
-        COUNT(*)
+        COUNT(*) as boardAllCount
         FROM t_community
         <where>
             <if test="search != null and search != '' ">
@@ -43,7 +44,7 @@
     </select>
 
     <select id="selCommunity">
-        SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic as writerPic, a.title, a.contents, date(a.created_at) AS createdAt
+        SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic as writerPic, a.title, a.contents, date(a.created_at) AS createdAt, a.count
         FROM t_community a
         JOIN t_user b
         ON a.iuser = b.iuser

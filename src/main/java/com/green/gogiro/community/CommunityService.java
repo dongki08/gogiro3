@@ -115,10 +115,25 @@ public class CommunityService {
 //    }
 
 
+//    public CommunityPicsInsVo updCommunity(CommunityUpdDto dto) {
+//        Optional<CommunityEntity> optComu = communityRepository.findByIboard((long)dto.getIboard());
+//        CommunityEntity communityEntity = optComu.orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+//
+//        if(communityEntity.getUserEntity().getIuser() != authenticationFacade.getLoginUserPk()) {
+//            throw new RestApiException(NOT_COMMUNITY_ENTITY);
+//        }
+//        int boardSize = communityEntity.getCommunityPicsEntityList().size();
+//        int fileSize = dto.getFiles() != null ? dto.getFiles().size() : 0;
+//        int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
+//        int totalSize = boardSize + fileSize - delSize;
+//
+//    }
+
     //커뮤니티 게시글 수정
     @Transactional
     public CommunityPicsInsVo updCommunity(CommunityUpdDto dto) {
-        Integer check = mapper.checkCommunity(dto.getIboard());
+        //Integer check = mapper.checkCommunity(dto.getIboard());
+        CommunityModel model = mapper.entityCommunity(dto.getIboard());
         List<CommunityBySelPicsDto> bDto = mapper.selByCommunityPics(dto.getIboard());
 
         int boardSize = bDto != null ? bDto.size() : 0;
@@ -126,7 +141,10 @@ public class CommunityService {
         int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
         int totalSize = boardSize + fileSize - delSize;
 
-        if (check == null) {
+        if(model.getIuser() != authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(NOT_COMMUNITY_ENTITY);
+        }
+        if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
         } else if (totalSize > 5) {
             throw new RestApiException(SIZE_PHOTO);
@@ -171,11 +189,11 @@ public class CommunityService {
         }
         List<Integer> iboard = new ArrayList<>();
         Map<Integer, CommunitySelVo> boardMap = new HashMap<>();
-        int count = mapper.selCommunityCount(dto.getSearch());
+        int boardAllCount = mapper.selCommunityCount(dto.getSearch());
         for (CommunitySelVo vo : list) {
             iboard.add(vo.getIboard());
             boardMap.put(vo.getIboard(), vo);
-            vo.setCount(count);
+            vo.setBoardAllCount(boardAllCount);
         }
 
         List<CommunityPicsVo> pics = mapper.selPicCommunity(iboard);
@@ -183,7 +201,7 @@ public class CommunityService {
             boardMap.get(pic.getIboard()).getPics().add(pic.getPic());
         }
         for (int i = 0; i < list.size(); i++) {
-            list.get(i).setBoardNum(count - dto.getStartIdx() - i);
+            list.get(i).setBoardNum(boardAllCount - dto.getStartIdx() - i);
         }
         return list;
     }
@@ -226,33 +244,58 @@ public class CommunityService {
         String target = "/community/" + dto.getIboard();
         myFileUtils.delFolderTrigger(target);
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
-        mapper.delCommunityAllComment(dto);
-        mapper.delCommunityDel(dto.getIboard());
-        mapper.delCommunity(dto);
+        CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
+        List<CommunityCommentEntity> commentEntity = communityCommentRepository.findAllByCommunityEntity(communityEntity);
+        communityCommentRepository.delete((CommunityCommentEntity) commentEntity.stream().toList());
+        communityRepository.delete(communityEntity);
+//        mapper.delCommunityAllComment(dto);
+//        mapper.delCommunityDel(dto.getIboard());
+//        mapper.delCommunity(dto);
         return new ResVo(SUCCESS);
     }
 
     //커뮤니티 댓글 등록
+    @Transactional
     public ResVo postCommunityComment(CommunityCommentInsDto dto) {
-        dto.setIuser((int)authenticationFacade.getLoginUserPk());
-//        //내용을 입력하지 않는 경우
-//        if(dto.getContents() == null) {
-//            throw new RestApiException(AuthErrorCode.NOT_CONTENT);
-//        }
-        return new ResVo(mapper.insCommunityComment(dto));
+        CommunityEntity communityEntity = new CommunityEntity();
+        CommunityCommentEntity commentEntity = new CommunityCommentEntity();
+        communityEntity.setIboard(dto.getIboard());
+        commentEntity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
+        commentEntity.setContents(dto.getContents());
+        commentEntity.setCommunityEntity(communityEntity);
+        communityCommentRepository.save(commentEntity);
+
+        return new ResVo(SUCCESS);
     }
+//    public ResVo postCommunityComment(CommunityCommentInsDto dto) {
+//        dto.setIuser((int)authenticationFacade.getLoginUserPk());
+////        //내용을 입력하지 않는 경우
+////        if(dto.getContents() == null) {
+////            throw new RestApiException(AuthErrorCode.NOT_CONTENT);
+////        }
+//        return new ResVo(mapper.insCommunityComment(dto));
+//    }
 
     //커뮤니티 댓글 삭제
+    @Transactional
     public ResVo delCommunityComment(CommunityCommentDelDto dto) {
-        dto.setIuser((int)authenticationFacade.getLoginUserPk());
-        return new ResVo(mapper.delCommunityComment(dto));
+        CommunityCommentEntity commentEntity = communityCommentRepository.getReferenceById(dto.getIcomment());
+        UserEntity userEntity = new UserEntity();
+        userEntity.setIuser(authenticationFacade.getLoginUserPk());
+        commentEntity.setIcomment(dto.getIcomment());
+        if(commentEntity.getUserEntity().getIuser() != authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(NOT_COMMUNITY_ENTITY);
+        }
+        communityCommentRepository.delete(commentEntity);
+
+        return new ResVo(SUCCESS);
     }
 
     //커뮤니티 좋아요 삽입 시 1 해제 시 0
     @Transactional
     public ResVo favCommunity(CommunityInsFavDto dto) {
         CommunityFavIds ids = new CommunityFavIds();
-        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIboard((long)dto.getIboard());
 
         AtomicInteger atomic = new AtomicInteger(FAIL);
