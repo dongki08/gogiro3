@@ -35,6 +35,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -120,6 +122,40 @@ public class OwnerService {
                 .checkShop(userEntity.getCheckShop())
                 .ishop(mp.getIshop())
                 .build();
+    }
+
+    public OwnerSelReservationVo getReservation() {
+        OwnerSelReservationVo vo = new OwnerSelReservationVo();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        List<SelButcherPickupMenuProcVo> menuList = new ArrayList<>();
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        List<OwnerNewReservationVo> voList = new ArrayList<>();
+        List<Integer> pk = new ArrayList<>();
+        HashMap<Integer,OwnerNewReservationVo> map = new HashMap<>();
+        if(checkShop == 0){
+            vo.setCheckShop(checkShop);
+            voList = mapper.selShopReservation(ishop);
+            List<SelShopNoShowProcVo> noShowVo = mapper.selShopNoShow(ishop);
+            vo.setOwnerReservationList(voList);
+            vo.setOwnerNoShowList(noShowVo);
+            return vo;
+        }
+        if(checkShop == 1) {
+            vo.setCheckShop(checkShop);
+            voList = mapper.selButcherPickup(ishop);
+            menuList = mapper.selButcherPickupMenu(ishop);
+            vo.setOwnerReservationList(voList);
+            for(OwnerNewReservationVo reservationVo : voList) {
+                pk.add(reservationVo.getIreser().intValue());
+                map.put(reservationVo.getIreser().intValue(),reservationVo);
+            }
+            for(SelButcherPickupMenuProcVo vo1 : menuList) {
+                map.get(vo1.getIreser()).getPickupList().add(vo1);
+            }
+            vo.setOwnerReservationList(voList);
+            return vo;
+        }
+        return null;
     }
 
     @Transactional

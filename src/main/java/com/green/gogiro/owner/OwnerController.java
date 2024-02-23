@@ -40,10 +40,14 @@ public class OwnerController {
 
     @GetMapping("/reservation")
     @Operation(summary = "고깃집 예약 내역 및 노쇼 내역", description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>" +
-            "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>" +
-            "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수")
-    public OwnerReservationVo getReservation() {
-        return null;
+            "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>confirm: 예약 상태" +
+            "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
+    "정육점은 pickupList배열추가 노쇼는 배열값 null<br> count[int]:갯수<br>" +
+            "ibutMenu[int]:메뉴pk<br>" +
+            "ireser[int]: 예약pk<br>" +
+            "menu[String]: 메뉴이름<br>")
+    public OwnerSelReservationVo getReservation() {
+        return service.getReservation();
     }
 
 
@@ -99,7 +103,7 @@ public class OwnerController {
     }
 
     @PutMapping("/review")
-    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "배용진이 작성해")
+    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리")
     public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {
         return service.postReviewComment(dto);
     }

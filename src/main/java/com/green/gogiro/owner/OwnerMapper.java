@@ -18,6 +18,14 @@ public interface OwnerMapper {
 
     int insButcherShop(ButcherInsDto dto);
 
+    List<OwnerNewReservationVo> selShopReservation(long ishop);
+
+    List<SelShopNoShowProcVo> selShopNoShow(long ishop);
+
+    List<OwnerNewReservationVo> selButcherPickup(long ishop);
+
+    List<SelButcherPickupMenuProcVo> selButcherPickupMenu(long ishop);
+
     //수정
     int insButcherPics(ButcherInsDto dto);
 

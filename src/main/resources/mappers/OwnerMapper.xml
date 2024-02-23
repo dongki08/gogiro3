@@ -11,6 +11,41 @@
         (#{imeat},#{name},#{location},#{open},#{tel},#{x},#{y})
     </insert>
     
+    <select id="selShopNoShow">
+        SELECT b.iuser,b.`name`,b.`date`, b.ireser, b.head_count AS headCount
+        FROM t_black_list_count a
+        JOIN (SELECT c.iuser, c.`name`, d.`date`,d.ireser,d.head_count FROM t_user c JOIN t_reservation d ON  c.iuser = d.iuser WHERE d.ishop = #{ishop} AND d.confirm = 3) b
+        ON a.iuser = b.iuser;
+    </select>
+
+    <select id="selShopReservation">
+        SELECT b.iuser, b.`name`, a.confirm, a.head_count AS headCount, a.ireser,a.date,a.request
+        FROM t_reservation a
+        JOIN t_user b
+        on a.iuser = b.iuser
+        AND a.ishop = #{ishop}
+        WHERE a.confirm = 0
+    </select>
+
+    <select id="selButcherPickup">
+        SELECT b.iuser, b.`name`, a.confirm, a.request,a.ipickup as ireser, a.date
+        FROM t_pickup a
+        JOIN t_user b
+        ON a.iuser = b.iuser
+        AND a.ibutcher = #{ishop}
+        WHERE a.confirm = 0
+    </select>
+
+    <select id="selButcherPickupMenu">
+        SELECT b.`count`,b.ibut_menu as ibutMenu,c.menu,a.ipickup as ireser
+        FROM t_pickup a
+        JOIN t_pickup_menu b
+        ON a.ipickup = b.ipickup
+        JOIN t_but_menu c
+        ON c.ibut_menu = b.ibut_menu
+        WHERE a.ibutcher = #{ishop}
+    </select>
+    
     <insert id="insStoreRegistrationPics">
         INSERT INTO
         t_shop_pic
