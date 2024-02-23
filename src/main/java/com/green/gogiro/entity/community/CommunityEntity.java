@@ -43,19 +43,19 @@ public class CommunityEntity extends BaseEntity {
     private int announce;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.ALL)
     private List<CommunityPicsEntity> communityPicsEntityList = new ArrayList<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.ALL)
     private List<CommunityFavEntity> communityFavEntityList = new ArrayList<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.ALL)
     private List<CommunityCountEntity> communityCountEntityList = new ArrayList<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.ALL)
     private List<CommunityCommentEntity> communityCommentEntityList = new ArrayList<>();
 
 

@@ -49,7 +49,7 @@ public class CommunityService {
         CommunityEntity communityentity = new CommunityEntity();
         communityentity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
 
-        if (authenticationFacade.getLoginUserRole().equals("ADMIN")) {
+        if(authenticationFacade.getLoginUserRole().equals("ADMIN")) {
             communityentity.setAnnounce(1);
         } else {
             communityentity.setAnnounce(0);
@@ -63,8 +63,8 @@ public class CommunityService {
         String target = "/community/" + communityentity.getIboard();
         CommunityPicsInsVo vo = new CommunityPicsInsVo();
         vo.setIboard(communityentity.getIboard().intValue());
-        if (pics != null) {
-            for (MultipartFile file : pics) {
+        if(pics != null) {
+            for(MultipartFile file : pics) {
                 String saveFileNm = myFileUtils.transferTo(file, target);
                 vo.getPics().add(saveFileNm);
             }
@@ -141,7 +141,7 @@ public class CommunityService {
         int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
         int totalSize = boardSize + fileSize - delSize;
 
-        if (model.getIuser() != authenticationFacade.getLoginUserPk()) {
+        if(model.getIuser() != authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
         if (model == null) {
@@ -149,7 +149,7 @@ public class CommunityService {
         } else if (totalSize > 5) {
             throw new RestApiException(SIZE_PHOTO);
         }
-        dto.setIuser((int) authenticationFacade.getLoginUserPk());
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.updCommunity(dto);
         String target = "/community/" + dto.getIboard();
         if (dto.getIcommuPics() != null && !dto.getIcommuPics().isEmpty()) {
@@ -211,8 +211,8 @@ public class CommunityService {
     public CommunityDetailVo getDetailCommunity(int iboard) {
         long iuser;
         try {
-            iuser = authenticationFacade.getLoginUserPk();
-        } catch (Exception e) {
+            iuser= authenticationFacade.getLoginUserPk();
+        } catch(Exception e) {
             iuser = 0;
         }
 
@@ -222,7 +222,7 @@ public class CommunityService {
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
-        CommunityDetailVo vo = mapper.selDetailCommunity(iboard, (int) iuser);
+        CommunityDetailVo vo = mapper.selDetailCommunity(iboard,(int)iuser);
         List<CommunityBySelPicsDto> pics = mapper.selByCommunityPics(iboard);
         vo.setPics(pics);
         List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard);
@@ -236,17 +236,23 @@ public class CommunityService {
     //커뮤니티 삭제
     @Transactional
     public ResVo delCommunity(CommunityDelDto dto) {
-        Integer check = mapper.checkCommunity(dto.getIboard());
+        //Integer check = mapper.checkCommunity(dto.getIboard());
+        CommunityModel model = mapper.entityCommunity(dto.getIboard());
         //게시글 여부 확인
-        if (check == null) {
+        if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
+        }
+        //본인 게시글 확인
+        if(model.getIuser() != authenticationFacade.getLoginUserPk()) {
+            throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
         String target = "/community/" + dto.getIboard();
         myFileUtils.delFolderTrigger(target);
-        dto.setIuser((int) authenticationFacade.getLoginUserPk());
-        CommunityEntity communityEntity = communityRepository.getReferenceById((long) dto.getIboard());
-        List<CommunityCommentEntity> commentEntity = communityCommentRepository.findAllByCommunityEntity(communityEntity);
+        dto.setIuser((int)authenticationFacade.getLoginUserPk());
+
+        CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
         communityRepository.delete(communityEntity);
+
 //        mapper.delCommunityAllComment(dto);
 //        mapper.delCommunityDel(dto.getIboard());
 //        mapper.delCommunity(dto);
@@ -282,7 +288,7 @@ public class CommunityService {
         UserEntity userEntity = new UserEntity();
         userEntity.setIuser(authenticationFacade.getLoginUserPk());
         commentEntity.setIcomment(dto.getIcomment());
-        if (commentEntity.getUserEntity().getIuser() != authenticationFacade.getLoginUserPk()) {
+        if(commentEntity.getUserEntity().getIuser() != authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
         communityCommentRepository.delete(commentEntity);
@@ -295,17 +301,17 @@ public class CommunityService {
     public ResVo favCommunity(CommunityInsFavDto dto) {
         CommunityFavIds ids = new CommunityFavIds();
         ids.setIuser(authenticationFacade.getLoginUserPk());
-        ids.setIboard((long) dto.getIboard());
+        ids.setIboard((long)dto.getIboard());
 
         AtomicInteger atomic = new AtomicInteger(FAIL);
         communityFavRepository
                 .findById(ids)
-                .ifPresentOrElse(entity -> communityFavRepository.delete(entity), () -> {
+                .ifPresentOrElse( entity -> communityFavRepository.delete(entity), () -> {
                     atomic.set(SUCCESS);
                     CommunityFavEntity saveFavEntity = new CommunityFavEntity();
                     saveFavEntity.setCommunityFavIds(ids);
-                    UserEntity userEntity = userRepository.getReferenceById((long) authenticationFacade.getLoginUserPk());
-                    CommunityEntity communityEntity = communityRepository.getReferenceById((long) dto.getIboard());
+                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
                     saveFavEntity.setUserEntity(userEntity);
                     saveFavEntity.setCommunityEntity(communityEntity);
                     communityFavRepository.save(saveFavEntity);
@@ -332,14 +338,14 @@ public class CommunityService {
         ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
         Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
-        if (optEntity.isPresent()) {
+        if(optEntity.isPresent()) {
             throw new RestApiException(REPORT_COMMUNITY_ENTITY);
         }
 
         UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
         CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
 
-        if (communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+        if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(REPORT_COMMUNITY_MYUSER);
         }
 
@@ -365,14 +371,14 @@ public class CommunityService {
         ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
         Optional<CommunityCommentCountEntity> optEntity = communityCommentCountRepository.findByCommunityCommentCountIds(ids);
-        if (optEntity.isPresent()) {
+        if(optEntity.isPresent()) {
             throw new RestApiException(REPORT_COMMUNITY_ENTITY);
         }
 
         UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
         CommunityCommentEntity communityCommentEntity = communityCommentRepository.getReferenceById(dto.getIcomment());
 
-        if (communityCommentEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
+        if(communityCommentEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(REPORT_COMMUNITY_MYUSER);
         }
         CommunityCommentCountEntity commentCountEntity = new CommunityCommentCountEntity();

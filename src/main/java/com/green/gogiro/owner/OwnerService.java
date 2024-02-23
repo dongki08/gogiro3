@@ -232,6 +232,31 @@ public class OwnerService {
     }
 
     @Transactional
+    public ResVo postMenu(MultipartFile pic, OwnerMenuInsDto dto) {
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        ShopEntity shopEntity = new ShopEntity();
+        shopEntity.setIshop(ishop);
+        ButcherEntity butcherEntity = new ButcherEntity();
+        butcherEntity.setIbutcher(ishop);
+        ShopMenuEntity shopMenuEntity = shopMenuRepository.getReferenceById(dto.getImenu());
+        shopMenuEntity.setImenu(dto.getImenu());
+        shopMenuEntity.setShopEntity(shopEntity);
+        ButcherMenuEntity butcherMenuEntity = butcherMenuRepository.getReferenceById(dto.getImenu());
+        butcherMenuEntity.setButcherEntity(butcherEntity);
+
+        if (checkShop == 0) {
+
+        }
+
+        if (checkShop == 1) {
+
+        }
+
+        return null;
+    }
+
+    @Transactional
     public OwnerMenuUpdVo updMenu(MultipartFile pic, OwnerMenuUpdDto dto) {
         int checkShop = authenticationFacade.getLoginOwnerCheckShop();
         long ishop = authenticationFacade.getLoginOwnerShopPk();
