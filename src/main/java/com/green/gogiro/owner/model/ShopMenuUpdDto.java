@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ShopMenuUpdDto {
 
     private int imenu;
-
+    @JsonIgnore
     private int ishop;
     @JsonIgnore
     private MultipartFile pic;
