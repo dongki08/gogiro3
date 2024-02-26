@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ButcherMenuRepository extends JpaRepository<ButcherMenuEntity,Long>, OwnerMenuQdslRepository {
-    @EntityGraph(attributePaths = {"ButcherEntity"})
-    List<ButcherMenuEntity> findByButcherEntity(ButcherEntity entity);
+    @EntityGraph(attributePaths = {"butcherEntity"})
+    List<ButcherMenuEntity> findByButcherEntity(ButcherEntity butcherEntity);
 
 }

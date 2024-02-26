@@ -9,6 +9,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Data
 public class ReservationInsDto {
     @JsonIgnore
@@ -28,4 +31,12 @@ public class ReservationInsDto {
     @Schema(title = "인원수",defaultValue = "1")
     @Min(value = 1)
     private int headCount;
+    @JsonIgnore
+    private LocalDateTime localDateTime;
+
+    public void setDate(String date){
+        this.date= date;
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        this.localDateTime= LocalDateTime.parse(date+".000", formatter);
+    }
 }

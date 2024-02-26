@@ -15,8 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
+
+import static com.green.gogiro.exception.ReservationErrorCode.PASSED_BY_DATE;
 
 
 @Tag(name = "예약(픽업)",description = "예약(픽업) API")
@@ -33,7 +38,10 @@ public class ReservationController {
             "<br>(실패)<br>(400)NOT_DATE(0000-00-00 00:00:00)<br>INVALID_PARAMETER(날짜 형식이 올바르지 않습니다)" +
             "<br>(404)VALID_SHOP(DB에 없는 고기집)<br>(500)INTERNAL_SERVER_ERROR")
     public ResVo postReservation(@RequestBody @Valid ReservationInsDto dto){
-        return service.postReservation1(dto);
+        if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
+            throw new RestApiException(PASSED_BY_DATE);
+        }
+        return service.postReservation2(dto);
     }
 
     @PostMapping("/pickup")
@@ -45,7 +53,10 @@ public class ReservationController {
             "<br>INVALID_PARAMETER<br>(날짜 형식이 올바르지 않습니다)<br>(메뉴를 입력해주세요)" +
             "<br>(500)INTERNAL_SERVER_ERROR")
     public ResVo postPickup(@RequestBody @Valid PickupInsDto dto){
-        return service.postPickup1(dto);
+        if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
+            throw new RestApiException(PASSED_BY_DATE);
+        }
+        return service.postPickup2(dto);
     }
 
     @PatchMapping("/reservation")

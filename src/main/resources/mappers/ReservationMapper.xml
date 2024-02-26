@@ -9,7 +9,8 @@
             ishop= #{ishop},
             date= #{date},
             request= #{request},
-            head_count= #{headCount}
+            head_count= #{headCount},
+            created_at= now()
     </insert>
 
     <insert id="insPickup" useGeneratedKeys="true" keyProperty="ipickup">
@@ -19,7 +20,8 @@
             iuser= #{iuser},
             ibutcher= #{ibutcher},
             date= #{date},
-            request= #{request}
+            request= #{request},
+            created_at= now()
     </insert>
 
     <insert id="insPickupMenu">
@@ -28,7 +30,8 @@
         SET
             ipickup= #{ipickup},
             ibut_menu= #{ibutMenu},
-            count= #{count}
+            count= #{count},
+            created_at= now()
     </insert>
 
     <update id="cancelReservation">
@@ -74,7 +77,8 @@
                 SET
                 ishop = #{ishop},
                 iuser = #{iuser},
-                star = #{star}
+                star = #{star},
+                created_at= now()
                 <if test="review != null != ' '">
                     , review = #{review}
                 </if>
@@ -84,6 +88,7 @@
                 SET iuser = #{iuser}
                 , ibutcher = #{ishop}
                 , star = #{star}
+                , created_at= now()
                 <if test="review != null != ' '">
                     , review = #{review}
                 </if>
