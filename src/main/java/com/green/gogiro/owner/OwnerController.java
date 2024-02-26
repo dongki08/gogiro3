@@ -140,7 +140,7 @@ public class OwnerController {
             "price : 가격<br>" +
             "imenu외에 값을 안 보내면 기존 값으로 돌아감<br>" +
             "--응답데이터<br>" +
-            "checkshop : 0번 고기집, 1번 정육점" +
+            "checkshop : 0번 고기집, 1번 정육점<br>" +
             "imenu : 메뉴pk<br>" +
             "ishop : 가게pk<br>" +
             "pic : 사진"
