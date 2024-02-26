@@ -42,7 +42,7 @@ public class OwnerController {
     @Operation(summary = "고깃집 예약 내역 및 노쇼 내역", description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>" +
             "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>confirm: 예약 상태" +
             "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
-    "정육점은 pickupList배열추가 노쇼는 배열값 null<br> count[int]:갯수<br>" +
+    "정육점은 OwnerNewReservationVo에 pickupList배열추가 노쇼는 배열값 null<br> count[int]:갯수<br>" +
             "ibutMenu[int]:메뉴pk<br>" +
             "ireser[int]: 예약pk<br>" +
             "menu[String]: 메뉴이름<br>")
@@ -76,7 +76,7 @@ public class OwnerController {
 //    }
 
     @GetMapping("/menu")
-    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기", description = "메뉴 보기 처리")
+    @Operation(summary = "고기집 or 정육점 가게 메뉴 보기", description = "<h2>메뉴 보기 처리</h2>")
     public List<OwnerMenuVo> getMenu() {
         return service.getMenu();
     }
@@ -127,7 +127,7 @@ public class OwnerController {
 //    }
 
     @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>imenu는 필수로 보내고 나머지는 안보내면 원래 값으로 들어감"
+    @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>imenu는 필수로 보내고 나머지는 안보내면 원래 값으로 들어감<br>menu만 String"
     )
     private OwnerMenuUpdVo updMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuUpdDto dto) {
         return service.updMenu(pic,dto);
