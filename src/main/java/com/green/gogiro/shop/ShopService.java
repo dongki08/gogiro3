@@ -131,7 +131,7 @@ public class ShopService {
     @Transactional
     public ResVo toggleShopBookmark(ShopBookmarkDto dto) {
         ShopBookmarkIds ids = new ShopBookmarkIds();
-        ids.setIuser((long)authenticationFacade.getLoginUserPk());
+        ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIshop((long)dto.getIshop());
 
         AtomicInteger atomic = new AtomicInteger(0);

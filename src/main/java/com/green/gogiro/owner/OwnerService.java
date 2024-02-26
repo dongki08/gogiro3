@@ -35,6 +35,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,6 +68,7 @@ public class OwnerService {
         List<OwnerReviewVo> vo = reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
         return vo;
     }
+
 
     @Transactional
     public OwnerManagementVo getShop() {
@@ -120,6 +123,40 @@ public class OwnerService {
                 .checkShop(userEntity.getCheckShop())
                 .ishop(mp.getIshop())
                 .build();
+    }
+
+    public OwnerSelReservationVo getReservation() {
+        OwnerSelReservationVo vo = new OwnerSelReservationVo();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        List<SelButcherPickupMenuProcVo> menuList = new ArrayList<>();
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        List<OwnerNewReservationVo> voList = new ArrayList<>();
+        List<Integer> pk = new ArrayList<>();
+        HashMap<Integer, OwnerNewReservationVo> map = new HashMap<>();
+        if (checkShop == 0) {
+            vo.setCheckShop(checkShop);
+            voList = mapper.selShopReservation(ishop);
+            List<SelShopNoShowProcVo> noShowVo = mapper.selShopNoShow(ishop);
+            vo.setOwnerReservationList(voList);
+            vo.setOwnerNoShowList(noShowVo);
+            return vo;
+        }
+        if (checkShop == 1) {
+            vo.setCheckShop(checkShop);
+            voList = mapper.selButcherPickup(ishop);
+            menuList = mapper.selButcherPickupMenu(ishop);
+            vo.setOwnerReservationList(voList);
+            for (OwnerNewReservationVo reservationVo : voList) {
+                pk.add(reservationVo.getIreser().intValue());
+                map.put(reservationVo.getIreser().intValue(), reservationVo);
+            }
+            for (SelButcherPickupMenuProcVo vo1 : menuList) {
+                map.get(vo1.getIreser()).getPickupList().add(vo1);
+            }
+            vo.setOwnerReservationList(voList);
+            return vo;
+        }
+        return null;
     }
 
     @Transactional
@@ -195,30 +232,6 @@ public class OwnerService {
         return butcherMenuRepository.selMenu(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop());
     }
 
-    @Transactional
-    public ResVo postMenu(MultipartFile pic, OwnerMenuInsDto dto) {
-        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
-        long ishop = authenticationFacade.getLoginOwnerShopPk();
-        ShopEntity shopEntity = new ShopEntity();
-        shopEntity.setIshop(ishop);
-        ButcherEntity butcherEntity = new ButcherEntity();
-        butcherEntity.setIbutcher(ishop);
-        ShopMenuEntity shopMenuEntity = shopMenuRepository.getReferenceById(dto.getImenu());
-        shopMenuEntity.setImenu(dto.getImenu());
-        shopMenuEntity.setShopEntity(shopEntity);
-        ButcherMenuEntity butcherMenuEntity = butcherMenuRepository.getReferenceById(dto.getImenu());
-        butcherMenuEntity.setButcherEntity(butcherEntity);
-
-        if (checkShop == 0) {
-
-        }
-
-        if (checkShop == 1) {
-
-        }
-
-        return null;
-    }
 
     @Transactional
     public OwnerMenuUpdVo updMenu(MultipartFile pic, OwnerMenuUpdDto dto) {
@@ -250,6 +263,7 @@ public class OwnerService {
             shopMenuRepository.save(shopMenuEntity);
             return OwnerMenuUpdVo.builder()
                     .checkShop(checkShop)
+                    .imenu(shopMenuEntity.getImenu().intValue())
                     .ishop(ishop)
                     .pic(savedName)
                     .build();
@@ -271,6 +285,7 @@ public class OwnerService {
             butcherMenuRepository.save(butcherMenuEntity);
             return OwnerMenuUpdVo.builder()
                     .ishop(ishop)
+                    .imenu(butcherMenuEntity.getIbutMenu().intValue())
                     .pic(savedName)
                     .checkShop(checkShop)
                     .build();
@@ -335,6 +350,55 @@ public class OwnerService {
         vo.setPic(fileNm);
         vo.setImenu(dto.getImenu());
         return vo;
+    }
+
+    @Transactional
+    public InsMenuVo postMenu(MultipartFile pic, OwnerMenuInsDto dto) {
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        ShopEntity shopEntity = new ShopEntity();
+        ButcherEntity butcherEntity = new ButcherEntity();
+        if (checkShop == 0) {
+            shopEntity.setIshop(ishop);
+            ShopMenuEntity entity = new ShopMenuEntity();
+            entity.setShopEntity(shopEntity);
+            if (pic != null) {
+                String target = "/shop/" + ishop + "/menu";
+                String savedName = myFileUtils.transferTo(pic, target);
+                entity.setPic(savedName);
+            }
+                entity.setMenu(dto.getMenu());
+            if(dto.getPrice() != 0) {
+                entity.setPrice(dto.getPrice());
+            }
+            shopMenuRepository.save(entity);
+            return InsMenuVo.builder()
+                    .pic(entity.getPic())
+                    .imenu(entity.getImenu())
+                    .price(entity.getPrice())
+                    .build();
+        }
+        if (checkShop == 1) {
+            butcherEntity.setIbutcher(ishop);
+            ButcherMenuEntity entity = new ButcherMenuEntity();
+            entity.setButcherEntity(butcherEntity);
+            if (pic != null) {
+                String target = "/butcher/" + ishop + "/butchershop_pic";
+                String savedName = myFileUtils.transferTo(pic, target);
+                entity.setPic(savedName);
+            }
+            entity.setMenu(dto.getMenu());
+            if(dto.getPrice() != 0) {
+                entity.setPrice(dto.getPrice());
+            }
+            butcherMenuRepository.save(entity);
+            return InsMenuVo.builder()
+                    .pic(entity.getPic())
+                    .price(entity.getPrice())
+                    .imenu(entity.getIbutMenu())
+                    .build();
+        }
+        return null;
     }
 
     public ShopMenuPicsVo updShopMenu(ShopMenuUpdDto dto) {

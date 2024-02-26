@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OwnerMenuUpdVo {
+public class OwnerSelReservationVo {
     private int checkShop;
-    private int imenu;
-    private Long ishop;
-    private String pic;
+    List<OwnerNewReservationVo> ownerReservationList = new ArrayList<>();
+    List<SelShopNoShowProcVo> ownerNoShowList = new ArrayList<>();
 }
