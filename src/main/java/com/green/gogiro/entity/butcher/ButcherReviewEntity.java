@@ -21,7 +21,7 @@ public class ButcherReviewEntity extends BaseEntity {
     private Long ireview;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "i_butcher", nullable = false)
+    @JoinColumn(name = "ibutcher", nullable = false)
     private ButcherEntity butcherEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
