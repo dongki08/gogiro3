@@ -73,7 +73,7 @@ public class ReservationService {
         ReservationEntity entity= new ReservationEntity();
         entity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
         entity.setShopEntity(shopEntity);
-        entity.setDate(LocalDateTime.parse(dto.getDate()));
+        entity.setDate(dto.getLocalDateTime());
         entity.setRequest(dto.getRequest());
         entity.setHeadCount(dto.getHeadCount());
         repository.save(entity);
@@ -125,20 +125,23 @@ public class ReservationService {
         PickupEntity entity= new PickupEntity();
         entity.setUserEntity(userRepository.getReferenceById(authenticationFacade.getLoginUserPk()));
         entity.setButcherEntity(butcherEntity);
-        entity.setDate(LocalDateTime.parse(dto.getDate()));
+        entity.setDate(dto.getLocalDateTime());
         entity.setRequest(dto.getRequest());
         pickupRepository.save(entity);
-        entity.getPickupMenuEntityList().addAll(
-                dto.getMenus().stream().map(item->
-                        PickupMenuEntity.builder()
-                                .pickupEntity(entity)
-                                .butcherMenuEntity(butcherMenuRepository.getReferenceById(
-                                        (long)item.getIbutMenu()
-                                        )
-                                )
-                                .count(item.getCount())
-                                .build()).toList()
-        );
+        entity.getPickupMenuEntityList()
+              .addAll(dto.getMenus().stream().map(item->{
+                  ButcherMenuEntity menuEntity=butcherMenuRepository.getReferenceById((long)item.getIbutMenu());
+                  PickupMenuIds ids=new PickupMenuIds();
+                  ids.setIbutMenu(menuEntity.getIbutMenu());
+                  ids.setIpickup(entity.getIpickup());
+                  return PickupMenuEntity.builder()
+                                         .pickupMenuIds(ids)
+                                         .pickupEntity(entity)
+                                         .butcherMenuEntity(menuEntity)
+                                         .count(item.getCount())
+                                         .build();
+                  }).toList()
+              );
         return new ResVo(entity.getIpickup().intValue());
     }
     //Mybatis 3.예약 취소

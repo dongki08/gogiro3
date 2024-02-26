@@ -7,6 +7,9 @@ import static com.green.gogiro.common.Const.REGEXP_DATE_TYPE5;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -29,4 +32,12 @@ public class PickupInsDto {
     private List<PickupMenuDto> menus;
     @JsonIgnore
     private int ipickup;
+    @JsonIgnore
+    private LocalDateTime localDateTime;
+
+    public void setDate(String date){
+        this.date= date;
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        this.localDateTime= LocalDateTime.parse(date+".000", formatter);
+    }
 }
