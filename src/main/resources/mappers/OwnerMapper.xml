@@ -170,4 +170,99 @@
         </foreach>
     </select>
 
+    <select id="bookmarkCount">
+        SELECT
+        COUNT(*) AS bookmarkCount
+        FROM t_${table}_bookmark
+        WHERE datediff(NOW(),created_at)<![CDATA[<=7]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS bookmarkCount
+        FROM t_${table}_bookmark
+        WHERE datediff(NOW(),created_at)>7
+        AND datediff(NOW(),created_at)<![CDATA[<=14]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS bookmarkCount
+        FROM t_${table}_bookmark
+        WHERE datediff(NOW(),created_at)>14
+        AND datediff(NOW(),created_at)<![CDATA[<=21]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS bookmarkCount
+        FROM t_${table}_bookmark
+        WHERE datediff(NOW(),created_at)>21
+        AND datediff(NOW(),created_at)<![CDATA[<=28]]>
+        AND i${column}= #{ishop}
+    </select>
+
+    <select id="reviewCount">
+        SELECT
+        COUNT(*) AS reviewCount
+        FROM t_${table}_review
+        WHERE datediff(NOW(),created_at)<![CDATA[<=7]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reviewCount
+        FROM t_${table}_review
+        WHERE datediff(NOW(),created_at)>7
+        AND datediff(NOW(),created_at)<![CDATA[<=14]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reviewCount
+        FROM t_${table}_review
+        WHERE datediff(NOW(),created_at)>14
+        AND datediff(NOW(),created_at)<![CDATA[<=21]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reviewCount
+        FROM t_${table}_review
+        WHERE datediff(NOW(),created_at)>21
+        AND datediff(NOW(),created_at)<![CDATA[<=28]]>
+        AND i${column}= #{ishop}
+    </select>
+
+    <select id="reservationCount">
+        SELECT
+        COUNT(*) AS reservationCount
+        FROM t_${table2}
+        WHERE datediff(NOW(),created_at)<![CDATA[<=7]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reservationCount
+        FROM t_${table2}
+        WHERE datediff(NOW(),created_at)>7
+        AND datediff(NOW(),created_at)<![CDATA[<=14]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reservationCount
+        FROM t_${table2}
+        WHERE datediff(NOW(),created_at)>14
+        AND datediff(NOW(),created_at)<![CDATA[<=21]]>
+        AND i${column}= #{ishop}
+        UNION all
+        SELECT
+        COUNT(*) AS reservationCount
+        FROM t_${table2}
+        WHERE datediff(NOW(),created_at)>21
+        AND datediff(NOW(),created_at)<![CDATA[<=28]]>
+        AND i${column}= #{ishop}
+    </select>
+
+    <select id="starAvg">
+        SELECT
+        IFNULL(AVG(star),0) AS starAvg
+        FROM
+        t_${table}_review
+        WHERE i${column}= #{ishop}
+    </select>
+
 </mapper>

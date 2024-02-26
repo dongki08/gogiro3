@@ -51,11 +51,11 @@ public class OwnerController {
     }
 
 
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     @Operation(summary = "가게 주인 로그인", description = "<h2>가게 주인 로그인 처리</h2>" +
             "<h3>---요구 데이터<br>email: 아이디<br>upw: 비밀번호</h3>" +
             "<h3>--응답 데이터<br>ishop: 가게pk<br>iuser: 유저pk<br>checkShop: (0: 고기집, 1:정육점)<br>accessToken: 엑세스 토큰")
-    public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
+    public OwnerSigninVo ownerSignin(HttpServletResponse res, @RequestBody OwnerSigninDto dto) {
         return service.ownerSignin(res, dto);
     }
 
@@ -112,6 +112,12 @@ public class OwnerController {
             "result : 1번 성공, 나머지 에러")
     public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {
         return service.postReviewComment(dto);
+    }
+
+
+    @GetMapping("/dashboard")
+    public DashBoardVo selDashBoard(){
+        return service.selDashBoard();
     }
 
     //    @PutMapping("/shop")
