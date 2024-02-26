@@ -61,7 +61,7 @@ public class OwnerController {
 
     @GetMapping("/review")
     @Operation(summary = "매장 리뷰 관리", description = "<h2>매장 리뷰 관리 처리</h2>" +
-            "<h3>--요구 데이터<br>페이지(sort는 지우고 써주세요)<br>--응답 데이터<br>ishop: 가게pk<br>iuser: 작성자 pk<br>comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>pics: 리뷰 사진(배열)")
+            "<h3>--요구 데이터<br>페이지(sort는 신경 안쓰셔도 되요)<br>--응답 데이터<br>ishop: 가게pk<br>iuser: 작성자 pk<br>comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>pics: 리뷰 사진(배열)")
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
         return service.getAllReview(pageable);
     }
@@ -103,7 +103,13 @@ public class OwnerController {
     }
 
     @PutMapping("/review")
-    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리")
+    @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리<br>" +
+            "--요청데이터<br>" +
+            "ireview : 댓글pk<br>" +
+            "checkshop : 0번 고기집, 1번 정육점<br>" +
+            "comment : 사장님리뷰댓글<br>" +
+            "--응답데이터<br>" +
+            "result : 1번 성공, 나머지 에러")
     public ResVo postReviewComment(@RequestBody ReviewCommentDto dto) {
         return service.postReviewComment(dto);
     }
@@ -127,14 +133,32 @@ public class OwnerController {
 //    }
 
     @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>imenu는 필수로 보내고 나머지는 안보내면 원래 값으로 들어감<br>menu만 String"
+    @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>" +
+            "--요청데이터<br>" +
+            "imenu(필수) : 메뉴pk<br>" +
+            "menu : 메뉴이름(string)<br>" +
+            "price : 가격<br>" +
+            "imenu외에 값을 안 보내면 기존 값으로 돌아감<br>" +
+            "--응답데이터<br>" +
+            "checkshop : 0번 고기집, 1번 정육점" +
+            "imenu : 메뉴pk<br>" +
+            "ishop : 가게pk<br>" +
+            "pic : 사진"
     )
     private OwnerMenuUpdVo updMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuUpdDto dto) {
         return service.updMenu(pic,dto);
     }
 
     @PostMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리")
+    @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리<br>" +
+            "--요청데이터<br>" +
+            "menu : 메뉴이름<br>" +
+            "price : 가격<br>" +
+            "pic : 사진<br>" +
+            "--응답데이터<br>" +
+            "imenu : 메뉴pk<br>" +
+            "price : 가격<br>" +
+            "pic : 사진")
     private InsMenuVo postMenu(@RequestPart(required = false) MultipartFile pic,@RequestPart OwnerMenuInsDto dto){
         return service.postMenu(pic,dto);
     }
