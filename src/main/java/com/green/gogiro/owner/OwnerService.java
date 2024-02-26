@@ -499,6 +499,9 @@ public class OwnerService {
         if (dto.getCheckShop() == 0) {
             Optional<ShopReviewEntity> optReview = Optional.of(shopReviewRepository.getReferenceById((long) dto.getIreview()));
             ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
+            if(shopReviewEntity.getShopEntity().getIshop() != authenticationFacade.getLoginOwnerShopPk()) {
+                throw new RestApiException(AuthErrorCode.NOT_SHOP);
+            }
             shopReviewEntity.setComment(dto.getComment());
             shopReviewRepository.save(shopReviewEntity);
             return new ResVo(Const.SUCCESS);
