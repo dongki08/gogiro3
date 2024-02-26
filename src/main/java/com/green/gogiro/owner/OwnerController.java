@@ -116,6 +116,7 @@ public class OwnerController {
 
 
     @GetMapping("/dashboard")
+    @Operation(summary = "대쉬 보드",description = "<h2>대쉬 보드 보기 처리</h2>" + "<h3>순서대로 배열안에 순서대로 1,2,3,4주차--응답데이터bokkmarkCnt(List:Integer):북마크 통계<br>reviewCnt:리뷰 통계<br>reservationCnt: 예약 통계<br>starAvg:총 별점")
     public DashBoardVo selDashBoard(){
         return service.selDashBoard();
     }

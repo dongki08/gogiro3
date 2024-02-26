@@ -48,7 +48,7 @@ spring:
     activate:
       on-profile: "jpa"
   datasource:
-    url: jdbc:mariadb://192.168.0.161:3306/gogiro3_jpa
+    url: jdbc:mariadb://192.168.0.161:3306/test4
     username: root
     password: green502
   jpa:
