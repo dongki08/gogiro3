@@ -10,13 +10,20 @@ app:
 file:
   dir: D:/gogi/download/gogiro/
 
+api:
+  comp:
+    code:
+      base-url: "https://api.odcloud.kr/api/nts-businessman/v1/status"
+      service-code-key: "serviceKey"
+      service-code-value: "cTMeBlOCpl%2FaaF%2BJTXLf40PU8Rv4Vkk2B%2FwyPitJSU0J%2FIYEOJxHltgmJhbiTYJOFOTcQ03I8fybIV8QKvM9hA%3D%3D"
+
 
 
 spring:
   servlet:
-      multipart:
-        max-file-size: 5MB
-        max-request-size: 15MB
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 15MB
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://192.168.0.144:3306/db_even_last_1
@@ -41,7 +48,7 @@ spring:
     activate:
       on-profile: "jpa"
   datasource:
-    url: jdbc:mariadb://192.168.0.161:3306/gogiro3_jpa
+    url: jdbc:mariadb://192.168.0.161:3306/test4
     username: root
     password: green502
   jpa:

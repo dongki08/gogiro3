@@ -26,6 +26,14 @@ public interface OwnerMapper {
 
     List<SelButcherPickupMenuProcVo> selButcherPickupMenu(long ishop);
 
+    List<Integer> bookmarkCount(DashBoardDto dto);
+
+    List<Integer> reviewCount(DashBoardDto dto);
+
+    List<Integer> reservationCount(DashBoardDto dto);
+
+    Integer starAvg(DashBoardDto dto);
+
     //수정
     int insButcherPics(ButcherInsDto dto);
 

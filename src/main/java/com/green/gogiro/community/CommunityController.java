@@ -42,7 +42,10 @@ public class CommunityController {
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "커뮤니티 수정", description = "커뮤니티 수정 처리<br>" +
-            "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
+            "--요청데이터<br>" +
+            "iboard : 보드pk<br>" +
+            "icommuPics : 삭제할 사진 pk<br>" +
+            "title(NOT NULL) : 제목(1~50자)<br>" +
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
             "--응답데이터<br>iboard : 보드pk<br>" +
@@ -134,21 +137,20 @@ public class CommunityController {
     }
 
     @PostMapping("/fav")
-    @Operation(summary = "좋아요 기능", description = "좋아요 처리<br>" +
+    @Operation(summary = "커뮤니티 추천", description = "커뮤니티 추천 처리<br>" +
             "--요청데이터<br>" +
-            "iuser : 유저pk<br>" +
             "iboard : 커뮤니티pk<br>" +
             "--응답데이터<br>" +
             "result : <select>" +
-            "    <option>1(좋아요)</option>" +
-            "    <option>0(좋아요취소)</option>" +
+            "    <option>1(추천)</option>" +
+            "    <option>0(추천 취소)</option>" +
             "</select>")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }
 
     @PostMapping("/report")
-    @Operation(summary = "커뮤니티 신고 기능", description = "커뮤니티 신고 처리<br>" +
+    @Operation(summary = "커뮤니티 신고", description = "커뮤니티 신고 처리<br>" +
             "--요청데이터<br>" +
             "iboard : 커뮤니티pk<br>" +
             "ireport : 신고pk<br>" +
@@ -160,11 +162,16 @@ public class CommunityController {
     }
 
     @PostMapping("/comment/report")
-    @Operation(summary = "커뮤니티 댓글 신고 기능", description = "커뮤니티 댓글 신고 처리<br>" +
+    @Operation(summary = "커뮤니티 댓글 신고", description = "커뮤니티 댓글 신고 처리<br>" +
             "--요청데이터<br>" +
             "icomment : 댓글pk<br>" +
-            "ireport : 신고pk(신고 사유 pk입니다, 신고 사유는 나중에 저희가 정리해서 보내드리겠습니다)<br>" +
-            "(그리고 한 번 신고할 때 하나의 사유만 할 건지 여러 사유를 추가할 수 있게 할 건지 정하면 좋을 거 같습니다" +
+            "ireport : 신고pk<br>" +
+            "1. 욕설/인신공격<br>" +
+            "2. 음란물<br>" +
+            "3. 영리목적/홍보성<br>" +
+            "4. 개인정보<br>" +
+            "5. 게시글 도배<br>" +
+            "6. 기타<br>" +
             "--응답데이터<br>" +
             "result : 1(성공), 나머진 에러")
     public ResVo reportCommentCommunity(CommentReportDto dto) {

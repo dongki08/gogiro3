@@ -12,7 +12,7 @@ import lombok.Data;
 public class ReviewCommentDto {
     @JsonIgnore
     private int iuser;
-
+    @Schema(name = "리뷰pk")
     private int ireview;
 
     @Schema(title = "고기집 0,정육점 1")

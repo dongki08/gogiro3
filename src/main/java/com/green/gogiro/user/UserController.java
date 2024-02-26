@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PostMapping("/signout")
-    @Operation(summary = "로그아웃", description = "<h2>로그아웃 처리</h2><h3>--응답데이터<br>(성공)result: 1")
+    @Operation(summary = "사용자 로그아웃", description = "<h2>사용자 로그아웃 처리</h2><h3>--응답데이터<br>(성공)result: 1")
     public ResVo signout(HttpServletResponse res) {
         return service.signout(res);
     }
