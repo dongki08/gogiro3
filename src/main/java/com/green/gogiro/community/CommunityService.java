@@ -348,12 +348,12 @@ public class CommunityService {
         if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(REPORT_COMMUNITY_MYUSER);
         }
-
         CommunityCountEntity countEntity = new CommunityCountEntity();
         countEntity.setCommunityCountIds(ids);
         countEntity.setIreport(reportEntity);
         countEntity.setUserEntity(userEntity);
         countEntity.setCommunityEntity(communityEntity);
+
         communityCountRepository.save(countEntity);
 
         communityEntity.setCount(communityEntity.getCount() + 1);
