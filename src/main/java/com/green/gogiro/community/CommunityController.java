@@ -137,20 +137,20 @@ public class CommunityController {
     }
 
     @PostMapping("/fav")
-    @Operation(summary = "좋아요 기능", description = "좋아요 처리<br>" +
+    @Operation(summary = "커뮤니티 추천", description = "커뮤니티 추천 처리<br>" +
             "--요청데이터<br>" +
             "iboard : 커뮤니티pk<br>" +
             "--응답데이터<br>" +
             "result : <select>" +
-            "    <option>1(좋아요)</option>" +
-            "    <option>0(좋아요취소)</option>" +
+            "    <option>1(추천)</option>" +
+            "    <option>0(추천 취소)</option>" +
             "</select>")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }
 
     @PostMapping("/report")
-    @Operation(summary = "커뮤니티 신고 기능", description = "커뮤니티 신고 처리<br>" +
+    @Operation(summary = "커뮤니티 신고", description = "커뮤니티 신고 처리<br>" +
             "--요청데이터<br>" +
             "iboard : 커뮤니티pk<br>" +
             "ireport : 신고pk<br>" +
@@ -162,7 +162,7 @@ public class CommunityController {
     }
 
     @PostMapping("/comment/report")
-    @Operation(summary = "커뮤니티 댓글 신고 기능", description = "커뮤니티 댓글 신고 처리<br>" +
+    @Operation(summary = "커뮤니티 댓글 신고", description = "커뮤니티 댓글 신고 처리<br>" +
             "--요청데이터<br>" +
             "icomment : 댓글pk<br>" +
             "ireport : 신고pk<br>" +
