@@ -381,6 +381,13 @@ INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (19, 11);
 INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (10, 12);
 INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (11, 12);
 
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (1, '욕설/인신공격');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (2, '음란물');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (3, '영리목적/홍보성');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (4, '개인정보');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (5, '게시글 도배');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (6, '기타');
+
 
 
 
