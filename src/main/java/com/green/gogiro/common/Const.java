@@ -15,6 +15,10 @@ public class Const{
     public static final int SHOP_CHECK_NUM = 0;
     public static final int BUTCHER_CHECK_NUM = 1;
 
+    public static final int NO_SHOW_PAGE = 7;
+
+    public static final int RESERVATION_PAGE = 5;
+
     public static final String REGEXP_PATTERN_SPACE_CHAR = "^[\\s]*$";
 
     public static final String REGEXP_PATTERN_SPACE_CHAR_TYPE_2 = "^([ ][\\s]*)$";

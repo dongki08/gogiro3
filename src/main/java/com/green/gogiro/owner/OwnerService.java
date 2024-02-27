@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.green.gogiro.common.Const.BUTCHER_CHECK_NUM;
+import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.SIZE_PHOTO;
 
 @Service
@@ -99,7 +99,8 @@ public class OwnerService {
 
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getEmail());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
-        if(userEntity.getCheck() == 1) {
+        String shopName = null;
+        if (userEntity.getCheck() == 1) {
             throw new RestApiException(AuthErrorCode.BLACK_LOGIN);
         }
         if (!userEntity.getRole().toString().equals("OWNER")) {
@@ -116,6 +117,7 @@ public class OwnerService {
             mp.setCheckShop(userEntity.getCheckShop());
             mp.setIshop(entity.getIshop());
             mp.setCheckShop(userEntity.getCheckShop());
+            shopName = entity.getName();
 
         }
         if (userEntity.getCheckShop() == 1) {
@@ -124,6 +126,7 @@ public class OwnerService {
             mp.setRole(userEntity.getRole().toString());
             mp.setIshop(entity.getIbutcher());
             mp.setCheckShop(userEntity.getCheckShop());
+            shopName = entity.getName();
         }
         String at = jwtTokenProvider.generateAccessToken(mp);
         String rt = jwtTokenProvider.generateRefreshToken(mp);
@@ -137,6 +140,7 @@ public class OwnerService {
                 .iuser(userEntity.getIuser())
                 .checkShop(userEntity.getCheckShop())
                 .ishop(mp.getIshop())
+                .shopName(shopName)
                 .build();
     }
 
@@ -154,28 +158,47 @@ public class OwnerService {
                 .build();
     }
 
+    //고깃집 노쇼 내역 보기
+    public OwnerSelNoShowVo selNoShow(int page) {
+        OwnerSelNoShowVo vo = new OwnerSelNoShowVo();
+        if (authenticationFacade.getLoginOwnerCheckShop() == 0) {
+            LimitIdx dto = new LimitIdx();
+            dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
+            dto.setStartIdx((page - 1) * NO_SHOW_PAGE);
+            dto.setRowCount(page * NO_SHOW_PAGE);
+            List<SelShopNoShowProcVo> pVo = mapper.selShopNoShow(dto);
+            vo.setCount(mapper.selNoShowCount(dto.getIshop()));
+            vo.setOwnerNoShowList(pVo);
+            return vo;
+        }
+        return vo;
+    }
 
-    //가게 예약 내역 or 노쇼 내역 보기
-    public OwnerSelReservationVo getReservation() {
+
+    //가게 예약 내역
+    public OwnerSelReservationVo getReservation(int page) {
         OwnerSelReservationVo vo = new OwnerSelReservationVo();
         long ishop = authenticationFacade.getLoginOwnerShopPk();
         List<SelButcherPickupMenuProcVo> menuList = new ArrayList<>();
+        LimitIdx dto = new LimitIdx();
+        dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
+        dto.setStartIdx((page - 1) * RESERVATION_PAGE);
+        dto.setRowCount(page * RESERVATION_PAGE);
         int checkShop = authenticationFacade.getLoginOwnerCheckShop();
         List<OwnerNewReservationVo> voList = new ArrayList<>();
         List<Integer> pk = new ArrayList<>();
         HashMap<Integer, OwnerNewReservationVo> map = new HashMap<>();
         if (checkShop == 0) {
             vo.setCheckShop(checkShop);
-            voList = mapper.selShopReservation(ishop);
-            List<SelShopNoShowProcVo> noShowVo = mapper.selShopNoShow(ishop);
+            voList = mapper.selShopReservation(dto);
             vo.setOwnerReservationList(voList);
-            vo.setOwnerNoShowList(noShowVo);
+            vo.setCount(mapper.selReservationCount(dto.getIshop()));
             return vo;
         }
         if (checkShop == 1) {
             vo.setCheckShop(checkShop);
-            voList = mapper.selButcherPickup(ishop);
-            menuList = mapper.selButcherPickupMenu(ishop);
+            voList = mapper.selButcherPickup(dto);
+            menuList = mapper.selButcherPickupMenu(dto);
             vo.setOwnerReservationList(voList);
             for (OwnerNewReservationVo reservationVo : voList) {
                 pk.add(reservationVo.getIreser().intValue());
@@ -185,6 +208,7 @@ public class OwnerService {
                 map.get(vo1.getIreser()).getPickupList().add(vo1);
             }
             vo.setOwnerReservationList(voList);
+            vo.setCount(mapper.selPickupCount(dto.getIshop()));
             return vo;
         }
         return null;
@@ -501,6 +525,7 @@ public class OwnerService {
 //                String saveFileNm = myFileUtils.transferTo(file, target);
 //                dto.getPics().add(saveFileNm);
 //            }
+
     //mapper.insShopPic(dto);
 //        }
 //        ShopPicsVo vo = new ShopPicsVo();

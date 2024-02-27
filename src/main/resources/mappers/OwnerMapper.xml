@@ -13,10 +13,19 @@
     
     <select id="selShopNoShow">
         SELECT
-        a.name, b.date, b.head_count as headCount,b.ireser
+        a.name, b.date, b.head_count as headCount,b.ireser,b.iuser
         FROM t_user a
         JOIN t_reservation b
         ON a.iuser= b.iuser
+        WHERE b.ishop = #{ishop}
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selNoShowCount">
+        SELECT
+        COUNT(*) AS `count`
+        FROM t_user a
+        JOIN t_reservation b ON a.iuser= b.iuser
         WHERE b.ishop = #{ishop}
     </select>
 
@@ -27,6 +36,14 @@
         on a.iuser = b.iuser
         AND a.ishop = #{ishop}
         WHERE a.confirm = 0
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selReservationCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_reservation a
+        JOIN t_user b ON a.iuser = b.iuser AND a.ishop = #{ishop}
+        WHERE a.confirm = 0
     </select>
 
     <select id="selButcherPickup">
@@ -35,6 +52,14 @@
         JOIN t_user b
         ON a.iuser = b.iuser
         AND a.ibutcher = #{ishop}
+        WHERE a.confirm = 0
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+    <select id="selPickupCount">
+        SELECT COUNT(*) AS `count`
+        FROM t_pickup a
+        JOIN t_user b ON a.iuser = b.iuser AND a.ibutcher = #{ishop}
         WHERE a.confirm = 0
     </select>
 
@@ -46,6 +71,7 @@
         JOIN t_but_menu c
         ON c.ibut_menu = b.ibut_menu
         WHERE a.ibutcher = #{ishop}
+        LIMIT #{startIdx}, #{rowCount}
     </select>
     
     <insert id="insStoreRegistrationPics">

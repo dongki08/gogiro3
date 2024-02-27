@@ -18,13 +18,19 @@ public interface OwnerMapper {
 
     int insButcherShop(ButcherInsDto dto);
 
-    List<OwnerNewReservationVo> selShopReservation(long ishop);
+    List<OwnerNewReservationVo> selShopReservation(LimitIdx dto);
 
-    List<SelShopNoShowProcVo> selShopNoShow(long ishop);
+    List<SelShopNoShowProcVo> selShopNoShow(LimitIdx dto);
 
-    List<OwnerNewReservationVo> selButcherPickup(long ishop);
+    List<OwnerNewReservationVo> selButcherPickup(LimitIdx ishop);
 
-    List<SelButcherPickupMenuProcVo> selButcherPickupMenu(long ishop);
+    List<SelButcherPickupMenuProcVo> selButcherPickupMenu(LimitIdx ishop);
+
+    int selPickupCount(long ishop);
+
+    int selReservationCount(long ishop);
+
+    int selNoShowCount(long ishop);
 
     List<Integer> bookmarkCount(DashBoardDto dto);
 
