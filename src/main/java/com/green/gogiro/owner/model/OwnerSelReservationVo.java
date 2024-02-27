@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OwnerSelReservationVo {
     private int checkShop;
+    private int count;
     List<OwnerNewReservationVo> ownerReservationList = new ArrayList<>();
-    List<SelShopNoShowProcVo> ownerNoShowList = new ArrayList<>();
+
 }

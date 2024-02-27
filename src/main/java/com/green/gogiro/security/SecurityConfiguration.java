@@ -33,6 +33,7 @@ public class SecurityConfiguration {
                                                                     , "/api/owner/modify/**"
                                                                     , "/api/owner/dashboard/**"
                                                                     , "/api/admin/signin/**"
+                                                                    , "/api/admin/noshow/**"
                                                                     , "/api/admin/menu/**"
                                                                     , "/api/admin/management/**"
                                                                     , "/api/owner/reservation/**"

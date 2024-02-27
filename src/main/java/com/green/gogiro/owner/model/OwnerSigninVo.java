@@ -13,5 +13,6 @@ public class OwnerSigninVo {
     private Long ishop;
     private int checkShop;
     private Long iuser;
+    private String shopName;
     private String accessToken;
 }

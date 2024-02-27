@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,15 +41,21 @@ public class OwnerController {
     }
 
     @GetMapping("/reservation")
-    @Operation(summary = "고깃집 예약 내역 및 노쇼 내역", description = "<h2>고깃집 예약 내역 및 노쇼 내역</h2><h3>--응답 데이터<br>" +
+    @Operation(summary = "식당 예약 및 픽업 주문 내역", description = "<h2>식당 예약 및 픽업 주문 내역보기 처리</h2><h3>--요청데이터<br>page:페이지(페이지당 5개씩)<br>--응답 데이터<br>" +
             "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>confirm: 예약 상태" +
-            "--OwnerNoShowVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
     "정육점은 OwnerNewReservationVo에 pickupList배열추가 노쇼는 배열값 null<br> count[int]:갯수<br>" +
             "ibutMenu[int]:메뉴pk<br>" +
             "ireser[int]: 예약pk<br>" +
             "menu[String]: 메뉴이름<br>")
-    public OwnerSelReservationVo getReservation() {
-        return service.getReservation();
+    public OwnerSelReservationVo getReservation(int page) {
+        return service.getReservation(page);
+    }
+
+    @GetMapping("/noshow")
+    @Operation(summary = "노쇼 내역",description = "<h2>노쇼 내역 보기 처리</h2><h3>--요청데이터<br>page:페이지(페이지당 10개씩)<br>--응답데이터<br>count:전체 노쇼 갯수<br>SelShopNoShowProcVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
+    "--노쇼내역이 없거나 정육점사장님이 불러오면 빈배열이 아니라 필드값이 전혀 안나오게 설정해둠")
+    public OwnerSelNoShowVo getNoShow(int page){
+        return service.selNoShow(page);
     }
 
 

@@ -8,5 +8,6 @@ public class SelShopNoShowProcVo {
     private String name;
     private String date;
     private int ireser;
+    private int count;
     private int headCount;
 }
