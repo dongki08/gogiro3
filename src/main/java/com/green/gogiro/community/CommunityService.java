@@ -385,7 +385,6 @@ public class CommunityService {
 
         communityEntity.getUserEntity().setCount(communityEntity.getUserEntity().getCount() + 1);
 
-
         return new ResVo(SUCCESS);
     }
 
@@ -417,6 +416,8 @@ public class CommunityService {
 
         communityCommentEntity.setCount(communityCommentEntity.getCount() + 1);
         communityCommentRepository.save(communityCommentEntity);
+
+        communityCommentEntity.getUserEntity().setCount(communityCommentEntity.getUserEntity().getCount() + 1);
 
         return new ResVo(SUCCESS);
     }

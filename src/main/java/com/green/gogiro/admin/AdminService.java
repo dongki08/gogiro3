@@ -257,6 +257,6 @@ public class AdminService{
         Optional<UserEntity> optional= userRepository.findById((long)iuser);
         UserEntity entity= optional.orElseThrow(()->new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
         entity.setCheck(entity.getCheck()==1?0:1);
-        return new ResVo(Const.SUCCESS);
+        return new ResVo(entity.getCheck());
     }
 }
