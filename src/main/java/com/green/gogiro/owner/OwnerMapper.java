@@ -63,7 +63,7 @@ public interface OwnerMapper {
 
 
 
-    List<OwnerShopPicsProcVo> selByButcherShopPics(long ishop);
+
 
 
 

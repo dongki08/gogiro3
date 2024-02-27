@@ -1,6 +1,7 @@
 package com.green.gogiro.owner;
 
 
+import com.green.gogiro.butchershop.ButcherShopMapper;
 import com.green.gogiro.common.*;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.butcher.ButcherEntity;
@@ -51,6 +52,7 @@ import static com.green.gogiro.exception.AuthErrorCode.SIZE_PHOTO;
 @Slf4j
 public class OwnerService {
     private final OwnerMapper mapper;
+    private final ButcherShopMapper butcherShopMapper;
     private final MyFileUtils myFileUtils;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -279,64 +281,64 @@ public class OwnerService {
             if (totalSize > 5) {
                 throw new RestApiException(SIZE_PHOTO);
             }
-                ShopEntity shopEntity = shopRepository.getReferenceById(ishop);
-                if (dto.getName().isEmpty()) {
-                    shopEntity.setName(shopEntity.getName());
-                } else {
-                    shopEntity.setName(dto.getName());
-                }
-                if (dto.getLocation().isEmpty()) {
-                    shopEntity.setLocation(shopEntity.getLocation());
-                } else {
-                    shopEntity.setLocation(dto.getLocation());
-                }
-                if (dto.getX().isEmpty()) {
-                    shopEntity.setX(shopEntity.getX());
-                } else {
-                    shopEntity.setX(dto.getX());
-                }
-                if (dto.getY().isEmpty()) {
-                    shopEntity.setY(shopEntity.getY());
-                } else {
-                    shopEntity.setY(dto.getY());
-                }
-                if (dto.getImeat() == null) {
-                    shopEntity.setShopCategoryEntity(shopEntity.getShopCategoryEntity());
-                } else {
-                    shopEntity.setShopCategoryEntity(categoryEntity);
-                }
-                if (dto.getDeposit() == null) {
-                    shopEntity.setDeposit(shopEntity.getDeposit());
-                } else {
-                    shopEntity.setDeposit(dto.getDeposit());
-                }
-                shopRepository.save(shopEntity);
-                shopMapper.delFacilities(ishop);
-                if (!dto.getFacility().isEmpty()) {
-                    shopMapper.insFacilities(ishop, dto.getFacility());
-                }
-                String target = "/shop/" + ishop + "/shop_pic";
-                ShopUpdDto pDto = new ShopUpdDto();
-                pDto.setIshop((int) ishop);
-                if (pics != null && !pics.isEmpty()) {
-                    if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
-                        List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
-                        for (ShopSelPicsNumDto pic : sDto) {
-                            myFileUtils.delFolderTrigger2(target + "/" + pic.getPic());
-                        }
-                        mapper.delShopPics(dto.getIshopPics());
-                    }
-                    for (MultipartFile file : pics) {
-                        String saveFileNm = myFileUtils.transferTo(file, target);
-                        pDto.getPics().add(saveFileNm);
-                    }
-                    mVo.setPics(pDto.getPics());
-                    mapper.insShopPic(pDto);
-                }
-                    return mVo;
+            ShopEntity shopEntity = shopRepository.getReferenceById(ishop);
+            if (dto.getName().isEmpty()) {
+                shopEntity.setName(shopEntity.getName());
+            } else {
+                shopEntity.setName(dto.getName());
             }
+            if (dto.getLocation().isEmpty()) {
+                shopEntity.setLocation(shopEntity.getLocation());
+            } else {
+                shopEntity.setLocation(dto.getLocation());
+            }
+            if (dto.getX().isEmpty()) {
+                shopEntity.setX(shopEntity.getX());
+            } else {
+                shopEntity.setX(dto.getX());
+            }
+            if (dto.getY().isEmpty()) {
+                shopEntity.setY(shopEntity.getY());
+            } else {
+                shopEntity.setY(dto.getY());
+            }
+            if (dto.getImeat() == null) {
+                shopEntity.setShopCategoryEntity(shopEntity.getShopCategoryEntity());
+            } else {
+                shopEntity.setShopCategoryEntity(categoryEntity);
+            }
+            if (dto.getDeposit() == null) {
+                shopEntity.setDeposit(shopEntity.getDeposit());
+            } else {
+                shopEntity.setDeposit(dto.getDeposit());
+            }
+            shopRepository.save(shopEntity);
+            shopMapper.delFacilities(ishop);
+            if (!dto.getFacility().isEmpty()) {
+                shopMapper.insFacilities(ishop, dto.getFacility());
+            }
+            String target = "/shop/" + ishop + "/shop_pic";
+            ShopUpdDto pDto = new ShopUpdDto();
+            pDto.setIshop((int) ishop);
+            if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
+                List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
+                for (ShopSelPicsNumDto pic : sDto) {
+                    myFileUtils.delFolderTrigger2(target + "/" + pic.getPic());
+                }
+                mapper.delShopPics(dto.getIshopPics());
+            }
+            if (pics != null && !pics.isEmpty()) {
+                for (MultipartFile file : pics) {
+                    String saveFileNm = myFileUtils.transferTo(file, target);
+                    pDto.getPics().add(saveFileNm);
+                }
+                mVo.setPics(pDto.getPics());
+                mapper.insShopPic(pDto);
+            }
+            return mVo;
+        }
         if (checkShop == 1) {
-            List<OwnerShopPicsProcVo> vo = mapper.selByButcherShopPics(ishop);
+            List<OwnerShopPicsProcVo> vo = butcherShopMapper.selByButcherShopPics(ishop);
             mVo.setIshop(ishop);
             mVo.setCheckShop(BUTCHER_CHECK_NUM);
             int picsSize = vo != null ? vo.size() : 0;
@@ -347,50 +349,48 @@ public class OwnerService {
                 throw new RestApiException(SIZE_PHOTO);
             }
 
-                ButcherEntity butcherEntity = butcherRepository.getReferenceById(ishop);
-                if (dto.getName().isEmpty()) {
-                    butcherEntity.setName(butcherEntity.getName());
-                } else {
-                    butcherEntity.setName(dto.getName());
-                }
-                if (dto.getLocation().isEmpty()) {
-                    butcherEntity.setLocation(butcherEntity.getLocation());
-                } else {
-                    butcherEntity.setLocation(dto.getLocation());
-                }
-                if (dto.getX().isEmpty()) {
-                    butcherEntity.setX(butcherEntity.getX());
-                } else {
-                    butcherEntity.setX(dto.getX());
-                }
-                if (dto.getY().isEmpty()) {
-                    butcherEntity.setY(butcherEntity.getY());
-                } else {
-                    butcherEntity.setY(dto.getY());
-                }
-                butcherRepository.save(butcherEntity);
+            ButcherEntity butcherEntity = butcherRepository.getReferenceById(ishop);
+            if (dto.getName().isEmpty()) {
+                butcherEntity.setName(butcherEntity.getName());
+            } else {
+                butcherEntity.setName(dto.getName());
+            }
+            if (dto.getLocation().isEmpty()) {
+                butcherEntity.setLocation(butcherEntity.getLocation());
+            } else {
+                butcherEntity.setLocation(dto.getLocation());
+            }
+            if (dto.getX().isEmpty()) {
+                butcherEntity.setX(butcherEntity.getX());
+            } else {
+                butcherEntity.setX(dto.getX());
+            }
+            if (dto.getY().isEmpty()) {
+                butcherEntity.setY(butcherEntity.getY());
+            } else {
+                butcherEntity.setY(dto.getY());
+            }
+            butcherRepository.save(butcherEntity);
             String path = "/butcher/" + ishop + "/butchershop_pic";
             ButcherInsDto pDto = new ButcherInsDto();
-            pDto.setIbutcher((int)ishop);
-            if (pics != null && !pics.isEmpty()) {
-                if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
-                    List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIshopPics());
-                    if (!picList.isEmpty()) {
-                        for (ButcherPicsProcVo vo2 : picList) {
-                            myFileUtils.delFolderTrigger2(path + "/" + vo2.getPic());
-                        }
-                        mapper.delButcherPics(dto.getIshopPics());
+            pDto.setIbutcher((int) ishop);
+            if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
+                List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIshopPics());
+                for (ButcherPicsProcVo vo2 : picList) {
+                    myFileUtils.delFolderTrigger2(path + "/" + vo2.getPic());
+                }
+                mapper.delButcherPics(dto.getIshopPics());
+                if (pics != null && !pics.isEmpty()) {
+                    for (MultipartFile pic : pics) {
+                        String saveFileNm = myFileUtils.transferTo(pic, path);
+                        pDto.getPics().add(saveFileNm);
                     }
+                    mVo.setPics(pDto.getPics());
+                    mapper.insButcherPics(pDto);
                 }
-                for (MultipartFile pic : pics) {
-                    String saveFileNm = myFileUtils.transferTo(pic, path);
-                    pDto.getPics().add(saveFileNm);
-                }
-                mapper.insButcherPics(pDto);
-                mVo.setPics(pDto.getPics());
             }
-                return mVo;
-            }
+            return mVo;
+        }
         return null;
     }
 
