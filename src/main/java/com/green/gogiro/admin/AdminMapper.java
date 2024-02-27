@@ -13,6 +13,7 @@ public interface AdminMapper {
     List<ReportedVo> reportList(ReportDto dto);
     int hide(HideDto dto);
     int cancelReport(CancelReportDto dto);
+    int delCount(DelCount count);
     List<BlackVo> blackList();
     int suspendAccount(CheckDto dto);
 }

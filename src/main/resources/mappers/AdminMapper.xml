@@ -79,8 +79,10 @@
         WHERE i${column}= #{pk}
     </update>
 
-    <delete id="delReviewCount">
-
+    <delete id="delCount">
+        DELETE
+        FROM t_${table}
+        WHERE i${column}= #{pk}
     </delete>
 
 
