@@ -43,7 +43,7 @@ public class ReservationController {
         if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
             throw new RestApiException(PASSED_BY_DATE);
         }
-        return null;//return service.postReservation2(dto);
+        return service.postReservation2(dto);
     }
 
     @PostMapping("/pickup")

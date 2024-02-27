@@ -39,6 +39,9 @@ public class PickupEntity extends BaseEntity {
     @ColumnDefault("0")
     private int confirm;
 
+    @Column(nullable = false)
+    private int total;
+
     @ToString.Exclude
     @OneToMany(mappedBy="pickupEntity",cascade=CascadeType.PERSIST)
     private List<PickupMenuEntity> pickupMenuEntityList = new ArrayList<>();

@@ -198,26 +198,22 @@
             </when>
         </choose>
     </insert>
-    <select id="amount">
-        <choose>
-            <when test="isReservation">
-                SELECT
-                    b.deposit
-                FROM t_reservation a
-                JOIN t_shop b
-                ON a.ishop= b.ishop
-                WHERE a.ireser=#{ireser}
-            </when>
-            <otherwise>
-                SELECT
-                    sum(c.`price`*b.`count`)
-                FROM t_pickup a
-                JOIN t_pickup_menu b
-                ON a.ipickup=b.ipickup
-                JOIN t_but_menu c
-                ON b.ibut_menu=c.ibut_menu
-                WHERE a.ipickup=#{ireser}
-            </otherwise>
-        </choose>
+    <select id="reservationAmount">
+        SELECT
+            b.deposit
+        FROM t_reservation a
+        JOIN t_shop b
+        ON a.ishop= b.ishop
+        WHERE a.ireser=#{ireser}
+    </select>
+    <select id="pickupAmount">
+        SELECT
+            sum(c.`price`*b.`count`)
+        FROM t_pickup a
+        JOIN t_pickup_menu b
+        ON a.ipickup=b.ipickup
+        JOIN t_but_menu c
+        ON b.ibut_menu=c.ibut_menu
+        WHERE a.ipickup=#{ireser}
     </select>
 </mapper>

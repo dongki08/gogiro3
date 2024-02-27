@@ -54,7 +54,7 @@ public class ReservationService {
 
     //Mybatis 1.예약 등록
     @Transactional
-    public ResVo postReservation1(ReservationInsDto dto) {
+    public ReservationVo postReservation1(ReservationInsDto dto) {
         ShopModel entity = shopMapper.selShopEntity(dto.getIshop());
         if (entity == null) {
             throw new RestApiException(VALID_SHOP);
@@ -63,13 +63,13 @@ public class ReservationService {
         mapper.insReservation(dto);
         ReservationVo vo= new ReservationVo();
 
-        //vo.setAmount();
+        vo.setAmount(mapper.reservationAmount(dto.getIreser()));
         vo.setIreser(dto.getIreser());
-        return null;
+        return vo;
     }
     //JPA 1.예약 등록
     @Transactional
-    public ResVo postReservation2(ReservationInsDto dto){
+    public ReservationVo postReservation2(ReservationInsDto dto){
         ShopEntity shopEntity=shopRepository.getReferenceById((long)dto.getIshop());
         if(shopEntity.getIshop().intValue()==0){
             throw new RestApiException(VALID_SHOP);
@@ -81,7 +81,10 @@ public class ReservationService {
         entity.setRequest(dto.getRequest());
         entity.setHeadCount(dto.getHeadCount());
         repository.save(entity);
-        return new ResVo(entity.getIreser().intValue());
+        ReservationVo vo= new ReservationVo();
+        vo.setAmount(mapper.reservationAmount(dto.getIreser()));
+        vo.setIreser(entity.getIreser().intValue());
+        return vo;
     }
     //Mybatis 2.픽업 등록
     @Transactional
@@ -319,7 +322,7 @@ public class ReservationService {
     }
     @Transactional
     public boolean confirmPayment(PaymentDto dto){
-        return (mapper.amount(dto))!=dto.getAmount();
+        return false;
     }
 }
 
