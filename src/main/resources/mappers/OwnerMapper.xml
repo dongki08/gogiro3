@@ -12,10 +12,12 @@
     </insert>
     
     <select id="selShopNoShow">
-        SELECT b.iuser,b.`name`,b.`date`, b.ireser, b.head_count AS headCount
-        FROM t_black_list_count a
-        JOIN (SELECT c.iuser, c.`name`, d.`date`,d.ireser,d.head_count FROM t_user c JOIN t_reservation d ON  c.iuser = d.iuser WHERE d.ishop = #{ishop} AND d.confirm = 3) b
-        ON a.iuser = b.iuser;
+        SELECT
+        a.name, b.date, b.head_count as headCount,b.ireser
+        FROM t_user a
+        JOIN t_reservation b
+        ON a.iuser= b.iuser
+        WHERE b.ishop = #{ishop}
     </select>
 
     <select id="selShopReservation">
