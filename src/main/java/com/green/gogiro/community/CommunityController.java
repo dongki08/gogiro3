@@ -27,7 +27,9 @@ public class CommunityController {
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
             "--응답데이터<br>iboard : 보드pk<br>" +
-            "pics : 사진리스트")
+            "pics : 사진리스트<br>" +
+            "총 관리자 로그인 후 커뮤니티 등록 시 announce(1)공지로 등록<br>" +
+            "가게관리자, 유저 로그인 후 커뮤니티 등록 시 announce(0)로 커뮤니티 게시글 등록")
     public CommunityPicsInsVo postCommunity(@RequestPart(required = false) List<MultipartFile> pics
             , @RequestPart @Valid CommunityInsDto dto) {
         //사진을 5장 초과했을 경우
