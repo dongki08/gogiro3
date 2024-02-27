@@ -119,7 +119,7 @@ public class CommunityController {
             "iboard : 커뮤니티pk<br>" +
             "--응답데이터<br>" +
             "result : 1(성공), 에러메세지(실패)<br>" +
-            "본인 게시글이 없을때 에러메세지 : 등록된 글을 찾을 수 없습니다." +
+            "본인 게시글이 없을때 에러메세지 : 등록된 글을 찾을 수 없습니다.<br>" +
             "다른 유저 게시글 삭제 시 에러메세지 : 다른 유저의 게시글입니다.")
     public ResVo delCommunity(CommunityDelDto dto) {
         return service.delCommunity(dto);
