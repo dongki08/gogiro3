@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.OutputStream;
@@ -21,6 +22,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import static com.green.gogiro.exception.ReservationErrorCode.INVALID_PAYMENT;
 import static com.green.gogiro.exception.ReservationErrorCode.PASSED_BY_DATE;
 
 
@@ -37,11 +39,11 @@ public class ReservationController {
             "<br>headCount(최소 1 이상): 인원수<br>--응답 데이터<br>(성공)<br>result: 예약pk" +
             "<br>(실패)<br>(400)NOT_DATE(0000-00-00 00:00:00)<br>INVALID_PARAMETER(날짜 형식이 올바르지 않습니다)" +
             "<br>(404)VALID_SHOP(DB에 없는 고기집)<br>(500)INTERNAL_SERVER_ERROR")
-    public ResVo postReservation(@RequestBody @Valid ReservationInsDto dto){
+    public ReservationVo postReservation(@RequestBody @Valid ReservationInsDto dto){
         if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
             throw new RestApiException(PASSED_BY_DATE);
         }
-        return service.postReservation2(dto);
+        return null;//return service.postReservation2(dto);
     }
 
     @PostMapping("/pickup")
@@ -78,7 +80,7 @@ public class ReservationController {
         return service.putReservation1(dto);
     }
 
-    @PostMapping("/review")
+    @PostMapping(value="/review",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "후기 등록",description = "후기 등록 처리<br>--요청 데이터<br>pics:후기 사진(1~5장)<br>" +
             "<br>checkShop:가게구분(고기집 0,정육점 1)<br>ireser(최소 1 이상):예약pk<br>ishop(최소 1 이상):가게pk" +
             "<br>star(1~5점):별점<br>review(1~50자):리뷰 내용<br>--응답 데이터<br>(성공)<br>ireview:리뷰pk" +
@@ -105,8 +107,9 @@ public class ReservationController {
 
     @PostMapping("/confirm")
     @Operation(summary="결제 승인",description="결제 승인 처리<br>" +
-            "--요청 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID" +
-            "<br>--응답 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID")
+            "--요청 데이터<br>checkShop: 가게 구분(0: 고기집, 1: 정육점), ireser: 예약pk" +
+            "<br>amount: 최종 결제 금액, <br>--응답 데이터<br>checkShop: 가게 구분(0: 고기집, 1: 정육점), ireser: 예약pk" +
+            "<br>amount: 최종 결제 금액")
     public PaymentDto confirmPayment(@RequestBody PaymentDto dto) throws Exception {
         String widgetSecretKey = "test_ck_6bJXmgo28eD0pPL4knJXrLAnGKWx";
         Base64.Encoder encoder = Base64.getEncoder();

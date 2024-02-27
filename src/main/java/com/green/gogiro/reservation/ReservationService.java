@@ -61,7 +61,11 @@ public class ReservationService {
         }
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.insReservation(dto);
-        return new ResVo(dto.getIreser());
+        ReservationVo vo= new ReservationVo();
+
+        //vo.setAmount();
+        vo.setIreser(dto.getIreser());
+        return null;
     }
     //JPA 1.예약 등록
     @Transactional
@@ -313,6 +317,9 @@ public class ReservationService {
         }
         return new ResVo(SUCCESS);
     }
-
+    @Transactional
+    public boolean confirmPayment(PaymentDto dto){
+        return (mapper.amount(dto))!=dto.getAmount();
+    }
 }
 

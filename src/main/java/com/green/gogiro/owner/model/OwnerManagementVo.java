@@ -14,9 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnerManagementVo {
+    private int checkShop;
     private Long ishop;
     private Long imeat;
-    private List<String> pics;
+    private List<OwnerShopPicsProcVo> pics;
     private String name;
     private String location;
     private String open;

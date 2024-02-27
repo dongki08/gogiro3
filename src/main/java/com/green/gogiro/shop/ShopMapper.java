@@ -1,6 +1,7 @@
 package com.green.gogiro.shop;
 
 
+import com.green.gogiro.owner.model.OwnerShopPicsProcVo;
 import com.green.gogiro.shop.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,5 +38,7 @@ public interface ShopMapper {
 
     List<ShopMainGogiVo> selMainShop();
     List<ShopMainCommuVo> selMainCommunity();
+
+    List<OwnerShopPicsProcVo> selByShopPics(int ishop);
 
 }

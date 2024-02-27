@@ -194,4 +194,35 @@
         GROUP BY b.iboard
         ORDER BY RAND() LIMIT 5
     </select>
+
+    <select id="selByShopPics">
+        SELECT pic,ishop_pics as picsPk
+        FROM t_shop_pic
+        WHERE ishop = #{ishop}
+    </select>
+
+    <update id="updShop">
+        update t_shop
+        set title = #{title},
+        contents = #{contents},
+        updated_at = NOW()
+        where iboard = #{iboard}
+        and iuser = #{iuser}
+    </update>
+
+    <delete id="delFacilities">
+        DELETE FROM t_shop_facilities
+        WHERE ishop = #{ishop}
+    </delete>
+
+    <insert id="insFacilities">
+        INSERT INTO t_shop_facilities
+        (ishop,ifacil)
+        VALUES(
+        <foreach collection="ifacil" item="ifacil" separator="),(">
+            #{ishop},#{ifacil}
+        </foreach>
+    )
+    </insert>
+
 </mapper>
