@@ -98,7 +98,7 @@
             b.number,
             a.`check` AS state
         FROM t_user a
-        LEFT JOIN t_butcher b
+        LEFT JOIN t_butcher_shop b
         ON a.iuser=b.iuser
         AND a.check_shop=1
         WHERE a.`check`=1

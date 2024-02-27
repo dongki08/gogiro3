@@ -8,9 +8,12 @@ import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.community.model.*;
+import com.green.gogiro.entity.BlackListEntity;
+import com.green.gogiro.entity.BlackListRepository;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.community.*;
 import com.green.gogiro.entity.community.repository.*;
+import com.green.gogiro.entity.shop.repository.ReservationRepository;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.RestApiException;
 import com.green.gogiro.security.AuthenticationFacade;
@@ -40,6 +43,8 @@ public class CommunityService {
     private final CommunityReportRepository communityReportRepository;
     private final CommunityCommentCountRepository communityCommentCountRepository;
     private final CommunityCommentRepository communityCommentRepository;
+    private final BlackListRepository blackListRepository;
+    private final ReservationRepository reservationRepository;
 
 
     //커뮤니티 게시글 등록
@@ -147,9 +152,17 @@ public class CommunityService {
             throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
         //사진pk 여부
-        if(dto.getIcommuPics() != picPk) {
+        if(dto.getIcommuPics().size() != dto.getIcommuPics()
+                .stream()
+                .filter(item-> { for(Integer pk: picPk) {
+                    if(item == pk) { return true; }
+                }
+                    return false;
+                }
+        ).toList().size()) {
             throw new RestApiException(NOT_COMMUNITY_PICSPKENTITY);
         }
+
 
         if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
@@ -345,26 +358,40 @@ public class CommunityService {
         ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
 
         Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
+        //신고 중복 안 되도록 처리
         if(optEntity.isPresent()) {
             throw new RestApiException(REPORT_COMMUNITY_ENTITY);
         }
-
         UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
-        CommunityEntity communityEntity = communityRepository.getReferenceById(dto.getIboard());
-
+        Optional<CommunityEntity> optionalCommunity = communityRepository.findAllByIboard(dto.getIboard());
+        //없는 게시물 신고불가 처리
+        CommunityEntity communityEntity = optionalCommunity
+                .orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+        //본인 게시글 신고 안 되도록 처리
         if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(REPORT_COMMUNITY_MYUSER);
         }
+        //없는 신고 pk를 신고 하였을 때
+        if(mapper.reportEntity(dto.getIreport().intValue()) == null) {
+            throw new RestApiException(REPORT_ENTITY);
+        }
+
         CommunityCountEntity countEntity = new CommunityCountEntity();
         countEntity.setCommunityCountIds(ids);
         countEntity.setIreport(reportEntity);
         countEntity.setUserEntity(userEntity);
         countEntity.setCommunityEntity(communityEntity);
-
         communityCountRepository.save(countEntity);
+
+        BlackListEntity blackListEntity = new BlackListEntity();
+        blackListEntity.setIuser(userEntity);
+        blackListEntity.setCount(communityEntity.getCount());
+        blackListRepository.save(blackListEntity);
 
         communityEntity.setCount(communityEntity.getCount() + 1);
         communityRepository.save(communityEntity);
+
+
 
         return new ResVo(SUCCESS);
     }

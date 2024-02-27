@@ -56,6 +56,7 @@
             <if test="search != null and search != '' ">
                 a.title like CONCAT('%',#{search},'%')
             </if>
+            and a.count <![CDATA[<=]]> 3
         </where>
         <choose>
             <when test="filter==0">
@@ -66,7 +67,6 @@
                 ORDER BY COUNT(c.iuser) DESC, a.iboard desc
             </when>
         </choose>
-
         limit #{startIdx}, #{rowCount}
     </select>
 
@@ -238,4 +238,10 @@
         WHERE iuser = #{iuser}
         AND iboard = #{iboard}
     </delete>
+
+    <select id="reportEntity">
+        select ireport
+        from t_report
+        where ireport = #{ireport}
+    </select>
 </mapper>
