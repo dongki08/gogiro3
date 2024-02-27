@@ -200,11 +200,9 @@
     </insert>
     <select id="reservationAmount">
         SELECT
-            b.deposit
-        FROM t_reservation a
-        JOIN t_shop b
-        ON a.ishop= b.ishop
-        WHERE a.ireser=#{ireser}
+            deposit
+        FROM t_shop
+        WHERE ishop=#{ishop}
     </select>
     <select id="pickupAmount">
         SELECT

@@ -24,7 +24,6 @@ import com.green.gogiro.reservation.model.*;
 import com.green.gogiro.security.AuthenticationFacade;
 import com.green.gogiro.shop.ShopMapper;
 import com.green.gogiro.entity.shop.repository.ShopRepository;
-import com.green.gogiro.shop.model.ShopModel;
 import com.green.gogiro.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RequiredArgsConstructor
 @Service
@@ -52,21 +52,21 @@ public class ReservationService {
     private final ShopReviewRepository shopReviewRepository;
     private final ButcherReviewRepository butcherReviewRepository;
 
-    //Mybatis 1.예약 등록
-    @Transactional
-    public ReservationVo postReservation1(ReservationInsDto dto) {
-        ShopModel entity = shopMapper.selShopEntity(dto.getIshop());
-        if (entity == null) {
-            throw new RestApiException(VALID_SHOP);
-        }
-        dto.setIuser((int)authenticationFacade.getLoginUserPk());
-        mapper.insReservation(dto);
-        ReservationVo vo= new ReservationVo();
-
-        vo.setAmount(mapper.reservationAmount(dto.getIreser()));
-        vo.setIreser(dto.getIreser());
-        return vo;
-    }
+//    //Mybatis 1.예약 등록
+//    @Transactional
+//    public ReservationVo postReservation1(ReservationInsDto dto) {
+//        ShopModel entity = shopMapper.selShopEntity(dto.getIshop());
+//        if (entity == null) {
+//            throw new RestApiException(VALID_SHOP);
+//        }
+//        dto.setIuser((int)authenticationFacade.getLoginUserPk());
+//        mapper.insReservation(dto);
+//        ReservationVo vo= new ReservationVo();
+//
+//        vo.setAmount(mapper.reservationAmount(dto.getIreser()));
+//        vo.setIreser(dto.getIreser());
+//        return vo;
+//    }
     //JPA 1.예약 등록
     @Transactional
     public ReservationVo postReservation2(ReservationInsDto dto){
@@ -82,46 +82,49 @@ public class ReservationService {
         entity.setHeadCount(dto.getHeadCount());
         repository.save(entity);
         ReservationVo vo= new ReservationVo();
-        vo.setAmount(mapper.reservationAmount(dto.getIreser()));
+        vo.setAmount(shopEntity.getDeposit());
         vo.setIreser(entity.getIreser().intValue());
         return vo;
     }
-    //Mybatis 2.픽업 등록
-    @Transactional
-    public ResVo postPickup1(PickupInsDto dto) {
-        List<Integer> menuList = butMapper.selButcherMenu(dto.getIbutcher());
-        List<Integer> list= menuList.stream().filter(item->{
-            for(PickupMenuDto menu: dto.getMenus()){
-                if(item==menu.getIbutMenu()){
-                    return true;
-                }
-            }
-            return false;
-        }).toList();
-        if(list.size()!=dto.getMenus().size()){
-            throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
-        }
-        dto.setIuser((int)authenticationFacade.getLoginUserPk());
-        mapper.insPickup(dto);
-        for (PickupMenuDto m : dto.getMenus()) {
-            PickupMenuDto menu = PickupMenuDto.builder()
-                    .ipickup(dto.getIpickup())
-                    .ibutMenu(m.getIbutMenu())
-                    .count(m.getCount())
-                    .build();
-            mapper.insPickupMenu(menu);
-        }
-        return new ResVo(dto.getIpickup());
-    }
+//    //Mybatis 2.픽업 등록
+//    @Transactional
+//    public ResVo postPickup1(PickupInsDto dto) {
+//        List<Integer> menuList = butMapper.selButcherMenu(dto.getIbutcher());
+//        List<Integer> list= menuList.stream().filter(item->{
+//            for(PickupMenuDto menu: dto.getMenus()){
+//                if(item==menu.getIbutMenu()){
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }).toList();
+//        if(list.size()!=dto.getMenus().size()){
+//            throw new RestApiException(AuthErrorCode.INVALID_MENU_OR_COUNT);
+//        }
+//        dto.setIuser((int)authenticationFacade.getLoginUserPk());
+//        mapper.insPickup(dto);
+//        for (PickupMenuDto m : dto.getMenus()) {
+//            PickupMenuDto menu = PickupMenuDto.builder()
+//                    .ipickup(dto.getIpickup())
+//                    .ibutMenu(m.getIbutMenu())
+//                    .count(m.getCount())
+//                    .build();
+//            mapper.insPickupMenu(menu);
+//        }
+//        return new ResVo(dto.getIpickup());
+//    }
     //JPA 2.픽업 등록
     @Transactional
-    public ResVo postPickup2(PickupInsDto dto){
+    public ReservationVo postPickup2(PickupInsDto dto){
         ButcherEntity butcherEntity=butcherRepository.getReferenceById((long)dto.getIbutcher());
-        List<Integer> menuList= butcherMenuRepository.findByButcherEntity(butcherEntity)
-                .stream().map(item->item.getIbutMenu().intValue()).toList();
-        List<Integer> list= menuList.stream().filter(item->{
+        List<ButcherMenuEntity> menuList= butcherMenuRepository.findByButcherEntity(butcherEntity);
+        AtomicInteger amount= new AtomicInteger();
+        List<ButcherMenuEntity> list= menuList.stream().filter(item->{
                 for(PickupMenuDto menu: dto.getMenus()){
-                    if(item==menu.getIbutMenu()){return true;}
+                    if(item.getIbutMenu()==menu.getIbutMenu()){
+                        amount.addAndGet(item.getPrice() * menu.getCount());
+                        return true;
+                    }
                 }
                 return false;
             }
@@ -149,7 +152,10 @@ public class ReservationService {
                                          .build();
                   }).toList()
               );
-        return new ResVo(entity.getIpickup().intValue());
+        ReservationVo vo= new ReservationVo();
+        vo.setAmount(amount.intValue());
+        vo.setIreser(entity.getIpickup().intValue());
+        return vo;
     }
     //Mybatis 3.예약 취소
     @Transactional

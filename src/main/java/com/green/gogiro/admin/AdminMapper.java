@@ -14,6 +14,7 @@ public interface AdminMapper {
     int hide(HideDto dto);
     int cancelReport(CancelReportDto dto);
     int delCount(DelCount count);
-    List<BlackVo> blackList();
+    List<Integer> beforeBlackList();
+    List<BlackVo> blackList(List<Integer> list);
     int suspendAccount(CheckDto dto);
 }

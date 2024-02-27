@@ -54,7 +54,7 @@ public class ReservationController {
             "<br>INVALID_MENU_OR_COUNT(메뉴 혹은 수량이 잘못되었습니다)" +
             "<br>INVALID_PARAMETER<br>(날짜 형식이 올바르지 않습니다)<br>(메뉴를 입력해주세요)" +
             "<br>(500)INTERNAL_SERVER_ERROR")
-    public ResVo postPickup(@RequestBody @Valid PickupInsDto dto){
+    public ReservationVo postPickup(@RequestBody @Valid PickupInsDto dto){
         if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
             throw new RestApiException(PASSED_BY_DATE);
         }

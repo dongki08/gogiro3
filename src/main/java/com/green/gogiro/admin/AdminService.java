@@ -15,7 +15,6 @@ import com.green.gogiro.entity.community.CommunityEntity;
 import com.green.gogiro.entity.community.repository.CommunityCommentRepository;
 import com.green.gogiro.entity.community.repository.CommunityRepository;
 import com.green.gogiro.entity.shop.ShopEntity;
-import com.green.gogiro.entity.shop.ShopReviewCountEntity;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
 import com.green.gogiro.exception.AuthErrorCode;
@@ -53,34 +52,34 @@ public class AdminService{
     private final ShopReviewRepository shopReviewRepository;
     private final ButcherReviewRepository butcherReviewRepository;
     //Mybatis 0.총 관리자 로그인
-    public AdminSigninVo adminSignin1(HttpServletResponse res, AdminSigninDto dto){
-        AdminSigninProcVo pVo= mapper.checkAdmin(dto.getEmail());
-        if(pVo==null){
-            throw new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID);
-        }else if(!pVo.getRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
-        }else if(!passwordEncoder.matches(dto.getUpw(), pVo.getUpw())){
-            throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
-        }
-        MyPrincipal mp = new MyPrincipal();
-        mp.setIuser(pVo.getIuser());
-        mp.setRole(pVo.getRole());
-        String at = jwtTokenProvider.generateAccessToken(mp);
-        String rt = jwtTokenProvider.generateRefreshToken(mp);
-        int rtCookieMaxAge = appProperties.getJwt()
-                                          .getRefreshTokenCookieMaxAge();
-        cookieUtils.deleteCookie(res, "rt");
-        cookieUtils.setCookie(res,
-                              "rt",
-                              rt,
-                              rtCookieMaxAge
-        );
-        return AdminSigninVo.builder()
-                            .result(Const.SUCCESS)
-                            .accessToken(at)
-                            .iuser(pVo.getIuser())
-                            .build();
-    }
+//    public AdminSigninVo adminSignin1(HttpServletResponse res, AdminSigninDto dto){
+//        AdminSigninProcVo pVo= mapper.checkAdmin(dto.getEmail());
+//        if(pVo==null){
+//            throw new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID);
+//        }else if(!pVo.getRole().equals("ADMIN")){
+//            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+//        }else if(!passwordEncoder.matches(dto.getUpw(), pVo.getUpw())){
+//            throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
+//        }
+//        MyPrincipal mp = new MyPrincipal();
+//        mp.setIuser(pVo.getIuser());
+//        mp.setRole(pVo.getRole());
+//        String at = jwtTokenProvider.generateAccessToken(mp);
+//        String rt = jwtTokenProvider.generateRefreshToken(mp);
+//        int rtCookieMaxAge = appProperties.getJwt()
+//                                          .getRefreshTokenCookieMaxAge();
+//        cookieUtils.deleteCookie(res, "rt");
+//        cookieUtils.setCookie(res,
+//                              "rt",
+//                              rt,
+//                              rtCookieMaxAge
+//        );
+//        return AdminSigninVo.builder()
+//                            .result(Const.SUCCESS)
+//                            .accessToken(at)
+//                            .iuser(pVo.getIuser())
+//                            .build();
+//    }
     //JPA 0.총 관리자 로그인
     @Transactional
     public AdminSigninVo adminSignin2(HttpServletResponse res, AdminSigninDto dto){
@@ -111,15 +110,15 @@ public class AdminService{
         return mapper.shopList(search);
     }
     //JPA 1.매장 관리 리스트
-    @Transactional
-    public List<ShopVo> shopList2(){return null;}//UNION 포함
+//    @Transactional
+//    public List<ShopVo> shopList2(){return null;}//UNION 포함
     //Mybatis 2.가게 승인 여부 변경
-    public ResVo confirmShop1(ConfirmDto dto){
-        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
-        }
-        return new ResVo(mapper.confirmShop(dto));
-    }
+//    public ResVo confirmShop1(ConfirmDto dto){
+//        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
+//            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+//        }
+//        return new ResVo(mapper.confirmShop(dto));
+//    }
     //JPA 2.가게 승인 여부 변경
     @Transactional
     public ResVo confirmShop2(ConfirmDto dto){
@@ -142,22 +141,21 @@ public class AdminService{
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
         }
-
         return mapper.reportList(new ReportDto(check));
     }
     //JPA 3.신고 글 리스트
-    @Transactional
-    public List<ReportedVo> reportList2(){return null;}//UNION 포함
+//    @Transactional
+//    public List<ReportedVo> reportList2(){return null;}//UNION 포함
     //Mybatis 4.글 숨김
-    public ResVo hide1(@RequestBody HideDto dto){
-        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
-        }
-        return new ResVo(mapper.hide(dto));
-    }
+//    public ResVo hide1(HideDto dto){
+//        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
+//            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+//        }
+//        return new ResVo(mapper.hide(dto));
+//    }
     //JPA 4.글 숨김
     @Transactional
-    public ResVo hide2(@RequestBody HideDto dto){
+    public ResVo hide2(HideDto dto){
         switch(dto.getCheck()){
             case 0:
                 Optional<CommunityEntity> optional0= communityRepository.findById((long)dto.getPk());
@@ -195,10 +193,10 @@ public class AdminService{
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
         }
-        DelCount delCount = new DelCount();
-        delCount.setCheck(dto.getCheck());
-        delCount.setPk(dto.getPk());
-        mapper.delCount(delCount);
+        DelCount del= new DelCount();
+        del.setCheck(dto.getCheck());
+        del.setPk(dto.getPk());
+        mapper.delCount(del);
         return new ResVo(mapper.cancelReport(dto));
     }
     //JPA 5.게시물 신고 취소
@@ -234,6 +232,10 @@ public class AdminService{
                 entity3.setCount(0);
                 break;
         }
+        DelCount del= new DelCount();
+        del.setCheck(dto.getCheck());
+        del.setPk(dto.getPk());
+        mapper.delCount(del);
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
@@ -241,18 +243,18 @@ public class AdminService{
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
         }
-        return mapper.blackList();
+        return mapper.blackList(mapper.beforeBlackList());
     }
     //JPA 6.사용자(USER,OWNER)블랙 리스트(정지)
-    @Transactional
-    public List<BlackVo> blackList2(){return null;}//UNION 사용
+//    @Transactional
+//    public List<BlackVo> blackList2(){return null;}//UNION 사용
     //Mybatis 7.계정 정지/정지 해제(토글로 처리)
-    public ResVo suspendAccount1(int iuser){
-        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
-        }
-        return new ResVo(mapper.suspendAccount(new CheckDto(iuser)));
-    }
+//    public ResVo suspendAccount1(int iuser){
+//        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
+//            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+//        }
+//        return new ResVo(mapper.suspendAccount(new CheckDto(iuser)));
+//    }
     //JPA 7.계정 정지/정지 해제(토글로 처리)
     @Transactional
     public ResVo suspendAccount2(int iuser){
