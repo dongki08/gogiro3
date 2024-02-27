@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.green.gogiro.common.Const.BUTCHER_CHECK_NUM;
 import static com.green.gogiro.exception.AuthErrorCode.SIZE_PHOTO;
 
 @Service
@@ -261,14 +262,16 @@ public class OwnerService {
 
 
     //가게 수정
+    @Transactional
     public OwnerManagementModifyVo updModify(List<MultipartFile> pics, OwnerManagementModifyDto dto) {
         int checkShop = authenticationFacade.getLoginOwnerCheckShop();
         long ishop = authenticationFacade.getLoginOwnerShopPk();
+        OwnerManagementModifyVo mVo = new OwnerManagementModifyVo();
         if (checkShop == 0) {
-            ShopModel model = shopMapper.selShopEntity((int) ishop);
             List<OwnerShopPicsProcVo> vo = shopMapper.selByShopPics((int) ishop);
-            OwnerManagementModifyVo mVo = new OwnerManagementModifyVo();
-
+            ShopCategoryEntity categoryEntity = categoryRepository.getReferenceById(dto.getImeat());
+            mVo.setIshop(ishop);
+            mVo.setCheckShop(checkShop);
             int picsSize = vo != null ? vo.size() : 0;
             int fileSize = pics != null ? pics.size() : 0;
             int delSize = dto.getIshopPics() != null ? dto.getIshopPics().size() : 0;
@@ -276,7 +279,6 @@ public class OwnerService {
             if (totalSize > 5) {
                 throw new RestApiException(SIZE_PHOTO);
             }
-            if (checkShop == 0) {
                 ShopEntity shopEntity = shopRepository.getReferenceById(ishop);
                 if (dto.getName().isEmpty()) {
                     shopEntity.setName(shopEntity.getName());
@@ -299,23 +301,23 @@ public class OwnerService {
                     shopEntity.setY(dto.getY());
                 }
                 if (dto.getImeat() == null) {
-                    shopEntity.getShopCategoryEntity().setImeat(shopEntity.getShopCategoryEntity().getImeat());
+                    shopEntity.setShopCategoryEntity(shopEntity.getShopCategoryEntity());
                 } else {
-                    shopEntity.getShopCategoryEntity().setImeat(dto.getImeat());
+                    shopEntity.setShopCategoryEntity(categoryEntity);
                 }
                 if (dto.getDeposit() == null) {
                     shopEntity.setDeposit(shopEntity.getDeposit());
                 } else {
                     shopEntity.setDeposit(dto.getDeposit());
                 }
-                mapper.delFacilities(ishop);
-                if (!dto.getFacility().isEmpty()) {
-                    mapper.insFacilities(ishop, dto.getFacility());
-                }
                 shopRepository.save(shopEntity);
-                    String target = "/shop/" + ishop + "/shop_pic";
-                    ShopUpdDto pDto = new ShopUpdDto();
-                    pDto.setIshop((int)ishop);
+                shopMapper.delFacilities(ishop);
+                if (!dto.getFacility().isEmpty()) {
+                    shopMapper.insFacilities(ishop, dto.getFacility());
+                }
+                String target = "/shop/" + ishop + "/shop_pic";
+                ShopUpdDto pDto = new ShopUpdDto();
+                pDto.setIshop((int) ishop);
                 if (pics != null && !pics.isEmpty()) {
                     if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
                         List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
@@ -324,20 +326,73 @@ public class OwnerService {
                         }
                         mapper.delShopPics(dto.getIshopPics());
                     }
-                        for (MultipartFile file : pics) {
-                            String saveFileNm = myFileUtils.transferTo(file, target);
-                            pDto.getPics().add(saveFileNm);
-                            mVo.getPics().add(saveFileNm);
+                    for (MultipartFile file : pics) {
+                        String saveFileNm = myFileUtils.transferTo(file, target);
+                        pDto.getPics().add(saveFileNm);
+                    }
+                    mVo.setPics(pDto.getPics());
+                    mapper.insShopPic(pDto);
+                }
+                    return mVo;
+            }
+        if (checkShop == 1) {
+            List<OwnerShopPicsProcVo> vo = mapper.selByButcherShopPics(ishop);
+            mVo.setIshop(ishop);
+            mVo.setCheckShop(BUTCHER_CHECK_NUM);
+            int picsSize = vo != null ? vo.size() : 0;
+            int fileSize = pics != null ? pics.size() : 0;
+            int delSize = dto.getIshopPics() != null ? dto.getIshopPics().size() : 0;
+            int totalSize = picsSize + fileSize - delSize;
+            if (totalSize > 5) {
+                throw new RestApiException(SIZE_PHOTO);
+            }
+
+                ButcherEntity butcherEntity = butcherRepository.getReferenceById(ishop);
+                if (dto.getName().isEmpty()) {
+                    butcherEntity.setName(butcherEntity.getName());
+                } else {
+                    butcherEntity.setName(dto.getName());
+                }
+                if (dto.getLocation().isEmpty()) {
+                    butcherEntity.setLocation(butcherEntity.getLocation());
+                } else {
+                    butcherEntity.setLocation(dto.getLocation());
+                }
+                if (dto.getX().isEmpty()) {
+                    butcherEntity.setX(butcherEntity.getX());
+                } else {
+                    butcherEntity.setX(dto.getX());
+                }
+                if (dto.getY().isEmpty()) {
+                    butcherEntity.setY(butcherEntity.getY());
+                } else {
+                    butcherEntity.setY(dto.getY());
+                }
+                butcherRepository.save(butcherEntity);
+            String path = "/butcher/" + ishop + "/butchershop_pic";
+            ButcherInsDto pDto = new ButcherInsDto();
+            pDto.setIbutcher((int)ishop);
+            if (pics != null && !pics.isEmpty()) {
+                if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
+                    List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIshopPics());
+                    if (!picList.isEmpty()) {
+                        for (ButcherPicsProcVo vo2 : picList) {
+                            myFileUtils.delFolderTrigger2(path + "/" + vo2.getPic());
                         }
-                        mapper.insShopPic(pDto);
-                        mVo.setIshop(ishop);
-                        mVo.setCheckShop(checkShop);
-                        return mVo;
+                        mapper.delButcherPics(dto.getIshopPics());
                     }
                 }
+                for (MultipartFile pic : pics) {
+                    String saveFileNm = myFileUtils.transferTo(pic, path);
+                    pDto.getPics().add(saveFileNm);
+                }
+                mapper.insButcherPics(pDto);
+                mVo.setPics(pDto.getPics());
+            }
+                return mVo;
             }
         return null;
-        }
+    }
 
 
     //메뉴 수정
@@ -443,7 +498,7 @@ public class OwnerService {
 //                String saveFileNm = myFileUtils.transferTo(file, target);
 //                dto.getPics().add(saveFileNm);
 //            }
-//            mapper.insShopPic(dto);
+    //mapper.insShopPic(dto);
 //        }
 //        ShopPicsVo vo = new ShopPicsVo();
 //        vo.setIshop(dto.getIshop());

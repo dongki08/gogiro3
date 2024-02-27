@@ -41,4 +41,8 @@ public interface ShopMapper {
 
     List<OwnerShopPicsProcVo> selByShopPics(int ishop);
 
+    int insFacilities(long ishop,List<Integer> ifacil);
+
+    int delFacilities(long ishop);
+
 }

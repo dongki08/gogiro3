@@ -186,4 +186,10 @@
         FROM t_but_menu
         WHERE ibutcher= #{ibutcher}
     </select>
+
+    <select id="selByButcherShopPics">
+        SELECT pic,ibut_pics as picsPk
+        FROM t_butcher_pic
+        WHERE ibutcher = #{ishop}
+    </select>
 </mapper>
