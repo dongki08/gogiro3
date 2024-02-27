@@ -12,7 +12,7 @@ public class OwnerManagementModifyDto {
     private String name;
     private String location;
     @Schema(title = "삭제할 사진pk",example = "[]")
-    private List<Integer> ishopPics;
+    private List<Integer> ishopPics = new ArrayList<>();
     private String open;
     private String tel;
     private String x;

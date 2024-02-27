@@ -13,6 +13,7 @@ public enum AuthErrorCode implements ErrorCode{
     SIZE_PHOTO(HttpStatus.BAD_REQUEST,"사진이 5장 초과 입니다."),
     MUST_PHOTO(HttpStatus.BAD_REQUEST,"사진을 1장 이상 넣어 주세요."),
     INVALID_CATEGORY(HttpStatus.NOT_FOUND,"존재하지 않는 카테고리입니다."),
+    BLACK_LOGIN(HttpStatus.BAD_REQUEST,"정지된 사용자 입니다"),
     NOT_STAR(HttpStatus.BAD_REQUEST,"별점을 선택해 주세요."),
     NOT_COMMUNITY_TITLE(HttpStatus.BAD_REQUEST,"제목을 입력해 주세요."),
     NOT_CONTENT(HttpStatus.BAD_REQUEST,"내용을 입력해 주세요."),
