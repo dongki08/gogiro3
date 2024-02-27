@@ -4,7 +4,12 @@ import lombok.Data;
 
 @Data
 public class PaymentDto {
-    private String orderId;//주문ID
-    private int amount;//최종결제금액
-    private String paymentKey;//결제ID
+    private int checkShop;//가게 구분
+    private int ireser;//예약 pk
+    private int amount;//결제 총 금액
+    private boolean isReservation;
+    public void setCheckShop(int checkShop){
+        this.checkShop=checkShop;
+        this.isReservation=(checkShop==0);
+    }
 }
