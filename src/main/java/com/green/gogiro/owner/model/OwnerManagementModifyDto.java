@@ -18,5 +18,6 @@ public class OwnerManagementModifyDto {
     private String x;
     private String y;
     private Integer deposit;
+    @Schema(title = "삭제할 편의시설pk",example = "[]")
     private List<Integer> facility = new ArrayList<>();
 }

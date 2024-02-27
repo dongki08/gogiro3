@@ -89,7 +89,8 @@
         LEFT JOIN t_shop b
         ON a.iuser=b.iuser
         AND a.check_shop=0
-        WHERE a.`check`=1
+        WHERE a.count<![CDATA[>=]]>3
+        OR a.no_show_count<![CDATA[>=]]>2
         UNION
         SELECT
             a.iuser,
@@ -98,11 +99,12 @@
             b.number,
             a.`check` AS state
         FROM t_user a
-        LEFT JOIN t_butcher b
+        LEFT JOIN t_butcher_shop b
         ON a.iuser=b.iuser
         AND a.check_shop=1
-        WHERE a.`check`=1
-        order by iuser
+        WHERE a.count<![CDATA[>=]]>3
+        OR a.no_show_count<![CDATA[>=]]>2
+        ORDER BY iuser
     </select>
 
     <update id="suspendAccount">

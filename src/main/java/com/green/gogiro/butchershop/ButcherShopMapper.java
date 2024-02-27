@@ -1,6 +1,7 @@
 package com.green.gogiro.butchershop;
 
 import com.green.gogiro.butchershop.model.*;
+import com.green.gogiro.owner.model.OwnerShopPicsProcVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -45,4 +46,6 @@ public interface ButcherShopMapper {
     int selIbutcherForTest();
 
     List<Integer> selIbutMenuForTest(int ibutcher);
+
+    List<OwnerShopPicsProcVo> selByButcherShopPics(long ishop);
 }

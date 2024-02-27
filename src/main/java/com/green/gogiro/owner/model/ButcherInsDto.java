@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,7 +18,7 @@ public class ButcherInsDto {
     @JsonIgnore
     private int ibutcher;
     @JsonIgnore
-    private List<String> pics;
+    private List<String> pics = new ArrayList<>();
     @JsonIgnore
     private List<MultipartFile> files;
 }

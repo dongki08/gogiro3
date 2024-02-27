@@ -40,6 +40,7 @@ public interface OwnerMapper {
     //수정
     int insButcherPics(ButcherPicsUpdDto dto);
 
+
     int insButcherMenu(ButcherMenuInsDto dto);
 
     String selButcherMenuPicNm(int ibutMenu);
@@ -58,9 +59,11 @@ public interface OwnerMapper {
 
     List<ButcherPicsProcVo> selButcherPics(List<Integer> ibutPics);
 
-    int delFacilities(long ishop);
 
-    int insFacilities(long ishop,List<Integer> ifacil);
+
+
+
+
 
 
 
