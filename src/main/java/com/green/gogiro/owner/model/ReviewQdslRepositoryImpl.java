@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.green.gogiro.common.Const.BUTCHER_CHECK_NUM;
+import static com.green.gogiro.common.Const.SHOP_CHECK_NUM;
 import static com.green.gogiro.entity.butcher.QButcherReviewEntity.butcherReviewEntity;
 import static com.green.gogiro.entity.shop.QShopReviewEntity.shopReviewEntity;
 
@@ -32,11 +34,15 @@ public class ReviewQdslRepositoryImpl implements ReviewQdslRepository {
                     .limit(pageable.getPageSize())
                     .fetch();
             return list.stream().map(item -> OwnerReviewVo.builder()
+                    .checkShop(SHOP_CHECK_NUM)
+                    .ireview(item.getIreview())
                     .review(item.getReview())
                     .iuser(item.getUserEntity().getIuser())
                     .pics(item.getShopReviewPicEntityList().stream().map(pic -> pic.getPic()).collect(Collectors.toList()))
                     .createdAt(item.getCreatedAt().toString())
                     .ishop(item.getIreview())
+                    .exist(item.getComment() == null ? 0 : 1)
+                    .updatedAt(item.getUpdatedAt() == null ? null : item.getUpdatedAt().toString())
                     .comment(item.getComment())
                     .star(item.getStar())
                     .build()).collect(Collectors.toList());
@@ -51,12 +57,16 @@ public class ReviewQdslRepositoryImpl implements ReviewQdslRepository {
                     .fetch();
 
             return list.stream().map(item -> OwnerReviewVo.builder()
+                    .ireview(item.getIreview())
+                    .checkShop(BUTCHER_CHECK_NUM)
                     .iuser(item.getUserEntity().getIuser())
                     .pics(item.getButcherReviewPicEntityList().stream().map(pic -> pic.getPic()).collect(Collectors.toList()))
                     .review(item.getReview())
                     .comment(item.getComment())
                     .ishop(item.getButcherEntity().getIbutcher())
                     .createdAt(item.getCreatedAt().toString())
+                    .exist(item.getComment() == null ? 0 : 1)
+                    .updatedAt(item.getUpdatedAt().toString())
                     .star(item.getStar())
                     .build()).collect(Collectors.toList());
         }

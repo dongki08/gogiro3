@@ -61,7 +61,7 @@ public class OwnerController {
 
     @GetMapping("/review")
     @Operation(summary = "매장 리뷰 관리", description = "<h2>매장 리뷰 관리 처리</h2>" +
-            "<h3>--요구 데이터<br>페이지(sort는 신경 안쓰셔도 되요)<br>--응답 데이터<br>ishop: 가게pk<br>iuser: 작성자 pk<br>comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>pics: 리뷰 사진(배열)")
+            "<h3>--요구 데이터<br>페이지(sort는 신경 안쓰셔도 되요)<br>--응답 데이터<br>checkShop: 가게구분(0:고기,1:정육)<br>ireview:리뷰pk<br>ishop: 가게pk<br>iuser: 작성자 pk<br>star:별점<br>exist:사장님 댓글여부(0:댓글없음,1:댓글있음)comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>updatedAt:사장님 댓글 작성 날짜<br>pics: 리뷰 사진(배열)")
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
         return service.getAllReview(pageable);
     }
