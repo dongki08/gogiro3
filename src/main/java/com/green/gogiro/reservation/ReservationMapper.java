@@ -39,5 +39,7 @@ public interface ReservationMapper {
 
     int selPickupConfirmForTest(int ipickup);
 
-    Integer amount(PaymentDto dto);
+    Integer reservationAmount(int ireser);
+
+    Integer pickupAmount(int ireser);
 }

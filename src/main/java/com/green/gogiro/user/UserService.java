@@ -312,6 +312,8 @@ public class UserService {
             shopReviewEntity.setCount(shopReviewEntity.getCount() + 1);
             shopRepository.save(shopEntity);
 
+            shopReviewEntity.getUserEntity().setCount(shopReviewEntity.getUserEntity().getCount() + 1);
+
             return new ResVo(SUCCESS);
         }
 
@@ -343,6 +345,8 @@ public class UserService {
 
             butcherReviewEntity.setCount(butcherReviewEntity.getCount() + 1);
             butcherRepository.save(butcherEntity);
+
+            butcherReviewEntity.getUserEntity().setCount(butcherReviewEntity.getUserEntity().getCount() + 1);
 
             return new ResVo(SUCCESS);
         }
