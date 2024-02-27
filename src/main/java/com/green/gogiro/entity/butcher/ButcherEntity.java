@@ -39,7 +39,7 @@ public class ButcherEntity extends BaseEntity {
     @Column(length = 40, nullable = false)
     private String y;
 
-    @Column(length = 30)
+    @Column(length = 200)
     private String open;
 
     @Column(length = 15)
