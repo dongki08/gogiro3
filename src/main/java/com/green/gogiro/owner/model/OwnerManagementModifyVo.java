@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class OwnerManagementModifyVo {
+    private int checkShop;
     private Long ishop;
     private List<String> pics;
 }

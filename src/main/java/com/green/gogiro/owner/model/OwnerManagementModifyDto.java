@@ -1,5 +1,6 @@
 package com.green.gogiro.owner.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,10 +11,12 @@ public class OwnerManagementModifyDto {
     private Long imeat;
     private String name;
     private String location;
+    @Schema(title = "삭제할 사진pk",example = "[]")
+    private List<Integer> ishopPics;
     private String open;
     private String tel;
     private String x;
     private String y;
-    private int deposit;
+    private Integer deposit;
     private List<Integer> facility = new ArrayList<>();
 }

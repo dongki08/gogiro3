@@ -58,6 +58,11 @@ public interface OwnerMapper {
 
     List<ButcherPicsProcVo> selButcherPics(List<Integer> ibutPics);
 
+    int delFacilities(long ishop);
+
+    int insFacilities(long ishop,List<Integer> ifacil);
+
+
 
 
 
