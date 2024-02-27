@@ -26,8 +26,10 @@ public class CommunityController {
             "--요청데이터<br>title(NOT NULL) : 제목(1~50자)<br>" +
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
-            "--응답데이터<br>iboard : 보드pk<br>" +
+            "--응답데이터<br>" +
+            "iboard : 보드pk<br>" +
             "pics : 사진리스트<br>" +
+            "사진 5장 초과 등록 시 에러메세지 : 사진이 5장 초과 입니다.<br>" +
             "총 관리자 로그인 후 커뮤니티 등록 시 announce(1)공지로 등록<br>" +
             "가게관리자, 유저 로그인 후 커뮤니티 등록 시 announce(0)로 커뮤니티 게시글 등록")
     public CommunityPicsInsVo postCommunity(@RequestPart(required = false) List<MultipartFile> pics
@@ -50,8 +52,12 @@ public class CommunityController {
             "title(NOT NULL) : 제목(1~50자)<br>" +
             "contents(NOT NULL) : 내용(1~300자)<br>" +
             "pics : 사진(최대 5장까지 등록가능)<br>" +
-            "--응답데이터<br>iboard : 보드pk<br>" +
-            "pics : 사진리스트")
+            "--응답데이터<br>" +
+            "iboard : 보드pk<br>" +
+            "pics : 사진리스트<br>" +
+            "본인 게시글 외 수정 시 에러메세지 : 다른 유저의 게시글입니다.<br>" +
+            "본인 게시글이 없을때 에러메세지 : 등록된 글을 찾을 수 없습니다.<br>" +
+            "사진 5장 초과 등록 시 에러메세지 : 사진이 5장 초과 입니다.")
     public CommunityPicsInsVo putCommunity(@RequestPart(required = false) List<MultipartFile> pics
             ,@Valid @RequestPart CommunityUpdDto dto) {
         //사진을 5장 초과했을 경우
@@ -112,7 +118,9 @@ public class CommunityController {
             "--요청데이터<br>" +
             "iboard : 커뮤니티pk<br>" +
             "--응답데이터<br>" +
-            "result : 1(성공), 에러메세지(실패)")
+            "result : 1(성공), 에러메세지(실패)<br>" +
+            "본인 게시글이 없을때 에러메세지 : 등록된 글을 찾을 수 없습니다." +
+            "다른 유저 게시글 삭제 시 에러메세지 : 다른 유저의 게시글입니다.")
     public ResVo delCommunity(CommunityDelDto dto) {
         return service.delCommunity(dto);
     }

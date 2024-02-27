@@ -70,5 +70,7 @@ public interface CommunityMapper {
 
     int delCommunityDel(int iboard);
 
+    List<Integer> selByCommunityPicsPk(int iboard);
+
 
 }
