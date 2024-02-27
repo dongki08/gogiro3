@@ -91,7 +91,7 @@ public class OwnerController {
 //    }
 
     @PutMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 안보내도됨),facility:편의시설pk(정육점은 안보내도됨)" +
+    @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터(안바꾸고싶으면 null값넣으면 기존 정보 들어감)<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 안보내도됨),facility:편의시설pk(정육점은 안보내도됨)" +
     "--응답데이터<br>checkShop: 0:고기,1:정육<br>ishop:가게pk,pics:수정한 사진 이름(배열)")
     public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart OwnerManagementModifyDto dto) {
         return service.updModify(pics, dto);
