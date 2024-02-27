@@ -39,11 +39,11 @@ public class ReservationController {
             "<br>headCount(최소 1 이상): 인원수<br>--응답 데이터<br>(성공)<br>result: 예약pk" +
             "<br>(실패)<br>(400)NOT_DATE(0000-00-00 00:00:00)<br>INVALID_PARAMETER(날짜 형식이 올바르지 않습니다)" +
             "<br>(404)VALID_SHOP(DB에 없는 고기집)<br>(500)INTERNAL_SERVER_ERROR")
-    public ResVo postReservation(@RequestBody @Valid ReservationInsDto dto){
+    public ReservationVo postReservation(@RequestBody @Valid ReservationInsDto dto){
         if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
             throw new RestApiException(PASSED_BY_DATE);
         }
-        return service.postReservation2(dto);
+        return null;//return service.postReservation2(dto);
     }
 
     @PostMapping("/pickup")
@@ -125,9 +125,7 @@ public class ReservationController {
 
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(dto.toString().getBytes("UTF-8"));
-        if(!service.confirmPayment(dto)){
-            throw new RestApiException(INVALID_PAYMENT);
-        }
+
         return dto;
     }
 }
