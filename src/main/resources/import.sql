@@ -392,7 +392,12 @@ INSERT INTO `t_report` (`ireport`, `report`)VALUES (5, '게시글 도배');
 INSERT INTO `t_report` (`ireport`, `report`)VALUES (6, '기타');
 
 
+INSERT INTO `t_butcher_shop` (`ibutcher`,iuser ,`number`,`name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES (1,42,99,'다정축산물직판장', '대구 중구 중앙대로 314', '매일\r\n08:30 - 22:30', '0507-1393-9410', '126.726385532141', '35.1804742090837', '2024-01-09 16:35:06');
+INSERT INTO `t_butcher_shop` (`ibutcher`,iuser ,`number`,`name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES (2,43,999,'남문한우백화점 부림축산', '대구 중구 중앙대로 307 남문시장 1층', '화\r\n09:00 - 22:00\r\n수\r\n09:00 - 22:00\r\n목\r\n09:00 - 22:00\r\n금\r\n09:00 - 22:00\r\n토\r\n09:00 - 22:00\r\n일(1/21)\r\n정기휴무 (매달 1, 3번째 일요일)\r\n월\r\n09:00 - 22:00\r\n매달 1, 3번째 일요일 정기 휴무', '0507-1457-5659', '126.723927362338', '35.1804056266027', '2024-01-09 16:36:48');
 
+
+INSERT INTO `t_butcher_pic` (`ibut_pics`, `ibutcher`, `pic`) VALUES(11, 1, '1598e1b9-28d3-4b02-bf45-af2363b9f336.jpg');
+INSERT INTO `t_butcher_pic` (`ibut_pics`, `ibutcher`, `pic`) VALUES(12, 2, 'b6cbc471-5e66-41f0-84a9-43d1403d63be.jpg');
 
 
 
