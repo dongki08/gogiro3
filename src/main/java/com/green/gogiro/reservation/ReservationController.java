@@ -105,8 +105,8 @@ public class ReservationController {
 
     @PostMapping("/confirm")
     @Operation(summary="결제 승인",description="결제 승인 처리<br>" +
-            "--요청 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID" +
-            "<br>--응답 데이터<br>orderId:주문ID, amount: 최종 결제 금액, paymentKey: 결제ID")
+            "--요청 데이터<br>checkShop: 가게 구분(0: 고기집, 1: 정육점), ireser: 예약pk" +
+            "<br>amount: 최종 결제 금액, <br>--응답 데이터")
     public PaymentDto confirmPayment(@RequestBody PaymentDto dto) throws Exception {
         String widgetSecretKey = "test_ck_6bJXmgo28eD0pPL4knJXrLAnGKWx";
         Base64.Encoder encoder = Base64.getEncoder();
