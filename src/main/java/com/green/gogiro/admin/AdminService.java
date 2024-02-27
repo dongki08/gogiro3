@@ -141,6 +141,7 @@ public class AdminService{
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
         }
+
         return mapper.reportList(new ReportDto(check));
     }
     //JPA 3.신고 글 리스트
