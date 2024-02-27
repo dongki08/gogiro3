@@ -64,7 +64,7 @@ public class UserController {
         return service.getRefreshToken(req);
     }
 
-    @PutMapping
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "회원정보 수정", description = "<h2>회원정보 수정 처리</h2><h3>--요청데이터" +
             "<br>pic:변경할 사진(변경하고 싶지 않으면 NULL가능)" +
             "<br>nickname(NOT NULL, 1~10글자): 닉네임(변경하고 싶지 않으면 원래 닉네임을 줘야 함), 빈 칸 불가" +
