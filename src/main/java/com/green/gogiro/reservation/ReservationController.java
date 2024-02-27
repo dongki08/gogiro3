@@ -124,7 +124,7 @@ public class ReservationController {
 
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(dto.toString().getBytes("UTF-8"));
-        if(!service.confirmPayment1(dto)){
+        if(!service.confirmPayment(dto)){
             throw new RestApiException(INVALID_PAYMENT);
         }
         return dto;
