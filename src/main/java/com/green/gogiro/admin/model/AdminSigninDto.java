@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class AdminSigninDto {
-    @Schema(defaultValue = "dd44@naver.com")
+    @Schema(defaultValue = "admin1")
     private String email;
     @Schema(defaultValue = "1212")
     private String upw;
