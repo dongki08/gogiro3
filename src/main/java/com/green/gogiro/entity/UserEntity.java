@@ -60,4 +60,12 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "`check`",columnDefinition = "int default 0")
     private int check;
+
+    @Column
+    @ColumnDefault("0")
+    private int count;
+
+    @Column
+    @ColumnDefault("0")
+    private int noShowCount;
 }

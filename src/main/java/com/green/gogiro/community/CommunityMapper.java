@@ -72,5 +72,7 @@ public interface CommunityMapper {
 
     List<Integer> selByCommunityPicsPk(int iboard);
 
+    Integer reportEntity(int ireport);
+
 
 }
