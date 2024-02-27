@@ -1,840 +1,400 @@
 INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (1, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test1', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (2, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test2', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (3, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test30', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (4, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test3', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (5, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test4', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (6, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test31', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (7, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test5', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (8, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test6', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (9, '0000-00-00 00:00:00.000000', NULL, NULL, NULL, 0, 2, 'test32', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (10, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test7', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (11, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test33', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (12, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test8', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (13, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test9', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (15, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test10', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (16, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test11', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (18, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test12', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (19, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test13', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (20, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test14', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (21, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test15', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (22, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test16', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (23, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test17', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (24, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test18', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (25, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test19', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (26, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test20', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (28, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test21', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (29, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test22', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (30, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test23', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (31, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test24', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (32, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test25', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (33, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test26', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (34, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test27', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (35, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test28', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
--- INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,
---                       `name`, `nickname`, `pic`, `role`, `tel`, `upw`)
--- VALUES (36, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test29', NULL, NULL, NULL, NULL, 'OWNER', NULL,
---         '$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (2, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test2', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (3, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test30', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (4, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test3', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (5, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test4', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (6, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test31', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (7, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test5', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (8, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test6', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (9, '0000-00-00 00:00:00.000000', NULL, NULL, NULL, 0, 2, 'test32', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (10, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test7', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (11, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test33', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (12, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test8', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (13, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test9', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (15, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test10', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (16, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test11', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (18, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test12', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (19, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test13', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (20, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test14', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (21, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test15', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (22, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test16', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (23, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test17', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (24, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test18', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (25, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test19', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (26, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test20', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (28, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test21', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (29, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test22', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (30, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test23', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (31, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test24', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (32, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test25', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (33, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test26', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (34, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test27', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (35, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test28', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (36, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test29', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
 
 
 
--- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(1, '돼지');
--- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(2, '소');
--- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(3, '닭');
--- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(4, '오리');
--- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(5, '양');
---
---
---
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (1, 1, 1, 1, '고기굽는남자', '삼덕동1가 32-10', '16:00 - 00:30\r\n00:00 라스트오더\r\n', '0507-1401-5933', '128.598017431535',
---         '35.8664565986455', '2024-01-09 16:39:19');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (2, 2, 2, 2, '실비소갈비', '삼덕동2가 132', '15:00 - 23:00', '0507-1403-8624', '128.601043353125', '35.8666058119543',
---         '2024-01-09 16:16:19');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (3, 3, 3, 3, '팔각도', '삼덕동1가 63-11', '17:00 - 24:00\r\n23:30 라스트오더\r\n', '0507-1389-3335\r\n', '128.599522658112',
---         '35.866578853136', '2024-01-09 16:26:20');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (4, 4, 4, 4, 'js가든', '계산동2가 200', '10:30 - 22:00\n15:00 - 17:00 브레이크타임\n21:00 라스트오더\n', '0507-1406-2873',
---         '128.590625718585', '35.8666296004242', '2024-01-09 12:36:20');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (5, 5, 5, 2, '국일생갈비', '대구 중구 국채보상로 492 ', '11:30 - 21:30\r\n15:00 - 17:00 브레이크타임\r\n21:00 라스트오더\r\n',
---         '053-254-5115', '128.58452915274', '35.8703826177825', '2024-01-19 15:37:54');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (6, 6, 6, 1, '목구멍', '종로2가 25-1', '매일\r\n16:00 - 24:00\r\n23:20 라스트오더\r\n', '0507-1411-3588', '128.591521217983',
---         '35.8689473747125', '2024-01-09 16:38:17');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (7, 7, 7, 2, '더부처스', '대구 중구 달구벌대로440길 9-18 1층', '정기휴무 (매주 월요일)', '0507-1362-3139\r\n', '128.604622166966',
---         '35.8621537199056', '2024-01-19 15:58:15');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (8, 8, 8, 1, '돗소리 종로점', '대구 중구 종로 24-1', '17:00 - 24:00 23:00 라스트오더', '0507-1479-5279', '128.59208799658',
---         '35.8680473704398', '2024-01-19 15:59:18');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (9, 9, 9, 1, '혜옥당 종로본점', '대구 중구 중앙대로81길 28 지상1, 2층', '16:00 - 00:30', '0507-1447-2626', '128.592103701563',
---         '35.8698393564739', '2024-01-19 15:59:54');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (10, 10, 10, 5, '음밀한양', '대구 중구 달구벌대로450길 10', '16:00 - 23:50\n23:00 라스트오더', '0507-1353-2337', '128.607468091386',
---         '35.8614832457034', '2024-01-19 16:00:20');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (11, 12, 11, 1, '돼지싸다구 종로점', '대구 중구 중앙대로81길 26 돼지싸다구', '16:00 - 02:00 01:00 라스트오더', '0507-1383-4459',
---         '128.592221687244', '35.8697877789512', '2024-01-19 16:00:52');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (12, 13, 12, 1, '경성상회 돈부귀', '대구 중구 공평로 30', '16:30 - 02:00 01:30 라스트오더', '0507-1335-9967', '128.600151609781',
---         '35.8665848938869', '2024-01-19 16:01:25');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (13, 15, 13, 1, '금돈미가', '대구 중구 대봉로 190-1 1층 금돈미가', '16:00 - 24:00 23:00 라스트오더', '0507-1311-5728',
---         '128.602489589772', '35.8556327695476', '2024-01-19 16:05:16');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (14, 16, 14, 1, '돌담 대구', '대구 중구 달구벌대로 2113-13 1층 돌담 대구', '12:00 - 23:00 15:00 - 17:00 브레이크타임', '010-3795-7866',
---         '128.594893358064', '35.8655358816761', '2024-01-19 16:08:15');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (15, 18, 15, 4, '고기생각숯불바베큐 대구역점', '대구 중구 태평로 166 1층\r\n', '12:00 - 22:00\r\n', '0507-1495-3553\r\n',
---         '128.595904011726', '35.8747044720207', '2024-01-19 16:09:34');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (16, 19, 16, 1, '경희식당 서문시장점', '대구 중구 큰장로28길 25', '09:00 - 20:00', '0507-1339-3152', '128.580793941142',
---         '35.870041912536', '2024-01-19 16:09:34');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (17, 20, 17, 4, '날마다 오리\r\n', '대구 중구 서성로16길 20 1층', '11:00 - 19:00\r\n18:30 라스트오더\r\n', '053-422-8252\r\n',
---         '128.588782732947', '35.8730781574668', '2024-01-19 16:10:18');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (18, 21, 18, 1, '상철농장 종로본점', '대구 중구 중앙대로79길 6 1층', '11:30 - 24:00 22:30 라스트오더', '0507-1494-0451',
---         '128.593235606593', '35.8693122269902', '2024-01-19 16:22:03');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (19, 22, 19, 1, '미진삼겹살', '대구 중구 공평로8길 25 미진삼겹살', '16:00 - 01:00 00:00 라스트오더', '053-215-6969', '128.601467536574',
---         '35.8668230995472', '2024-01-19 16:23:00');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (20, 23, 20, 4, '일석이조\r\n', '대구 중구 재마루길 19\r\n', '07:30 - 22:30\r\n', '0507-1440-8906\r\n', '128.587183581324',
---         '35.8653277442953', '2024-01-19 16:25:00');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (21, 24, 21, 4, '미림양장\r\n', '대구 중구 교동1길 33 1층', '12:00 - 03:00', '0507-1364-1350\r\n', '128.597389515495',
---         '35.8730482489588', '2024-01-19 16:25:50');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (22, 25, 22, 3, '다희집', '대구 중구 동덕로30길 63-6 1층', '11:30 - 01:00 00:00 라스트오더', '0507-1320-1494', '128.60747762406',
---         '35.8669538612865', '2024-01-19 16:26:14');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (23, 26, 23, 4, '년', '대구 중구 달구벌대로447길 62-3 1층', '18:00 - 03:00', '0507-1345-4793', '128.608479648319',
---         '35.8651622236814', '2024-01-19 16:26:41');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (24, 28, 24, 3, '86계성집 팔륙계성집', '대구 중구 중앙대로81길 82 86계성집', '17:00 - 23:00', '0507-1336-8535', '128.589174977909',
---         '35.8696065389076', '2024-01-19 16:28:19');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (25, 29, 25, 3, '엄지척닭도리 대구 교동점', '대구 중구 경상감영길 222 107호', '11:00 - 23:00', '0507-1383-5881', '128.599184425384',
---         '35.8714258265453', '2024-01-19 16:28:50');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (26, 30, 26, 3, '원주통닭', '대구 중구 동성로6길 42-6', '정기휴무 (매주 월요일)', '053-424-5129', '128.597500404249',
---         '35.8683584899682', '2024-01-19 16:29:11');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (27, 31, 27, 3, '유가네닭갈비 대구동성로점', '대구 중구 중앙대로 412 아카데미극장', '11:00 - 21:30', '053-421-0760', '128.594320754079',
---         '35.8699830565434', '2024-01-19 16:29:41');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (28, 32, 28, 3, '두남자찜닭 대구동성로점', '대구 중구 동성로1길 25 2층', '11:30 - 22:30 21:30 라스트오더', '053-426-4478',
---         '128.594933168932', '35.8669146432759', '2024-01-19 16:30:22');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (29, 33, 29, 3, '꼬지짱 동성로직영점', '대구 중구 동성로5길 11 1층', '13:00 - 22:30', '0507-1339-1109', '128.595251575209',
---         '35.8679807026018', '2024-01-19 16:30:56');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (30, 34, 30, 3, '참숯삼인조 종로직영점', '대구 중구 중앙대로81길 53 1층', '15:00 - 24:00', '0507-1491-3387', '128.590666513915',
---         '35.8694735206662', '2024-01-19 16:31:18');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (31, 35, 31, 3, '현풍닭칼국수 동성로점', '대구 중구 동성로1길 65 현풍닭칼국수', '11:00 - 21:00 20:30 라스트오더', '053-424-6699',
---         '128.596957020717', '35.8656162383467', '2024-01-19 16:31:47');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (32, 36, 32, 3, '오키도키찜닭 동성로 본점', '대구 중구 동성로6길 40 2층 오키도키찜닭', '11:30 - 22:30', '053-253-4122', '128.597470347958',
---         '35.868548850642', '2024-01-19 16:32:13');
--- INSERT INTO `t_shop` (`ishop`, `iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`)
--- VALUES (33, 11, 33, 5, '뭐양 종로가족점', '대구 중구 종로 48-1', '정기휴무(매달 2,4번째 월요일', '053-428-3822', '128.591437698948',
---         '35.8701907978374', '2024-01-19 17:32:08');
---
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (9, 1, '22f6a12a-63d9-4c96-a55d-a297d7e2083f.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (10, 1, '28bc248f-873d-44ac-bf31-a59fa7be485a.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (11, 1, '0d9969ca-dde8-4d42-9b10-3caa87e1aca0.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (12, 2, '0d1cedd2-b347-4772-ac4f-d00f9346a040.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (13, 2, '7a902bcb-45b5-4736-a475-24e1d2247c4e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (14, 3, 'a111be25-0c4a-4a1e-91b8-33bc747febdd.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (15, 3, 'a4d28843-9247-4190-a77b-53e71d3de4b3.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (16, 4, 'e5c2d247-d419-4038-b376-705f01b15b3a.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (17, 4, '136dd470-285e-423b-9c28-0eaf914800ba.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (18, 5, 'e6c9b6f2-4062-4a3a-8bde-fe96539148c9.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (19, 5, '5e5060a3-2e59-4c31-98c1-a4d21acd4f9d.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (20, 6, '2d5e125f-085e-4da7-868e-d9da0cdb15bb.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (21, 6, '1a24fe22-0a00-4946-b3be-3b64b1ac15cd.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (22, 7, 'e4985079-788f-4211-9dc1-da3fdc230b52.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (23, 7, '0a6bf272-1b4a-4c76-9bfe-dc8bc455beb8.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (24, 8, '67c3e7e3-b9c5-492f-a06f-5a12f472c66e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (25, 8, '746cfd05-980d-413f-8c8f-dd5cbfe8dd07.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (26, 9, '955d4299-4f2e-4d48-8afd-9f5e9f10eb8e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (27, 9, 'c84ad4fc-f817-43ab-8ef8-df5e513a9201.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (28, 10, '729ea550-4f31-4141-bde1-be5b2c54c09a.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (29, 10, '4fae44f8-5bee-42fd-8adc-a3cc59efd04e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (30, 10, '02ae0cfe-b970-419a-8430-4c10fb9c7b16.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (31, 11, '74bca9ae-5047-444b-9b35-0f1d7c209ce4.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (32, 11, 'b0143935-7ebb-41bc-8f76-7cc5fd8878a2.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (33, 11, '8149ac3a-04a7-4ef0-84b1-611403bcd2ff.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (34, 12, '0bc8afe5-88a3-4510-a1ae-45e2eecd6a11.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (35, 12, 'b8fe15de-0b6d-4897-8573-931f5b257201.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (36, 12, '6dd1512f-5148-4b97-83cc-d834a76e3e68.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (37, 13, '201df54e-8489-4970-9c21-f76bfcc74854.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (38, 13, '01c8933b-f2de-4e4e-8953-f51fa948efbf.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (39, 13, '06d4688e-b2c7-42aa-bfa1-c229d94a07c8.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (40, 14, '42ce25d9-992b-44bf-bb59-b4026345dd1c.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (41, 14, 'caa942e5-ad54-42a5-9b61-3ef41ff31e92.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (42, 14, '688457d8-c483-44ab-87c8-5714736280bb.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (43, 16, '34ce2a7a-cbe3-450c-92ff-9dad7d17b3bd.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (44, 16, '3a90a1a4-4442-4004-a1cf-bf93d6b69564.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (45, 17, '0cfe3fe8-ad35-428a-8075-4500df15bb9b.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (46, 18, 'ef443156-de6d-46df-9ecc-79a34c68cfe1.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (47, 18, 'f04f8d14-de6b-4c90-810a-d2548c861673.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (48, 18, '7b01b504-a384-4f9a-8d83-64418c059340.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (49, 19, 'da388749-50ba-4247-8248-b4b6dcc23b7b.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (50, 19, '1ef0530b-6a02-4e7f-be6b-b09666e2e704.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (51, 19, 'c27c1450-65f8-4999-b83d-542fa1808272.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (52, 20, '4803a7b9-c1f1-43a2-9562-ac6d47cb2746.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (53, 33, '8b3650d6-f04e-4e2e-82d4-fd0670efca13.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (54, 33, '8f3323c9-247d-4cf0-9e8b-2e9d2fececc7.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (55, 33, '84afc0f4-e341-4d4e-97d4-08981ea73d89.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (56, 21, '15fc084f-0791-48f6-aa19-2899648ef005.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (57, 21, '48fdeac3-def0-4785-b411-4eebbd738cd1.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (58, 21, '2a70c017-0087-4fee-b582-44065483d788.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (59, 32, '32a84197-ec9b-44ef-aee2-e1e431c20e7e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (60, 32, '086173d0-3e2d-49b7-b2ad-d0adb2b19a15.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (61, 32, 'eca6e678-a9cb-479e-bc80-bac92910580d.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (62, 22, '8754850d-4542-4cd1-82a2-c316d4cdcc85.png');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (63, 22, '1ed3f131-1f2e-4f40-8975-263979dc86dd.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (64, 22, '27081357-23d0-4b79-bddc-88ae8797aa45.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (65, 31, 'a89389ba-208c-437e-9962-e9b79fe510e5.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (66, 31, 'ec59c04a-268c-4b96-9f65-b8ac3ebc1baf.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (67, 31, '43fce71a-b8d4-41ec-ba35-3fc3188f4bda.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (68, 23, '150e2727-6cc2-4f31-b35d-e59e33b865a0.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (69, 23, '29a8ed79-d5a8-4476-8894-11a031bc18ba.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (70, 30, '67139e77-e54e-4f3a-b792-200e1ecca68d.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (71, 30, '4f8b75dd-7678-497f-b958-101c70fc31c0.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (72, 30, 'e5306336-cd14-48a2-8eab-23dc41db47f7.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (73, 24, 'a298c8fc-b5dc-4c94-b436-7307db42d698.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (74, 24, '1c29170c-5da9-4d63-b761-930c4cf498a7.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (75, 24, 'a24f3fcd-d3d0-41ac-a53c-f58daa0cec45.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (76, 29, '63bea498-672b-47c3-a403-259bdbda61b2.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (77, 29, '85e4d6a2-1d99-4f20-a28d-5dae4077c455.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (78, 29, '74bba451-f99c-4f8b-8d08-c6cdfbec9d02.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (79, 25, '5909e7b7-0473-425e-b9da-be2d0e15b18f.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (80, 25, 'd91a03ae-7c66-4dc2-8546-34f8ef07ba8a.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (81, 28, '5a094aeb-4ca7-4083-82bf-8c73c26e6d60.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (82, 28, 'e85e66b8-227a-4291-86b7-890bbb938a7a.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (83, 28, '53a7dda7-f509-4adb-abf7-59733cdf886e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (84, 26, '335c3311-86be-471f-8042-6ce9f2ea43e6.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (85, 26, 'e25f687f-e568-44ef-8b87-90179599d3dd.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (86, 27, '9b7cd50a-5487-46dd-9ef0-25eef28e8a06.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (87, 27, '350af825-d8a7-412f-a0ef-9bce15e7e1d2.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (88, 27, 'cc50a4c3-0ccb-43d3-b521-84c35dba1c9e.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (89, 15, 'ac1b8c68-19af-4776-9595-886c7db04535.jpg');
--- INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`)
--- VALUES (90, 15, '65384d4d-1bb3-4c5c-bc8f-9537c221d272.jpg');
---
---
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (1, 8, '숄더랙세트', 53000, '4a95a489-3ea3-488c-b276-faa1b9caf287.jpg', '2024-01-24 15:41:00', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (2, 8, '돗소리세트(대)', 53000, 'bc3a7e75-fab1-4329-81a6-2ae847eb70ca.jpg', '2024-01-24 15:41:43', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (3, 8, '도래창구이', 9000, '796b3266-0dda-4b29-aee4-8c8862fa4f2f.jpg', '2024-01-24 15:41:52', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (4, 8, '숄더렉', 32000, 'b201c70f-52be-473d-9000-3a150775f86d.jpg', '2024-01-24 15:42:03', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (5, 8, '가브리살', 11000, 'e4171035-4e30-4436-9a3a-589f7b1ba5bc.jpg', '2024-02-01 11:40:31', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (6, 8, '항정상', 12000, '60b64ae4-ca95-4a61-a995-416b11303653.jpg', '2024-01-24 15:42:31', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (7, 8, '갈매기살', 11000, '41d1afb0-10f1-425e-b2e0-2a400c472f7a.jpg', '2024-01-24 15:42:52', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (8, 8, '늑간삼겹살', 12000, '70c1bda8-5c1f-4255-90a1-1dfc9db8bf77.jpg', '2024-01-24 15:43:13', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (9, 8, '냄비라면', 4000, '74408ab7-4f53-43ef-8c6f-09dd83528669.jpg', '2024-01-24 15:43:24', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (10, 8, '빨강이밥', 5000, '9266d0e0-3807-49ce-a191-9d1b110691f3.jpg', '2024-01-24 15:43:38', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (11, 8, '갈비삼겹', 13000, '31502911-5761-4659-b28c-260c923e8e18.jpg', '2024-01-24 15:43:48', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (12, 8, '돗소리세트(소)', 31000, '4175a801-0c93-485c-84a8-733a09d4b1b4.jpg', '2024-01-24 15:44:02', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (13, 8, '냄비된장', 3000, NULL, '2024-01-19 16:45:50', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (14, 8, '벌집껍데기', 7000, NULL, '2024-01-19 16:45:55', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (15, 2, '갈비살', 38000, '2e278481-9125-4345-8147-2563486d2988.jpg', '2024-01-24 15:25:48', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (16, 2, '양념갈비살', 38000, 'e96c787c-5abc-43a1-b470-549fdd294bfb.jpg', '2024-01-24 15:28:31', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (17, 2, '등심', 37000, '05678e24-c105-47b7-b8ea-0b0c922f16d9.jpg', '2024-01-24 15:28:43', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (18, 9, '목살 (130g)', 13000, '23630fa4-848c-4b08-b5e3-3b18f08341b2.png', '2024-01-24 15:45:54', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (19, 5, '한우 특생갈비', 45000, '1bfb232e-1b98-4d6f-8c67-b2a220a1108c.png', '2024-01-24 15:33:40', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (20, 9, '양념목갈비 (170g)', 12000, 'ee4d9708-213d-43b0-aa31-c1b9e67d0e95.png', '2024-01-24 15:46:06', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (21, 9, '삼겹살 (130g)', 13000, '912fc6f0-452d-4063-96e4-d49d533f45cc.png', '2024-01-24 15:46:16', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (22, 5, '한우 생갈비', 32000, '2ba3cb86-fd42-40f6-8ce8-9b2ddfa3e61c.jpg', '2024-01-24 15:33:51', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (23, 5, '한우 안창살', 38000, '3db9fa62-e7df-4df1-bf41-52e020b8a887.jpg', '2024-01-24 15:34:03', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (24, 7, '습식숙성살치살 300g', 35000, 'f5ed122d-f4fd-48cb-90b3-fb6d29229fe4.jpg', '2024-01-24 15:35:37', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (25, 7, '소고기된장찌개', 5000, 'a567fc42-b24e-41f7-a824-6efa7baf94eb.jpg', '2024-01-24 15:35:45', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (26, 11, '모듬한판', 49000, '5970c1de-2909-4e14-8b7c-59857a4b5f02.jpg', '2024-01-24 15:49:56', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (27, 11, '라면', 4000, NULL, '2024-01-19 16:51:13', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (28, 11, '꼬들살', 11000, NULL, '2024-01-19 16:51:27', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (29, 4, 'js가든 시그니처 북경오리(한 마리)', 120000, 'b183187e-e58c-469e-95b5-abffd0b32e90.jpg', '2024-01-24 15:31:15',
---         NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (30, 4, '목화솜탕수육(s)', 45000, '2b9498e5-231d-40fa-ba95-ff386fe3bb69.jpg', '2024-01-24 15:31:29', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (31, 12, '삼겹살', 8500, '3b8972b5-6eb5-4a16-9d59-d2b81024ffee.jpg', '2024-01-24 15:51:14', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (32, 12, '깍둑목살', 8500, '576b0af8-23bf-4ee4-89b4-8629d7d5b003.jpg', '2024-01-24 15:51:26', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (33, 12, '경성갈비', 12500, 'c3d2bb4d-73ee-4cda-b3a6-7830a27b714b.jpg', '2024-01-24 15:51:36', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (34, 15, '오리 한마리', 20900, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (35, 15, '오리 반마리', 10900, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (36, 13, '516교차숙성 삼겹살', 15000, 'f1117606-84bd-415f-ac47-4d642ef89baf.jpg', '2024-01-24 15:51:00', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (37, 17, '오리탕 1인분 포장가능', 0, NULL, '2024-01-31 14:46:56', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (38, 13, '516교차숙성 목살', 15000, 'b7cc2b4b-4ff3-4357-9afe-ae6162dc44cd.jpg', '2024-01-24 15:50:52', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (39, 13, '516교차숙성 항정살', 16000, 'fa9c1598-fb1f-4e07-abdc-13482450786f.jpg', '2024-01-24 15:51:09', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (40, 14, '돌담대구 돼지고기 오마카세', 33000, 'bc1fa8cb-8746-412c-8883-20f338565243.jpg', '2024-01-24 15:48:47', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (41, 14, '된장찌개 점심한상', 9000, 'f23011db-13c3-4ea9-8ed3-770e9a94bf53.jpg', '2024-01-24 15:49:02', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (42, 14, '콩나물국밥 점심한상', 9000, '6e7dc663-3bff-4b02-af5e-1ee080ad98f1.jpg', '2024-01-24 15:49:20', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (43, 16, '소갈비찜', 16000, '25686511-681a-4581-92cc-d41f8e1d42f8.jpg', '2024-01-24 15:45:01', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (44, 16, '청국장', 9000, '75d0bf74-9c08-4cc0-8e3c-2e2f5e2ef2be.jpg', '2024-01-24 15:44:40', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (45, 16, '돼지갈비찜', 9000, '0c963fd1-7855-45ab-b2ce-f714e4cabcc3.jpg', '2024-01-24 15:44:52', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (46, 18, '특대판', 78000, 'c42e41e9-0d1d-4e3b-84ad-2936007faa22.jpg', '2024-01-24 15:42:47', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (47, 18, '한판', 63000, '571a66a8-7859-4cb0-b18a-d2e84ef57ac7.jpg', '2024-01-24 15:42:58', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (48, 18, '반판', 44000, '684dcbb6-b230-4b1a-b243-4b4831bcb722.jpg', '2024-01-24 15:43:10', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (49, 20, '불고기150g', 7500, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (50, 20, '생오리600g\r\n', 23000, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (51, 21, '북경오리 (Half)', 35000, 'dbaa37c0-6546-4590-8e4b-fe8bd9e028b1.jpg', '2024-01-24 15:38:13', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (52, 21, '북경오리 (Whole)\r\n', 65000, '5edf4779-6d3b-4fd9-8911-1d68dab48d32.jpg', '2024-01-24 15:38:04', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (53, 10, '스지탕', 23000, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (54, 10, '오리도리탕', 22000, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (55, 19, '미진모듬 중(600g)', 47000, '4c2e1ddd-506c-4ff0-8fcc-7f4b1e69a4b1.jpg', '2024-01-24 15:41:42', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (56, 19, '미진모듬 대(720g)', 58000, 'b13fa8d5-328b-4a42-b569-aa871fa63acf.jpg', '2024-01-24 15:41:36', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (57, 19, '삼겹살한판(480g)', 44000, '279acabc-2883-4fb6-80bf-77af9143b1d2.jpg', '2024-01-24 15:41:53', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (58, 22, '닭곰탕', 8000, 'd63c2517-7a28-4cc9-8ae6-ad71dfc50f21.jpg', '2024-01-24 15:36:54', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (59, 22, '닭전골', 24000, '2e1cac4c-bde5-4ef2-b260-58be3335506b.jpg', '2024-01-24 15:37:12', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (60, 22, '닭무침', 23000, 'dacaff7f-85e7-478e-9c00-ca6fadb9d0f8.jpg', '2024-01-24 15:37:05', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (61, 24, '지리산 깻잎닭도리탕 (中)', 27000, 'e599cbcb-c7dc-40a7-ba40-d1b7623c79f2.jpg', '2024-01-24 15:35:47', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (62, 24, '팔륙계성집 꽃도리탕 (中)', 36000, '41d293a7-ad07-4ee0-addc-3c37890f0683.jpg', '2024-01-24 15:36:01', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (63, 24, '닭특수부위 돌판구이', 37000, '99965865-3ba2-415a-938b-0226ae8f5fce.jpg', '2024-01-24 15:35:35', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (64, 25, '닭곱새(1인분)', 11000, '2158c2fa-bc8d-4fc5-bb73-d27457b60653.jpg', '2024-01-24 15:33:25', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (65, 25, '엄지척 닭도리 (찜닭 저리가)(1인 (뼈닭 불가))', 14900, 'eb52afc4-eb65-4ee5-9ed5-2257cfcac3f2.jpg',
---         '2024-01-24 15:33:11', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (66, 25, '엄지척 닭도리 (찜닭 저리가)(2~3인 (기본 순살 뼈 변경 가능))', 26000, 'd2a07130-68f5-409c-9d43-e9420122f30e.jpg',
---         '2024-01-24 15:33:17', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (67, 26, '튀김통닭', 19000, '6262e392-cc67-43e7-b6dc-5b39cc573f3e.jpg', '2024-01-24 15:31:49', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (68, 26, '양념통닭', 20000, 'c4cc91de-30e0-4968-8d65-6dff64629983.jpg', '2024-01-24 15:31:30', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (69, 26, '반반통닭', 20000, 'e3f95294-3953-423a-89ab-73596bca131f.jpg', '2024-01-24 15:31:39', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (70, 10, '냉장 생 양갈비(180g)', 22000, 'fffd5097-7ca3-404f-b133-854beafb924f.jpg', '2024-01-24 15:48:26', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (71, 10, '냉장 생 양등심', 19000, 'a9745e6d-a473-471f-80eb-68cc2675bfec.jpg', '2024-01-24 15:48:35', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (72, 27, '콘치즈닭갈비', 11000, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (73, 27, '직화통닭갈비', 11000, NULL, '2024-01-19 17:22:24', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (74, 27, '찜닭갈비', 11000, NULL, '2024-01-19 17:22:32', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (75, 28, '뼈없는반마리', 22000, 'ef2aeb3f-f739-4597-b26a-61fc022c3469.jpg', '2024-01-24 15:28:17', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (76, 28, 'A세트', 25500, NULL, '2024-01-19 17:23:11', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (77, 28, '납작만두', 3500, NULL, '2024-01-19 17:23:19', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (78, 29, '(육즙 주르륵) 소금구이', 3500, NULL, NULL, NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (79, 29, '(맵찔이는 요고) 순한맛', 3500, NULL, '2024-01-19 17:23:59', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (80, 29, '(기름끼잡는 알싸한) 조금매운맛', 3500, NULL, '2024-01-19 17:24:07', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (81, 30, '마늘산낙지구이1마리', 23000, '63b65748-a7b2-4c62-9d6e-f52f32c495dd.jpg', '2024-01-24 15:24:19', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (82, 30, '숯불닭갈비(닭다리사이살구이)', 12000, '2dcdbd60-0e58-4c6c-98de-81a4b1792270.jpg', '2024-01-24 15:24:34', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (83, 30, '닭목살특수부위', 13000, '93e82830-ee03-4957-91fa-164f0e3b44ac.jpg', '2024-01-24 15:24:08', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (84, 31, '닭칼국수', 8500, 'e1188f8b-5f6d-468a-bc9a-3f78b7e1013d.jpg', '2024-01-24 15:23:26', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (85, 31, '삼계칼국수', 11000, 'fcd92a82-819e-4308-ae04-f57772ba1847.jpg', '2024-01-24 15:23:48', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (86, 31, '닭칼수육세트', 15500, 'ea40f1db-52cd-442b-aa72-4b7551e0c1ef.jpg', '2024-01-24 15:23:39', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (87, 32, '핫스파이시크림찜닭(순살 반마리)', 27000, '4238369c-4b01-4984-b4c7-a73f3dbaf6f3.jpg', '2024-01-24 15:01:28', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (88, 32, '핫스파이시크림찜닭(순살 한마리)', 35000, '4329dede-3a78-4c4d-bfa3-d402dd57f3ed.jpg', '2024-01-24 15:18:17', NOW());
--- INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`, created_at)
--- VALUES (89, 32, '해물크림찜닭(반마리)', 30000, '79aa42b8-34d2-418b-9f29-26bfb13935fc.jpg', '2024-01-24 15:23:12', NOW());
---
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (1, '주차장');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (2, '단체 가능');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (3, '포장가능');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (4, '배달가능');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (5, '와이파이');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (6, '예약 가능');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (7, '화장실구분');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (8, '대기공간');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (9, '장애인시설');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (10, '반려동물');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (11, '유아의자');
--- INSERT INTO `t_facilities` (`ifacil`, `facility`)
--- VALUES (12, '간편결제');
---
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (2, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (7, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (14, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (23, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (30, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (33, 1);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (1, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (2, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (3, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (6, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (8, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (9, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (10, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (11, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (13, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (14, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (16, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (18, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (19, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (21, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (26, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (30, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 2);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (10, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (15, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (16, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (17, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (21, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 3);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (17, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (21, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 4);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (2, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (3, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (6, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (7, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (8, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (9, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (10, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (11, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (13, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (14, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (17, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (18, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (19, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (21, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (23, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (30, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (33, 5);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (1, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (3, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (6, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (7, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (8, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (9, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (10, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (11, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (13, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (14, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (15, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (16, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (18, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (21, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (23, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 6);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (1, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (2, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (3, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (5, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (6, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (9, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (11, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (14, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (18, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (19, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (30, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (31, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (33, 7);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (12, 8);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (13, 8);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (19, 8);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (25, 8);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)
--- VALUES (28, 9);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (10, 10);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (11, 11);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (12, 11);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (13, 11);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (19, 11);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (10, 12);
--- INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (11, 12);
+ INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(1, '돼지');
+ INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(2, '소');
+ INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(3, '닭');
+ INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(4, '오리');
+ INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(5, '양');
 
 
 
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(1, 1, 1, 1, '고기굽는남자', '삼덕동1가 32-10', '16:00 - 00:30\r\n00:00 라스트오더\r\n', '0507-1401-5933', '128.598017431535', '35.8664565986455', '2024-01-09 16:39:19');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(2, 2, 2, 2, '실비소갈비', '삼덕동2가 132', '15:00 - 23:00', '0507-1403-8624', '128.601043353125', '35.8666058119543', '2024-01-09 16:16:19');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(3, 3, 3, 3, '팔각도', '삼덕동1가 63-11', '17:00 - 24:00\r\n23:30 라스트오더\r\n', '0507-1389-3335\r\n', '128.599522658112', '35.866578853136', '2024-01-09 16:26:20');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(4, 4, 4, 4, 'js가든', '계산동2가 200', '10:30 - 22:00\n15:00 - 17:00 브레이크타임\n21:00 라스트오더\n', '0507-1406-2873', '128.590625718585', '35.8666296004242', '2024-01-09 12:36:20');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES	(5, 5, 5, 2, '국일생갈비', '대구 중구 국채보상로 492 ', '11:30 - 21:30\r\n15:00 - 17:00 브레이크타임\r\n21:00 라스트오더\r\n', '053-254-5115', '128.58452915274', '35.8703826177825', '2024-01-19 15:37:54');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES	(6, 6, 6, 1, '목구멍', '종로2가 25-1', '매일\r\n16:00 - 24:00\r\n23:20 라스트오더\r\n', '0507-1411-3588', '128.591521217983', '35.8689473747125', '2024-01-09 16:38:17');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES	(7, 7, 7, 2, '더부처스', '대구 중구 달구벌대로440길 9-18 1층', '정기휴무 (매주 월요일)', '0507-1362-3139\r\n', '128.604622166966', '35.8621537199056', '2024-01-19 15:58:15');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES	(8, 8, 8, 1, '돗소리 종로점', '대구 중구 종로 24-1', '17:00 - 24:00 23:00 라스트오더', '0507-1479-5279', '128.59208799658', '35.8680473704398', '2024-01-19 15:59:18');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(9, 9, 9, 1, '혜옥당 종로본점', '대구 중구 중앙대로81길 28 지상1, 2층', '16:00 - 00:30', '0507-1447-2626', '128.592103701563', '35.8698393564739', '2024-01-19 15:59:54');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(10, 10, 10, 5, '음밀한양', '대구 중구 달구벌대로450길 10', '16:00 - 23:50\n23:00 라스트오더', '0507-1353-2337', '128.607468091386', '35.8614832457034', '2024-01-19 16:00:20');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(11, 12, 11, 1, '돼지싸다구 종로점', '대구 중구 중앙대로81길 26 돼지싸다구', '16:00 - 02:00 01:00 라스트오더', '0507-1383-4459', '128.592221687244', '35.8697877789512', '2024-01-19 16:00:52');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(12, 13, 12, 1, '경성상회 돈부귀', '대구 중구 공평로 30', '16:30 - 02:00 01:30 라스트오더', '0507-1335-9967', '128.600151609781', '35.8665848938869', '2024-01-19 16:01:25');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(13, 15, 13, 1, '금돈미가', '대구 중구 대봉로 190-1 1층 금돈미가', '16:00 - 24:00 23:00 라스트오더', '0507-1311-5728', '128.602489589772', '35.8556327695476', '2024-01-19 16:05:16');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(14, 16, 14, 1, '돌담 대구', '대구 중구 달구벌대로 2113-13 1층 돌담 대구', '12:00 - 23:00 15:00 - 17:00 브레이크타임', '010-3795-7866', '128.594893358064', '35.8655358816761', '2024-01-19 16:08:15');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(15, 18, 15, 4, '고기생각숯불바베큐 대구역점', '대구 중구 태평로 166 1층\r\n', '12:00 - 22:00\r\n', '0507-1495-3553\r\n', '128.595904011726', '35.8747044720207', '2024-01-19 16:09:34');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(16, 19, 16, 1, '경희식당 서문시장점', '대구 중구 큰장로28길 25', '09:00 - 20:00', '0507-1339-3152', '128.580793941142', '35.870041912536', '2024-01-19 16:09:34');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(17, 20, 17, 4, '날마다 오리\r\n', '대구 중구 서성로16길 20 1층', '11:00 - 19:00\r\n18:30 라스트오더\r\n', '053-422-8252\r\n', '128.588782732947', '35.8730781574668', '2024-01-19 16:10:18');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(18, 21, 18, 1, '상철농장 종로본점', '대구 중구 중앙대로79길 6 1층', '11:30 - 24:00 22:30 라스트오더', '0507-1494-0451', '128.593235606593', '35.8693122269902', '2024-01-19 16:22:03');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(19, 22, 19, 1, '미진삼겹살', '대구 중구 공평로8길 25 미진삼겹살', '16:00 - 01:00 00:00 라스트오더', '053-215-6969', '128.601467536574', '35.8668230995472', '2024-01-19 16:23:00');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(20, 23, 20, 4, '일석이조\r\n', '대구 중구 재마루길 19\r\n', '07:30 - 22:30\r\n', '0507-1440-8906\r\n', '128.587183581324', '35.8653277442953', '2024-01-19 16:25:00');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(21, 24, 21, 4, '미림양장\r\n', '대구 중구 교동1길 33 1층', '12:00 - 03:00', '0507-1364-1350\r\n', '128.597389515495', '35.8730482489588', '2024-01-19 16:25:50');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(22, 25, 22, 3, '다희집', '대구 중구 동덕로30길 63-6 1층', '11:30 - 01:00 00:00 라스트오더', '0507-1320-1494', '128.60747762406', '35.8669538612865', '2024-01-19 16:26:14');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(23, 26, 23, 4, '년', '대구 중구 달구벌대로447길 62-3 1층', '18:00 - 03:00', '0507-1345-4793', '128.608479648319', '35.8651622236814', '2024-01-19 16:26:41');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(24, 28, 24, 3, '86계성집 팔륙계성집', '대구 중구 중앙대로81길 82 86계성집', '17:00 - 23:00', '0507-1336-8535', '128.589174977909', '35.8696065389076', '2024-01-19 16:28:19');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(25, 29, 25, 3, '엄지척닭도리 대구 교동점', '대구 중구 경상감영길 222 107호', '11:00 - 23:00', '0507-1383-5881', '128.599184425384', '35.8714258265453', '2024-01-19 16:28:50');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(26, 30, 26, 3, '원주통닭', '대구 중구 동성로6길 42-6', '정기휴무 (매주 월요일)', '053-424-5129', '128.597500404249', '35.8683584899682', '2024-01-19 16:29:11');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(27, 31, 27, 3, '유가네닭갈비 대구동성로점', '대구 중구 중앙대로 412 아카데미극장', '11:00 - 21:30', '053-421-0760', '128.594320754079', '35.8699830565434', '2024-01-19 16:29:41');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(28, 32, 28, 3, '두남자찜닭 대구동성로점', '대구 중구 동성로1길 25 2층', '11:30 - 22:30 21:30 라스트오더', '053-426-4478', '128.594933168932', '35.8669146432759', '2024-01-19 16:30:22');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(29, 33, 29, 3, '꼬지짱 동성로직영점', '대구 중구 동성로5길 11 1층', '13:00 - 22:30', '0507-1339-1109', '128.595251575209', '35.8679807026018', '2024-01-19 16:30:56');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(30, 34, 30, 3, '참숯삼인조 종로직영점', '대구 중구 중앙대로81길 53 1층', '15:00 - 24:00', '0507-1491-3387', '128.590666513915', '35.8694735206662', '2024-01-19 16:31:18');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(31, 35, 31, 3, '현풍닭칼국수 동성로점', '대구 중구 동성로1길 65 현풍닭칼국수', '11:00 - 21:00 20:30 라스트오더', '053-424-6699', '128.596957020717', '35.8656162383467', '2024-01-19 16:31:47');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(32, 36, 32, 3, '오키도키찜닭 동성로 본점', '대구 중구 동성로6길 40 2층 오키도키찜닭', '11:30 - 22:30', '053-253-4122', '128.597470347958', '35.868548850642', '2024-01-19 16:32:13');
+INSERT INTO `t_shop` (`ishop`,`iuser`, `number`, `imeat`, `name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES(33, 11, 33, 5, '뭐양 종로가족점', '대구 중구 종로 48-1', '정기휴무(매달 2,4번째 월요일', '053-428-3822', '128.591437698948', '35.8701907978374', '2024-01-19 17:32:08');
+
+
+
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (9, 1, '22f6a12a-63d9-4c96-a55d-a297d7e2083f.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (10, 1, '28bc248f-873d-44ac-bf31-a59fa7be485a.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (11, 1, '0d9969ca-dde8-4d42-9b10-3caa87e1aca0.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (12, 2, '0d1cedd2-b347-4772-ac4f-d00f9346a040.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (13, 2, '7a902bcb-45b5-4736-a475-24e1d2247c4e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (14, 3, 'a111be25-0c4a-4a1e-91b8-33bc747febdd.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (15, 3, 'a4d28843-9247-4190-a77b-53e71d3de4b3.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (16, 4, 'e5c2d247-d419-4038-b376-705f01b15b3a.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (17, 4, '136dd470-285e-423b-9c28-0eaf914800ba.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (18, 5, 'e6c9b6f2-4062-4a3a-8bde-fe96539148c9.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (19, 5, '5e5060a3-2e59-4c31-98c1-a4d21acd4f9d.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (20, 6, '2d5e125f-085e-4da7-868e-d9da0cdb15bb.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (21, 6, '1a24fe22-0a00-4946-b3be-3b64b1ac15cd.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (22, 7, 'e4985079-788f-4211-9dc1-da3fdc230b52.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (23, 7, '0a6bf272-1b4a-4c76-9bfe-dc8bc455beb8.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (24, 8, '67c3e7e3-b9c5-492f-a06f-5a12f472c66e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (25, 8, '746cfd05-980d-413f-8c8f-dd5cbfe8dd07.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (26, 9, '955d4299-4f2e-4d48-8afd-9f5e9f10eb8e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (27, 9, 'c84ad4fc-f817-43ab-8ef8-df5e513a9201.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (28, 10, '729ea550-4f31-4141-bde1-be5b2c54c09a.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (29, 10, '4fae44f8-5bee-42fd-8adc-a3cc59efd04e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (30, 10, '02ae0cfe-b970-419a-8430-4c10fb9c7b16.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (31, 11, '74bca9ae-5047-444b-9b35-0f1d7c209ce4.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (32, 11, 'b0143935-7ebb-41bc-8f76-7cc5fd8878a2.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (33, 11, '8149ac3a-04a7-4ef0-84b1-611403bcd2ff.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (34, 12, '0bc8afe5-88a3-4510-a1ae-45e2eecd6a11.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (35, 12, 'b8fe15de-0b6d-4897-8573-931f5b257201.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (36, 12, '6dd1512f-5148-4b97-83cc-d834a76e3e68.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (37, 13, '201df54e-8489-4970-9c21-f76bfcc74854.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (38, 13, '01c8933b-f2de-4e4e-8953-f51fa948efbf.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (39, 13, '06d4688e-b2c7-42aa-bfa1-c229d94a07c8.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (40, 14, '42ce25d9-992b-44bf-bb59-b4026345dd1c.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (41, 14, 'caa942e5-ad54-42a5-9b61-3ef41ff31e92.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (42, 14, '688457d8-c483-44ab-87c8-5714736280bb.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (43, 16, '34ce2a7a-cbe3-450c-92ff-9dad7d17b3bd.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (44, 16, '3a90a1a4-4442-4004-a1cf-bf93d6b69564.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (45, 17, '0cfe3fe8-ad35-428a-8075-4500df15bb9b.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (46, 18, 'ef443156-de6d-46df-9ecc-79a34c68cfe1.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (47, 18, 'f04f8d14-de6b-4c90-810a-d2548c861673.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (48, 18, '7b01b504-a384-4f9a-8d83-64418c059340.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (49, 19, 'da388749-50ba-4247-8248-b4b6dcc23b7b.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (50, 19, '1ef0530b-6a02-4e7f-be6b-b09666e2e704.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (51, 19, 'c27c1450-65f8-4999-b83d-542fa1808272.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (52, 20, '4803a7b9-c1f1-43a2-9562-ac6d47cb2746.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (53, 33, '8b3650d6-f04e-4e2e-82d4-fd0670efca13.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (54, 33, '8f3323c9-247d-4cf0-9e8b-2e9d2fececc7.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (55, 33, '84afc0f4-e341-4d4e-97d4-08981ea73d89.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (56, 21, '15fc084f-0791-48f6-aa19-2899648ef005.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (57, 21, '48fdeac3-def0-4785-b411-4eebbd738cd1.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (58, 21, '2a70c017-0087-4fee-b582-44065483d788.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (59, 32, '32a84197-ec9b-44ef-aee2-e1e431c20e7e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (60, 32, '086173d0-3e2d-49b7-b2ad-d0adb2b19a15.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (61, 32, 'eca6e678-a9cb-479e-bc80-bac92910580d.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (62, 22, '8754850d-4542-4cd1-82a2-c316d4cdcc85.png');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (63, 22, '1ed3f131-1f2e-4f40-8975-263979dc86dd.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (64, 22, '27081357-23d0-4b79-bddc-88ae8797aa45.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (65, 31, 'a89389ba-208c-437e-9962-e9b79fe510e5.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (66, 31, 'ec59c04a-268c-4b96-9f65-b8ac3ebc1baf.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (67, 31, '43fce71a-b8d4-41ec-ba35-3fc3188f4bda.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (68, 23, '150e2727-6cc2-4f31-b35d-e59e33b865a0.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (69, 23, '29a8ed79-d5a8-4476-8894-11a031bc18ba.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (70, 30, '67139e77-e54e-4f3a-b792-200e1ecca68d.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (71, 30, '4f8b75dd-7678-497f-b958-101c70fc31c0.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (72, 30, 'e5306336-cd14-48a2-8eab-23dc41db47f7.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (73, 24, 'a298c8fc-b5dc-4c94-b436-7307db42d698.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (74, 24, '1c29170c-5da9-4d63-b761-930c4cf498a7.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (75, 24, 'a24f3fcd-d3d0-41ac-a53c-f58daa0cec45.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (76, 29, '63bea498-672b-47c3-a403-259bdbda61b2.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (77, 29, '85e4d6a2-1d99-4f20-a28d-5dae4077c455.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (78, 29, '74bba451-f99c-4f8b-8d08-c6cdfbec9d02.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (79, 25, '5909e7b7-0473-425e-b9da-be2d0e15b18f.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (80, 25, 'd91a03ae-7c66-4dc2-8546-34f8ef07ba8a.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (81, 28, '5a094aeb-4ca7-4083-82bf-8c73c26e6d60.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (82, 28, 'e85e66b8-227a-4291-86b7-890bbb938a7a.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (83, 28, '53a7dda7-f509-4adb-abf7-59733cdf886e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (84, 26, '335c3311-86be-471f-8042-6ce9f2ea43e6.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (85, 26, 'e25f687f-e568-44ef-8b87-90179599d3dd.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (86, 27, '9b7cd50a-5487-46dd-9ef0-25eef28e8a06.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (87, 27, '350af825-d8a7-412f-a0ef-9bce15e7e1d2.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (88, 27, 'cc50a4c3-0ccb-43d3-b521-84c35dba1c9e.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (89, 15, 'ac1b8c68-19af-4776-9595-886c7db04535.jpg');
+INSERT INTO `t_shop_pic` (`ishop_pics`, `ishop`, `pic`) VALUES (90, 15, '65384d4d-1bb3-4c5c-bc8f-9537c221d272.jpg');
+
+
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(1, 8, '숄더랙세트', 53000, '4a95a489-3ea3-488c-b276-faa1b9caf287.jpg', '2024-01-24 15:41:00', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(2, 8, '돗소리세트(대)', 53000, 'bc3a7e75-fab1-4329-81a6-2ae847eb70ca.jpg', '2024-01-24 15:41:43', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(3, 8, '도래창구이', 9000, '796b3266-0dda-4b29-aee4-8c8862fa4f2f.jpg', '2024-01-24 15:41:52', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(4, 8, '숄더렉', 32000, 'b201c70f-52be-473d-9000-3a150775f86d.jpg', '2024-01-24 15:42:03', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(5, 8, '가브리살', 11000, 'e4171035-4e30-4436-9a3a-589f7b1ba5bc.jpg', '2024-02-01 11:40:31', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(6, 8, '항정상', 12000, '60b64ae4-ca95-4a61-a995-416b11303653.jpg', '2024-01-24 15:42:31', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(7, 8, '갈매기살', 11000, '41d1afb0-10f1-425e-b2e0-2a400c472f7a.jpg', '2024-01-24 15:42:52', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(8, 8, '늑간삼겹살', 12000, '70c1bda8-5c1f-4255-90a1-1dfc9db8bf77.jpg', '2024-01-24 15:43:13', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(9, 8, '냄비라면', 4000, '74408ab7-4f53-43ef-8c6f-09dd83528669.jpg', '2024-01-24 15:43:24', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(10, 8, '빨강이밥', 5000, '9266d0e0-3807-49ce-a191-9d1b110691f3.jpg', '2024-01-24 15:43:38', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(11, 8, '갈비삼겹', 13000, '31502911-5761-4659-b28c-260c923e8e18.jpg', '2024-01-24 15:43:48', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(12, 8, '돗소리세트(소)', 31000, '4175a801-0c93-485c-84a8-733a09d4b1b4.jpg', '2024-01-24 15:44:02', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(13, 8, '냄비된장', 3000, NULL, '2024-01-19 16:45:50', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(14, 8, '벌집껍데기', 7000, NULL, '2024-01-19 16:45:55', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(15, 2, '갈비살', 38000, '2e278481-9125-4345-8147-2563486d2988.jpg', '2024-01-24 15:25:48', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(16, 2, '양념갈비살', 38000, 'e96c787c-5abc-43a1-b470-549fdd294bfb.jpg', '2024-01-24 15:28:31', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(17, 2, '등심', 37000, '05678e24-c105-47b7-b8ea-0b0c922f16d9.jpg', '2024-01-24 15:28:43', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(18, 9, '목살 (130g)', 13000, '23630fa4-848c-4b08-b5e3-3b18f08341b2.png', '2024-01-24 15:45:54', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES	(19, 5, '한우 특생갈비', 45000, '1bfb232e-1b98-4d6f-8c67-b2a220a1108c.png', '2024-01-24 15:33:40', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(20, 9, '양념목갈비 (170g)', 12000, 'ee4d9708-213d-43b0-aa31-c1b9e67d0e95.png', '2024-01-24 15:46:06', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(21, 9, '삼겹살 (130g)', 13000, '912fc6f0-452d-4063-96e4-d49d533f45cc.png', '2024-01-24 15:46:16', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(22, 5, '한우 생갈비', 32000, '2ba3cb86-fd42-40f6-8ce8-9b2ddfa3e61c.jpg', '2024-01-24 15:33:51', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(23, 5, '한우 안창살', 38000, '3db9fa62-e7df-4df1-bf41-52e020b8a887.jpg', '2024-01-24 15:34:03', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(24, 7, '습식숙성살치살 300g', 35000, 'f5ed122d-f4fd-48cb-90b3-fb6d29229fe4.jpg', '2024-01-24 15:35:37', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(25, 7, '소고기된장찌개', 5000, 'a567fc42-b24e-41f7-a824-6efa7baf94eb.jpg', '2024-01-24 15:35:45', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(26, 11, '모듬한판', 49000, '5970c1de-2909-4e14-8b7c-59857a4b5f02.jpg', '2024-01-24 15:49:56', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(27, 11, '라면', 4000, NULL, '2024-01-19 16:51:13', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(28, 11, '꼬들살', 11000, NULL, '2024-01-19 16:51:27', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(29, 4, 'js가든 시그니처 북경오리(한 마리)', 120000, 'b183187e-e58c-469e-95b5-abffd0b32e90.jpg', '2024-01-24 15:31:15', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(30, 4, '목화솜탕수육(s)', 45000, '2b9498e5-231d-40fa-ba95-ff386fe3bb69.jpg', '2024-01-24 15:31:29', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(31, 12, '삼겹살', 8500, '3b8972b5-6eb5-4a16-9d59-d2b81024ffee.jpg', '2024-01-24 15:51:14', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(32, 12, '깍둑목살', 8500, '576b0af8-23bf-4ee4-89b4-8629d7d5b003.jpg', '2024-01-24 15:51:26', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(33, 12, '경성갈비', 12500, 'c3d2bb4d-73ee-4cda-b3a6-7830a27b714b.jpg', '2024-01-24 15:51:36', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(34, 15, '오리 한마리', 20900, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(35, 15, '오리 반마리', 10900, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(36, 13, '516교차숙성 삼겹살', 15000, 'f1117606-84bd-415f-ac47-4d642ef89baf.jpg', '2024-01-24 15:51:00', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(37, 17, '오리탕 1인분 포장가능', 0, NULL, '2024-01-31 14:46:56', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(38, 13, '516교차숙성 목살', 15000, 'b7cc2b4b-4ff3-4357-9afe-ae6162dc44cd.jpg', '2024-01-24 15:50:52', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(39, 13, '516교차숙성 항정살', 16000, 'fa9c1598-fb1f-4e07-abdc-13482450786f.jpg', '2024-01-24 15:51:09', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(40, 14, '돌담대구 돼지고기 오마카세', 33000, 'bc1fa8cb-8746-412c-8883-20f338565243.jpg', '2024-01-24 15:48:47', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(41, 14, '된장찌개 점심한상', 9000, 'f23011db-13c3-4ea9-8ed3-770e9a94bf53.jpg', '2024-01-24 15:49:02', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(42, 14, '콩나물국밥 점심한상', 9000, '6e7dc663-3bff-4b02-af5e-1ee080ad98f1.jpg', '2024-01-24 15:49:20', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(43, 16, '소갈비찜', 16000, '25686511-681a-4581-92cc-d41f8e1d42f8.jpg', '2024-01-24 15:45:01', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(44, 16, '청국장', 9000, '75d0bf74-9c08-4cc0-8e3c-2e2f5e2ef2be.jpg', '2024-01-24 15:44:40', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(45, 16, '돼지갈비찜', 9000, '0c963fd1-7855-45ab-b2ce-f714e4cabcc3.jpg', '2024-01-24 15:44:52', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(46, 18, '특대판', 78000, 'c42e41e9-0d1d-4e3b-84ad-2936007faa22.jpg', '2024-01-24 15:42:47', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(47, 18, '한판', 63000, '571a66a8-7859-4cb0-b18a-d2e84ef57ac7.jpg', '2024-01-24 15:42:58', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(48, 18, '반판', 44000, '684dcbb6-b230-4b1a-b243-4b4831bcb722.jpg', '2024-01-24 15:43:10', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(49, 20, '불고기150g', 7500, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(50, 20, '생오리600g\r\n', 23000, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(51, 21, '북경오리 (Half)', 35000, 'dbaa37c0-6546-4590-8e4b-fe8bd9e028b1.jpg', '2024-01-24 15:38:13', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(52, 21, '북경오리 (Whole)\r\n', 65000, '5edf4779-6d3b-4fd9-8911-1d68dab48d32.jpg', '2024-01-24 15:38:04', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(53, 10, '스지탕', 23000, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(54, 10, '오리도리탕', 22000, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(55, 19, '미진모듬 중(600g)', 47000, '4c2e1ddd-506c-4ff0-8fcc-7f4b1e69a4b1.jpg', '2024-01-24 15:41:42', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(56, 19, '미진모듬 대(720g)', 58000, 'b13fa8d5-328b-4a42-b569-aa871fa63acf.jpg', '2024-01-24 15:41:36', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(57, 19, '삼겹살한판(480g)', 44000, '279acabc-2883-4fb6-80bf-77af9143b1d2.jpg', '2024-01-24 15:41:53', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(58, 22, '닭곰탕', 8000, 'd63c2517-7a28-4cc9-8ae6-ad71dfc50f21.jpg', '2024-01-24 15:36:54', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(59, 22, '닭전골', 24000, '2e1cac4c-bde5-4ef2-b260-58be3335506b.jpg', '2024-01-24 15:37:12', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(60, 22, '닭무침', 23000, 'dacaff7f-85e7-478e-9c00-ca6fadb9d0f8.jpg', '2024-01-24 15:37:05', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(61, 24, '지리산 깻잎닭도리탕 (中)', 27000, 'e599cbcb-c7dc-40a7-ba40-d1b7623c79f2.jpg', '2024-01-24 15:35:47', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(62, 24, '팔륙계성집 꽃도리탕 (中)', 36000, '41d293a7-ad07-4ee0-addc-3c37890f0683.jpg', '2024-01-24 15:36:01', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(63, 24, '닭특수부위 돌판구이', 37000, '99965865-3ba2-415a-938b-0226ae8f5fce.jpg', '2024-01-24 15:35:35', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(64, 25, '닭곱새(1인분)', 11000, '2158c2fa-bc8d-4fc5-bb73-d27457b60653.jpg', '2024-01-24 15:33:25', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(65, 25, '엄지척 닭도리 (찜닭 저리가)(1인 (뼈닭 불가))', 14900, 'eb52afc4-eb65-4ee5-9ed5-2257cfcac3f2.jpg', '2024-01-24 15:33:11', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(66, 25, '엄지척 닭도리 (찜닭 저리가)(2~3인 (기본 순살 뼈 변경 가능))', 26000, 'd2a07130-68f5-409c-9d43-e9420122f30e.jpg', '2024-01-24 15:33:17', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(67, 26, '튀김통닭', 19000, '6262e392-cc67-43e7-b6dc-5b39cc573f3e.jpg', '2024-01-24 15:31:49', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(68, 26, '양념통닭', 20000, 'c4cc91de-30e0-4968-8d65-6dff64629983.jpg', '2024-01-24 15:31:30', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(69, 26, '반반통닭', 20000, 'e3f95294-3953-423a-89ab-73596bca131f.jpg', '2024-01-24 15:31:39', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(70, 10, '냉장 생 양갈비(180g)', 22000, 'fffd5097-7ca3-404f-b133-854beafb924f.jpg', '2024-01-24 15:48:26', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(71, 10, '냉장 생 양등심', 19000, 'a9745e6d-a473-471f-80eb-68cc2675bfec.jpg', '2024-01-24 15:48:35', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(72, 27, '콘치즈닭갈비', 11000, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(73, 27, '직화통닭갈비', 11000, NULL, '2024-01-19 17:22:24', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(74, 27, '찜닭갈비', 11000, NULL, '2024-01-19 17:22:32', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(75, 28, '뼈없는반마리', 22000, 'ef2aeb3f-f739-4597-b26a-61fc022c3469.jpg', '2024-01-24 15:28:17', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(76, 28, 'A세트', 25500, NULL, '2024-01-19 17:23:11', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(77, 28, '납작만두', 3500, NULL, '2024-01-19 17:23:19', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(78, 29, '(육즙 주르륵) 소금구이', 3500, NULL, NULL, NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(79, 29, '(맵찔이는 요고) 순한맛', 3500, NULL, '2024-01-19 17:23:59', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(80, 29, '(기름끼잡는 알싸한) 조금매운맛', 3500, NULL, '2024-01-19 17:24:07', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(81, 30, '마늘산낙지구이1마리', 23000, '63b65748-a7b2-4c62-9d6e-f52f32c495dd.jpg', '2024-01-24 15:24:19', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(82, 30, '숯불닭갈비(닭다리사이살구이)', 12000, '2dcdbd60-0e58-4c6c-98de-81a4b1792270.jpg', '2024-01-24 15:24:34', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(83, 30, '닭목살특수부위', 13000, '93e82830-ee03-4957-91fa-164f0e3b44ac.jpg', '2024-01-24 15:24:08', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(84, 31, '닭칼국수', 8500, 'e1188f8b-5f6d-468a-bc9a-3f78b7e1013d.jpg', '2024-01-24 15:23:26', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(85, 31, '삼계칼국수', 11000, 'fcd92a82-819e-4308-ae04-f57772ba1847.jpg', '2024-01-24 15:23:48', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(86, 31, '닭칼수육세트', 15500, 'ea40f1db-52cd-442b-aa72-4b7551e0c1ef.jpg', '2024-01-24 15:23:39', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(87, 32, '핫스파이시크림찜닭(순살 반마리)', 27000, '4238369c-4b01-4984-b4c7-a73f3dbaf6f3.jpg', '2024-01-24 15:01:28', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(88, 32, '핫스파이시크림찜닭(순살 한마리)', 35000, '4329dede-3a78-4c4d-bfa3-d402dd57f3ed.jpg', '2024-01-24 15:18:17', NOW());
+INSERT INTO `t_shop_menu` (`imenu`, `ishop`, `menu`, `price`, `pic`, `updated_at`,created_at) VALUES(89, 32, '해물크림찜닭(반마리)', 30000, '79aa42b8-34d2-418b-9f29-26bfb13935fc.jpg', '2024-01-24 15:23:12', NOW());
+
+
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (1, '주차장');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (2, '단체 가능');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (3, '포장가능');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (4, '배달가능');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (5, '와이파이');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (6, '예약 가능');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (7, '화장실구분');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (8, '대기공간');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (9, '장애인시설');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (10, '반려동물');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (11, '유아의자');
+INSERT INTO `t_facilities` (`ifacil`, `facility`)VALUES (12, '간편결제');
+
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (2, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (7, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (14, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (23, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (30, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (33, 1);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (1, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (2, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (3, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (6, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (8, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (9, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (10, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (11, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (13, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (14, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (16, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (18, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (19, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (21, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (26, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (30, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 2);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (10, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (15, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (16, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (17, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (21, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 3);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (17, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (21, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 4);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (2, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (3, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (6, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (7, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (8, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (9, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (10, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (11, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (13, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (14, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (17, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (18, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (19, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (21, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (23, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (30, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (33, 5);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (1, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (3, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (6, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (7, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (8, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (9, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (10, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (11, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (13, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (14, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (15, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (16, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (18, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (21, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (23, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 6);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (1, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (2, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (3, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (5, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (6, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (9, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (11, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (14, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (18, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (19, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (30, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (31, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (33, 7);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (12, 8);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (13, 8);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (19, 8);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (25, 8);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`)VALUES (28, 9);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (10, 10);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (11, 11);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (12, 11);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (13, 11);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (19, 11);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (10, 12);
+INSERT INTO `t_shop_facilities` (`ishop`, `ifacil`) VALUES (11, 12);
+
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (1, '욕설/인신공격');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (2, '음란물');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (3, '영리목적/홍보성');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (4, '개인정보');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (5, '게시글 도배');
+INSERT INTO `t_report` (`ireport`, `report`)VALUES (6, '기타');
+
+
+INSERT INTO `t_butcher_shop` (`ibutcher`,iuser ,`number`,`name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES (1,42,99,'다정축산물직판장', '대구 중구 중앙대로 314', '매일\r\n08:30 - 22:30', '0507-1393-9410', '126.726385532141', '35.1804742090837', '2024-01-09 16:35:06');
+INSERT INTO `t_butcher_shop` (`ibutcher`,iuser ,`number`,`name`, `location`, `open`, `tel`, `x`, `y`, `created_at`) VALUES (2,43,999,'남문한우백화점 부림축산', '대구 중구 중앙대로 307 남문시장 1층', '화\r\n09:00 - 22:00\r\n수\r\n09:00 - 22:00\r\n목\r\n09:00 - 22:00\r\n금\r\n09:00 - 22:00\r\n토\r\n09:00 - 22:00\r\n일(1/21)\r\n정기휴무 (매달 1, 3번째 일요일)\r\n월\r\n09:00 - 22:00\r\n매달 1, 3번째 일요일 정기 휴무', '0507-1457-5659', '126.723927362338', '35.1804056266027', '2024-01-09 16:36:48');
+
+
+INSERT INTO `t_butcher_pic` (`ibut_pics`, `ibutcher`, `pic`) VALUES(11, 1, '1598e1b9-28d3-4b02-bf45-af2363b9f336.jpg');
+INSERT INTO `t_butcher_pic` (`ibut_pics`, `ibutcher`, `pic`) VALUES(12, 2, 'b6cbc471-5e66-41f0-84a9-43d1403d63be.jpg');
 
 
 

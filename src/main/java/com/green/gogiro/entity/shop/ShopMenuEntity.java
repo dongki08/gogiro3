@@ -18,7 +18,7 @@ public class ShopMenuEntity extends BaseEntity {
     @JoinColumn(name = "ishop", nullable = false)
     private ShopEntity shopEntity;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 100, nullable = false)
     private String menu;
 
     @Column

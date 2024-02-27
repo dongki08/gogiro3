@@ -29,6 +29,16 @@ spring:
     url: jdbc:mariadb://192.168.0.144:3306/db_even_last_1
     username: even_last_1
     password: army
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+    generate-ddl: true
 
 mybatis:
   mapper-locations: mappers/**/*.xml
@@ -48,9 +58,9 @@ spring:
     activate:
       on-profile: "jpa"
   datasource:
-    url: jdbc:mariadb://192.168.0.161:3306/test4
-    username: root
-    password: green502
+    url: jdbc:mariadb://192.168.0.144:3306/db_even_last_1
+    username: even_last_1
+    password: army
   jpa:
     hibernate:
       ddl-auto: update
