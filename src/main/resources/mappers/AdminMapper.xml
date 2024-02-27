@@ -78,6 +78,12 @@
             count= 0
         WHERE i${column}= #{pk}
     </update>
+
+    <delete id="delReviewCount">
+
+    </delete>
+
+
     <select id="blackList">
         SELECT
             a.iuser,
