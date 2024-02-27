@@ -313,7 +313,6 @@ public class UserService {
             shopRepository.save(shopEntity);
 
             shopReviewEntity.getUserEntity().setCount(shopReviewEntity.getUserEntity().getCount() + 1);
-
             return new ResVo(SUCCESS);
         }
 
