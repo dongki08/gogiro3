@@ -20,6 +20,8 @@ public class AdminController {
     private final AdminService service;
     //0.총 관리자 로그인
     @PostMapping("/signin")
+    @Operation(summary="총 관리자 로그인",description="--요청 데이터<br>email:아이디, upw:비밀번호" +
+            "<br>--응답 데이터<br>result:로그인 결과(1:성공, 2:비밀번호틀림, 3: 아이디 없음)<br>iuser:유저pk<br>accessToken:엑세스 토큰")
     public AdminSigninVo adminSignin(HttpServletResponse res, @RequestBody AdminSigninDto dto){
         return service.adminSignin2(res,dto);
     }

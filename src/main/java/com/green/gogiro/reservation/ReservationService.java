@@ -83,7 +83,7 @@ public class ReservationService {
         repository.save(entity);
         ReservationVo vo= new ReservationVo();
         vo.setAmount(shopEntity.getDeposit());
-        vo.setIreser(entity.getIreser().intValue());
+        vo.setPk(entity.getIreser().intValue());
         return vo;
     }
 //    //Mybatis 2.픽업 등록
@@ -154,7 +154,7 @@ public class ReservationService {
               );
         ReservationVo vo= new ReservationVo();
         vo.setAmount(amount.intValue());
-        vo.setIreser(entity.getIpickup().intValue());
+        vo.setPk(entity.getIpickup().intValue());
         return vo;
     }
     //Mybatis 3.예약 취소

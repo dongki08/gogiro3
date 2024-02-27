@@ -3,18 +3,24 @@ package com.green.gogiro.reservation.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.green.gogiro.common.Const.REGEXP_DATE_TYPE5;
+import static com.green.gogiro.exception.AuthErrorCode.REGEXP_DATE_TYPE;
+import static java.lang.Math.abs;
 
+import com.green.gogiro.exception.AuthErrorCode;
+import com.green.gogiro.exception.RestApiException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
 @Data
-public class PickupInsDto {
+public class PickupInsDto{
     @JsonIgnore
     private int iuser;
     @Schema(title = "정육점pk")
@@ -34,10 +40,18 @@ public class PickupInsDto {
     private int ipickup;
     @JsonIgnore
     private LocalDateTime localDateTime;
-
-    public void setDate(String date){
+    @JsonIgnore
+    private boolean invalidDate;
+    public void setDate(String date) {
         this.date= date;
         DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
         this.localDateTime= LocalDateTime.parse(date+".000", formatter);
+        LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
+        LocalDate dayDate2 = this.localDateTime.toLocalDate();
+        Period diff= Period.between(dayDate1, dayDate2);
+        int year= abs(diff.getYears());
+        int month= abs(diff.getMonths());
+        int day= abs(diff.getDays());
+        this.invalidDate=(year>0||month>0||day>=30);
     }
 }
