@@ -15,6 +15,7 @@ import com.green.gogiro.entity.community.CommunityEntity;
 import com.green.gogiro.entity.community.repository.CommunityCommentRepository;
 import com.green.gogiro.entity.community.repository.CommunityRepository;
 import com.green.gogiro.entity.shop.ShopEntity;
+import com.green.gogiro.entity.shop.ShopReviewCountEntity;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
 import com.green.gogiro.exception.AuthErrorCode;
@@ -194,6 +195,10 @@ public class AdminService{
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
         }
+        DelCount delCount = new DelCount();
+        delCount.setCheck(dto.getCheck());
+        delCount.setPk(dto.getPk());
+        mapper.delCount(delCount);
         return new ResVo(mapper.cancelReport(dto));
     }
     //JPA 5.게시물 신고 취소
