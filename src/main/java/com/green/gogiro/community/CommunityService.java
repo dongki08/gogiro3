@@ -135,15 +135,22 @@ public class CommunityService {
         //Integer check = mapper.checkCommunity(dto.getIboard());
         CommunityModel model = mapper.entityCommunity(dto.getIboard());
         List<CommunityBySelPicsDto> bDto = mapper.selByCommunityPics(dto.getIboard());
+        List<Integer> picPk = mapper.selByCommunityPicsPk(dto.getIboard());
 
         int boardSize = bDto != null ? bDto.size() : 0;
         int fileSize = dto.getFiles() != null ? dto.getFiles().size() : 0;
         int delSize = dto.getIcommuPics() != null ? dto.getIcommuPics().size() : 0;
         int totalSize = boardSize + fileSize - delSize;
 
+        //본인 게시글 확인
         if(model.getIuser() != authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(NOT_COMMUNITY_ENTITY);
         }
+        //사진pk 여부
+        if(dto.getIcommuPics() != picPk) {
+            throw new RestApiException(NOT_COMMUNITY_PICSPKENTITY);
+        }
+
         if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
         } else if (totalSize > 5) {

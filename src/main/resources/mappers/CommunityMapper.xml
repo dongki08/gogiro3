@@ -157,6 +157,12 @@
         WHERE iboard = #{iboard}
     </select>
 
+    <select id="selByCommunityPicsPk">
+        select icommu_pics as icommuPics
+        from t_commu_pics
+        where iboard = #{iboard}
+    </select>
+
     <select id="selCommunityPics">
         SELECT icommu_pics as icommuPics, pic
         FROM t_commu_pics

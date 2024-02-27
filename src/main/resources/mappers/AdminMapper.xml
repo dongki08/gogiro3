@@ -61,7 +61,7 @@
         FROM t_${table} a
         JOIN t_user b
         ON a.iuser=b.iuser
-        WHERE a.COUNT<![CDATA[>]]>=1
+        WHERE a.COUNT<![CDATA[>=]]>1
         ORDER BY a.created_at
     </select>
     <update id="hide">
