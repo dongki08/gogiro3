@@ -380,14 +380,10 @@ public class CommunityService {
         countEntity.setCommunityEntity(communityEntity);
         communityCountRepository.save(countEntity);
 
-//        BlackListEntity blackListEntity = new BlackListEntity();
-//        blackListEntity.setIuser(userEntity);
-//        blackListEntity.setCount(communityEntity.getCount());
-//        blackListRepository.save(blackListEntity);
-
         communityEntity.setCount(communityEntity.getCount() + 1);
         communityRepository.save(communityEntity);
 
+        communityEntity.getUserEntity().setCount(communityEntity.getUserEntity().getCount() + 1);
 
 
         return new ResVo(SUCCESS);
