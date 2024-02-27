@@ -46,7 +46,7 @@ public class ShopEntity extends BaseEntity {
     @Column(length = 15)
     private String tel;
 
-    @Column(length = 20,nullable = false, unique = true)
+    @Column(length = 10,nullable = false, unique = true)
     private String number;
 
     @Column(nullable = false)

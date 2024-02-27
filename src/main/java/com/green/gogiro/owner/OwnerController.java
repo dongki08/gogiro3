@@ -5,6 +5,7 @@ import com.green.gogiro.owner.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ public class OwnerController {
 //                             @RequestPart String num, @RequestPart String name, @RequestPart String shopName,
 //                             @RequestPart String x, @RequestPart String y, @RequestPart String location,
 //                             @RequestPart int imeat){
-    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart OwnerSignupDto dto) {
+    public ResVo ownerSignup(@RequestPart MultipartFile pic, @Valid @RequestPart OwnerSignupDto dto) {
         return service.ownerSignup(pic, dto);
     }
 
