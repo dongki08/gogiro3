@@ -189,12 +189,16 @@ public class AdminService{
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 5.게시물 신고 취소
-//    public ResVo cancelReport1(CancelReportDto dto){
-//        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-//            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
-//        }
-//        return new ResVo(mapper.cancelReport(dto));
-//    }
+    public ResVo cancelReport1(CancelReportDto dto){
+        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+        }
+        DelCount del= new DelCount();
+        del.setCheck(dto.getCheck());
+        del.setPk(dto.getPk());
+        mapper.delCount(del);
+        return new ResVo(mapper.cancelReport(dto));
+    }
     //JPA 5.게시물 신고 취소
     @Transactional
     public ResVo cancelReport2(CancelReportDto dto){
@@ -228,6 +232,10 @@ public class AdminService{
                 entity3.setCount(0);
                 break;
         }
+        DelCount del= new DelCount();
+        del.setCheck(dto.getCheck());
+        del.setPk(dto.getPk());
+        mapper.delCount(del);
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
