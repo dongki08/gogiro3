@@ -83,7 +83,7 @@ public class CommunityController {
             "writerPic : 작성자 프로필 사진<br>" +
             "title : 제목<br>" +
             "contents : 내용<br>" +
-            "count : 신고 횟수" +
+            "count : 신고 횟수<br>" +
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
             "boardAllCount : 게시글 총 갯수")
