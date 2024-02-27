@@ -8,8 +8,6 @@ import com.green.gogiro.common.Const;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
 import com.green.gogiro.community.model.*;
-import com.green.gogiro.entity.BlackListEntity;
-import com.green.gogiro.entity.BlackListRepository;
 import com.green.gogiro.entity.UserEntity;
 import com.green.gogiro.entity.community.*;
 import com.green.gogiro.entity.community.repository.*;
@@ -43,7 +41,6 @@ public class CommunityService {
     private final CommunityReportRepository communityReportRepository;
     private final CommunityCommentCountRepository communityCommentCountRepository;
     private final CommunityCommentRepository communityCommentRepository;
-    private final BlackListRepository blackListRepository;
     private final ReservationRepository reservationRepository;
 
 
@@ -383,10 +380,10 @@ public class CommunityService {
         countEntity.setCommunityEntity(communityEntity);
         communityCountRepository.save(countEntity);
 
-        BlackListEntity blackListEntity = new BlackListEntity();
-        blackListEntity.setIuser(userEntity);
-        blackListEntity.setCount(communityEntity.getCount());
-        blackListRepository.save(blackListEntity);
+//        BlackListEntity blackListEntity = new BlackListEntity();
+//        blackListEntity.setIuser(userEntity);
+//        blackListEntity.setCount(communityEntity.getCount());
+//        blackListRepository.save(blackListEntity);
 
         communityEntity.setCount(communityEntity.getCount() + 1);
         communityRepository.save(communityEntity);
