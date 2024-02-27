@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.OutputStream;
@@ -79,7 +80,7 @@ public class ReservationController {
         return service.putReservation1(dto);
     }
 
-    @PostMapping("/review")
+    @PostMapping(value="/review",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "후기 등록",description = "후기 등록 처리<br>--요청 데이터<br>pics:후기 사진(1~5장)<br>" +
             "<br>checkShop:가게구분(고기집 0,정육점 1)<br>ireser(최소 1 이상):예약pk<br>ishop(최소 1 이상):가게pk" +
             "<br>star(1~5점):별점<br>review(1~50자):리뷰 내용<br>--응답 데이터<br>(성공)<br>ireview:리뷰pk" +
@@ -124,7 +125,7 @@ public class ReservationController {
 
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(dto.toString().getBytes("UTF-8"));
-        if(!service.confirmPayment1(dto)){
+        if(!service.confirmPayment(dto)){
             throw new RestApiException(INVALID_PAYMENT);
         }
         return dto;
