@@ -31,14 +31,17 @@ INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `
 INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (34, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test27', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
 INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (35, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test28', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
 INSERT INTO `t_user` (`iuser`, `created_at`, `updated_at`, `address`, `birth`, `check`, `check_shop`, `email`, `gender`,`name`, `nickname`, `pic`, `role`, `tel`, `upw`)VALUES (36, '2024-02-26 17:17:39.000000', NULL, NULL, NULL, 0, 0, 'test29', NULL, NULL, NULL, NULL, 'OWNER', NULL,'$2a$10$PGamg9zjhrZBmnFWMCex..PqEShW8Falop3MydCgoaBkg.xNSv8ui');
+INSERT INTO `t_user` (`check`, `check_shop`, `gender`, `created_at`, `iuser`, `updated_at`, `name`, `nickname`, `tel`, `birth`, `email`, `address`, `pic`, `upw`, `role`) VALUES(0, 2, '남', '2024-02-26 10:34:10.125428', 37, '2024-02-26 10:34:10.125428', '박동현', '박깍둑', '01012345678', '19000109', 'dd11@naver.com', '깍둑시', NULL, '$2a$10$UOklFKllcMZyLWoKNdDgHuMGXqDWLeweDHtroiKAIgJmQHKg8wQCS', 'USER');
+INSERT INTO `t_user` (`check`, `check_shop`, `gender`, `created_at`, `iuser`, `updated_at`, `name`, `nickname`, `tel`, `birth`, `email`, `address`, `pic`, `upw`, `role`) VALUES(0, 2, '남', '2024-02-26 10:34:31.727763', 38, '2024-02-26 10:34:31.727763', '배용진', '배깍둑', '01055345678', '19000109', 'dd22@naver.com', '깍둑동', NULL, '$2a$10$TLkw0FunR/sfn2ClSP6kRelnNRNm0zyE32Hd22mVMi2k61/CfvP.6', 'USER');
+INSERT INTO `t_user` (`check`, `check_shop`, `gender`, `created_at`, `iuser`, `updated_at`, `name`, `nickname`, `tel`, `birth`, `email`, `address`, `pic`, `upw`, `role`) VALUES	(0, 2, '남', '2024-02-26 10:34:49.864714', 39, '2024-02-26 10:34:49.864714', '문하나', '문깍둑', '01055345678', '19000109', 'dd33@naver.com', '깍둑깍둑', NULL, '$2a$10$geRvJnC8GUMcqVb5UezNguZrKzVlz91d5LGrUCUpvI579Ft7RdB.C', 'USER');
+INSERT INTO `t_user` (`check`, `check_shop`, `gender`, `created_at`, `iuser`, `updated_at`, `name`, `nickname`, `tel`, `birth`, `email`, `address`, `pic`, `upw`, `role`) VALUES(0, 2, '남', '2024-02-26 10:35:09.459470', 40, '2024-02-26 10:35:09.459470', '김현수', '김깍둑', '01055344478', '19000109', 'dd44@naver.com', '김깍둑', NULL, '$2a$10$JMQIiP8gHiBDPpKxCd/4dOuZUqbLoro3FxTus97/lT/6O2ThAZhKO', 'USER');
 
 
-
- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(1, '돼지');
- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(2, '소');
- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(3, '닭');
- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(4, '오리');
- INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(5, '양');
+INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(1, '돼지');
+INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(2, '소');
+INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(3, '닭');
+INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(4, '오리');
+INSERT INTO `t_category` (`imeat`, `mtype`) VALUES	(5, '양');
 
 
 

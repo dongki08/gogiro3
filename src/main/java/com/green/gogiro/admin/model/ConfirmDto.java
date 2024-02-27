@@ -1,7 +1,6 @@
 package com.green.gogiro.admin.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
@@ -17,8 +16,7 @@ public class ConfirmDto {
 
     @Min(value=0,message="승인 여부 값이 올바르지 않습니다")
     @Max(value=3,message="승인 여부 값이 올바르지 않습니다")
-    @Schema(name = "승인여부")
-    private int confirm; //변경하고 싶은 승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)
+    private int confirm;//변경하고 싶은 승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)
 
     @JsonIgnore
     private String table;

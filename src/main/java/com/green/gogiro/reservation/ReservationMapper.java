@@ -38,4 +38,6 @@ public interface ReservationMapper {
     CancelDto selPickupForCancelTest();
 
     int selPickupConfirmForTest(int ipickup);
+
+    Integer amount(PaymentDto dto);
 }

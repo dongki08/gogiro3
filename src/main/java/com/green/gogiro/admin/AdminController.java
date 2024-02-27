@@ -21,7 +21,7 @@ public class AdminController {
     //0.총 관리자 로그인
     @PostMapping("/signin")
     public AdminSigninVo adminSignin(HttpServletResponse res, @RequestBody AdminSigninDto dto){
-        return service.adminSignin1(res,dto);
+        return service.adminSignin2(res,dto);
     }
     /*1.매장 관리 리스트
     1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트
@@ -52,7 +52,7 @@ public class AdminController {
             "<br>--요구 데이터<br>checkShop(0 또는 1): 가게 구분(0:고기집, 1:정육점)<br>ishop(최소 1 이상): 가게 pk" +
             "<br>confirm:변경하고 싶은 승인 여부(1:확정, 2:거절, 3:퇴출)<br>--응답 데이터<br>(성공)" +
             "<br>result: 1<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo confirmShop(@Valid @RequestBody ConfirmDto dto){return service.confirmShop1(dto);}
+    public ResVo confirmShop(@Valid @RequestBody ConfirmDto dto){return service.confirmShop2(dto);}
     /*3.신고 글 리스트(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기)
     1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가
     2)계정 제재는 총 관리자 재량으로*/

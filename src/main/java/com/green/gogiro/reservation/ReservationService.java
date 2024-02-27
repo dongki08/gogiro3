@@ -313,6 +313,9 @@ public class ReservationService {
         }
         return new ResVo(SUCCESS);
     }
-
+    @Transactional
+    public boolean confirmPayment1(PaymentDto dto){
+        return (mapper.amount(dto))!=dto.getAmount();
+    }
 }
 

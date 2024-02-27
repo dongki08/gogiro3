@@ -33,6 +33,7 @@ public enum AuthErrorCode implements ErrorCode{
     REPORT_COMMUNITY_MYUSER(HttpStatus.BAD_REQUEST, "본인 게시글은 신고가 불가능합니다"),
     REPORT_REVIEW_ENTITY(HttpStatus.NOT_FOUND, "이미 신고된 리뷰입니다"),
     REPORT_REVIEW_MYUSER(HttpStatus.BAD_REQUEST, "본인 리뷰는 신고가 불가능합니다"),
+    NOT_COMMUNITY_PICSPKENTITY(HttpStatus.BAD_REQUEST, "삭제할 사진을 찾을 수 없습니다."),
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND, "refresh-token이 없습니다.");
 
 
