@@ -99,6 +99,9 @@ public class OwnerService {
 
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getEmail());
         UserEntity userEntity = optEntity.orElseThrow(() -> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID));
+        if(userEntity.getCheck() == 1) {
+            throw new RestApiException(AuthErrorCode.BLACK_LOGIN);
+        }
         if (!userEntity.getRole().toString().equals("OWNER")) {
             throw new RestApiException(AuthErrorCode.NOT_ROLE);
         }
