@@ -6,6 +6,13 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+import static java.lang.Math.abs;
+
 @Data
 public class CancelDto {
     @JsonIgnore
@@ -22,5 +29,6 @@ public class CancelDto {
     public void setCheckShop(int checkShop) {
         this.isReservation= (checkShop==0);
         this.checkShop= checkShop;
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     }
 }

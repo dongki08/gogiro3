@@ -13,4 +13,5 @@ public class AdminSigninVo {
     private int result;
     private Long iuser;
     private String accessToken;
+    private int checkShop;
 }
