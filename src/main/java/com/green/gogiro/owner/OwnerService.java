@@ -141,6 +141,9 @@ public class OwnerService {
         MyPrincipal mp = new MyPrincipal();
         if (userEntity.getCheckShop() == 0) {
             ShopEntity entity = shopRepository.findByUserEntity(userEntity);
+            if(entity.getConfirm() != 1){
+                throw new RestApiException(CONFIRM);
+            }
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
             mp.setCheckShop(userEntity.getCheckShop());
@@ -151,6 +154,9 @@ public class OwnerService {
         }
         if (userEntity.getCheckShop() == 1) {
             ButcherEntity entity = butcherRepository.findByUserEntity(userEntity);
+            if(entity.getConfirm() != 1){
+                throw new RestApiException(CONFIRM);
+            }
             mp.setIuser(userEntity.getIuser());
             mp.setRole(userEntity.getRole().toString());
             mp.setIshop(entity.getIbutcher());
