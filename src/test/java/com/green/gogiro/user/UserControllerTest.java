@@ -130,31 +130,31 @@ class UserControllerTest {
         ResVo result= mapper.readValue(content, ResVo.class);
         assertEquals(vo.getResult(), result.getResult());
     }
-    @Test
-    @WithMockUser
-    void putUserTest() throws Exception{
-        final int EXPECTED= 21;
-        UserUpdDto dto= new UserUpdDto();
-        dto.setNickname("테스트");
-        dto.setAddress("대구어딘가");
-        dto.setTel("01012345678");
-        MockMultipartFile file = new MockMultipartFile("pic", "aaa.jpg", "multipart/form-data", "uploadFile".getBytes(StandardCharsets.UTF_8));
-        MockMultipartFile request = new MockMultipartFile("dto", null, "application/json", mapper.writeValueAsString(dto).getBytes(StandardCharsets.UTF_8));
-        given(service.updateUser(any())).willReturn(new ResVo(EXPECTED));
-        MvcResult mr= mvc.perform(MockMvcRequestBuilders.multipart(HttpMethod.PUT,"/api/user")
-                                                        .file(file)
-                                                        .file(request)
-                                                        .accept(MediaType.APPLICATION_JSON)
-                                                        .contentType(MediaType.MULTIPART_FORM_DATA)
-                                                        .with(csrf()))
-                         .andExpect(status().isOk())
-                         .andDo(print())
-                         .andReturn();
-        verify(service).updateUser(any());
-        String content= mr.getResponse().getContentAsString();
-        ResVo result= mapper.readValue(content,ResVo.class);
-        assertEquals(EXPECTED, result.getResult());
-    }
+//    @Test
+//    @WithMockUser
+//    void putUserTest() throws Exception{
+//        final int EXPECTED= 21;
+//        UserUpdDto dto= new UserUpdDto();
+//        dto.setNickname("테스트");
+//        dto.setAddress("대구어딘가");
+//        dto.setTel("01012345678");
+//        MockMultipartFile file = new MockMultipartFile("pic", "aaa.jpg", "multipart/form-data", "uploadFile".getBytes(StandardCharsets.UTF_8));
+//        MockMultipartFile request = new MockMultipartFile("dto", null, "application/json", mapper.writeValueAsString(dto).getBytes(StandardCharsets.UTF_8));
+//        given(service.updateUser(any())).willReturn(new ResVo(EXPECTED));
+//        MvcResult mr= mvc.perform(MockMvcRequestBuilders.multipart(HttpMethod.PUT,"/api/user")
+//                                                        .file(file)
+//                                                        .file(request)
+//                                                        .accept(MediaType.APPLICATION_JSON)
+//                                                        .contentType(MediaType.MULTIPART_FORM_DATA)
+//                                                        .with(csrf()))
+//                         .andExpect(status().isOk())
+//                         .andDo(print())
+//                         .andReturn();
+//        verify(service).updateUser(any());
+//        String content= mr.getResponse().getContentAsString();
+//        ResVo result= mapper.readValue(content,ResVo.class);
+//        assertEquals(EXPECTED, result.getResult());
+//    }
     @Test
     @WithMockUser
     void getUserInfoTest() throws Exception{

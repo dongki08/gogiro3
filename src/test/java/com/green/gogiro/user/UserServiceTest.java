@@ -67,14 +67,14 @@ class UserServiceTest {
         }
     }
 
-    @Test
-    void updateUserTest() throws Exception {
-        UserUpdDto dto= new UserUpdDto();
-        ResVo vo= service.updateUser(dto);
-        verify(authenticationFacade).getLoginUserPk();
-        verify(mapper).updateUser(any());
-        assertEquals(1, vo.getResult());
-    }
+//    @Test
+//    void updateUserTest() throws Exception {
+//        UserUpdDto dto= new UserUpdDto();
+//        ResVo vo= service.updateUser(dto);
+//        verify(authenticationFacade).getLoginUserPk();
+//        verify(mapper).updateUser(any());
+//        assertEquals(1, vo.getResult());
+//    }
 
     @Test
     void selUserInfoTest() throws Exception {

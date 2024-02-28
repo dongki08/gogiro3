@@ -39,7 +39,7 @@
         update t_user
         set nickname = #{nickname},
         address = #{address},
-        updated_at = NOW()
+        updated_at = NOW(),
         <if test="pic!=null">
             pic = #{pic},
         </if>

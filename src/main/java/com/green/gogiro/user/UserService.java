@@ -195,7 +195,7 @@ public class UserService {
     }
 
     //유저 정보 수정
-    public ResVo updateUser(UserUpdDto dto) {
+    public ResVo updateUser(MultipartFile pic, UserUpdDto dto) {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
 
         //null이 아닌데(이미있다) 본인이 아닐 때
@@ -203,10 +203,10 @@ public class UserService {
                 && !mapper.checkNicknameBeforeUpdate(dto.getIuser()).equals(dto.getNickname())) {
             throw new RestApiException(UserErrorCode.DUPLICATION_NICK_NAME);
         }
-        if (dto.getFile() != null) {
+        if (pic != null) {
             String path = "/user/" + dto.getIuser() + "/";
             myFileUtils.delFolderTrigger2(path);
-            String savedPicFileNm = myFileUtils.transferTo(dto.getFile(), path);
+            String savedPicFileNm = myFileUtils.transferTo(pic, path);
             dto.setPic(savedPicFileNm);
         }
         mapper.updateUser(dto);
