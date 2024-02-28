@@ -278,6 +278,7 @@ public class OwnerService {
         entity.setEmail(dto.getId());
         entity.setName(dto.getName());
         entity.setRole(RoleEnum.OWNER);
+        entity.setNickname(dto.getShopName());
         userRepository.save(entity);
         UserEntity userEntity = userRepository.getReferenceById(entity.getIuser());
         if (entity.getCheckShop() == 0) {
