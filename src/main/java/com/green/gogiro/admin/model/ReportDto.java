@@ -8,6 +8,12 @@ public class ReportDto {
     private String table;
     private String column1;
     private String column2;
+    private int page;
+    private int startIdx;
+    private int rowCount;
+    public void setPage(int page){
+        this.startIdx=(page-1)*this.rowCount;
+    }
     public ReportDto(int check){
         switch(check){
             case 0:

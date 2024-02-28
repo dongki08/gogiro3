@@ -17,6 +17,7 @@ import com.green.gogiro.entity.community.repository.CommunityRepository;
 import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
+import com.green.gogiro.exception.AdminErrorCode;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.CommonErrorCode;
 import com.green.gogiro.exception.RestApiException;
@@ -31,6 +32,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.green.gogiro.common.Const;
@@ -104,11 +107,11 @@ public class AdminService{
         return AdminSigninVo.builder().result(Const.SUCCESS).accessToken(at).iuser(userEntity.getIuser()).checkShop(2).build();
     }
     //Mybatis 1.매장 관리 리스트
-    public List<ShopVo> shopList1(String search){
+    public List<ShopVo> shopList1(ShopDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.shopList(search);
+        return mapper.shopList(dto);
     }
     //JPA 1.매장 관리 리스트
 //    @Transactional
@@ -138,11 +141,11 @@ public class AdminService{
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 3.신고 글 리스트
-    public List<ReportedVo> reportList1(int check){
+    public List<ReportedVo> reportList1(ReportDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.reportList(new ReportDto(check));
+        return mapper.reportList(dto);
     }
     //JPA 3.신고 글 리스트
 //    @Transactional
@@ -163,28 +166,36 @@ public class AdminService{
                 CommunityEntity entity0= optional0.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity0.setCount(3);
+                if(entity0.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity0.setCount(3);}
                 break;
             case 1:
                 Optional<CommunityCommentEntity> optional1= communityCommentRepository.findById((long)dto.getPk());
                 CommunityCommentEntity entity1= optional1.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity1.setCount(3);
+                if(entity1.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity1.setCount(3);}
                 break;
             case 2:
                 Optional<ShopReviewEntity> optional2= shopReviewRepository.findById((long)dto.getPk());
                 ShopReviewEntity entity2= optional2.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity2.setCount(3);
+                if(entity2.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity2.setCount(3);}
                 break;
             case 3:
                 Optional<ButcherReviewEntity> optional3= butcherReviewRepository.findById((long)dto.getPk());
                 ButcherReviewEntity entity3= optional3.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity3.setCount(3);
+                if(entity3.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity3.setCount(3);}
                 break;
         }
         return new ResVo(Const.SUCCESS);
@@ -209,28 +220,36 @@ public class AdminService{
                 CommunityEntity entity0= optional0.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity0.setCount(0);
+                if(entity0.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity0.setCount(0);}
                 break;
             case 1:
                 Optional<CommunityCommentEntity> optional1= communityCommentRepository.findById((long)dto.getPk());
                 CommunityCommentEntity entity1= optional1.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity1.setCount(0);
+                if(entity1.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity1.setCount(0);}
                 break;
             case 2:
                 Optional<ShopReviewEntity> optional2= shopReviewRepository.findById((long)dto.getPk());
                 ShopReviewEntity entity2= optional2.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity2.setCount(0);
+                if(entity2.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity2.setCount(0);}
                 break;
             case 3:
                 Optional<ButcherReviewEntity> optional3= butcherReviewRepository.findById((long)dto.getPk());
                 ButcherReviewEntity entity3= optional3.orElseThrow(
                         ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity3.setCount(0);
+                if(entity3.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity3.setCount(0);}
                 break;
         }
         DelCount del= new DelCount();
@@ -240,11 +259,13 @@ public class AdminService{
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
-    public List<BlackVo> blackList1(){
+    public List<BlackVo> blackList1(BlackDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.blackList(mapper.beforeBlackList());
+        List<Integer> list= mapper.beforeBlackList();
+        dto.setList(list);
+        return !list.isEmpty()?mapper.blackList(dto):new ArrayList<>();
     }
     //JPA 6.사용자(USER,OWNER)블랙 리스트(정지)
 //    @Transactional
