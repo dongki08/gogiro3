@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+import static com.green.gogiro.exception.AuthErrorCode.INVALID_PAGE;
+
 @Tag(name = "고기 잡담", description = "고기 잡담 API")
 @RestController
 @RequiredArgsConstructor
@@ -87,9 +89,11 @@ public class CommunityController {
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
             "boardAllCount : 게시글 총 갯수<br>" +
-            "allfav : 좋아요 총 갯수" +
-            "신고횟수 3회이상 자동블러처리")
+            "totalfav : 좋아요 총 갯수" +
+            "신고횟수 3회이상 자동블러처리<br>" +
+            "filter 최신순(0), 좋아요 순(1)외에 입력 시 : 잘못된 페이지가 입력되었습니다.")
     public List<CommunitySelVo> getCommunity(CommunitySelDto dto) {
+
         return service.selCommunity(dto);
     }
 
@@ -110,7 +114,8 @@ public class CommunityController {
             "pics : 사진리스트<br>" +
             "be : 이전글<br>" +
             "af : 다음글<br>" +
-            "comments : 댓글리스트")
+            "comments : 댓글리스트<br>" +
+            "게시글이 없을때 : 등록된 글을 찾을 수 없습니다.")
     public CommunityDetailVo getDetailCommunity(@PathVariable int iboard) {
         return service.getDetailCommunity(iboard);
     }
@@ -133,7 +138,8 @@ public class CommunityController {
             "iboard : 커뮤니티pk<br>" +
             "contents : 댓글내용(1~50자)<br>" +
             "--응답데이터<br>" +
-            "result : 1(성공), 에러메세지(실패)")
+            "result : 1(성공)<br>" +
+            "없는 iboard pk 등록 시 : 등록된 글을 찾을 수 없습니다.")
     public ResVo postCommunityComment(@Valid @RequestBody CommunityCommentInsDto dto) {
         return service.postCommunityComment(dto);
     }
@@ -143,7 +149,8 @@ public class CommunityController {
             "--요청데이터<br>" +
             "icomment : 댓글pk<br>" +
             "--응답데이터<br>" +
-            "result : 1(성공), 에러메세지(실패)")
+            "result : 1(성공)<br>" +
+            "없는 icomment pk 삭제 시 : 등록된 글을 찾을 수 없습니다.")
     public ResVo delCommunityComment(@RequestBody CommunityCommentDelDto dto) {
         return service.delCommunityComment(dto);
     }
@@ -174,7 +181,8 @@ public class CommunityController {
             "6. 기타<br>" +
             "--응답데이터<br>" +
             "result : 1(성공), 중복신고(이미 신고된 게시글입니다)" +
-            ", 본인게시글 신고(본인 게시글은 신고가 불가능합니다)")
+            ", 본인게시글 신고(본인 게시글은 신고가 불가능합니다)<br>" +
+            "신고pk 외 등록 시 : 신고 종류를 찾을 수 없습니다.")
     public ResVo reportCommunity(CommunityReportDto dto) {
         return service.reportCommunity(dto);
     }
@@ -191,7 +199,9 @@ public class CommunityController {
             "5. 게시글 도배<br>" +
             "6. 기타<br>" +
             "--응답데이터<br>" +
-            "result : 1(성공), 나머진 에러")
+            "result : 1(성공), 중복신고(이미 신고된 게시글입니다)" +
+            ", 본인댓글 신고(본인 게시글은 신고가 불가능합니다)<br>" +
+            "신고pk 외 등록 시 : 신고 종류를 찾을 수 없습니다.")
     public ResVo reportCommentCommunity(CommentReportDto dto) {
         return service.reportcomment(dto);
     }
