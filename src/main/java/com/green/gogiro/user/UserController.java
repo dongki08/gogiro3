@@ -72,11 +72,7 @@ public class UserController {
             "<br>tel(NOT NULL): 전화번호(변경하고 싶지 않으면 원래 전화번호를 줘야 함), 01012345678(ex), 빈 칸 불가")
     public ResVo putUser(@RequestPart(required = false) MultipartFile pic,
                          @Valid @RequestPart UserUpdDto dto) {
-        if (pic != null) {
-            dto.setFile(pic);
-        }
-
-        return service.updateUser(dto);
+        return service.updateUser(pic,dto);
     }
 
     @GetMapping

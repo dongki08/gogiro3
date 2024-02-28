@@ -32,4 +32,7 @@ public class CommunitySelVo {
 
     @Schema(title = "게시글 총 갯수")
     private int boardAllCount;
+
+    @Schema(title = "총 좋아요 수")
+    private int totalFav;
 }

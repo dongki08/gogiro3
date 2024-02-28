@@ -32,6 +32,5 @@ public class UserUpdDto {
     @Schema(title = "전화번호")
     @Pattern(regexp = Const.REGEXP_USER_TEL , message = "전화번호 형식을 맞춰 주세요")
     private String tel;
-    @JsonIgnore
-    private MultipartFile file;
+
 }
