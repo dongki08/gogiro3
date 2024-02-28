@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @Info(title = "Gogiro ver.1"
-                    , description = " 고기로 v1"
-                    , version = "1.0.0"
+        info = @Info(title = "Gogiro ver.2"
+                    , description = " 고기로 v2"
+                    , version = "2.0.0"
         ),
         security = @SecurityRequirement(name = "authorization")
 )

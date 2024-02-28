@@ -74,7 +74,7 @@ public class CommunityController {
     @Operation(summary = "커뮤니티 리스트", description = "커뮤니티 리스트 처리<br>" +
             "--요청데이터<br>page : 페이지처리<br>" +
             "search : 제목검색<br>" +
-            "filter : 0(작성자순), 1(추천순)<br>" +
+            "filter : 0(최신순), 1(추천순)<br>" +
             "--응답데이터<br>" +
             "iboard : 커뮤니티pk<br>" +
             "boardNum : 게시글번호<br>" +
@@ -86,7 +86,9 @@ public class CommunityController {
             "count : 신고 횟수<br>" +
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
-            "boardAllCount : 게시글 총 갯수")
+            "boardAllCount : 게시글 총 갯수<br>" +
+            "allfav : 좋아요 총 갯수" +
+            "신고횟수 3회이상 자동블러처리")
     public List<CommunitySelVo> getCommunity(CommunitySelDto dto) {
         return service.selCommunity(dto);
     }
