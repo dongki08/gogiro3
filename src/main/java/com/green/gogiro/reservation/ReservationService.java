@@ -3,6 +3,8 @@ package com.green.gogiro.reservation;
 import static com.green.gogiro.common.Const.*;
 import static com.green.gogiro.exception.AuthErrorCode.*;
 import static com.green.gogiro.exception.ReservationErrorCode.*;
+import static java.lang.Math.abs;
+
 import com.green.gogiro.butchershop.ButcherShopMapper;
 import com.green.gogiro.common.MyFileUtils;
 import com.green.gogiro.common.ResVo;
@@ -29,7 +31,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -137,6 +143,7 @@ public class ReservationService {
         entity.setButcherEntity(butcherEntity);
         entity.setDate(dto.getLocalDateTime());
         entity.setRequest(dto.getRequest());
+        entity.setTotal(amount.intValue());
         pickupRepository.save(entity);
         entity.getPickupMenuEntityList()
               .addAll(dto.getMenus().stream().map(item->{
@@ -158,7 +165,7 @@ public class ReservationService {
         return vo;
     }
     //Mybatis 3.예약 취소
-    @Transactional
+    /*@Transactional
     public ResVo cancelReservation1(CancelDto dto) {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         Integer checkReservation = mapper.checkReservation(dto);
@@ -171,24 +178,44 @@ public class ReservationService {
             mapper.cancelPickup(dto);
         }
         return new ResVo(SUCCESS);
-    }
+    }*/
     //JPA 3.예약 취소
     @Transactional
     public ResVo cancelReservation2(CancelDto dto){
-        ReservationEntity entity= reservationRepository.getReferenceById((long)dto.getIreser());
-        if(entity.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
-            throw new RestApiException(CANT_CANCEL);
-        }
         if(dto.isReservation()){
             //예약 취소
-            reservationRepository.getReferenceById((long)dto.getIreser()).setConfirm(1);
+            Optional<ReservationEntity> optEntity= reservationRepository.findById((long)dto.getIreser());
+            ReservationEntity reservation= optEntity.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
+            LocalDate dayDate2 = reservation.getDate().toLocalDate();
+            Period diff= Period.between(dayDate1, dayDate2);
+            if(reservation.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
+                throw new RestApiException(CANT_CANCEL);
+            } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
+                throw new RestApiException(CANT_UPDATE);
+            } else if(reservation.getDate().isAfter(LocalDateTime.now())){
+                throw new RestApiException(PASSED_BY_DATE);
+            }
+            reservation.setConfirm(1);
         }else{
             //픽업 취소
-            pickupRepository.getReferenceById((long)dto.getIreser()).setConfirm(1);
+            Optional<PickupEntity> optPickup= pickupRepository.findById((long)dto.getIreser());
+            PickupEntity pickup= optPickup.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
+            LocalDate dayDate2 = pickup.getDate().toLocalDate();
+            Period diff= Period.between(dayDate1, dayDate2);
+            if(pickup.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
+                throw new RestApiException(CANT_CANCEL);
+            } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
+                throw new RestApiException(CANT_UPDATE);
+            } else if(pickup.getDate().isAfter(LocalDateTime.now())){
+                throw new RestApiException(PASSED_BY_DATE);
+            }
+            pickup.setConfirm(1);
         }
         return new ResVo(SUCCESS);
     }
-    //Mybatis 4.예약 변경
+   /* //Mybatis 4.예약 변경
     @Transactional
     public ResVo putReservation1(ReservationUpdDto dto) {
         if((LocalDateTime.now()).isAfter(LocalDateTime.parse(dto.getDate()))){
@@ -197,33 +224,37 @@ public class ReservationService {
         dto.setIuser((int)authenticationFacade.getLoginUserPk());
         mapper.updReservation(dto);
         return new ResVo(SUCCESS);
-    }
+    }*/
     //JPA 4.예약 변경
     @Transactional
     public ResVo putReservation2(ReservationUpdDto dto){
-        if((LocalDateTime.now()).isAfter(LocalDateTime.parse(dto.getDate()))){
-            throw new RestApiException(AuthErrorCode.NOT_DATE);
+        if(dto.getLocalDateTime().isBefore(LocalDateTime.now())){
+            throw new RestApiException(PASSED_BY_DATE);
+        } else if(dto.isInvalidDate()){
+            throw new RestApiException(INVALID_DATE);
         }
         if(dto.isReservation()){
-            ReservationEntity reservation=reservationRepository.getReferenceById((long)dto.getIreser());
+            Optional<ReservationEntity> optEntity= reservationRepository.findById((long)dto.getIreser());
+            ReservationEntity reservation= optEntity.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(reservation.getUserEntity().getIuser()!= authenticationFacade.getLoginUserPk()){
                 throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
             }
-            reservation.setDate(LocalDateTime.parse(dto.getDate()));
+            reservation.setDate(dto.getLocalDateTime());
             reservation.setRequest(dto.getRequest());
             reservation.setHeadCount(dto.getHeadCount());
         }else{
-            PickupEntity pickup=pickupRepository.getReferenceById((long)dto.getIreser());
+            Optional<PickupEntity> optPickup= pickupRepository.findById((long)dto.getIreser());
+            PickupEntity pickup= optPickup.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(pickup.getUserEntity().getIuser()!= authenticationFacade.getLoginUserPk()){
                 throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
             }
-            pickup.setDate(LocalDateTime.parse(dto.getDate()));
+            pickup.setDate(dto.getLocalDateTime());
             pickup.setRequest(dto.getRequest());
         }
         return new ResVo(SUCCESS);
     }
     //Mybatis 5.후기 작성
-    @Transactional
+    /*@Transactional
     public ReviewPicsInsVo postReview1(ReviewDto dto) {
         ReviewPicsInsVo vo = new ReviewPicsInsVo();
         vo.setCheckShop(dto.getCheckShop());
@@ -247,7 +278,7 @@ public class ReservationService {
         }
         //해당 유저의 예약 혹은 픽업이 아닌 경우
         throw new RestApiException(INVALID_RESERVATION);
-    }
+    }*/
     //JPA 5.후기 작성
     @Transactional
     public ReviewPicsInsVo postReview2(ReviewDto dto) {
@@ -259,7 +290,8 @@ public class ReservationService {
                         + "/review/" + dto.getIreview()
                         + "/";
         if(dto.isReservation()){
-            ReservationEntity reservation=reservationRepository.getReferenceById((long)dto.getIreser());
+            Optional<ReservationEntity> optReservation= reservationRepository.findById((long)dto.getIreser());
+            ReservationEntity reservation= optReservation.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(iuser!=reservation.getUserEntity().getIuser()){
                 throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
             }
@@ -282,7 +314,8 @@ public class ReservationService {
                                                                       .build())
                   .toList());
         }else{
-            PickupEntity pickup=pickupRepository.getReferenceById((long)dto.getIreser());
+            Optional<PickupEntity> optPickup= pickupRepository.findById((long)dto.getIreser());
+            PickupEntity pickup= optPickup.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(iuser!=pickup.getUserEntity().getIuser()){
                 throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
             }
@@ -313,22 +346,33 @@ public class ReservationService {
         }
         if(dto.isReservation()){
             Optional<ReservationEntity> optional=reservationRepository.findById((long)dto.getIreser());
-            ReservationEntity entity=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
-            if(entity.getIreser()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
-            if(entity.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
-            entity.setConfirm(2);
+            ReservationEntity reservation=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            if(reservation.getIreser()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
+            if(reservation.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            reservation.setConfirm(2);
         }else{
             Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
-            PickupEntity entity=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
-            if(entity.getIpickup()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
-            if(entity.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
-            entity.setConfirm(2);
+            PickupEntity pickup=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            if(pickup.getIpickup()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
+            if(pickup.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            pickup.setConfirm(2);
         }
         return new ResVo(SUCCESS);
     }
+    //결제 확인(금액 비교)
     @Transactional
     public boolean confirmPayment(PaymentDto dto){
-        return false;
+        boolean check;
+        if(dto.isReservation()){
+            Optional<ReservationEntity> optional=reservationRepository.findById((long)dto.getIreser());
+            ReservationEntity reservation=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            check=(reservation.getShopEntity().getDeposit()!=dto.getAmount());
+        } else{
+            Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
+            PickupEntity pickup=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
+            check=(pickup.getTotal()!=dto.getAmount());
+        }
+        return check;
     }
 }
 

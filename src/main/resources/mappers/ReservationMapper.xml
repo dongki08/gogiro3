@@ -54,18 +54,18 @@
 
     <select id="checkReservation">
         <choose>
-            <when test="checkShop == 0">
+            <when test="isReservation">
                 SELECT ireser
                 FROM t_reservation
                 WHERE ireser = #{ireser}
                 AND iuser = #{iuser}
             </when>
-            <when test="checkShop == 1">
+            <otherwise>
                 SELECT ipickup as ireser
                 FROM t_pickup
                 WHERE ipickup = #{ireser}
                 AND iuser = #{iuser}
-            </when>
+            </otherwise>
         </choose>
     </select>
 
