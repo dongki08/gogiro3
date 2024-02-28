@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SelButcherPickupMenuProcVo {
-    private int count;
+    private int menuCount;
     private int ibutMenu;
     private int ireser;
     private String menu;
