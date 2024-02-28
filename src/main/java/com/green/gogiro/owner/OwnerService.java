@@ -24,8 +24,6 @@ import com.green.gogiro.security.JwtTokenProvider;
 import com.green.gogiro.security.MyPrincipal;
 
 import com.green.gogiro.shop.ShopMapper;
-import com.green.gogiro.shop.model.ShopFacilityVo;
-import com.green.gogiro.shop.model.ShopModel;
 import com.green.gogiro.user.UserRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -74,8 +72,7 @@ public class OwnerService {
     //가게 리뷰 보기
     @Transactional
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
-        List<OwnerReviewVo> vo = reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
-        return vo;
+        return reviewRepository.selByReviewAll(authenticationFacade.getLoginOwnerShopPk(), authenticationFacade.getLoginOwnerCheckShop(), pageable);
     }
 
 
@@ -220,14 +217,13 @@ public class OwnerService {
             throw new RestApiException(AuthErrorCode.INVALID_PAGE);
         }
         OwnerSelReservationVo vo = new OwnerSelReservationVo();
-        long ishop = authenticationFacade.getLoginOwnerShopPk();
-        List<SelButcherPickupMenuProcVo> menuList = new ArrayList<>();
+        List<SelButcherPickupMenuProcVo> menuList;
         LimitIdx dto = new LimitIdx();
         dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
         dto.setStartIdx((page - 1) * RESERVATION_PAGE);
         dto.setRowCount(page * RESERVATION_PAGE);
         int checkShop = authenticationFacade.getLoginOwnerCheckShop();
-        List<OwnerNewReservationVo> voList = new ArrayList<>();
+        List<OwnerNewReservationVo> voList;
         List<Integer> pk = new ArrayList<>();
         HashMap<Integer, OwnerNewReservationVo> map = new HashMap<>();
         if (checkShop == 0) {
@@ -531,66 +527,7 @@ public class OwnerService {
         }
         return null;
     }
-//
-//    public StoreRegistrationPicsVo insRegistration(StoreRegistrationDto dto) {
-//
-//        if (dto.getPics().size() > 5) {
-//            throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
-//        }
-//        mapper.insStoreRegistration(dto);
-//        String target = "/shop/" + dto.getIshop() + "/shop_pic";
-//        StoreRegistrationPicsVo vo = new StoreRegistrationPicsVo();
-//        vo.setIshop(dto.getIshop());
-//
-//        for (MultipartFile file : dto.getPics()) {
-//            String saveFileNm = myFileUtils.transferTo(file, target);
-//            vo.getPics().add(saveFileNm);
-//        }
-//        if (dto.getIfacil() != null || dto.getIfacil().get(0) != 0) {
-//            mapper.insShopFacility(dto);
-//        }
-//        mapper.insStoreRegistrationPics(vo);
-//        return vo;
-//    }
 
-//    public ShopPicsVo updShopPics(ShopUpdDto dto) {
-//        if (dto.getFiles() != null && dto.getFiles().size() > 5) {
-//            throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
-//        }
-//        String target = "/shop/" + dto.getIshop() + "/shop_pic";
-//        if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
-//            List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
-//            for (ShopSelPicsNumDto pics : sDto) {
-//                myFileUtils.delFolderTrigger2(target + "/" + pics.getPic());
-//            }
-//            mapper.delShopPics(dto.getIshopPics());
-//        }
-//        if (dto.getFiles() != null) {
-//            for (MultipartFile file : dto.getFiles()) {
-//                String saveFileNm = myFileUtils.transferTo(file, target);
-//                dto.getPics().add(saveFileNm);
-//            }
-
-    //mapper.insShopPic(dto);
-//        }
-//        ShopPicsVo vo = new ShopPicsVo();
-//        vo.setIshop(dto.getIshop());
-//        vo.setPics(dto.getPics());
-//        return vo;
-//    }
-
-//    public ShopMenuPicsVo insShopMenu(ShopMenuDto dto) {
-//
-//        String target = "/shop/" + dto.getIshop() + "/menu";
-//        String fileNm = myFileUtils.transferTo(dto.getPic(), target);
-//        dto.setFileNm(fileNm);
-//        mapper.insShopMenu(dto);
-//        ShopMenuPicsVo vo = new ShopMenuPicsVo();
-//        vo.setIshop(dto.getIshop());
-//        vo.setPic(fileNm);
-//        vo.setImenu(dto.getImenu());
-//        return vo;
-//    }
 
 
     //가게 메뉴 등록
@@ -642,6 +579,92 @@ public class OwnerService {
         }
         return null;
     }
+
+
+
+    //리뷰 댓글 달기
+    @Transactional
+    public ResVo postReviewComment(ReviewCommentDto dto) {
+        if (dto.getCheckShop() == 0) {
+            Optional<ShopReviewEntity> optReview = Optional.of(shopReviewRepository.getReferenceById((long) dto.getIreview()));
+            ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
+            if (shopReviewEntity.getShopEntity().getIshop() != authenticationFacade.getLoginOwnerShopPk()) {
+                throw new RestApiException(AuthErrorCode.NOT_SHOP);
+            }
+            shopReviewEntity.setComment(dto.getComment());
+            shopReviewRepository.save(shopReviewEntity);
+            return new ResVo(Const.SUCCESS);
+        } else {
+            Optional<ButcherReviewEntity> optReview = Optional.of(butcherReviewRepository.getReferenceById((long) dto.getIreview()));
+            ButcherReviewEntity butcherReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
+            butcherReviewEntity.setComment(dto.getComment());
+            butcherReviewRepository.save(butcherReviewEntity);
+            return new ResVo(Const.SUCCESS);
+        }
+    }
+}
+
+
+//
+//    public StoreRegistrationPicsVo insRegistration(StoreRegistrationDto dto) {
+//
+//        if (dto.getPics().size() > 5) {
+//            throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
+//        }
+//        mapper.insStoreRegistration(dto);
+//        String target = "/shop/" + dto.getIshop() + "/shop_pic";
+//        StoreRegistrationPicsVo vo = new StoreRegistrationPicsVo();
+//        vo.setIshop(dto.getIshop());
+//
+//        for (MultipartFile file : dto.getPics()) {
+//            String saveFileNm = myFileUtils.transferTo(file, target);
+//            vo.getPics().add(saveFileNm);
+//        }
+//        if (dto.getIfacil() != null || dto.getIfacil().get(0) != 0) {
+//            mapper.insShopFacility(dto);
+//        }
+//        mapper.insStoreRegistrationPics(vo);
+//        return vo;
+//    }
+
+//    public ShopPicsVo updShopPics(ShopUpdDto dto) {
+//        if (dto.getFiles() != null && dto.getFiles().size() > 5) {
+//            throw new RestApiException(AuthErrorCode.SIZE_PHOTO);
+//        }
+//        String target = "/shop/" + dto.getIshop() + "/shop_pic";
+//        if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
+//            List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
+//            for (ShopSelPicsNumDto pics : sDto) {
+//                myFileUtils.delFolderTrigger2(target + "/" + pics.getPic());
+//            }
+//            mapper.delShopPics(dto.getIshopPics());
+//        }
+//        if (dto.getFiles() != null) {
+//            for (MultipartFile file : dto.getFiles()) {
+//                String saveFileNm = myFileUtils.transferTo(file, target);
+//                dto.getPics().add(saveFileNm);
+//            }
+
+//mapper.insShopPic(dto);
+//        }
+//        ShopPicsVo vo = new ShopPicsVo();
+//        vo.setIshop(dto.getIshop());
+//        vo.setPics(dto.getPics());
+//        return vo;
+//    }
+
+//    public ShopMenuPicsVo insShopMenu(ShopMenuDto dto) {
+//
+//        String target = "/shop/" + dto.getIshop() + "/menu";
+//        String fileNm = myFileUtils.transferTo(dto.getPic(), target);
+//        dto.setFileNm(fileNm);
+//        mapper.insShopMenu(dto);
+//        ShopMenuPicsVo vo = new ShopMenuPicsVo();
+//        vo.setIshop(dto.getIshop());
+//        vo.setPic(fileNm);
+//        vo.setImenu(dto.getImenu());
+//        return vo;
+//    }
 
 //    public ShopMenuPicsVo updShopMenu(ShopMenuUpdDto dto) {
 //        String picNm = mapper.selPicNm(dto.getImenu());
@@ -736,25 +759,3 @@ public class OwnerService {
 //        return vo;
 //    }
 
-
-    //리뷰 댓글 달기
-    @Transactional
-    public ResVo postReviewComment(ReviewCommentDto dto) {
-        if (dto.getCheckShop() == 0) {
-            Optional<ShopReviewEntity> optReview = Optional.of(shopReviewRepository.getReferenceById((long) dto.getIreview()));
-            ShopReviewEntity shopReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
-            if (shopReviewEntity.getShopEntity().getIshop() != authenticationFacade.getLoginOwnerShopPk()) {
-                throw new RestApiException(AuthErrorCode.NOT_SHOP);
-            }
-            shopReviewEntity.setComment(dto.getComment());
-            shopReviewRepository.save(shopReviewEntity);
-            return new ResVo(Const.SUCCESS);
-        } else {
-            Optional<ButcherReviewEntity> optReview = Optional.of(butcherReviewRepository.getReferenceById((long) dto.getIreview()));
-            ButcherReviewEntity butcherReviewEntity = optReview.orElseThrow(() -> new RestApiException(AuthErrorCode.NOT_CONTENT));
-            butcherReviewEntity.setComment(dto.getComment());
-            butcherReviewRepository.save(butcherReviewEntity);
-            return new ResVo(Const.SUCCESS);
-        }
-    }
-}

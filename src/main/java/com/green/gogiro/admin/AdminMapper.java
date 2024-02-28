@@ -9,7 +9,7 @@ import java.util.List;
 public interface AdminMapper {
     AdminSigninProcVo checkAdmin(String email);
     List<ShopVo> shopList(String search);
-    int confirmShop(ConfirmDto dto);
+    int confirmShop(ConfirmsDto dto);
     List<ReportedVo> reportList(ReportDto dto);
     int hide(HideDto dto);
     int cancelReport(CancelReportDto dto);

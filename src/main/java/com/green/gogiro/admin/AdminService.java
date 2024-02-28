@@ -30,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 import java.util.Optional;
 import com.green.gogiro.common.Const;
@@ -114,7 +114,7 @@ public class AdminService{
 //    @Transactional
 //    public List<ShopVo> shopList2(){return null;}//UNION 포함
     //Mybatis 2.가게 승인 여부 변경
-//    public ResVo confirmShop1(ConfirmDto dto){
+//    public ResVo confirmShop1(ConfirmsDto dto){
 //        if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
 //            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
 //        }
@@ -122,7 +122,7 @@ public class AdminService{
 //    }
     //JPA 2.가게 승인 여부 변경
     @Transactional
-    public ResVo confirmShop2(ConfirmDto dto){
+    public ResVo confirmShop2(ConfirmsDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }

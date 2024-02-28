@@ -33,11 +33,6 @@ public class OwnerController {
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
             "<br>(성공)result: 가게 주인pk(사용자랑 같은 테이블이기 때문에 다른 주소에서 쓸 때도 유저pk명(iuser)과 동일할 수 있습니다)" +
             "<br>(실패)에러는 나중에 로직 다 짜고 나서 해도 괜찮을까요? ㅜㅜ")
-//    public ResVo ownerSignup(@RequestPart MultipartFile pic,
-//                             @RequestPart String id, @RequestPart String upw, @RequestPart String checkPw,
-//                             @RequestPart String num, @RequestPart String name, @RequestPart String shopName,
-//                             @RequestPart String x, @RequestPart String y, @RequestPart String location,
-//                             @RequestPart int imeat){
     public ResVo ownerSignup(@RequestPart MultipartFile pic, @Valid @RequestPart OwnerSignupDto dto) {
         return service.ownerSignup(pic, dto);
     }
@@ -82,15 +77,7 @@ public class OwnerController {
     public List<OwnerReviewVo> getAllReview(Pageable pageable) {
         return service.getAllReview(pageable);
     }
-//    @PostMapping("/shop")
-//    @Operation(summary = "가게 등록",description = "가게 등록 처리")
-//    public StoreRegistrationPicsVo insRegistration(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart StoreRegistrationDto dto){
-//        dto.setPics(pics);
-//        if (dto.getPics() == null || dto.getPics().isEmpty()) {
-//            throw new RestApiException(MUST_PHOTO);
-//        }
-//        return service.insRegistration(dto);
-//    }
+
 
     @GetMapping("/menu")
     @Operation(summary = "고기집 or 정육점 가게 메뉴 보기", description = "<h2>메뉴 보기 처리</h2>")
@@ -98,14 +85,7 @@ public class OwnerController {
         return service.getMenu();
     }
 
-//    @PostMapping(value = "/menu", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
-//    public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto) {
-//        if (pic != null) {
-//            dto.setPic(pic);
-//        }
-//        return service.insShopMenu(dto);
-//    }
+
 
     @PutMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터(안바꾸고싶으면 null값넣으면 기존 정보 들어감)<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 안보내도됨),facility:편의시설pk(정육점은 안보내도됨)" +
@@ -139,23 +119,7 @@ public class OwnerController {
         return service.selDashBoard();
     }
 
-    //    @PutMapping("/shop")
-//    @Operation(summary = "가게 사진 수정",description = "가게 사진 수정 처리")
-//    public ShopPicsVo updShopPics(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart ShopUpdDto dto){
-//        if(pics != null) {
-//            dto.setFiles(pics);
-//        }
-//        return service.updShopPics(dto);
-//    }
-//
-//    @PutMapping(value = "/shop/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    @Operation(summary = "가게 메뉴 사진 등록", description = "가게 메뉴 사진 등록 처리")
-//    public ShopMenuPicsVo updShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuUpdDto dto) {
-//        if (pic != null) {
-//            dto.setPic(pic);
-//        }
-//        return service.updShopMenu(dto);
-//    }
+
 
     @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>" +
@@ -224,5 +188,39 @@ public class OwnerController {
 //            dto.setFiles(pics);
 //        }
 //        return service.updButcherPic(dto);
+//    }
+    //    @PostMapping(value = "/menu", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @Operation(summary = "가게 메뉴 등록", description = "가게 메뉴 등록 처리")
+//    public ShopMenuPicsVo insShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuDto dto) {
+//        if (pic != null) {
+//            dto.setPic(pic);
+//        }
+//        return service.insShopMenu(dto);
+//    }
+    //    @PutMapping("/shop")
+//    @Operation(summary = "가게 사진 수정",description = "가게 사진 수정 처리")
+//    public ShopPicsVo updShopPics(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart ShopUpdDto dto){
+//        if(pics != null) {
+//            dto.setFiles(pics);
+//        }
+//        return service.updShopPics(dto);
+//    }
+//
+//    @PutMapping(value = "/shop/menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    @Operation(summary = "가게 메뉴 사진 등록", description = "가게 메뉴 사진 등록 처리")
+//    public ShopMenuPicsVo updShopMenu(@RequestPart(required = false) MultipartFile pic, @RequestPart ShopMenuUpdDto dto) {
+//        if (pic != null) {
+//            dto.setPic(pic);
+//        }
+//        return service.updShopMenu(dto);
+//    }
+    //    @PostMapping("/shop")
+//    @Operation(summary = "가게 등록",description = "가게 등록 처리")
+//    public StoreRegistrationPicsVo insRegistration(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart StoreRegistrationDto dto){
+//        dto.setPics(pics);
+//        if (dto.getPics() == null || dto.getPics().isEmpty()) {
+//            throw new RestApiException(MUST_PHOTO);
+//        }
+//        return service.insRegistration(dto);
 //    }
 }
