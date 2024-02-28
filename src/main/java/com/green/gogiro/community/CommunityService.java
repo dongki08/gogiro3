@@ -159,10 +159,10 @@ public class CommunityService {
         ).toList().size()) {
             throw new RestApiException(NOT_COMMUNITY_PICSPKENTITY);
         }
-
-
+        //게시글 등록 여부
         if (model == null) {
             throw new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK);
+            //사진 5장 초과 에러
         } else if (totalSize > 5) {
             throw new RestApiException(SIZE_PHOTO);
         }
@@ -195,6 +195,9 @@ public class CommunityService {
 
     //커뮤니티 게시글 리스트
     public List<CommunitySelVo> selCommunity(CommunitySelDto dto) {
+        if(dto.getStartIdx() < 0) {
+            throw new RestApiException(INVALID_PAGE);
+        }
         //검색창 공백
         if (Pattern.matches(Const.REGEXP_PATTERN_SPACE_CHAR_TYPE_2, dto.getSearch())) {
             throw new RestApiException(NOT_CONTENT);
@@ -204,7 +207,10 @@ public class CommunityService {
         if (list.isEmpty()) {
             throw new RestApiException(SEARCH_COMMUNITY);
         }
-
+        //filter 최신순, 좋아요 순 외에 예외처리
+        if(dto.getFilter() != 1 && dto.getFilter() != 0) {
+            throw new RestApiException(INVALID_PAGE);
+        }
         List<Integer> iboard = new ArrayList<>();
         Map<Integer, CommunitySelVo> boardMap = new HashMap<>();
         int boardAllCount = mapper.selCommunityCount(dto.getSearch());
@@ -236,7 +242,7 @@ public class CommunityService {
 
         CommunityModel entity = mapper.entityCommunity(iboard);
         if (entity == null) {
-            throw new RestApiException(VALID_BOARD);
+            throw new RestApiException(NOT_COMMUNITY_CHECK);
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
@@ -280,6 +286,10 @@ public class CommunityService {
     //커뮤니티 댓글 등록
     @Transactional
     public ResVo postCommunityComment(CommunityCommentInsDto dto) {
+        //없는 게시글 댓글 등록 시 예외처리
+        communityRepository.findAllByIboard(dto.getIboard())
+                .orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+
         CommunityEntity communityEntity = new CommunityEntity();
         CommunityCommentEntity commentEntity = new CommunityCommentEntity();
         communityEntity.setIboard(dto.getIboard());
@@ -302,6 +312,10 @@ public class CommunityService {
     //커뮤니티 댓글 삭제
     @Transactional
     public ResVo delCommunityComment(CommunityCommentDelDto dto) {
+        //없는 댓글 삭제 시 예외처리
+        communityCommentRepository.findAllByIcomment(dto.getIcomment())
+                .orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+
         CommunityCommentEntity commentEntity = communityCommentRepository.getReferenceById(dto.getIcomment());
         UserEntity userEntity = new UserEntity();
         userEntity.setIuser(authenticationFacade.getLoginUserPk());
