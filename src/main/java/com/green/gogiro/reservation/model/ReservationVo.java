@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ReservationVo {
-    private int ireser;
+    private int pk;
     private int amount;
 }
