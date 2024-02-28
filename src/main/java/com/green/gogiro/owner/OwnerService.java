@@ -45,7 +45,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.green.gogiro.common.Const.*;
-import static com.green.gogiro.exception.AuthErrorCode.SIZE_PHOTO;
+import static com.green.gogiro.exception.AuthErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -91,17 +91,28 @@ public class OwnerService {
         return ownerManagementVo;
     }
 
-
+    //메뉴 삭제
     @Transactional
     public ResVo delMenu(long imenu){
     int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+    long ishop = authenticationFacade.getLoginOwnerShopPk();
     if(checkShop == 0){
+        Optional<ShopMenuEntity> optMenu = shopMenuRepository.findByImenu(imenu);
+        ShopMenuEntity shopMenuEntityCheck = optMenu.orElseThrow(() -> new RestApiException(INVALID_SHOP_MENU));
+        if(shopMenuEntityCheck.getShopEntity().getIshop() != ishop || shopMenuEntityCheck.getImenu() != imenu){
+            throw new RestApiException(NOT_SHOP_MENU);
+        }
         ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
         shopMenuEntity.setImenu(imenu);
         shopMenuRepository.delete(shopMenuEntity);
         return new ResVo(SUCCESS);
     }
     if(checkShop == 1){
+        Optional<ButcherMenuEntity> optMenu = butcherMenuRepository.findByIbutMenu(imenu);
+        ButcherMenuEntity butcherMenuEntityCheck = optMenu.orElseThrow(()-> new RestApiException(INVALID_SHOP_MENU));
+        if(butcherMenuEntityCheck.getButcherEntity().getIbutcher() != ishop || butcherMenuEntityCheck.getIbutMenu() != imenu){
+            throw new RestApiException(NOT_SHOP_MENU);
+        }
         ButcherMenuEntity butcherMenuEntity = new ButcherMenuEntity();
         butcherMenuEntity.setIbutMenu(imenu);
         butcherMenuRepository.delete(butcherMenuEntity);
@@ -274,9 +285,8 @@ public class OwnerService {
             shopEntity.setNumber(dto.getNum());
             shopEntity.setName(dto.getShopName());
             shopRepository.save(shopEntity);
-            String target = "/shop/" + shopEntity.getIshop() + "/shop_pic";
+            String target = "/shop/" + shopEntity.getIshop() + "/shop_pic" + "/";
             StoreRegistrationPicsVo vo = new StoreRegistrationPicsVo();
-
             String saveFileNm = myFileUtils.transferTo(pic, target);
             vo.getPics().add(saveFileNm);
 
@@ -296,7 +306,7 @@ public class OwnerService {
             butcherEntity.setNumber(dto.getNum());
             butcherEntity.setName(dto.getShopName());
             butcherRepository.save(butcherEntity);
-            String target = "/butcher/" + butcherEntity.getIbutcher() + "/butchershop_pic";
+            String target = "/butcher/" + butcherEntity.getIbutcher() + "/butchershop_pic" + "/";
             ButcherPicVo vo = new ButcherPicVo();
             String saveFileNm = myFileUtils.transferTo(pic, target);
             vo.getPics().add(saveFileNm);
@@ -372,13 +382,13 @@ public class OwnerService {
             if (!dto.getFacility().isEmpty()) {
                 shopMapper.insFacilities(ishop, dto.getFacility());
             }
-            String target = "/shop/" + ishop + "/shop_pic";
+            String target = "/shop/" + ishop + "/shop_pic" + "/";
             ShopUpdDto pDto = new ShopUpdDto();
             pDto.setIshop((int) ishop);
             if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
                 List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
                 for (ShopSelPicsNumDto pic : sDto) {
-                    myFileUtils.delFolderTrigger2(target + "/" + pic.getPic());
+                    myFileUtils.delFolderTrigger2(target + pic.getPic());
                 }
                 mapper.delShopPics(dto.getIshopPics());
             }
@@ -426,13 +436,13 @@ public class OwnerService {
                 butcherEntity.setY(dto.getY());
             }
             butcherRepository.save(butcherEntity);
-            String path = "/butcher/" + ishop + "/butchershop_pic";
+            String path = "/butcher/" + ishop + "/butchershop_pic" + "/";
             ButcherInsDto pDto = new ButcherInsDto();
             pDto.setIbutcher((int) ishop);
             if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
                 List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIshopPics());
                 for (ButcherPicsProcVo vo2 : picList) {
-                    myFileUtils.delFolderTrigger2(path + "/" + vo2.getPic());
+                    myFileUtils.delFolderTrigger2(path + vo2.getPic());
                 }
                 mapper.delButcherPics(dto.getIshopPics());
                 if (pics != null && !pics.isEmpty()) {
@@ -466,7 +476,7 @@ public class OwnerService {
             shopMenuEntity.setShopEntity(shopEntity);
             if (pic != null) {
                 myFileUtils.delFolderTrigger2(shopMenuEntity.getPic());
-                String target = "/shop/" + ishop + "/menu";
+                String target = "/shop/" + ishop + "/menu" + "/";
                 savedName = myFileUtils.transferTo(pic, target);
                 shopMenuEntity.setPic(savedName);
             }
@@ -493,7 +503,7 @@ public class OwnerService {
             butcherMenuEntity.setButcherEntity(butcherEntity);
             if (pic != null) {
                 myFileUtils.delFolderTrigger2(butcherMenuEntity.getPic());
-                String target = "/butcher/" + ishop + "/menu";
+                String target = "/butcher/" + ishop + "/menu" + "/";
                 savedName = myFileUtils.transferTo(pic, target);
                 butcherMenuEntity.setPic(savedName);
             }
@@ -588,7 +598,7 @@ public class OwnerService {
             ShopMenuEntity entity = new ShopMenuEntity();
             entity.setShopEntity(shopEntity);
             if (pic != null) {
-                String target = "/shop/" + ishop + "/menu";
+                String target = "/shop/" + ishop + "/menu" + "/";
                 String savedName = myFileUtils.transferTo(pic, target);
                 entity.setPic(savedName);
             }
@@ -608,7 +618,7 @@ public class OwnerService {
             ButcherMenuEntity entity = new ButcherMenuEntity();
             entity.setButcherEntity(butcherEntity);
             if (pic != null) {
-                String target = "/butcher/" + ishop + "/butchershop_pic";
+                String target = "/butcher/" + ishop + "/menu" + "/";
                 String savedName = myFileUtils.transferTo(pic, target);
                 entity.setPic(savedName);
             }
