@@ -160,6 +160,9 @@ public class OwnerService {
 
     //고깃집 노쇼 내역 보기
     public OwnerSelNoShowVo selNoShow(int page) {
+        if(page < 1) {
+            throw new RestApiException(AuthErrorCode.INVALID_PAGE);
+        }
         OwnerSelNoShowVo vo = new OwnerSelNoShowVo();
         if (authenticationFacade.getLoginOwnerCheckShop() == 0) {
             LimitIdx dto = new LimitIdx();
@@ -177,6 +180,9 @@ public class OwnerService {
 
     //가게 예약 내역
     public OwnerSelReservationVo getReservation(int page) {
+        if(page < 1) {
+            throw new RestApiException(AuthErrorCode.INVALID_PAGE);
+        }
         OwnerSelReservationVo vo = new OwnerSelReservationVo();
         long ishop = authenticationFacade.getLoginOwnerShopPk();
         List<SelButcherPickupMenuProcVo> menuList = new ArrayList<>();
@@ -198,6 +204,9 @@ public class OwnerService {
         if (checkShop == 1) {
             vo.setCheckShop(checkShop);
             voList = mapper.selButcherPickup(dto);
+            if(voList.isEmpty()){
+                return vo;
+            }
             menuList = mapper.selButcherPickupMenu(dto);
             vo.setOwnerReservationList(voList);
             for (OwnerNewReservationVo reservationVo : voList) {
