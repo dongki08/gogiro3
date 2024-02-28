@@ -45,14 +45,17 @@
     </select>
 
     <select id="selCommunity">
-        SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic as writerPic, a.title, a.contents, date(a.created_at) AS createdAt, a.count
+        SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic AS writerPic, a.title, a.contents, DATE(a.created_at) AS createdAt, a.count
+        , COUNT(e.iboard) AS totalfav
         FROM t_community a
-        JOIN t_user b
+        LEFT JOIN t_user b
         ON a.iuser = b.iuser
-        <if test="filter==1">
-            LEFT JOIN t_community_fav c
-            ON a.iboard= c.iboard
-        </if>
+        LEFT JOIN t_community_fav c
+        ON a.iboard= c.iboard
+        LEFT JOIN (SELECT d.iboard, count(d.iboard)
+        FROM t_community_fav d
+        GROUP BY d.iboard) e
+        ON a.iboard = e.iboard
         <where>
             <if test="search != null and search != '' ">
                 a.title like CONCAT('%',#{search},'%') or a.contents like CONCAT('%',#{search},'%')
@@ -61,6 +64,7 @@
         </where>
         <choose>
             <when test="filter==0">
+                GROUP BY a.iboard
                 ORDER BY a.iboard DESC
             </when>
             <when test="filter==1">
@@ -173,7 +177,7 @@
         </foreach>
         )
     </select>
-    
+
 <!--    <select id="beforeTitleNextTitle">-->
 <!--        (SELECT-->
 <!--        iboard, title-->
