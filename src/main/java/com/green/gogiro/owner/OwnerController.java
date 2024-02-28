@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -151,6 +153,7 @@ public class OwnerController {
     @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>" +
             "--요청데이터<br>" +
+            "pic: 메뉴 사진<br>" +
             "imenu(필수) : 메뉴pk<br>" +
             "menu : 메뉴이름(string)<br>" +
             "price : 가격<br>" +

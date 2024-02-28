@@ -95,12 +95,13 @@ public class AdminService{
         MyPrincipal mp = new MyPrincipal();
         mp.setIuser(userEntity.getIuser());
         mp.setRole(userEntity.getRole().toString());
+        mp.setCheckShop(2);
         String at = jwtTokenProvider.generateAccessToken(mp);
         String rt = jwtTokenProvider.generateRefreshToken(mp);
         int rtCookieMaxAge= appProperties.getJwt().getRefreshTokenCookieMaxAge();
         cookieUtils.deleteCookie(res, "rt");
         cookieUtils.setCookie(res, "rt", rt, rtCookieMaxAge);
-        return AdminSigninVo.builder().result(Const.SUCCESS).accessToken(at).iuser(userEntity.getIuser()).build();
+        return AdminSigninVo.builder().result(Const.SUCCESS).accessToken(at).iuser(userEntity.getIuser()).checkShop(2).build();
     }
     //Mybatis 1.매장 관리 리스트
     public List<ShopVo> shopList1(String search){

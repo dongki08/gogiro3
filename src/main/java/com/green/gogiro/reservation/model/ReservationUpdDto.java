@@ -10,6 +10,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+import static java.lang.Math.abs;
+
 @Data
 public class ReservationUpdDto {
     @JsonIgnore
@@ -32,8 +39,24 @@ public class ReservationUpdDto {
     private int headCount;
     @JsonIgnore
     private boolean isReservation;
+    @JsonIgnore
+    private LocalDateTime localDateTime;
+    @JsonIgnore
+    private boolean invalidDate;
     public void setCheckShop(int checkShop){
         this.checkShop=checkShop;
         this.isReservation=(checkShop==0);
+    }
+    public void setDate(String date){
+        this.date= date;
+        DateTimeFormatter formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        this.localDateTime= LocalDateTime.parse(date+".000", formatter);
+        LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
+        LocalDate dayDate2 = this.localDateTime.toLocalDate();
+        Period diff= Period.between(dayDate1, dayDate2);
+        int year= abs(diff.getYears());
+        int month= abs(diff.getMonths());
+        int day= abs(diff.getDays());
+        this.invalidDate=(year>0||month>0||day>=30);
     }
 }

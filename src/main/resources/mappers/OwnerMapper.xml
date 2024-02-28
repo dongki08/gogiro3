@@ -64,7 +64,7 @@
     </select>
 
     <select id="selButcherPickupMenu">
-        SELECT b.`count`,b.ibut_menu as ibutMenu,c.menu,a.ipickup as ireser
+        SELECT b.`count` as menuCount,b.ibut_menu as ibutMenu,c.menu,a.ipickup as ireser
         FROM t_pickup a
         JOIN t_pickup_menu b
         ON a.ipickup = b.ipickup

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,11 +31,7 @@ public class SecurityConfiguration {
                                         , "/api/user/signup/**"
                                         , "/api/owner/signup"
                                         , "/api/owner/signin"
-                                        , "/api/admin/signin/**"
-                                        , "/api/admin/noshow/**"
-                                        , "/api/admin/menu/**"
-                                        , "/api/admin/management/**"
-                                        , "/api/owner/reservation/**"
+                                        , "/api/admin/signin"
                                         , "/login"
                                         , "/join"
                                         , "/join/**"
@@ -71,7 +68,11 @@ public class SecurityConfiguration {
                                 .permitAll().requestMatchers(HttpMethod.GET, "/api/owner/review"
                                         , "/api/owner/menu", "/api/owner/reservation"
                                         , "/api/owner/noshow",  "/api/owner/dashboard").hasAnyRole("OWNER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/reservation/confirm").hasAnyRole("OWNER")
                         .requestMatchers(HttpMethod.GET,"/api/owner/management").hasAnyRole("OWNER")
+                        .requestMatchers(HttpMethod.POST,"/api/review").hasAnyRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/api/admin/**").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH,"/api/admin/**").hasAnyRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/owner/review", "/api/owner/modify", "/api/owner/menu").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.POST, "/api/owner/menu").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.GET, "/api/butcher-shop", "/api/butcher-shop/**"

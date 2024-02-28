@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnerNewReservationVo {
-    private int checkShop;
     private Long ireser;
     private Long iuser;
     private String name;
