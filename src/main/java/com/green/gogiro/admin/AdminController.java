@@ -31,7 +31,7 @@ public class AdminController {
     1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트
     2)각 가게의 가게 승인 여부 표시
     3)가게 이름 검색 기능*/
-    @GetMapping("/shop/{search}")
+    @GetMapping("/shop")
     @Operation(summary="매장 관리 리스트",description="사이트에 등록된 가게(고기집&정육점) 리스트" +
             "<br>1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트" +
             "<br>2)각 가게의 가게 승인 여부 표시<br>3)가게 이름 검색 기능<br>" +
@@ -43,8 +43,8 @@ public class AdminController {
             "<br>name:가게 이름<br>x:경도, y:위도<br>pic:가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)" +
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(400)<br>INVALID_EXIST_USER_ID<br>(401)UNAUTHORIZED" +
-            "<br>(404)<br>INVALID_PASSWORD<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<ShopVo> shopList(@PathVariable(required = false) String search){
+            "<br>(404)<br>INVALID_PASSWORD<br>(500)INTERNAL_SERVER_ERROR<br>")
+    public List<ShopVo> shopList(String search){
         return service.shopList1(search);
     }
     /*2.가게 승인 여부 변경
@@ -61,13 +61,13 @@ public class AdminController {
     /*3.신고 글 리스트(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기)
     1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가
     2)계정 제재는 총 관리자 재량으로*/
-    @GetMapping("/report/{check}")
+    @GetMapping("/report")
     @Operation(summary="신고 글 리스트",description="고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기 중 신고당한 글 리스트" +
             "<br>1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가<br>2)계정 제재는 총 관리자 재량으로" +
             "<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)<br>" +
             "--응답 데이터<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
-            "<br>state:상태(실패)<br>(401)UNAUTHORIZED<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public List<ReportedVo> reportList(@PathVariable int check){
+            "<br>state:상태(실패)<br>(401)UNAUTHORIZED<br>(500)INTERNAL_SERVER_ERROR<br>")
+    public List<ReportedVo> reportList(int check){
         //글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)
         if(check<0||check>3){throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);}
         return service.reportList1(check);
@@ -80,7 +80,7 @@ public class AdminController {
             "<br>1)신고가 3개 이상이 되거나 총 관리자가 글 숨김 처리를 하면 리스트나 후기에서 글이 안 보이게 된다" +
             "<br><br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
             "<br>pk:해당 글 pk<br>--응답 데이터<br>(성공)result: 1<br>(실패)" +
-            "<br>(404)NOT_COMMUNITY_CHECK<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
+            "<br>(404)NOT_COMMUNITY_CHECK<br>(500)INTERNAL_SERVER_ERROR<br>")
     public ResVo hide(@Valid @RequestBody HideDto dto){return service.hide2(dto);}
     /*5.게시물 신고 취소
     1)신고 수 1 이상인 게시 글의 신고 수를 0으로 만든다(관리자니까)
@@ -98,15 +98,15 @@ public class AdminController {
     @Operation(summary="계정 관리 리스트",description="신고받거나 정지된 USER(이용자),OWNER(가게 주인) 리스트" +
             "<br>2.이름 부분을 실명으로 하고 싶으신지 닉네임으로 하고 싶으신지 궁금합니다<br><br>--요구 데이터: 없음" +
             "<br>--응답 데이터<br>name: 이름(실명?닉네임?)<br>id:아이디<br>number:사업자등록번호" +
-            "<br>state:상태(잠금여부 0:정상 1:잠금)<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
+            "<br>state:상태(잠금여부 0:정상 1:잠금)<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>")
     public List<BlackVo> blackList(){return service.blackList1();}
     /*7.계정 정지/정지 해제(토글로 처리)
     1)이거 실행하기 전에 경고 문구 같은 거 있는 컨펌 창 하나 띄워주는 건 어떤가요*/
-    @PatchMapping("/{iuser}")
+    @PatchMapping
     @Operation(summary="계정 잠금",description="계정 잠금/해제(토글로 처리)" +
             "<br>--요구 데이터<br>iuser:유저 pk<br>--응답 데이터<br>(성공)<br>result: 1(잠금) or 0(해제)" +
-            "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>에러는 로직 다 짜고 나서 넣어도 될까요 ㅜㅜ")
-    public ResVo suspendAccount(@PathVariable int iuser){
+            "<br>(실패)<br>(500)INTERNAL_SERVER_ERROR<br>")
+    public ResVo suspendAccount(int iuser){
         if(iuser<=0){throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);}
         return service.suspendAccount2(iuser);
     }
