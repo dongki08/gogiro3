@@ -87,6 +87,7 @@ public class CommunityController {
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
             "boardAllCount : 게시글 총 갯수<br>" +
+            "allfav : 좋아요 총 갯수" +
             "신고횟수 3회이상 자동블러처리")
     public List<CommunitySelVo> getCommunity(CommunitySelDto dto) {
         return service.selCommunity(dto);
