@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ButcherMenuRepository extends JpaRepository<ButcherMenuEntity,Long>, OwnerMenuQdslRepository {
     @EntityGraph(attributePaths = {"butcherEntity"})
     List<ButcherMenuEntity> findByButcherEntity(ButcherEntity butcherEntity);
+    Optional<ButcherMenuEntity> findByIbutMenu(long imenu);
 
 }

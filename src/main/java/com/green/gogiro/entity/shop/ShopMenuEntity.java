@@ -3,6 +3,7 @@ package com.green.gogiro.entity.shop;
 import com.green.gogiro.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @Entity
@@ -21,7 +22,7 @@ public class ShopMenuEntity extends BaseEntity {
     @Column(length = 100, nullable = false)
     private String menu;
 
-    @Column
+    @Column(columnDefinition = "BIGINT UNSIGNED DEFAULT 0",nullable = false)
     private int price;
 
     @Column(length = 50)

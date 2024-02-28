@@ -76,7 +76,7 @@ public class ReservationController {
             "<br>ireser(최소 1 이상): 예약 혹은 픽업 pk<br>--응답 데이터<br>(성공)<br>result: 1" +
             "<br>(실패)<br>(400)<br>INVALID_PARAMETER<br>(가게구분 값이 잘못되었습니다)<br>(예약pk가 없습니다)" +
             "<br>INVALID_RESERVATION(존재하지 않는 예약입니다)<br>(500)<br>INTERNAL_SERVER_ERROR(서버에서 에러가 발생하였습니다)")
-    public ResVo cancelReservation(@RequestBody @Valid CancelDto dto){
+    public ResVo cancelReservation(@RequestBody  CancelDto dto){
         return service.cancelReservation2(dto);
     }
 

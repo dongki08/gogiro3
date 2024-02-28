@@ -65,7 +65,7 @@ public class AdminController {
             "<br>--요구 데이터<br>checkShop(0 또는 1): 가게 구분(0:고기집, 1:정육점)<br>ishop(최소 1 이상): 가게 pk" +
             "<br>confirm:변경하고 싶은 승인 여부(1:확정, 2:거절, 3:퇴출)<br>--응답 데이터<br>(성공)" +
             "<br>result: 1<br>(실패)<br>(400)<br>INVALID_PARAMETER<br>(401)UNAUTHORIZED<br>(404)VALID_SHOP<br>(500)INTERNAL_SERVER_ERROR")
-    public ResVo confirmShop(@Valid @RequestBody ConfirmDto dto){return service.confirmShop2(dto);}
+    public ResVo confirmShop(@RequestBody @Valid ConfirmsDto dto){return service.confirmShop2(dto);}
     /*3.신고 글 리스트(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기)
     1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가
     2)계정 제재는 총 관리자 재량으로*/

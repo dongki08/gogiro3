@@ -125,7 +125,7 @@ public class AdminService{
 //    }
     //JPA 2.가게 승인 여부 변경
     @Transactional
-    public ResVo confirmShop2(ConfirmDto dto){
+    public ResVo confirmShop2(ConfirmsDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
             throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
