@@ -92,6 +92,24 @@ public class OwnerService {
     }
 
 
+    @Transactional
+    public ResVo delMenu(long imenu){
+    int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+    if(checkShop == 0){
+        ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
+        shopMenuEntity.setImenu(imenu);
+        shopMenuRepository.delete(shopMenuEntity);
+        return new ResVo(SUCCESS);
+    }
+    if(checkShop == 1){
+        ButcherMenuEntity butcherMenuEntity = new ButcherMenuEntity();
+        butcherMenuEntity.setIbutMenu(imenu);
+        butcherMenuRepository.delete(butcherMenuEntity);
+        return new ResVo(SUCCESS);
+    }
+    return null;
+    }
+
     //사장님 로그인
     @Transactional
     public OwnerSigninVo ownerSignin(HttpServletResponse res, OwnerSigninDto dto) {
@@ -136,6 +154,7 @@ public class OwnerService {
         cookieUtils.deleteCookie(res, "rt");
         cookieUtils.setCookie(res, "rt", rt, rtCookieMaxAge);
         return OwnerSigninVo.builder()
+                .result(SUCCESS)
                 .accessToken(at)
                 .iuser(userEntity.getIuser())
                 .checkShop(userEntity.getCheckShop())

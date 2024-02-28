@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnerSigninVo {
+    private int result;
     private Long ishop;
     private int checkShop;
     private Long iuser;

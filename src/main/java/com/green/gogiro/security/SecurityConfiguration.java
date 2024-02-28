@@ -67,14 +67,16 @@ public class SecurityConfiguration {
                                 )
                                 .permitAll().requestMatchers(HttpMethod.GET, "/api/owner/review"
                                         , "/api/owner/menu", "/api/owner/reservation"
-                                        , "/api/owner/noshow",  "/api/owner/dashboard").hasAnyRole("OWNER")
-                        .requestMatchers(HttpMethod.PATCH, "/api/reservation/confirm").hasAnyRole("OWNER")
-                        .requestMatchers(HttpMethod.GET,"/api/owner/management").hasAnyRole("OWNER")
-                        .requestMatchers(HttpMethod.POST,"/api/review").hasAnyRole("USER")
-                        .requestMatchers(HttpMethod.GET,"/api/admin/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH,"/api/admin/**").hasAnyRole("ADMIN")
+                                        , "/api/owner/noshow", "/api/owner/dashboard").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.PATCH, "/api/reservation/confirm").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.GET, "/api/owner/management").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.POST, "/api/review").hasAnyRole("USER")
+                                .requestMatchers(HttpMethod.GET, "/api/admin/**").hasAnyRole("ADMIN")
+                                .requestMatchers(HttpMethod.PATCH, "/api/admin/**").hasAnyRole("ADMIN")
                                 .requestMatchers(HttpMethod.PUT, "/api/owner/review", "/api/owner/modify", "/api/owner/menu").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.POST, "/api/owner/menu").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.DELETE, "/api/owner/menu").hasAnyRole("OWNER")
+                                .requestMatchers(HttpMethod.PATCH, "/api/reservation").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.GET, "/api/butcher-shop", "/api/butcher-shop/**"
                                         , "/api/shop", "/api/shop/**"
                                         , "/api/community"

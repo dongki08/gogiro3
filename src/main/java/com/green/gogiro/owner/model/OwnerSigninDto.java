@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class OwnerSigninDto {
-    @Schema(defaultValue = "dd55@naver.com")
+    @Schema(defaultValue = "test2")
     private String email;
     @Schema(defaultValue = "1212")
     private String upw;
