@@ -27,7 +27,7 @@ public class AdminController {
     @PostMapping("/signin")
     @Operation(summary="총 관리자 로그인",description="--요청 데이터<br>email:아이디, upw:비밀번호" +
             "<br>--응답 데이터(성공)<br>result:로그인 결과(1:성공, 2:비밀번호틀림, 3: 아이디 없음)<br>iuser:유저pk<br>accessToken:엑세스 토큰" +
-            "<br>(401)UNAUTHORIZED<br>(404)INVALID_EXIST_USER_ID / INVALID_PASSWORD")
+            "<br>checkShop: 2(사용자, 총 관리자는 2)<br>(실패)<br>(401)UNAUTHORIZED<br>(404)INVALID_EXIST_USER_ID / INVALID_PASSWORD")
     public AdminSigninVo adminSignin(HttpServletResponse res, @Valid @RequestBody AdminSigninDto dto){
         return service.adminSignin2(res,dto);
     }
@@ -38,18 +38,18 @@ public class AdminController {
     @GetMapping("/shop")
     @Operation(summary="매장 관리 리스트",description="사이트에 등록된 가게(고기집&정육점) 리스트" +
             "<br>1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트(최근에 등록한 가게가 먼저 보이게)" +
-            "<br>2)각 가게의 가게 승인 여부 표시<br>3)가게 이름 검색 기능<br>" +
+            "<br>2)각 가게의 가게 승인 여부 표시<br>3)가게 이름 검색 기능<br>4)페이지 당 10개<br>" +
             "<br><br>--요구 데이터<br>search: 검색어(가게 이름)(필수 아님)<br>page: 페이지<br>--응답 데이터<br>(성공)" +
             "<br>checkShop:가게 구분(0:고기집, 1:정육점)<br>ishop:가게 pk(최소 1 이상)<br>name: 대표자명" +
             "<br>shopName:가게 이름<br>x:경도, y:위도<br>pic:가게 사진" +
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(400)<br>INVALID_EXIST_USER_ID / INVALID_PAGE<br>(401)UNAUTHORIZED" +
             "<br>(404)<br>INVALID_PASSWORD<br>(500)INTERNAL_SERVER_ERROR<br>")
-    public List<ShopVo> shopList(String search,int page){
+    public List<ShopVo> shopList(@RequestParam(required = false) String search,int page){
         ShopDto dto= new ShopDto();
         if(page<=0){throw new RestApiException(INVALID_PAGE);}
         dto.setPage(page);
-        if(!search.isBlank()){dto.setSearch(search);}
+        if(search!=null&&!search.isBlank()){dto.setSearch(search);}
         return service.shopList1(dto);
     }
     /*2.가게 승인 여부 변경
@@ -69,7 +69,7 @@ public class AdminController {
     @GetMapping("/report")
     @Operation(summary="신고 글 리스트",description="고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기 중 신고당한 글 리스트" +
             "<br>1)해당 글의 신고 수가 3회 이상이면 블러 처리 및 신고 글 리스트에 추가<br>2)계정 제재는 총 관리자 재량으로" +
-            "<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)<br>" +
+            "<br>3)페이지 당 10개<br>4)최근에 작성된 글이 먼저 보이게<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)<br>" +
             "--응답 데이터<br>pk:해당 글 pk<br>contents:신고 글 내용<br>writerNm:게시물 작성자<br>count:현재 신고받은 수"+
             "<br>state:상태(실패)<br>(400)INVALID_PAGE<br>(401)UNAUTHORIZED<br>(500)INTERNAL_SERVER_ERROR<br>")
     public List<ReportedVo> reportList(int check, int page){
@@ -86,7 +86,7 @@ public class AdminController {
     @PatchMapping("/hide")
     @Operation(summary="글 숨김",description="총 관리자가 신고받은 글(고기잡담 글, 고기잡담 글의 댓글, 고기집 후기, 정육점 후기 중 신고당한 글)을 숨긴다" +
             "<br>1)신고가 3개 이상이 되거나 총 관리자가 글 숨김 처리를 하면 리스트나 후기에서 글이 안 보이게 된다" +
-            "<br><br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
+            "<br>4)페이지 당 10개<br>--요구 데이터<br>check:글 종류(0:고기잡담 글, 1:고기잡담 댓글, 2:고기집 후기, 3:정육점 후기)" +
             "<br>pk:해당 글 pk<br>--응답 데이터<br>(성공)result: 1<br>(실패)" +
             "<br>(400)INVALID_PARAMETER / ALREADY_BLINDED<br>(404)NOT_COMMUNITY_CHECK<br>(500)INTERNAL_SERVER_ERROR<br>")
     public ResVo hide(@Valid @RequestBody HideDto dto){return service.hide2(dto);}
@@ -104,7 +104,7 @@ public class AdminController {
     2)노쇼 카운트 2회 이상인 사용자*/
     @GetMapping("/black")
     @Operation(summary="계정 관리 리스트",description="신고받거나 정지된 USER(이용자),OWNER(가게 주인) 리스트" +
-            "<br>--요구 데이터: 없음<br>--응답 데이터<br>name: 이름(실명?닉네임?)" +
+            "<br>페이지 당 10개,계정 pk 순서대로 정렬<br>--요구 데이터: 없음<br>--응답 데이터<br>name: 이름(실명?닉네임?)" +
             "<br>id:아이디<br>number:사업자등록번호<br>state:상태(잠금여부 0:정상 1:잠금)" +
             "<br>(실패)(400)INVALID_PAGE<br>(401)UNAUTHORIZED<br>(500)INTERNAL_SERVER_ERROR<br>")
     public List<BlackVo> blackList(int page){
