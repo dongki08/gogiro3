@@ -148,6 +148,7 @@ public class ShopService {
         );
         return new ResVo(atomic.get());
     }
+
     // 리터럴 바꾸기****************
 
     public ShopMainVo selMainPage() {

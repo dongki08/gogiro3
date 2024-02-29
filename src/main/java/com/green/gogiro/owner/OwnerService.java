@@ -384,9 +384,6 @@ public class OwnerService {
             } else {
                 shopEntity.setDeposit(dto.getDeposit());
             }
-            if (!dto.getFacility().isEmpty()) {
-                shopMapper.insFacilities(ishop, dto.getFacility());
-            }
             String target = "/shop/" + ishop + "/shop_pic" + "/";
             ShopUpdDto pDto = new ShopUpdDto();
             pDto.setIshop((int) ishop);
@@ -411,8 +408,11 @@ public class OwnerService {
                 mVo.setPics(pDto.getPics());
                 mapper.insShopPic(pDto);
             }
+            if (!dto.getFacility().isEmpty()) {
+                shopMapper.delFacilities(ishop);
+                shopMapper.insFacilities(ishop, dto.getFacility());
+            }
             shopRepository.save(shopEntity);
-            shopMapper.delFacilities(ishop);
             return mVo;
         }
         if (checkShop == 1) {
@@ -475,7 +475,7 @@ public class OwnerService {
                     mapper.insButcherPics(pDto);
                 }
             }
-                    butcherRepository.save(butcherEntity);
+            butcherRepository.save(butcherEntity);
             return mVo;
         }
         return null;
