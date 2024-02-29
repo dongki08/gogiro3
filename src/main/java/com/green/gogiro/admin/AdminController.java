@@ -41,7 +41,7 @@ public class AdminController {
             "<br>2)각 가게의 가게 승인 여부 표시<br>3)가게 이름 검색 기능<br>4)페이지 당 10개<br>" +
             "<br><br>--요구 데이터<br>search: 검색어(가게 이름)(필수 아님)<br>page: 페이지<br>--응답 데이터<br>(성공)" +
             "<br>checkShop:가게 구분(0:고기집, 1:정육점)<br>ishop:가게 pk(최소 1 이상)<br>name: 대표자명" +
-            "<br>shopName:가게 이름<br>x:경도, y:위도<br>pic:가게 사진" +
+            "<br>location: 주인이 작성한 위치<br>shopName:가게 이름<br>x:경도, y:위도<br>pic:가게 사진" +
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(400)<br>INVALID_EXIST_USER_ID / INVALID_PAGE<br>(401)UNAUTHORIZED" +
             "<br>(404)<br>INVALID_PASSWORD<br>(500)INTERNAL_SERVER_ERROR<br>")
