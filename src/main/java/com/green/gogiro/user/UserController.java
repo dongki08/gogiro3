@@ -125,8 +125,21 @@ public class UserController {
     }
 
     @PostMapping("review/report")
-    @Operation(summary = "가게 후기 신고", description = "체크샵 까먹지말고")
-    public ResVo reportShopReview(ReportDto dto) {
+    @Operation(summary = "가게 후기 신고", description = "가게 후기 신고 처리<br>" +
+            "--요청데이터<br>" +
+            "checkShop: 가게구분(0: 고기집 1: 정육점)<br>" +
+            "ireview: 리뷰pk<br>" +
+            "ireport: 신고pk<br>" +
+            "1. 욕설/인신공격<br>" +
+            "2. 음란물<br>" +
+            "3. 영리목적/홍보성<br>" +
+            "4. 개인정보<br>" +
+            "5. 게시글 도배<br>" +
+            "6. 기타<br>" +
+            "ishop : 가게pk<br>" +
+            "--응답데이터<br>" +
+            "result: 1(성공)<br>")
+    public ResVo reportShopReview(@RequestBody ReportDto dto) {
         return service.reportShopReview(dto);
     }
 
