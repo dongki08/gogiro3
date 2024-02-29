@@ -1,7 +1,7 @@
 package com.green.gogiro.admin.model;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+
 
 @Data
 public class ReportDto {
