@@ -287,9 +287,12 @@ public class CommunityService {
     @Transactional
     public ResVo postCommunityComment(CommunityCommentInsDto dto) {
         //없는 게시글 댓글 등록 시 예외처리
-        communityRepository.findAllByIboard(dto.getIboard())
-                .orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
-
+        Optional<CommunityEntity> optCommu = communityRepository.findAllByIboard(dto.getIboard());
+        CommunityEntity entity = optCommu.orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+        //공지사항 댓글 예외처리
+        if (entity.getAnnounce() == 1) {
+            throw new RestApiException(NOT_COMMENT_ANNOUNCE);
+        }
         CommunityEntity communityEntity = new CommunityEntity();
         CommunityCommentEntity commentEntity = new CommunityCommentEntity();
         communityEntity.setIboard(dto.getIboard());
@@ -386,6 +389,10 @@ public class CommunityService {
         //없는 신고 pk를 신고 하였을 때
         if(mapper.reportEntity(dto.getIreport().intValue()) == null) {
             throw new RestApiException(REPORT_ENTITY);
+        }
+        //공지사항 신고 하였을때 예외처리
+        if(communityEntity.getAnnounce() == 1) {
+            throw new RestApiException(NOT_COMMUNITY_ANNOUNCE);
         }
 
         CommunityCountEntity countEntity = new CommunityCountEntity();
