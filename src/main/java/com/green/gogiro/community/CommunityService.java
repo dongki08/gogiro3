@@ -337,7 +337,13 @@ public class CommunityService {
         CommunityFavIds ids = new CommunityFavIds();
         ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIboard((long)dto.getIboard());
-
+        //없는 게시글 추천 예외처리
+        Optional<CommunityEntity> optCommu = communityRepository.findAllByIboard(dto.getIboard());
+        CommunityEntity entitythrow = optCommu.orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
+        //공지사항 댓글 예외처리
+        if (entitythrow.getAnnounce() == 1) {
+            throw new RestApiException(NOT_COMMENT_FAV);
+        }
         AtomicInteger atomic = new AtomicInteger(FAIL);
         communityFavRepository
                 .findById(ids)

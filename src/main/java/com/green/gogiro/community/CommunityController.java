@@ -140,7 +140,7 @@ public class CommunityController {
             "--응답데이터<br>" +
             "result : 1(성공)<br>" +
             "없는 iboard pk 등록 시 : 등록된 글을 찾을 수 없습니다.<br>" +
-            "공지사항 댓글 등록 시 : 공지사항에는 댓글을 등록 할 수 없습니다.")
+            "공지사항 댓글 등록 시 : 공지사항은 댓글을 등록 할 수 없습니다.")
     public ResVo postCommunityComment(@Valid @RequestBody CommunityCommentInsDto dto) {
         return service.postCommunityComment(dto);
     }
@@ -164,7 +164,9 @@ public class CommunityController {
             "result : <select>" +
             "    <option>1(추천)</option>" +
             "    <option>0(추천 취소)</option>" +
-            "</select>")
+            "</select><br>" +
+            "없는 iboard pk 등록 시 : 등록된 글을 찾을 수 없습니다.<br>" +
+            "공지사항 추천 시 : 공지사항은 추천을 할 수 없습니다.")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }
