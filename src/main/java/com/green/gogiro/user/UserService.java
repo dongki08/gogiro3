@@ -74,7 +74,6 @@ public class UserService {
 
     @Transactional
     public ResVo signup(MultipartFile pic, UserSignupDto dto) {
-
         if (mapper.checkNickname(dto.getNickname()) != null) {
             throw new RestApiException(UserErrorCode.NEED_NICK_NAME_CHECK);
         }
@@ -83,15 +82,12 @@ public class UserService {
         }
         String hashedPw = passwordEncoder.encode(dto.getUpw());
         dto.setUpw(hashedPw);
-
         if (mapper.checkEmail(dto.getEmail()) != null) {
             throw new RestApiException(UserErrorCode.DUPLICATION_EMAIL);
         }
-
         if ("01000000000".equals(dto.getTel())) {
             throw new RestApiException(UserErrorCode.REGEXP_TEL);
         }
-
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(dto.getEmail());
         userEntity.setName(dto.getName());
@@ -103,7 +99,6 @@ public class UserService {
         userEntity.setNickname(dto.getNickname());
         userEntity.setCheckShop(2);
         userEntity.setRole(RoleEnum.USER);
-
 
         userRepository.save(userEntity);
         if (pic != null) {
