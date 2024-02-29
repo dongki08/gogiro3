@@ -182,7 +182,8 @@ public class CommunityController {
             "--응답데이터<br>" +
             "result : 1(성공), 중복신고(이미 신고된 게시글입니다)" +
             ", 본인게시글 신고(본인 게시글은 신고가 불가능합니다)<br>" +
-            "신고pk 외 등록 시 : 신고 종류를 찾을 수 없습니다.")
+            "신고pk 외 등록 시 : 신고 종류를 찾을 수 없습니다.<br>" +
+            "공지사항 신고 시 : 공지사항은 신고를 할 수 없습니다.")
     public ResVo reportCommunity(CommunityReportDto dto) {
         return service.reportCommunity(dto);
     }

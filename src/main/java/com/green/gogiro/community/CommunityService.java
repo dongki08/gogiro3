@@ -387,6 +387,10 @@ public class CommunityService {
         if(mapper.reportEntity(dto.getIreport().intValue()) == null) {
             throw new RestApiException(REPORT_ENTITY);
         }
+        //공지사항 신고 하였을때 예외처리
+        if(communityEntity.getAnnounce() == 1) {
+            throw new RestApiException(NOT_COMMUNITY_ANNOUNCE);
+        }
 
         CommunityCountEntity countEntity = new CommunityCountEntity();
         countEntity.setCommunityCountIds(ids);
