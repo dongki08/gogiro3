@@ -37,14 +37,11 @@ public class AdminController {
     3)가게 이름 검색 기능*/
     @GetMapping("/shop")
     @Operation(summary="매장 관리 리스트",description="사이트에 등록된 가게(고기집&정육점) 리스트" +
-            "<br>1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트" +
+            "<br>1)DB에 등록된 모든 가게들(고기집+정육점)의 리스트(최근에 등록한 가게가 먼저 보이게)" +
             "<br>2)각 가게의 가게 승인 여부 표시<br>3)가게 이름 검색 기능<br>" +
-            "<br>1.상세 주소를 위도,경도를 이용해서 부르고 싶으시면 x,y로 보내드리겠습니다" +
-            "<br>2.그냥 가게 주인이 직접 쓴 주소(문자열)로 받고 싶으시면 location으로 보내드리겠습니다" +
-            "<br>3.고기 종류도 나타내고 싶으시면 checkShop에 0:정육점, 1:돼지, 2:소, 3:닭, 4:오리, 5:양으로 보내드릴 수 있습니다"+
-            "<br><br>--요구 데이터<br>search: 검색어(가게 이름)(필수 아님)<br>--응답 데이터<br>(성공)" +
-            "<br>checkShop:가게 구분(0:고기집, 1:정육점)<br>ishop:가게 pk(최소 1 이상)" +
-            "<br>name:가게 이름<br>x:경도, y:위도<br>pic:가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)" +
+            "<br><br>--요구 데이터<br>search: 검색어(가게 이름)(필수 아님)<br>page: 페이지<br>--응답 데이터<br>(성공)" +
+            "<br>checkShop:가게 구분(0:고기집, 1:정육점)<br>ishop:가게 pk(최소 1 이상)<br>name: 대표자명" +
+            "<br>shopName:가게 이름<br>x:경도, y:위도<br>pic:가게 사진" +
             "<br>tel:전화번호<br>confirm:승인 여부(0:대기, 1:확정, 2: 거절, 3:퇴출)"+
             "<br>(실패)<br>(400)<br>INVALID_EXIST_USER_ID / INVALID_PAGE<br>(401)UNAUTHORIZED" +
             "<br>(404)<br>INVALID_PASSWORD<br>(500)INTERNAL_SERVER_ERROR<br>")
