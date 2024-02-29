@@ -12,7 +12,8 @@ public class ShopVo {
     0:정육점, 1:돼지, 2:소, 3:닭, 4:오리, 5:양으로 보내드릴 수 있습니다*/
     private int checkShop;//가게 구분(0:고기집, 1:정육점)
     private int ishop;//가게 pk(최소 1 이상)
-    private String name;//가게 이름
+    private String name;//대표자명
+    private String shopName;//가게명
     private String x;//경도
     private String y;//위도
     private String tel;//전화번호
