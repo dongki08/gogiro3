@@ -26,6 +26,6 @@ public class OwnerManagementVo {
     private String y;
     private int deposit;
     private String number;
-    private List<FacilitiesVo> facilities = new ArrayList<>();
+    private List<Long> facilities = new ArrayList<>();
 
 }

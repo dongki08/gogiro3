@@ -83,14 +83,11 @@ public class OwnerMainQdslRepositoryImpl implements OwnerMainQdslRepository {
     }
 
     @Override
-    public List<FacilitiesVo> selFacilityByShop(long ishop) {
+    public List<Long> selFacilityByShop(long ishop) {
         List<ShopFacilitiesEntity> list = jpaQueryFactory.selectFrom(shopFacilitiesEntity)
                 .where(shopFacilitiesEntity.shopEntity.ishop.eq(ishop))
                 .fetch();
-        return list.stream().map(item -> FacilitiesVo.builder()
-                .ifacil(item.getFacilityEntity().getIfacil())
-                .facility(item.getFacilityEntity().getFacility())
-                .build()).collect(Collectors.toList());
+        return list.stream().map(item -> item.getFacilityEntity().getIfacil()).collect(Collectors.toList());
     }
 
     public List<OwnerShopPicsProcVo> selShopPics(long ishop) {
