@@ -54,6 +54,7 @@ public class OwnerMainQdslRepositoryImpl implements OwnerMainQdslRepository {
                     .ishop(entity.getIshop())
                     .number(entity.getNumber())
                     .open(entity.getOpen())
+                    .facilities(selFacilityByShop(ishop))
                     .build();
         }
         if (checkShop == 1) {

@@ -385,7 +385,8 @@ public class OwnerService {
                 shopEntity.setDeposit(dto.getDeposit());
             }
             if (!dto.getFacility().isEmpty()) {
-                shopMapper.insFacilities(ishop, dto.getFacility());
+                shopMapper.delFacilities(ishop);
+                shopMapper.insFacilities((int)ishop, dto.getFacility());
             }
             String target = "/shop/" + ishop + "/shop_pic" + "/";
             ShopUpdDto pDto = new ShopUpdDto();
@@ -412,7 +413,6 @@ public class OwnerService {
                 mapper.insShopPic(pDto);
             }
             shopRepository.save(shopEntity);
-            shopMapper.delFacilities(ishop);
             return mVo;
         }
         if (checkShop == 1) {
