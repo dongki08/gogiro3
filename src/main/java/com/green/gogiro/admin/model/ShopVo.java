@@ -22,6 +22,7 @@ public class ShopVo {
     private String pic;
     @JsonIgnore
     private String createdAt;
+    @JsonIgnore
     private boolean isShop;
 
     //가게 사진(여러 장으로 받고 싶으시면 리스트로 변경하겠습니다)
