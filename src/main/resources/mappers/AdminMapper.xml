@@ -24,7 +24,7 @@
         LEFT JOIN t_user c
         ON a.iuser=c.iuser
         <if test="search!=null">
-            WHERE a.name LIKE `%${search}%`
+            WHERE a.name LIKE '%${search}%'
         </if>
         GROUP BY a.ishop
         union
@@ -42,7 +42,7 @@
         LEFT JOIN t_user c
         ON a.iuser= c.iuser
         <if test="search!=null">
-            WHERE a.name LIKE `%${search}%`
+            WHERE a.name LIKE '%${search}%'
         </if>
         GROUP BY a.ibutcher
         ORDER BY createdAt
