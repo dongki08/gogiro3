@@ -125,7 +125,10 @@ public class UserController {
     }
 
     @PostMapping("review/report")
-    @Operation(summary = "가게 후기 신고", description = "체크샵 까먹지말고")
+    @Operation(summary = "가게 후기 신고", description = "<h2>가게 후기 신고 처리</h2>" +
+            "<h3>--요청데이터<br>checkShop: 가게구분(0: 고기집 1: 정육점)<br>ireview: 리뷰pk<br>" +
+            "ireport: 신고pk<br>ishop : 가게pk" +
+            "<br>--응답데이터<br>result: 1(성공)")
     public ResVo reportShopReview(ReportDto dto) {
         return service.reportShopReview(dto);
     }
