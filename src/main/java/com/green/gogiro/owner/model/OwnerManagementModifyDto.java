@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class OwnerManagementModifyDto {
-    private Long imeat;
+    private long imeat;
     private String name;
     private String location;
     @Schema(title = "삭제할 사진pk",example = "[]")

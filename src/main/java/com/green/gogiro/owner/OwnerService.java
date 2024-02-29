@@ -67,6 +67,7 @@ public class OwnerService {
     private final ShopMenuRepository shopMenuRepository;
     private final ShopReviewRepository shopReviewRepository;
     private final ButcherReviewRepository butcherReviewRepository;
+    private final ShopCategoryRepository shopCategoryRepository;
 
 
     //가게 리뷰 보기
@@ -90,32 +91,32 @@ public class OwnerService {
 
     //메뉴 삭제
     @Transactional
-    public ResVo delMenu(long imenu){
-    int checkShop = authenticationFacade.getLoginOwnerCheckShop();
-    long ishop = authenticationFacade.getLoginOwnerShopPk();
-    if(checkShop == 0){
-        Optional<ShopMenuEntity> optMenu = shopMenuRepository.findByImenu(imenu);
-        ShopMenuEntity shopMenuEntityCheck = optMenu.orElseThrow(() -> new RestApiException(INVALID_SHOP_MENU));
-        if(shopMenuEntityCheck.getShopEntity().getIshop() != ishop || shopMenuEntityCheck.getImenu() != imenu){
-            throw new RestApiException(NOT_SHOP_MENU);
+    public ResVo delMenu(long imenu) {
+        int checkShop = authenticationFacade.getLoginOwnerCheckShop();
+        long ishop = authenticationFacade.getLoginOwnerShopPk();
+        if (checkShop == 0) {
+            Optional<ShopMenuEntity> optMenu = shopMenuRepository.findByImenu(imenu);
+            ShopMenuEntity shopMenuEntityCheck = optMenu.orElseThrow(() -> new RestApiException(INVALID_SHOP_MENU));
+            if (shopMenuEntityCheck.getShopEntity().getIshop() != ishop || shopMenuEntityCheck.getImenu() != imenu) {
+                throw new RestApiException(NOT_SHOP_MENU);
+            }
+            ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
+            shopMenuEntity.setImenu(imenu);
+            shopMenuRepository.delete(shopMenuEntity);
+            return new ResVo(SUCCESS);
         }
-        ShopMenuEntity shopMenuEntity = new ShopMenuEntity();
-        shopMenuEntity.setImenu(imenu);
-        shopMenuRepository.delete(shopMenuEntity);
-        return new ResVo(SUCCESS);
-    }
-    if(checkShop == 1){
-        Optional<ButcherMenuEntity> optMenu = butcherMenuRepository.findByIbutMenu(imenu);
-        ButcherMenuEntity butcherMenuEntityCheck = optMenu.orElseThrow(()-> new RestApiException(INVALID_SHOP_MENU));
-        if(butcherMenuEntityCheck.getButcherEntity().getIbutcher() != ishop || butcherMenuEntityCheck.getIbutMenu() != imenu){
-            throw new RestApiException(NOT_SHOP_MENU);
+        if (checkShop == 1) {
+            Optional<ButcherMenuEntity> optMenu = butcherMenuRepository.findByIbutMenu(imenu);
+            ButcherMenuEntity butcherMenuEntityCheck = optMenu.orElseThrow(() -> new RestApiException(INVALID_SHOP_MENU));
+            if (butcherMenuEntityCheck.getButcherEntity().getIbutcher() != ishop || butcherMenuEntityCheck.getIbutMenu() != imenu) {
+                throw new RestApiException(NOT_SHOP_MENU);
+            }
+            ButcherMenuEntity butcherMenuEntity = new ButcherMenuEntity();
+            butcherMenuEntity.setIbutMenu(imenu);
+            butcherMenuRepository.delete(butcherMenuEntity);
+            return new ResVo(SUCCESS);
         }
-        ButcherMenuEntity butcherMenuEntity = new ButcherMenuEntity();
-        butcherMenuEntity.setIbutMenu(imenu);
-        butcherMenuRepository.delete(butcherMenuEntity);
-        return new ResVo(SUCCESS);
-    }
-    return null;
+        return null;
     }
 
     //사장님 로그인
@@ -138,7 +139,7 @@ public class OwnerService {
         MyPrincipal mp = new MyPrincipal();
         if (userEntity.getCheckShop() == 0) {
             ShopEntity entity = shopRepository.findByUserEntity(userEntity);
-            if(entity.getConfirm() != 1){
+            if (entity.getConfirm() != 1) {
                 throw new RestApiException(CONFIRM);
             }
             mp.setIuser(userEntity.getIuser());
@@ -151,7 +152,7 @@ public class OwnerService {
         }
         if (userEntity.getCheckShop() == 1) {
             ButcherEntity entity = butcherRepository.findByUserEntity(userEntity);
-            if(entity.getConfirm() != 1){
+            if (entity.getConfirm() != 1) {
                 throw new RestApiException(CONFIRM);
             }
             mp.setIuser(userEntity.getIuser());
@@ -193,7 +194,7 @@ public class OwnerService {
 
     //고깃집 노쇼 내역 보기
     public OwnerSelNoShowVo selNoShow(int page) {
-        if(page < 1) {
+        if (page < 1) {
             throw new RestApiException(AuthErrorCode.INVALID_PAGE);
         }
         OwnerSelNoShowVo vo = new OwnerSelNoShowVo();
@@ -213,7 +214,7 @@ public class OwnerService {
 
     //가게 예약 내역
     public OwnerSelReservationVo getReservation(int page) {
-        if(page < 1) {
+        if (page < 1) {
             throw new RestApiException(AuthErrorCode.INVALID_PAGE);
         }
         OwnerSelReservationVo vo = new OwnerSelReservationVo();
@@ -236,7 +237,7 @@ public class OwnerService {
         if (checkShop == 1) {
             vo.setCheckShop(checkShop);
             voList = mapper.selButcherPickup(dto);
-            if(voList.isEmpty()){
+            if (voList.isEmpty()) {
                 return vo;
             }
             menuList = mapper.selButcherPickupMenu(dto);
@@ -370,18 +371,19 @@ public class OwnerService {
             } else {
                 shopEntity.setY(dto.getY());
             }
-            if (dto.getImeat() == null) {
-                shopEntity.setShopCategoryEntity(shopEntity.getShopCategoryEntity());
-            } else {
-                shopEntity.setShopCategoryEntity(categoryEntity);
+            if (dto.getImeat() != 0) {
+                shopCategoryRepository.findByImeat(dto.getImeat()).orElseThrow(() -> new RestApiException(INVALID_CATEGORY));
             }
+            if (dto.getImeat() == 0) {
+                throw new RestApiException(NOT_SHOP_0);
+            }
+            shopEntity.setShopCategoryEntity(categoryEntity);
+
             if (dto.getDeposit() == null) {
                 shopEntity.setDeposit(shopEntity.getDeposit());
             } else {
                 shopEntity.setDeposit(dto.getDeposit());
             }
-            shopRepository.save(shopEntity);
-            shopMapper.delFacilities(ishop);
             if (!dto.getFacility().isEmpty()) {
                 shopMapper.insFacilities(ishop, dto.getFacility());
             }
@@ -389,8 +391,14 @@ public class OwnerService {
             ShopUpdDto pDto = new ShopUpdDto();
             pDto.setIshop((int) ishop);
             if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
-                List<ShopSelPicsNumDto> sDto = mapper.selShopPics(dto.getIshopPics());
-                for (ShopSelPicsNumDto pic : sDto) {
+                List<ShopSelPicsNumDto> picList = mapper.selShopPics(dto.getIshopPics());
+                if (picList.isEmpty()) {
+                    throw new RestApiException(INVALID_PIC);
+                }
+                for (ShopSelPicsNumDto pic : picList) {
+                    if (pic.getIshop() != ishop) {
+                        throw new RestApiException(NOT_PIC);
+                    }
                     myFileUtils.delFolderTrigger2(target + pic.getPic());
                 }
                 mapper.delShopPics(dto.getIshopPics());
@@ -403,9 +411,14 @@ public class OwnerService {
                 mVo.setPics(pDto.getPics());
                 mapper.insShopPic(pDto);
             }
+            shopRepository.save(shopEntity);
+            shopMapper.delFacilities(ishop);
             return mVo;
         }
         if (checkShop == 1) {
+            if (dto.getImeat() != 0) {
+                throw new RestApiException(INVALID_BUTCHER_CATEGORY);
+            }
             List<OwnerShopPicsProcVo> vo = butcherShopMapper.selByButcherShopPics(ishop);
             mVo.setIshop(ishop);
             mVo.setCheckShop(BUTCHER_CHECK_NUM);
@@ -416,7 +429,6 @@ public class OwnerService {
             if (totalSize > 5) {
                 throw new RestApiException(SIZE_PHOTO);
             }
-
             ButcherEntity butcherEntity = butcherRepository.getReferenceById(ishop);
             if (dto.getName().isEmpty()) {
                 butcherEntity.setName(butcherEntity.getName());
@@ -438,14 +450,20 @@ public class OwnerService {
             } else {
                 butcherEntity.setY(dto.getY());
             }
-            butcherRepository.save(butcherEntity);
             String path = "/butcher/" + ishop + "/butchershop_pic" + "/";
             ButcherInsDto pDto = new ButcherInsDto();
             pDto.setIbutcher((int) ishop);
+
             if (dto.getIshopPics() != null && !dto.getIshopPics().isEmpty()) {
                 List<ButcherPicsProcVo> picList = mapper.selButcherPics(dto.getIshopPics());
-                for (ButcherPicsProcVo vo2 : picList) {
-                    myFileUtils.delFolderTrigger2(path + vo2.getPic());
+                if (picList.isEmpty()) {
+                    throw new RestApiException(INVALID_PIC);
+                }
+                for (ButcherPicsProcVo pic : picList) {
+                    if (pic.getIshop() != ishop) {
+                        throw new RestApiException(NOT_PIC);
+                    }
+                    myFileUtils.delFolderTrigger2(path + pic.getPic());
                 }
                 mapper.delButcherPics(dto.getIshopPics());
                 if (pics != null && !pics.isEmpty()) {
@@ -457,6 +475,7 @@ public class OwnerService {
                     mapper.insButcherPics(pDto);
                 }
             }
+                    butcherRepository.save(butcherEntity);
             return mVo;
         }
         return null;
@@ -529,7 +548,6 @@ public class OwnerService {
     }
 
 
-
     //가게 메뉴 등록
     @Transactional
     public InsMenuVo postMenu(MultipartFile pic, OwnerMenuInsDto dto) {
@@ -579,7 +597,6 @@ public class OwnerService {
         }
         return null;
     }
-
 
 
     //리뷰 댓글 달기

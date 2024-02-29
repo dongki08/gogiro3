@@ -188,7 +188,7 @@
     </select>
 
     <select id="selByButcherShopPics">
-        SELECT pic,ibut_pics as picsPk
+        SELECT pic,ibut_pics as picsPk, ibutcher as ishop
         FROM t_butcher_pic
         WHERE ibutcher = #{ishop}
     </select>
