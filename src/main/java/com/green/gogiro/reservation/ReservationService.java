@@ -290,7 +290,9 @@ public class ReservationService {
             Optional<ReservationEntity> optReservation= reservationRepository.findById((long)dto.getIreser());
             ReservationEntity reservation= optReservation.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(iuser!=reservation.getUserEntity().getIuser()){
-                throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
+                throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            } else if(reservation.getShopEntity().getIshop()!=dto.getIshop()){
+                throw new RestApiException(INVALID_SHOP);
             }
             ShopReviewEntity entity= new ShopReviewEntity();
             entity.setShopEntity(shopRepository.getReferenceById((long)dto.getIshop()));
@@ -315,6 +317,8 @@ public class ReservationService {
             PickupEntity pickup= optPickup.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(iuser!=pickup.getUserEntity().getIuser()){
                 throw new RestApiException((CommonErrorCode.UNAUTHORIZED));
+            }else if(pickup.getButcherEntity().getIbutcher()!=dto.getIshop()){
+                throw new RestApiException(INVALID_SHOP);
             }
             ButcherReviewEntity entity= new ButcherReviewEntity();
             entity.setButcherEntity(butcherRepository.getReferenceById((long)dto.getIshop()));
