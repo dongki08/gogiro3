@@ -14,6 +14,7 @@ public class ShopVo {
     private int ishop;//가게 pk(최소 1 이상)
     private String name;//대표자명
     private String shopName;//가게명
+    private String location;//위치
     private String x;//경도
     private String y;//위도
     private String tel;//전화번호
