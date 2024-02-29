@@ -410,7 +410,7 @@ public class OwnerService {
             }
             if (!dto.getFacility().isEmpty()) {
                 shopMapper.delFacilities(ishop);
-                shopMapper.insFacilities((int)ishop, dto.getFacility());
+                shopMapper.insFacilities(ishop, dto.getFacility());
             }
             shopRepository.save(shopEntity);
             return mVo;
@@ -475,7 +475,7 @@ public class OwnerService {
                     mapper.insButcherPics(pDto);
                 }
             }
-                    butcherRepository.save(butcherEntity);
+            butcherRepository.save(butcherEntity);
             return mVo;
         }
         return null;

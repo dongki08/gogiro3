@@ -33,7 +33,7 @@ public class OwnerController {
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
             "<br>(성공)result: 가게 주인pk(사용자랑 같은 테이블이기 때문에 다른 주소에서 쓸 때도 유저pk명(iuser)과 동일할 수 있습니다)" +
             "<br>(실패)에러는 나중에 로직 다 짜고 나서 해도 괜찮을까요? ㅜㅜ")
-    public ResVo ownerSignup(@RequestPart MultipartFile pic, @Valid @RequestPart OwnerSignupDto dto) {
+    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart @Valid OwnerSignupDto dto) {
         return service.ownerSignup(pic, dto);
     }
 

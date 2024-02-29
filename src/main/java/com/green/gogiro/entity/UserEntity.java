@@ -28,10 +28,10 @@ public class UserEntity extends BaseEntity {
     @Column(length = 300, nullable = false)
     private String upw;
 
-    @Column(length = 10)
+    @Column(length = 10,nullable = false)
     private String name;
 
-    @Column(length = 20)
+    @Column(length = 20,nullable = false)
     private String nickname;
 
     @Column(length = 20)
