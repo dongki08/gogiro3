@@ -285,10 +285,7 @@ public class ReservationService {
         ReviewPicsInsVo vo = new ReviewPicsInsVo();
         vo.setCheckShop(dto.getCheckShop());
         long iuser= authenticationFacade.getLoginUserPk();
-        String target = (dto.getCheckShop()==0?"/shop/":"/butcher/")
-                        + dto.getIshop()
-                        + "/review/" + dto.getIreview()
-                        + "/";
+        String target = (dto.getCheckShop()==0?"/shop/":"/butcher/") + dto.getIshop() +"/review/";
         if(dto.isReservation()){
             Optional<ReservationEntity> optReservation= reservationRepository.findById((long)dto.getIreser());
             ReservationEntity reservation= optReservation.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
@@ -301,9 +298,9 @@ public class ReservationService {
             entity.setStar(dto.getStar());
             entity.setReview(dto.getReview());
             shopReviewRepository.save(entity);
-            vo.setIreview(dto.getIreview());
+            vo.setIreview(entity.getIreview().intValue());
             for(MultipartFile file : dto.getFiles()){
-                String saveFileNm = myFileUtils.transferTo(file, target);
+                String saveFileNm = myFileUtils.transferTo(file, target+entity.getIreview()+"/");
                 vo.getPics().add(saveFileNm);
             }
             entity.getShopReviewPicEntityList()
@@ -325,9 +322,9 @@ public class ReservationService {
             entity.setStar(dto.getStar());
             entity.setReview(dto.getReview());
             butcherReviewRepository.save(entity);
-            vo.setIreview(dto.getIreview());
+            vo.setIreview(entity.getIreview().intValue());
             for(MultipartFile file : dto.getFiles()){
-                String saveFileNm = myFileUtils.transferTo(file, target);
+                String saveFileNm = myFileUtils.transferTo(file, target+entity.getIreview()+"/");
                 vo.getPics().add(saveFileNm);
             }
             entity.getButcherReviewPicEntityList()

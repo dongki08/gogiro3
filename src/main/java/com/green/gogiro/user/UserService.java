@@ -105,14 +105,14 @@ public class UserService {
         userEntity.setRole(RoleEnum.USER);
 
 
+        userRepository.save(userEntity);
         if (pic != null) {
-            String path = "/user/" + dto.getIuser();
+            String path = "/user/" + userEntity.getIuser() + "/";
             String savedPicFileNm = myFileUtils.transferTo(pic, path);
             dto.setPic(savedPicFileNm);
             mapper.updUserPic(dto);
             userEntity.setPic(dto.getPic());
         }
-        userRepository.save(userEntity);
         return new ResVo(userEntity.getIuser().intValue());
     }
 

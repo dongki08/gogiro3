@@ -44,6 +44,7 @@
         </if>
         GROUP BY a.ibutcher
         ORDER BY createdAt DESC
+        LIMIT #{startIdx},#{rowCount}
     </select>
     <update id="confirmShop">
         UPDATE
@@ -56,13 +57,14 @@
         SELECT
             a.i${column1} AS pk,
             a.${column2} AS contents,
-            b.nickname,
+            b.nickname as writerNm,
             a.count
         FROM t_${table} a
         JOIN t_user b
         ON a.iuser=b.iuser
         WHERE a.COUNT<![CDATA[>=]]>1
         ORDER BY a.created_at
+        LIMIT #{startIdx},#{rowCount}
     </select>
     <update id="hide">
         UPDATE
@@ -102,7 +104,7 @@
         SELECT
             iuser
         FROM t_but_review
-        WHERE COUNT>=3;
+        WHERE COUNT>=3
     </select>
     <select id="blackList">
         SELECT
@@ -121,6 +123,7 @@
             #{item}
         </foreach>
         ORDER BY a.iuser
+        LIMIT #{startIdx},#{rowCount}
     </select>
 
     <update id="suspendAccount">

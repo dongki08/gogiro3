@@ -17,6 +17,7 @@ import com.green.gogiro.entity.community.repository.CommunityRepository;
 import com.green.gogiro.entity.shop.ShopEntity;
 import com.green.gogiro.entity.shop.ShopReviewEntity;
 import com.green.gogiro.entity.shop.repository.ShopReviewRepository;
+import com.green.gogiro.exception.AdminErrorCode;
 import com.green.gogiro.exception.AuthErrorCode;
 import com.green.gogiro.exception.CommonErrorCode;
 import com.green.gogiro.exception.RestApiException;
@@ -31,6 +32,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.green.gogiro.common.Const;
@@ -85,12 +88,12 @@ public class AdminService{
     public AdminSigninVo adminSignin2(HttpServletResponse res, AdminSigninDto dto){
         Optional<UserEntity> optEntity = userRepository.findByEmail(dto.getEmail());
         UserEntity userEntity = optEntity.orElseThrow(
-                ()-> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID)
+                ()-> new RestApiException(AuthErrorCode.INVALID_EXIST_USER_ID)//404
         );
         if(!userEntity.getRole().toString().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }else if(!passwordEncoder.matches(dto.getUpw(), userEntity.getUpw())){
-            throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);
+            throw new RestApiException(AuthErrorCode.INVALID_PASSWORD);//404
         }
         MyPrincipal mp = new MyPrincipal();
         mp.setIuser(userEntity.getIuser());
@@ -104,11 +107,11 @@ public class AdminService{
         return AdminSigninVo.builder().result(Const.SUCCESS).accessToken(at).iuser(userEntity.getIuser()).checkShop(2).build();
     }
     //Mybatis 1.매장 관리 리스트
-    public List<ShopVo> shopList1(String search){
+    public List<ShopVo> shopList1(ShopDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.shopList(search);
+        return mapper.shopList(dto);
     }
     //JPA 1.매장 관리 리스트
 //    @Transactional
@@ -122,27 +125,27 @@ public class AdminService{
 //    }
     //JPA 2.가게 승인 여부 변경
     @Transactional
-    public ResVo confirmShop2(ConfirmDto dto){
+    public ResVo confirmShop2(ConfirmsDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
         if(dto.isShop()){
             Optional<ShopEntity> optional= shopRepository.findById((long)dto.getIshop());
-            ShopEntity entity= optional.orElseThrow(()->new RestApiException(AuthErrorCode.VALID_SHOP));
+            ShopEntity entity= optional.orElseThrow(()->new RestApiException(AuthErrorCode.VALID_SHOP));//404
             entity.setConfirm(dto.getConfirm());
         }else{
             Optional<ButcherEntity> optional= butcherRepository.findById((long)dto.getIshop());
-            ButcherEntity entity= optional.orElseThrow(()->new RestApiException(AuthErrorCode.VALID_SHOP));
+            ButcherEntity entity= optional.orElseThrow(()->new RestApiException(AuthErrorCode.VALID_SHOP));//404
             entity.setConfirm(dto.getConfirm());
         }
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 3.신고 글 리스트
-    public List<ReportedVo> reportList1(int check){
+    public List<ReportedVo> reportList1(ReportDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.reportList(new ReportDto(check));
+        return mapper.reportList(dto);
     }
     //JPA 3.신고 글 리스트
 //    @Transactional
@@ -161,45 +164,53 @@ public class AdminService{
             case 0:
                 Optional<CommunityEntity> optional0= communityRepository.findById((long)dto.getPk());
                 CommunityEntity entity0= optional0.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity0.setCount(3);
+                if(entity0.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity0.setCount(3);}
                 break;
             case 1:
                 Optional<CommunityCommentEntity> optional1= communityCommentRepository.findById((long)dto.getPk());
                 CommunityCommentEntity entity1= optional1.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity1.setCount(3);
+                if(entity1.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity1.setCount(3);}
                 break;
             case 2:
                 Optional<ShopReviewEntity> optional2= shopReviewRepository.findById((long)dto.getPk());
                 ShopReviewEntity entity2= optional2.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity2.setCount(3);
+                if(entity2.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity2.setCount(3);}
                 break;
             case 3:
                 Optional<ButcherReviewEntity> optional3= butcherReviewRepository.findById((long)dto.getPk());
                 ButcherReviewEntity entity3= optional3.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity3.setCount(3);
+                if(entity3.getCount()==3){
+                    throw new RestApiException(AdminErrorCode.ALREADY_BLINDED);
+                } else{entity3.setCount(3);}
                 break;
         }
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 5.게시물 신고 취소
-    public ResVo cancelReport1(CancelReportDto dto){
+    /*public ResVo cancelReport1(CancelReportDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
         DelCount del= new DelCount();
         del.setCheck(dto.getCheck());
         del.setPk(dto.getPk());
         mapper.delCount(del);
         return new ResVo(mapper.cancelReport(dto));
-    }
+    }*/
     //JPA 5.게시물 신고 취소
     @Transactional
     public ResVo cancelReport2(CancelReportDto dto){
@@ -207,30 +218,38 @@ public class AdminService{
             case 0:
                 Optional<CommunityEntity> optional0= communityRepository.findById((long)dto.getPk());
                 CommunityEntity entity0= optional0.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity0.setCount(0);
+                if(entity0.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity0.setCount(0);}
                 break;
             case 1:
                 Optional<CommunityCommentEntity> optional1= communityCommentRepository.findById((long)dto.getPk());
                 CommunityCommentEntity entity1= optional1.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity1.setCount(0);
+                if(entity1.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity1.setCount(0);}
                 break;
             case 2:
                 Optional<ShopReviewEntity> optional2= shopReviewRepository.findById((long)dto.getPk());
                 ShopReviewEntity entity2= optional2.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity2.setCount(0);
+                if(entity2.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity2.setCount(0);}
                 break;
             case 3:
                 Optional<ButcherReviewEntity> optional3= butcherReviewRepository.findById((long)dto.getPk());
                 ButcherReviewEntity entity3= optional3.orElseThrow(
-                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)
+                        ()->new RestApiException(AuthErrorCode.NOT_COMMUNITY_CHECK)//404
                 );
-                entity3.setCount(0);
+                if(entity3.getCount()==0){
+                    throw new RestApiException(AdminErrorCode.NO_REPORTED);
+                } else{entity3.setCount(0);}
                 break;
         }
         DelCount del= new DelCount();
@@ -240,11 +259,13 @@ public class AdminService{
         return new ResVo(Const.SUCCESS);
     }
     //Mybatis 6.사용자(USER,OWNER)블랙 리스트(정지)
-    public List<BlackVo> blackList1(){
+    public List<BlackVo> blackList1(BlackDto dto){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
-        return mapper.blackList(mapper.beforeBlackList());
+        List<Integer> list= mapper.beforeBlackList();
+        dto.setList(list);
+        return !list.isEmpty()?mapper.blackList(dto):new ArrayList<>();
     }
     //JPA 6.사용자(USER,OWNER)블랙 리스트(정지)
 //    @Transactional
@@ -260,10 +281,10 @@ public class AdminService{
     @Transactional
     public ResVo suspendAccount2(int iuser){
         if(!authenticationFacade.getLoginUserRole().equals("ADMIN")){
-            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);
+            throw new RestApiException(CommonErrorCode.UNAUTHORIZED);//401
         }
         Optional<UserEntity> optional= userRepository.findById((long)iuser);
-        UserEntity entity= optional.orElseThrow(()->new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+        UserEntity entity= optional.orElseThrow(()->new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));//404
         entity.setCheck(entity.getCheck()==1?0:1);
         return new ResVo(entity.getCheck());
     }

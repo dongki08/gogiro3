@@ -31,7 +31,7 @@ public class UserEntity extends BaseEntity {
     @Column(length = 10)
     private String name;
 
-    @Column(length = 10)
+    @Column(length = 20)
     private String nickname;
 
     @Column(length = 20)
