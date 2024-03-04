@@ -28,4 +28,5 @@ public class OwnerManagementVo {
     private String number;
     private List<Long> facilities = new ArrayList<>();
 
+
 }
