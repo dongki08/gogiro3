@@ -101,6 +101,7 @@ public class ShopService {
         for (ShopReviewDetail review : reviewList) {
 
             ireviewList.add(review.getIreview());
+            review.setExist(review.getComment() != null ? 1 : 0);
             reviewDetailMap.put(review.getIreview(), review);
         }
         List<ShopReviewPicVo> reviewPicList = mapper.selReviewPicDetail(ishop);
