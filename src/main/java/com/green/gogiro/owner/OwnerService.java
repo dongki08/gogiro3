@@ -361,6 +361,11 @@ public class OwnerService {
             } else {
                 shopEntity.setLocation(dto.getLocation());
             }
+            if(dto.getOpen().isEmpty()){
+                shopEntity.setOpen(shopEntity.getOpen());
+            } else {
+                shopEntity.setOpen(dto.getOpen());
+            }
             if (dto.getX().isEmpty()) {
                 shopEntity.setX(shopEntity.getX());
             } else {
