@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.green.gogiro.common.Const.*;
@@ -351,27 +352,27 @@ public class OwnerService {
                 throw new RestApiException(SIZE_PHOTO);
             }
             ShopEntity shopEntity = shopRepository.getReferenceById(ishop);
-            if (dto.getName().isEmpty()) {
+            if (dto.getName().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getName())) {
                 shopEntity.setName(shopEntity.getName());
             } else {
                 shopEntity.setName(dto.getName());
             }
-            if (dto.getLocation().isEmpty()) {
+            if (dto.getLocation().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getLocation())) {
                 shopEntity.setLocation(shopEntity.getLocation());
             } else {
                 shopEntity.setLocation(dto.getLocation());
             }
-            if(dto.getOpen().isEmpty()){
+            if(dto.getOpen().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getOpen())){
                 shopEntity.setOpen(shopEntity.getOpen());
             } else {
                 shopEntity.setOpen(dto.getOpen());
             }
-            if (dto.getX().isEmpty()) {
+            if (dto.getX().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getX())) {
                 shopEntity.setX(shopEntity.getX());
             } else {
                 shopEntity.setX(dto.getX());
             }
-            if (dto.getY().isEmpty()) {
+            if (dto.getY().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getY())) {
                 shopEntity.setY(shopEntity.getY());
             } else {
                 shopEntity.setY(dto.getY());
@@ -435,22 +436,22 @@ public class OwnerService {
                 throw new RestApiException(SIZE_PHOTO);
             }
             ButcherEntity butcherEntity = butcherRepository.getReferenceById(ishop);
-            if (dto.getName().isEmpty()) {
+            if (dto.getName().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getName())) {
                 butcherEntity.setName(butcherEntity.getName());
             } else {
                 butcherEntity.setName(dto.getName());
             }
-            if (dto.getLocation().isEmpty()) {
+            if (dto.getLocation().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getLocation())) {
                 butcherEntity.setLocation(butcherEntity.getLocation());
             } else {
                 butcherEntity.setLocation(dto.getLocation());
             }
-            if (dto.getX().isEmpty()) {
+            if (dto.getX().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getX())) {
                 butcherEntity.setX(butcherEntity.getX());
             } else {
                 butcherEntity.setX(dto.getX());
             }
-            if (dto.getY().isEmpty()) {
+            if (dto.getY().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getY())) {
                 butcherEntity.setY(butcherEntity.getY());
             } else {
                 butcherEntity.setY(dto.getY());
