@@ -104,7 +104,7 @@ public class OwnerController {
     @PutMapping("/review")
     @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리<br>" +
             "--요청데이터<br>" +
-            "ireview : 댓글pk<br>" +
+            "ireview : 리뷰pk<br>" +
             "checkshop : 0번 고기집, 1번 정육점<br>" +
             "comment : 사장님리뷰댓글<br>" +
             "--응답데이터<br>" +
