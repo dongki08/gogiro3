@@ -53,6 +53,7 @@ public class SecurityConfiguration {
                                         , "/meat/**"
                                         , "/butcher"
                                         , "/butcher/**"
+                                        , "/"
                                         , "/my"
                                         , "/my/**"
                                         , "/community"
