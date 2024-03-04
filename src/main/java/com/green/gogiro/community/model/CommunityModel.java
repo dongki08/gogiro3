@@ -8,4 +8,5 @@ public class CommunityModel {
     private int iuser;
     private String title;
     private String contents;
+    private int count;
 }

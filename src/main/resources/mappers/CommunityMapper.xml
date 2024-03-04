@@ -86,25 +86,34 @@
     </select>
 
     <select id="selCommunityComments">
-        SELECT b.iboard, b.icomment , b.iuser AS writerPk,c.nickname AS writerName, b.`contents` as comment, b.created_at as createdAt, b.count
+        SELECT b.iboard, b.icomment, b.iuser AS writerPk,c.nickname AS writerName, b.`contents` AS COMMENT, b.created_at AS createdAt, b.count
+        ,if(p.iuser IS NULL,0,1) AS isCommentReport
         FROM t_community a
         JOIN t_community_comment b
         ON a.iboard = b.iboard
-        JOIN t_user c
+        left JOIN t_user c
         ON b.iuser = c.iuser
+        LEFT JOIN (SELECT e.iuser, e.icomment FROM t_comment_count AS e JOIN t_community_comment m ON e.icomment = m.icomment WHERE e.iuser = #{iuser}) AS p
+        ON b.icomment = p.icomment
+        AND p.iuser = #{iuser}
         WHERE a.iboard = #{iboard}
     </select>
 
     <select id="selDetailCommunity">
-        SELECT a.iboard, a.iuser, b.nickname AS `name`,b.pic as writerPic, a.title,(SELECT count(iboard) FROM t_community_fav WHERE iboard = #{iboard}) AS totalFav ,if(c.iuser IS null,0,1) isFav,a.contents, a.created_at AS createdAt
+        SELECT a.iboard, a.iuser, b.nickname AS `name`,b.pic as writerPic, a.title,(
+        SELECT count(iboard) FROM t_community_fav WHERE iboard = #{iboard}
+        ) AS totalFav ,if(c.iuser IS null,0,1) isFav, if(d.iuser IS null,0,1) isReport,a.contents, a.created_at AS createdAt, a.`count`
         FROM t_community a
         JOIN t_user b
         ON a.iuser = b.iuser
         left JOIN t_community_fav c
         ON a.iboard = c.iboard
         AND c.iuser = #{iuser}
+        left JOIN t_community_count d
+        ON a.iboard = d.iboard
         WHERE a.iboard = #{iboard}
     </select>
+
 
     <!-- entity용 -->
     <select id="entityCommunity">

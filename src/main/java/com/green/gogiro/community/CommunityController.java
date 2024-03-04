@@ -109,13 +109,17 @@ public class CommunityController {
             "title : 제목<br>" +
             "totalFav : 총 좋아요 수<br>" +
             "isFav : 좋아요 여부 1(좋아요), 0(좋아요취소)<br>" +
+            "isReport : 신고 여부 1(신고)<br>" +
+            "isCommentReport : 댓글 신고 여부 1(신고)<br>" +
             "contents : 내용<br>" +
             "createdAt : 작성일<br>" +
+            "count : 신고횟수<br>" +
             "pics : 사진리스트<br>" +
             "be : 이전글<br>" +
             "af : 다음글<br>" +
             "comments : 댓글리스트<br>" +
-            "게시글이 없을때 : 등록된 글을 찾을 수 없습니다.")
+            "게시글이 없을때 : 등록된 글을 찾을 수 없습니다.<br>" +
+            "신고 3회 이상으로 블러처리 되었을 때 : 존재하지 않는 게시판입니다.")
     public CommunityDetailVo getDetailCommunity(@PathVariable int iboard) {
         return service.getDetailCommunity(iboard);
     }

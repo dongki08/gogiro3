@@ -239,17 +239,19 @@ public class CommunityService {
         } catch(Exception e) {
             iuser = 0;
         }
-
         CommunityModel entity = mapper.entityCommunity(iboard);
         if (entity == null) {
             throw new RestApiException(NOT_COMMUNITY_CHECK);
+        }
+        if(entity.getCount() >= 3) {
+            throw new RestApiException(VALID_BOARD);
         }
         CommunitySelBeAfDto bDto = mapper.beforeTitle(iboard);
         CommunitySelBeAfDto aDto = mapper.afterTitle(iboard);
         CommunityDetailVo vo = mapper.selDetailCommunity(iboard,(int)iuser);
         List<CommunityBySelPicsDto> pics = mapper.selByCommunityPics(iboard);
         vo.setPics(pics);
-        List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard);
+        List<CommunityCommentVo> comments = mapper.selCommunityComments(iboard, iuser);
         vo.setComments(comments);
         vo.setBe(bDto);
         vo.setAf(aDto);

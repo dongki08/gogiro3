@@ -36,7 +36,7 @@ public interface CommunityMapper {
 
     List<CommunityPicsVo> selPicCommunity(List<Integer> iboard);
 
-    List<CommunityCommentVo> selCommunityComments(int iboard);
+    List<CommunityCommentVo> selCommunityComments(int iboard, long iuser);
 
     CommunityDetailVo selDetailCommunity(int iboard, int iuser);
 

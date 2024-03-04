@@ -22,10 +22,14 @@ public class CommunityDetailVo {
     private int totalFav;
     @Schema(title = "나의 좋아요 여부")
     private int isFav;
+    @Schema(title = "나의 신고 여부")
+    private int isReport;
     @Schema(title = "내용")
     private String contents;
     @Schema(title = "작성일")
     private String createdAt;
+    @Schema(title = "신고 횟수")
+    private int count;
     @Schema(title = "사진")
     private List<CommunityBySelPicsDto> pics = new ArrayList<>();
     @Schema(title = "이전글")

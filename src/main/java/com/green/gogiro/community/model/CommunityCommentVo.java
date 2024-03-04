@@ -11,6 +11,7 @@ public class CommunityCommentVo {
     private int icomment;
     private int writerPk;
     private int count;
+    private int isCommentReport;
     private String writerName;
     private String comment;
     private String createdAt;
