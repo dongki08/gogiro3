@@ -34,6 +34,7 @@ public class ShopDetailVo {
     private List<ShopDetailMenu> menus = new ArrayList<>();
     @Schema(title = "식당 리뷰")
     private List<ShopReviewDetail> reviews = new ArrayList<>();
+
 }
 
 
