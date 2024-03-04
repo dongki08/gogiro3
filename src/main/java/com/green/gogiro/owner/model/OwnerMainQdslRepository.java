@@ -8,6 +8,6 @@ import java.util.List;
 public interface OwnerMainQdslRepository {
   OwnerManagementVo selDetailShop(long ishop, int checkShop);
 
-  List<FacilitiesVo> selFacilityByShop(long ishop);
+  List<Long> selFacilityByShop(long ishop);
 
 }

@@ -97,7 +97,7 @@
     </select>
 
     <select id="selReviewDetail">
-        SELECT a.ishop,c.iuser,c.pic as writerPic ,a.ireview,c.nickname,a.star,a.review
+        SELECT a.ishop,c.iuser,c.pic as writerPic ,a.ireview,c.nickname,a.star,a.review, a.comment
         FROM t_shop_review a
         JOIN t_user c
         ON a.iuser = c.iuser

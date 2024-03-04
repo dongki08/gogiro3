@@ -13,37 +13,39 @@
         SELECT
             0 AS checkShop,
             a.ishop,
-            a.name,
-            a.x, a.y,
-            a.tel,
-            a.confirm,
-            b.pic,
-            a.created_at AS createdAt
+            c.name,
+            a.name AS shopName,
+            a.location,
+            a.x, a.y, a.tel, a.confirm,
+            b.pic, a.created_at AS createdAt
         FROM t_shop a
-        JOIN t_shop_pic b
-        ON a.ishop=b.ishop
+        LEFT JOIN t_shop_pic b
+        ON a.ishop= b.ishop
+        LEFT JOIN t_user c
+        ON a.iuser=c.iuser
         <if test="search!=null">
             WHERE a.name LIKE '%${search}%'
         </if>
         GROUP BY a.ishop
-        UNION
+        union
         SELECT
             1 AS checkShop,
-            a.ibutcher AS ishop,
-            a.name,
-            a.x, a.y,
-            a.tel,
-            a.confirm,
-            b.pic,
-            a.created_at AS createdAt
+            a.ibutcher,
+            c.name,
+            a.name AS shopName,
+            a.location,
+            a.x, a.y, a.tel, a.confirm,
+            b.pic, a.created_at AS createdAt
         FROM t_butcher_shop a
-        JOIN t_butcher_pic b
-        ON a.ibutcher=b.ibutcher
+        LEFT JOIN t_butcher_pic b
+        ON a.ibutcher= b.ibutcher
+        LEFT JOIN t_user c
+        ON a.iuser= c.iuser
         <if test="search!=null">
             WHERE a.name LIKE '%${search}%'
         </if>
         GROUP BY a.ibutcher
-        ORDER BY createdAt DESC
+        ORDER BY createdAt
         LIMIT #{startIdx},#{rowCount}
     </select>
     <update id="confirmShop">

@@ -1,7 +1,7 @@
 package com.green.gogiro.admin.model;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+
 
 @Data
 public class ReportDto {
@@ -10,7 +10,7 @@ public class ReportDto {
     private String column2;
     private int page;
     private int startIdx;
-    private int rowCount;
+    private int rowCount=10;
     public void setPage(int page){
         this.startIdx=(page-1)*this.rowCount;
     }

@@ -408,9 +408,9 @@ public class OwnerService {
                 mVo.setPics(pDto.getPics());
                 mapper.insShopPic(pDto);
             }
-            if (!dto.getFacility().isEmpty()) {
+            if (!dto.getFacilities().isEmpty()) {
                 shopMapper.delFacilities(ishop);
-                shopMapper.insFacilities(ishop, dto.getFacility());
+                shopMapper.insFacilities(ishop, dto.getFacilities());
             }
             shopRepository.save(shopEntity);
             return mVo;

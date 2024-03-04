@@ -33,7 +33,7 @@ public class OwnerController {
             "<br>pic: 가게 사진(일단 회원가입할 때 1장만 넣게 하죠? 리스트나 상세 정보에서 나타날 수 있게)<br>--응답 데이터" +
             "<br>(성공)result: 가게 주인pk(사용자랑 같은 테이블이기 때문에 다른 주소에서 쓸 때도 유저pk명(iuser)과 동일할 수 있습니다)" +
             "<br>(실패)에러는 나중에 로직 다 짜고 나서 해도 괜찮을까요? ㅜㅜ")
-    public ResVo ownerSignup(@RequestPart MultipartFile pic, @Valid @RequestPart OwnerSignupDto dto) {
+    public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart @Valid OwnerSignupDto dto) {
         return service.ownerSignup(pic, dto);
     }
 
@@ -88,14 +88,15 @@ public class OwnerController {
 
 
     @PutMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터(안바꾸고싶으면 null값넣으면 기존 정보 들어감(imeat값과 deposit(에약금)은 다시 꼭 보내줘야함))<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 0보내면됨)<br>facility:편의시설pk(정육점은 안보내도됨)(수정 안할꺼면 빈배열 할거면 기존꺼 + 추가할pk 보내줘야함)" +
+    @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터(안바꾸고싶으면 null값넣으면 기존 정보 들어감(imeat값과 deposit(에약금)은 다시 꼭 보내줘야함))<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 0보내면됨)<br>facilities:편의시설pk(정육점은 안보내도됨)(수정 안할꺼면 빈배열 할거면 기존꺼 + 추가할pk 보내줘야함)" +
     "--응답데이터<br>checkShop: 0:고기,1:정육<br>ishop:가게pk,pics:수정한 사진 이름(배열)")
     public OwnerManagementModifyVo updModify(@RequestPart(required = false) List<MultipartFile> pics, @RequestPart OwnerManagementModifyDto dto) {
         return service.updModify(pics, dto);
     }
 
     @GetMapping("/management")
-    @Operation(summary = "매장 정보", description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int")
+    @Operation(summary = "매장 정보", description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int<br>" +
+    "facilities(리스트 배열):편의시설pk")
     public OwnerManagementVo getShop() {
         return service.getShop();
     }

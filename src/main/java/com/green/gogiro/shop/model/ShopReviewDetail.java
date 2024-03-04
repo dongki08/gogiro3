@@ -29,4 +29,8 @@ public class ShopReviewDetail {
     private String review;
     @Schema(title = "리뷰 사진")
     private List<String> pic = new ArrayList<>();
+    @Schema(title = "리뷰 코멘트")
+    private String comment;
+    @Schema(title = "리뷰 존재 여부")
+    private Integer exist;
 }

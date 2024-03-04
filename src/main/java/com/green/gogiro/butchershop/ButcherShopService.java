@@ -90,6 +90,7 @@ public class ButcherShopService {
         Map<Integer, ReviewDetail> map= new HashMap<>();
         for(ReviewDetail review: reviews) {
             ireview.add(review.getIreview());
+            review.setExist(review.getComment() != null ? 1 : 0);
             map.put(review.getIreview(), review);
         }
         List<ReviewPicVo> pics = mapper.selReviewPicDetail(ibutcher);
