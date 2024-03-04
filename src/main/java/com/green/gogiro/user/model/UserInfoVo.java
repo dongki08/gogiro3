@@ -24,4 +24,6 @@ public class UserInfoVo {
     private String pic;
     @Schema(title = "전화번호",defaultValue = " ")
     private String tel;
+    @Schema(title = "가게 구분:0(고기),1(정육),2(사용자,어드민)")
+    private int checkShop;
 }

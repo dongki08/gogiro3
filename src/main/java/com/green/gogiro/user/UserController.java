@@ -87,7 +87,7 @@ public class UserController {
     @Operation(summary = "예약 및 픽업 리스트", description = "<h2>회원이 등록한 예약 및 픽업 정보를 리스트로 처리</h2>" +
             "<h3>--요청데이터<br>page: 페이지<br>" +
             "--응답데이터<br>List<br>ReservationVo의 데이터들<br>checkShop: 가게 구분(0: 식당, 1:정육점)<br>ireser: 예약pk<br>ishop: 식당pk<br>name: 가게이름<br>" +
-            "date: 예약날짜<br>request: 요청사항,<br>confirm: 예약 및 픽업 승인(0:대기, 1: 취소 2: 확정)<br>headCount: 인원 수<br>pic: 가게 사진<br>" +
+            "date: 예약날짜<br>request: 요청사항,<br>confirm: 예약 및 픽업 승인(0:대기(결제 완료), 1: 취소 2: 확정)<br>headCount: 인원 수<br>pic: 가게 사진<br>" +
             "isbook: 북마크 여부(0: 전, 1: 후)<br>count: 예약 총 갯수<br>createdAt: 예약 등록일")
     public List<ReservationVo> getReservation(UserMyPageDto dto) {
         return service.getReservation(dto);
