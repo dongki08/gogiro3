@@ -136,6 +136,7 @@ public class UserService {
         MyPrincipal myPrincipal = MyPrincipal.builder()
                 .iuser(userEntity.getIuser())
                 .role(userEntity.getRole().toString())
+                .checkShop(userEntity.getCheckShop())
                 .build();
         String at = jwtTokenProvider.generateAccessToken(myPrincipal);
         String rt = jwtTokenProvider.generateRefreshToken(myPrincipal);

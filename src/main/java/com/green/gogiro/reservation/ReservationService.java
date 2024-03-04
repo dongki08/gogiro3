@@ -189,7 +189,7 @@ public class ReservationService {
             LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
             LocalDate dayDate2 = reservation.getDate().toLocalDate();
             Period diff= Period.between(dayDate1, dayDate2);
-            if(reservation.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
+            if(reservation.getShopEntity().getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
                 throw new RestApiException(CANT_CANCEL);
             } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
                 throw new RestApiException(CANT_UPDATE);
@@ -204,7 +204,7 @@ public class ReservationService {
             LocalDate dayDate1 = LocalDateTime.now().toLocalDate();
             LocalDate dayDate2 = pickup.getDate().toLocalDate();
             Period diff= Period.between(dayDate1, dayDate2);
-            if(pickup.getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
+            if(pickup.getButcherEntity().getUserEntity().getIuser()!=authenticationFacade.getLoginUserPk()){
                 throw new RestApiException(CANT_CANCEL);
             } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
                 throw new RestApiException(CANT_UPDATE);

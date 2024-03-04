@@ -26,12 +26,18 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                                         "/api/user/signin",
+                                        "/api/user",
                                         "/api/status"
                                         , "/api/user/signup"
                                         , "/api/user/signup/**"
                                         , "/api/owner/signup"
-                                        , "/api/owner/signin"
+                                        , "/api/owner/signup/**"
+                                        , "/api/owner/signin/**"
                                         , "/api/admin/signin"
+                                        , "/api/admin/signup"
+                                        , "/api/admin/signup/**"
+                                        , "/api/status"
+                                        , "/api/status/**"
                                         , "/login"
                                         , "/join"
                                         , "/join/**"
@@ -43,6 +49,7 @@ public class SecurityConfiguration {
                                         , "/asset-manifest.json"
                                         , "/pic"
                                         , "/pic/**"
+                                        , "/success**"
                                         , "/main"
                                         , "/assets"
                                         , "/assets/**"
@@ -55,6 +62,7 @@ public class SecurityConfiguration {
                                         , "/butcher/**"
                                         , "/"
                                         , "/my"
+                                        , "/admin/signup"
                                         , "/my/**"
                                         , "/community"
                                         , "/community/list"
@@ -78,7 +86,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/owner/menu").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.DELETE, "/api/owner/menu").hasAnyRole("OWNER")
                                 .requestMatchers(HttpMethod.PATCH, "/api/reservation").hasAnyRole("OWNER")
-                        .requestMatchers(HttpMethod.POST,"/api/community/comment", "/api/community/report", "api/community/comment/report").hasAnyRole("USER", "OWNER")
+                                .requestMatchers(HttpMethod.POST, "/api/community/comment", "/api/community/report", "api/community/comment/report").hasAnyRole("USER", "OWNER")
                                 .requestMatchers(HttpMethod.GET, "/api/butcher-shop", "/api/butcher-shop/**"
                                         , "/api/shop", "/api/shop/**"
                                         , "/api/community"

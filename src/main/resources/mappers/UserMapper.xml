@@ -56,7 +56,8 @@
         gender,
         address,
         pic,
-        tel
+        tel,
+        check_shop as checkShop
         FROM t_user
         where iuser= #{iuser}
     </select>
