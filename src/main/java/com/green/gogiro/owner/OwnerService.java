@@ -447,6 +447,16 @@ public class OwnerService {
             } else {
                 butcherEntity.setName(dto.getName());
             }
+            if(dto.getTel().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getTel())) {
+                butcherEntity.setTel(butcherEntity.getTel());
+            } else {
+                butcherEntity.setTel(dto.getTel());
+            }
+            if(dto.getOpen().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getOpen())){
+                butcherEntity.setOpen(butcherEntity.getOpen());
+            } else {
+                butcherEntity.setOpen(dto.getOpen());
+            }
             if (dto.getLocation().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getLocation())) {
                 butcherEntity.setLocation(butcherEntity.getLocation());
             } else {
