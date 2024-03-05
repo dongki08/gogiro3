@@ -96,7 +96,7 @@ public class ReservationController {
             "<br>pics(List-String):사진들의 파일명<br>(실패)<br>(400)<br>INVALID_PARAMETER<br>" +
             "<br>(400)<br>SIZE_PHOTO(사진이 5장 초과 입니다)<br>MUST_PHOTO(사진을 1장 이상 넣어 주세요)<br>INVALID_RESERVATION(존재하지 않는 예약입니다)" +
             "<br>(500)<br>INTERNAL_SERVER_ERROR")
-    public ReviewPicsInsVo postReview(@Valid @RequestPart(required = false) List<MultipartFile> pics, @Valid @RequestPart ReviewDto dto){
+    public ReviewPicsInsVo postReview(@Valid @RequestPart List<MultipartFile> pics, @Valid @RequestPart ReviewDto dto){
         if(pics == null || pics.isEmpty()){
             throw new RestApiException(AuthErrorCode.MUST_PHOTO);
         } if(pics.size() > Const.PIC_MAX){
