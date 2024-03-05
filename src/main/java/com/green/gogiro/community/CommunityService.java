@@ -353,7 +353,7 @@ public class CommunityService {
                     atomic.set(SUCCESS);
                     CommunityFavEntity saveFavEntity = new CommunityFavEntity();
                     saveFavEntity.setCommunityFavIds(ids);
-                    UserEntity userEntity = userRepository.getReferenceById((long)authenticationFacade.getLoginUserPk());
+                    UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
                     CommunityEntity communityEntity = communityRepository.getReferenceById((long)dto.getIboard());
                     saveFavEntity.setUserEntity(userEntity);
                     saveFavEntity.setCommunityEntity(communityEntity);

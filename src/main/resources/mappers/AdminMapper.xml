@@ -107,6 +107,11 @@
             iuser
         FROM t_but_review
         WHERE COUNT>=3
+        UNION
+        SELECT
+        iuser
+        FROM t_user
+        WHERE no_show_count>=2
     </select>
     <select id="blackList">
         SELECT
