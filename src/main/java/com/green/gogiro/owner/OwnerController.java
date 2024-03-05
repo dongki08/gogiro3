@@ -103,7 +103,7 @@ public class OwnerController {
     //매장 정보
     @GetMapping("/management")
     @Operation(summary = "매장 정보", description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int<br>" +
-    "facilities(리스트 배열):편의시설pk")
+    "number사업자번호: int<br>facilities(리스트 배열):편의시설pk")
     public OwnerManagementVo getShop() {
         return service.getShop();
     }
