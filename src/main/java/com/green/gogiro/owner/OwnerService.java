@@ -524,7 +524,7 @@ public class OwnerService {
                 savedName = myFileUtils.transferTo(pic, target);
                 shopMenuEntity.setPic(savedName);
             }
-            if (dto.getMenu().isEmpty()) {
+            if (dto.getMenu().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getMenu())) {
                 shopMenuEntity.setMenu(shopMenuEntity.getMenu());
             } else {
                 shopMenuEntity.setMenu(dto.getMenu());
@@ -551,12 +551,16 @@ public class OwnerService {
                 savedName = myFileUtils.transferTo(pic, target);
                 butcherMenuEntity.setPic(savedName);
             }
-            if (dto.getMenu() == null) {
+            if (dto.getMenu().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getMenu())) {
                 butcherMenuEntity.setMenu(butcherMenuEntity.getMenu());
+            } else {
+                butcherMenuEntity.setMenu(dto.getMenu());
             }
+
             if (dto.getPrice() == null) {
                 butcherMenuEntity.setPrice(butcherMenuEntity.getPrice());
-
+            } else {
+                butcherMenuEntity.setPrice(dto.getPrice());
             }
             butcherMenuRepository.save(butcherMenuEntity);
             return OwnerMenuUpdVo.builder()

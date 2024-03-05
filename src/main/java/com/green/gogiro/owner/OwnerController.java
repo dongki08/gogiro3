@@ -26,6 +26,7 @@ import java.util.List;
 public class OwnerController {
     private final OwnerService service;
 
+    //사장 회원 가입
     @PostMapping(value = "/signup", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "가게 주인 회원 가입", description = "<h2>가게 주인 회원 가입 처리</h2><br>--요구 데이터<br>id:아이디(최대 20자)<br>upw:비밀번호<br>checkpw:비밀번호 확인" +
             "<br>number: 사업자 등록 번호(사이트에서 쓸 일 없으면 db에 저장할 필요 없을 듯?)<br>name: 주인의 실명<br>shopName:가게 이름<br>x:경도" +
@@ -36,7 +37,7 @@ public class OwnerController {
     public ResVo ownerSignup(@RequestPart MultipartFile pic, @RequestPart @Valid OwnerSignupDto dto) {
         return service.ownerSignup(pic, dto);
     }
-
+    //식당 예약 및 픽업 주문 내역
     @GetMapping("/reservation")
     @Operation(summary = "식당 예약 및 픽업 주문 내역", description = "<h2>식당 예약 및 픽업 주문 내역보기 처리</h2><h3>--요청데이터<br>page:페이지(페이지당 5개씩)<br>--응답 데이터<br>" +
             "--OwnerNewReservationVo(예약 내역)(배열)<br>ireser: 예약pk<br>iuser: 예약자pk<br>name: 예약자이름<br>date: 예약일시<br>headCount: 인원수<br>request: 요청사항<br>confirm: 예약 상태" +
@@ -48,6 +49,7 @@ public class OwnerController {
         return service.getReservation(page);
     }
 
+    //고깃집 노쇼 내역
     @GetMapping("/noshow")
     @Operation(summary = "노쇼 내역",description = "<h2>노쇼 내역 보기 처리</h2><h3>--요청데이터<br>page:페이지(페이지당 10개씩)<br>--응답데이터<br>count:전체 노쇼 갯수<br>SelShopNoShowProcVo(노쇼 내역)(배열)<br>name: 예약자 이름<br>date: 예약일시<br>headCount: 인원수<br>" +
     "--노쇼내역이 없거나 정육점사장님이 불러오면 빈배열이 아니라 필드값이 전혀 안나오게 설정해둠")
@@ -55,7 +57,7 @@ public class OwnerController {
         return service.selNoShow(page);
     }
 
-
+    //가게 주인 로그인
     @PostMapping("/signin")
     @Operation(summary = "가게 주인 로그인", description = "<h2>가게 주인 로그인 처리</h2>" +
             "<h3>---요구 데이터<br>email: 아이디<br>upw: 비밀번호</h3>" +
@@ -64,6 +66,7 @@ public class OwnerController {
         return service.ownerSignin(res, dto);
     }
 
+    //메뉴 삭제
     @DeleteMapping("/menu")
     @Operation(summary = "메뉴 삭제",description = "<h2>메뉴 삭제 처리</h2>" +
     "<h3>--요청데이터<br>imenu:메뉴pk<br>--응답 데이터<br>result:1 = 성공")
@@ -71,6 +74,8 @@ public class OwnerController {
         return service.delMenu(imenu);
     }
 
+
+    //매장 리뷰 관리
     @GetMapping("/review")
     @Operation(summary = "매장 리뷰 관리", description = "<h2>매장 리뷰 관리 처리</h2>" +
             "<h3>--요구 데이터<br>페이지(sort는 신경 안쓰셔도 되요)<br>--응답 데이터<br>checkShop: 가게구분(0:고기,1:정육)<br>ireview:리뷰pk<br>ishop: 가게pk<br>iuser: 작성자 pk<br>star:별점<br>exist:사장님 댓글여부(0:댓글없음,1:댓글있음)comment:사장님 댓글<br>review: 리뷰내용<br>createdAt:작성 날짜<br>updatedAt:사장님 댓글 작성 날짜<br>pics: 리뷰 사진(배열)")
@@ -79,6 +84,7 @@ public class OwnerController {
     }
 
 
+    //고기집 or 정육점 가게 메뉴 보기
     @GetMapping("/menu")
     @Operation(summary = "고기집 or 정육점 가게 메뉴 보기", description = "<h2>메뉴 보기 처리</h2>")
     public List<OwnerMenuVo> getMenu() {
@@ -86,7 +92,7 @@ public class OwnerController {
     }
 
 
-
+    //매장 정보 관리(수정)
     @PutMapping(value = "/modify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "매장 정보 관리(수정)", description = "<h2>매장 정보 수정 처리</h2><h3>--요청데이터(안바꾸고싶으면 null값넣으면 기존 정보 들어감(imeat값과 deposit(에약금)은 다시 꼭 보내줘야함))<br>pics: 가게사진<br>imeat:고기종류(정육점은 0보내면 됨)<br>name상호명: String<br>location상세주소: String<br>ishopPics:삭제할 사진pk(배열)<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int(정육점은 0보내면됨)<br>facilities:편의시설pk(정육점은 안보내도됨)(수정 안할꺼면 빈배열 할거면 기존꺼 + 추가할pk 보내줘야함)" +
     "--응답데이터<br>checkShop: 0:고기,1:정육<br>ishop:가게pk,pics:수정한 사진 이름(배열)")
@@ -94,6 +100,7 @@ public class OwnerController {
         return service.updModify(pics, dto);
     }
 
+    //매장 정보
     @GetMapping("/management")
     @Operation(summary = "매장 정보", description = "<h2>매장 정보 보기 처리</h2><h3>--응답 데이터<br>pics: 가게사진<br>imeat:고기종류<br>name상호명: String<br>location상세주소: String<br>open매장오픈시간: String<br>tel매장전화번호: String<br>x매장주소(다음포스트)경도: String<br>y매장주소(다음포스트)위도: String<br>deposit예약금 : int<br>" +
     "facilities(리스트 배열):편의시설pk")
@@ -101,6 +108,7 @@ public class OwnerController {
         return service.getShop();
     }
 
+    //고객이 작성한 리뷰에 코멘트 달기
     @PutMapping("/review")
     @Operation(summary = "고객이 작성한 리뷰에 코멘트 달기", description = "고객이 작성한 리뷰에 코멘트 처리<br>" +
             "--요청데이터<br>" +
@@ -114,6 +122,7 @@ public class OwnerController {
     }
 
 
+    //대쉬 보드
     @GetMapping("/dashboard")
     @Operation(summary = "대쉬 보드",description = "<h2>대쉬 보드 보기 처리</h2>" + "<h3>순서대로 배열안에 순서대로 1,2,3,4주차--응답데이터bokkmarkCnt(List:Integer):북마크 통계<br>reviewCnt:리뷰 통계<br>reservationCnt: 예약 통계<br>starAvg:총 별점")
     public DashBoardVo selDashBoard(){
@@ -121,7 +130,7 @@ public class OwnerController {
     }
 
 
-
+    //정육점 or 고기집 메뉴 수정
     @PutMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "정육점 or 고기집 메뉴 수정",description = "<h3>정육점 or 고기집 메뉴 수정 처리</h3>" +
             "--요청데이터<br>" +
@@ -140,6 +149,8 @@ public class OwnerController {
         return service.updMenu(pic,dto);
     }
 
+
+    //정육점 or 고기집 메뉴 등록
     @PostMapping(value = "menu",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(summary = "정육점 or 고기집 메뉴 등록",description = "정육점 or 고기집 메뉴 등록 처리<br>" +
             "--요청데이터<br>" +
