@@ -20,6 +20,8 @@ public class OwnerReviewVo {
     private Long ireview;
     @Schema(title = "가게pk")
     private Long ishop;
+    @Schema(title = "작성자 사진")
+    private String writerPic;
     @Schema(title = "유저pk")
     private Long iuser;
     @Schema(title = "별점")
