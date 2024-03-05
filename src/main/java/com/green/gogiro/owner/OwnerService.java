@@ -585,6 +585,7 @@ public class OwnerService {
             shopEntity.setIshop(ishop);
             ShopMenuEntity entity = new ShopMenuEntity();
             entity.setShopEntity(shopEntity);
+            //고깃집 메뉴 사진 업로드
             if (pic != null) {
                 String target = "/shop/" + ishop + "/menu" + "/";
                 String savedName = myFileUtils.transferTo(pic, target);
@@ -605,6 +606,7 @@ public class OwnerService {
             butcherEntity.setIbutcher(ishop);
             ButcherMenuEntity entity = new ButcherMenuEntity();
             entity.setButcherEntity(butcherEntity);
+            //정육점 메뉴 사진 업로드
             if (pic != null) {
                 String target = "/butcher/" + ishop + "/menu" + "/";
                 String savedName = myFileUtils.transferTo(pic, target);

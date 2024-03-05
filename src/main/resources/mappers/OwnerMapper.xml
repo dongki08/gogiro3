@@ -18,6 +18,7 @@
         JOIN t_reservation b
         ON a.iuser= b.iuser
         WHERE b.ishop = #{ishop}
+        AND b.confirm = 3
         LIMIT #{startIdx}, #{rowCount}
     </select>
 
@@ -27,6 +28,7 @@
         FROM t_user a
         JOIN t_reservation b ON a.iuser= b.iuser
         WHERE b.ishop = #{ishop}
+        AND b.confirm = 3
     </select>
 
     <select id="selShopReservation">
