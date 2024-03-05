@@ -35,4 +35,7 @@ public class CommunitySelVo {
 
     @Schema(title = "총 좋아요 수")
     private int totalFav;
+
+    @Schema(title = "공지")
+    private int announce;
 }
