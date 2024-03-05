@@ -38,6 +38,7 @@ public class ReviewQdslRepositoryImpl implements ReviewQdslRepository {
                     .ireview(item.getIreview())
                     .review(item.getReview())
                     .iuser(item.getUserEntity().getIuser())
+                    .writerPic(item.getUserEntity().getPic())
                     .pics(item.getShopReviewPicEntityList().stream().map(pic -> pic.getPic()).collect(Collectors.toList()))
                     .createdAt(item.getCreatedAt().toString())
                     .ishop(item.getIreview())
