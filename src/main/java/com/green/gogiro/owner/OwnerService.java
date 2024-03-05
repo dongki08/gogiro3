@@ -147,7 +147,6 @@ public class OwnerService {
             mp.setRole(userEntity.getRole().toString());
             mp.setCheckShop(userEntity.getCheckShop());
             mp.setIshop(entity.getIshop());
-            mp.setCheckShop(userEntity.getCheckShop());
             shopName = entity.getName();
 
         }
