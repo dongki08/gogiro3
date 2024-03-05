@@ -32,6 +32,12 @@ public interface OwnerMapper {
 
     int selNoShowCount(long ishop);
 
+    int totalBookmark(DashBoardDto dto);
+
+    int totalReview(DashBoardDto dto);
+
+    int totalReservation(DashBoardDto dto);
+
     List<Integer> bookmarkCount(DashBoardDto dto);
 
     List<Integer> reviewCount(DashBoardDto dto);

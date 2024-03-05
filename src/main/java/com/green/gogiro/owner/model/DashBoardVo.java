@@ -12,8 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DashBoardVo {
+    private int totalBookmark;
+    private int totalReservation;
+    private int totalReview;
+    private float starAvg;
     List<Integer> bookmarkCnt;
     List<Integer> reviewCnt;
     List<Integer> reservationCnt;
-    private float starAvg;
 }

@@ -185,6 +185,9 @@ public class OwnerService {
         dto.setCheckShop(authenticationFacade.getLoginOwnerCheckShop());
         dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
         return DashBoardVo.builder()
+                .totalBookmark(mapper.totalBookmark(dto))
+                .totalReview(mapper.totalReview(dto))
+                .totalReservation(mapper.totalReservation(dto))
                 .bookmarkCnt(mapper.bookmarkCount(dto))
                 .reviewCnt(mapper.reviewCount(dto))
                 .reservationCnt(mapper.reservationCount(dto))

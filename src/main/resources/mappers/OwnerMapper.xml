@@ -288,6 +288,24 @@
         AND i${column}= #{ishop}
     </select>
 
+    <select id="totalBookmark">
+        SELECT IFNULL(COUNT(a.iuser),0) AS total
+        FROM t_${table}_bookmark a
+        WHERE i${column} = #{ishop}
+    </select>
+
+    <select id="totalReview">
+        SELECT IFNULL(COUNT(a.ireview),0)
+        FROM t_${table}_review a
+        WHERE i${column} = #{ishop}
+    </select>
+
+    <select id="totalReservation">
+        SELECT COUNT(*)
+        FROM t_${table2} a
+        WHERE i${column} = #{ishop}
+    </select>
+
     <select id="starAvg">
         SELECT
         IFNULL(AVG(star),0) AS starAvg
