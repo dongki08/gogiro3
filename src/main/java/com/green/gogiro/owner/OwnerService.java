@@ -357,6 +357,12 @@ public class OwnerService {
             } else {
                 shopEntity.setName(dto.getName());
             }
+
+            if(dto.getTel().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getTel())) {
+                shopEntity.setTel(shopEntity.getTel());
+            } else {
+                shopEntity.setTel(dto.getTel());
+            }
             if (dto.getLocation().isEmpty() || Pattern.matches(REGEXP_PATTERN_SPACE_CHAR,dto.getLocation())) {
                 shopEntity.setLocation(shopEntity.getLocation());
             } else {
