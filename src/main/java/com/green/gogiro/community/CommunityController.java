@@ -89,7 +89,8 @@ public class CommunityController {
             "createdAt : 작성일<br>" +
             "pics : 사진리스트<br>" +
             "boardAllCount : 게시글 총 갯수<br>" +
-            "totalfav : 좋아요 총 갯수" +
+            "totalfav : 좋아요 총 갯수<br>" +
+            "announce : 공지 여부<br>" +
             "신고횟수 3회이상 자동블러처리<br>" +
             "filter 최신순(0), 좋아요 순(1)외에 입력 시 : 잘못된 페이지가 입력되었습니다.")
     public List<CommunitySelVo> getCommunity(CommunitySelDto dto) {
