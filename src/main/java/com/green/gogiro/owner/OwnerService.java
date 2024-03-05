@@ -203,7 +203,7 @@ public class OwnerService {
             LimitIdx dto = new LimitIdx();
             dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
             dto.setStartIdx((page - 1) * NO_SHOW_PAGE);
-            dto.setRowCount(page * NO_SHOW_PAGE);
+            dto.setRowCount(NO_SHOW_PAGE);
             List<SelShopNoShowProcVo> pVo = mapper.selShopNoShow(dto);
             vo.setCount(mapper.selNoShowCount(dto.getIshop()));
             vo.setOwnerNoShowList(pVo);
@@ -223,7 +223,7 @@ public class OwnerService {
         LimitIdx dto = new LimitIdx();
         dto.setIshop(authenticationFacade.getLoginOwnerShopPk());
         dto.setStartIdx((page - 1) * RESERVATION_PAGE);
-        dto.setRowCount(page * RESERVATION_PAGE);
+        dto.setRowCount(RESERVATION_PAGE);
         int checkShop = authenticationFacade.getLoginOwnerCheckShop();
         List<OwnerNewReservationVo> voList;
         List<Integer> pk = new ArrayList<>();
