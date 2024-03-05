@@ -346,6 +346,9 @@ public class CommunityService {
         if (entitythrow.getAnnounce() == 1) {
             throw new RestApiException(NOT_COMMENT_FAV);
         }
+        if(entitythrow.getCount() >= 3) {
+            throw new RestApiException(VALID_BOARD);
+        }
         AtomicInteger atomic = new AtomicInteger(FAIL);
         communityFavRepository
                 .findById(ids)

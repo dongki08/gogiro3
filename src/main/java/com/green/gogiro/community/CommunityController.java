@@ -171,7 +171,8 @@ public class CommunityController {
             "    <option>0(추천 취소)</option>" +
             "</select><br>" +
             "없는 iboard pk 등록 시 : 등록된 글을 찾을 수 없습니다.<br>" +
-            "공지사항 추천 시 : 공지사항은 추천을 할 수 없습니다.")
+            "공지사항 추천 시 : 공지사항은 추천을 할 수 없습니다.<br>" +
+            "블러처리 게시판 추천 시 : 존재하지 않는 게시판입니다.")
     public ResVo favCommunity(@RequestBody CommunityInsFavDto dto) {
         return service.favCommunity(dto);
     }
