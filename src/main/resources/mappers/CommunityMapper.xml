@@ -46,7 +46,7 @@
 
     <select id="selCommunity">
         SELECT a.iboard, a.iuser, b.nickname AS writerName,b.pic AS writerPic, a.title, a.contents, DATE(a.created_at) AS createdAt, a.count
-        , COUNT(e.iboard) AS totalfav
+        , COUNT(e.iboard) AS totalfav, a.announce
         FROM t_community a
         LEFT JOIN t_user b
         ON a.iuser = b.iuser
@@ -65,11 +65,11 @@
         <choose>
             <when test="filter==0">
                 GROUP BY a.iboard
-                ORDER BY a.iboard DESC
+                ORDER BY a.announce DESC, a.iboard DESC
             </when>
             <when test="filter==1">
                 GROUP BY a.iboard
-                ORDER BY COUNT(c.iuser) DESC, a.iboard desc
+                ORDER BY a.announce DESC, COUNT(c.iuser) DESC, a.iboard desc
             </when>
         </choose>
         limit #{startIdx}, #{rowCount}
