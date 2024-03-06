@@ -382,26 +382,26 @@ public class CommunityService {
         ids.setIuser(authenticationFacade.getLoginUserPk());
         ids.setIboard(dto.getIboard());
         ReportEntity reportEntity = communityReportRepository.getReferenceById(dto.getIreport());
-
         Optional<CommunityCountEntity> optEntity = communityCountRepository.findByCommunityCountIds(ids);
-        //신고 중복 안 되도록 처리
+        UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
+        Optional<CommunityEntity> optionalCommunity = communityRepository.findAllByIboard(dto.getIboard());
+
+        //중복신고 예외처리
         if(optEntity.isPresent()) {
             throw new RestApiException(REPORT_COMMUNITY_ENTITY);
         }
-        UserEntity userEntity = userRepository.getReferenceById(authenticationFacade.getLoginUserPk());
-        Optional<CommunityEntity> optionalCommunity = communityRepository.findAllByIboard(dto.getIboard());
-        //없는 게시물 신고불가 처리
+        //없는게시물 신고 예외처리
         CommunityEntity communityEntity = optionalCommunity
                 .orElseThrow(() -> new RestApiException(NOT_COMMUNITY_CHECK));
-        //본인 게시글 신고 안 되도록 처리
+        //본인게시글 신고 예외처리
         if(communityEntity.getUserEntity().getIuser() == authenticationFacade.getLoginUserPk()) {
             throw new RestApiException(REPORT_COMMUNITY_MYUSER);
         }
-        //없는 신고 pk를 신고 하였을 때
+        //신고pk 외 신고 예외처리
         if(mapper.reportEntity(dto.getIreport().intValue()) == null) {
             throw new RestApiException(REPORT_ENTITY);
         }
-        //공지사항 신고 하였을때 예외처리
+        //공지사항 신고 예외처리
         if(communityEntity.getAnnounce() == 1) {
             throw new RestApiException(NOT_COMMUNITY_ANNOUNCE);
         }
