@@ -48,6 +48,8 @@ public class SecurityConfiguration {
                                         , "/admin/bookmark"
                                         , "/admin/review"
                                         , "/admin/doc"
+                                        , "/butcher/review"
+                                        , "/butcher/review/**"
                                         , "/svisor/shop"
                                         , "/svisor/user"
                                         , "/svisor/report"
