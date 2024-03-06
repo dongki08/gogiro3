@@ -191,6 +191,7 @@
         FROM t_community a
         JOIN t_commu_pics b
         ON a.iboard = b.iboard
+        WHERE a.count <![CDATA[<]]> 3
         GROUP BY b.iboard
         ORDER BY RAND() LIMIT 5
     </select>
