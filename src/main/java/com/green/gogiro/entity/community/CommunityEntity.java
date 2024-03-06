@@ -43,7 +43,8 @@ public class CommunityEntity extends BaseEntity {
     private int announce;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "communityEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "communityEntity",
+            cascade = CascadeType.ALL)
     private List<CommunityPicsEntity> communityPicsEntityList = new ArrayList<>();
 
     @ToString.Exclude

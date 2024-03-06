@@ -41,7 +41,6 @@ public class CommunityService {
     private final CommunityReportRepository communityReportRepository;
     private final CommunityCommentCountRepository communityCommentCountRepository;
     private final CommunityCommentRepository communityCommentRepository;
-    private final ReservationRepository reservationRepository;
 
 
     //커뮤니티 게시글 등록
