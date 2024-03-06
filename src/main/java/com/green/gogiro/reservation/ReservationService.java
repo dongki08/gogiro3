@@ -193,7 +193,7 @@ public class ReservationService {
                 throw new RestApiException(CANT_CANCEL);
             } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
                 throw new RestApiException(CANT_UPDATE);
-            } else if(reservation.getDate().isAfter(LocalDateTime.now())){
+            } else if(LocalDateTime.now().isAfter(reservation.getDate())){
                 throw new RestApiException(PASSED_BY_DATE);
             }
             reservation.setConfirm(1);
@@ -208,7 +208,7 @@ public class ReservationService {
                 throw new RestApiException(CANT_CANCEL);
             } else if(abs(diff.getYears())==0&&abs(diff.getMonths())==0&&abs(diff.getDays())==0){
                 throw new RestApiException(CANT_UPDATE);
-            } else if(pickup.getDate().isAfter(LocalDateTime.now())){
+            } else if(LocalDateTime.now().isAfter(pickup.getDate())){
                 throw new RestApiException(PASSED_BY_DATE);
             }
             pickup.setConfirm(1);
