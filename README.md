@@ -2,7 +2,7 @@
 
 <img src="https://github.com/Baeyongjinn/gogiro2/assets/146905709/3aa4c96c-3b6e-4a44-9faf-573da94b2b63">
 
-### 📅 프로젝트 기간 2024.01.02 ~ 2024.02.06
+### 📅 프로젝트 기간 2024.02.07 ~ 2024.03.08
 
 ## 🍖 팀원 소개
 |[배용진](https://github.com/Baeyongjinn)|[김현수](https://github.com/oxoxooox248)|[박동현](https://github.com/dongki08)|[문하나](https://github.com/hanadool1)|
