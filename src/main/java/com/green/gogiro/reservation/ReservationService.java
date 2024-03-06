@@ -341,6 +341,7 @@ public class ReservationService {
         }
         return vo;
     }
+    @Transactional
     public ResVo confirmReservation(ConfirmDto dto){
         if(authenticationFacade.getLoginOwnerCheckShop()!=dto.getCheckShop()){
             throw new RestApiException(CommonErrorCode.INVALID_PARAMETER);
