@@ -369,10 +369,12 @@ public class ReservationService {
             Optional<ReservationEntity> optional=reservationRepository.findById((long)dto.getIreser());
             ReservationEntity reservation=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             check=(reservation.getShopEntity().getDeposit()!=dto.getAmount());
+            if(check){reservationRepository.delete(reservation);}
         } else{
             Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
             PickupEntity pickup=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             check=(pickup.getTotal()!=dto.getAmount());
+            if(check){pickupRepository.delete(pickup);}
         }
         return check;
     }
