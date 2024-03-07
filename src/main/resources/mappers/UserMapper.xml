@@ -106,6 +106,7 @@
         LEFT JOIN t_shop_pic d
         ON a.ishop= d.ishop
         WHERE a.iuser = #{iuser}
+        AND a.confirm in (0,1,2)
         GROUP BY a.ireser
         UNION
         SELECT
@@ -128,6 +129,7 @@
         LEFT JOIN t_butcher_pic d
         ON e.ibutcher= d.ibutcher
         WHERE e.iuser = #{iuser}
+        AND e.confirm in (0,1,2)
         GROUP BY e.ipickup
         ORDER BY createdAt DESC
         LIMIT #{startIdx}, #{rowCount}
