@@ -45,7 +45,7 @@ public class SecurityConfiguration {
                                         , "/err"
                                         , "/admin/menu"
                                         , "/admin/info"
-                                        , "/admin/bookmark"
+                                        , "/admin/book"
                                         , "/admin/review"
                                         , "/admin/doc"
                                         , "/butcher/review"
