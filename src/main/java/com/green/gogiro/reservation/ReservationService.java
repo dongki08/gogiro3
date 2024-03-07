@@ -86,6 +86,7 @@ public class ReservationService {
         entity.setDate(dto.getLocalDateTime());
         entity.setRequest(dto.getRequest());
         entity.setHeadCount(dto.getHeadCount());
+        entity.setConfirm(-1);
         repository.save(entity);
         ReservationVo vo= new ReservationVo();
         vo.setAmount(shopEntity.getDeposit());
@@ -144,6 +145,7 @@ public class ReservationService {
         entity.setDate(dto.getLocalDateTime());
         entity.setRequest(dto.getRequest());
         entity.setTotal(amount.intValue());
+        entity.setConfirm(-1);
         pickupRepository.save(entity);
         entity.getPickupMenuEntityList()
               .addAll(dto.getMenus().stream().map(item->{
@@ -350,13 +352,13 @@ public class ReservationService {
             Optional<ReservationEntity> optional=reservationRepository.findById((long)dto.getIreser());
             ReservationEntity reservation=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(reservation.getIreser()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
-            if(reservation.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            if(reservation.getConfirm()==1||reservation.getConfirm()==-1){throw new RestApiException(ALREADY_CANCELED);}
             reservation.setConfirm(2);
         }else{
             Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
             PickupEntity pickup=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             if(pickup.getIpickup()!=dto.getIreser()){throw new RestApiException(INVALID_RESERVATION);}
-            if(pickup.getConfirm()==1){throw new RestApiException(ALREADY_CANCELED);}
+            if(pickup.getConfirm()==1||pickup.getConfirm()==-1){throw new RestApiException(ALREADY_CANCELED);}
             pickup.setConfirm(2);
         }
         return new ResVo(SUCCESS);
@@ -370,11 +372,13 @@ public class ReservationService {
             ReservationEntity reservation=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             check=(reservation.getShopEntity().getDeposit()!=dto.getAmount());
             if(check){reservationRepository.delete(reservation);}
+            reservation.setConfirm(0);
         } else{
             Optional<PickupEntity> optional=pickupRepository.findById((long)dto.getIreser());
             PickupEntity pickup=optional.orElseThrow(()->new RestApiException(INVALID_RESERVATION));
             check=(pickup.getTotal()!=dto.getAmount());
             if(check){pickupRepository.delete(pickup);}
+            pickup.setConfirm(0);
         }
         return check;
     }

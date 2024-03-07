@@ -73,6 +73,7 @@
         JOIN t_but_menu c
         ON c.ibut_menu = b.ibut_menu
         WHERE a.ibutcher = #{ishop}
+        AND a.confirm = 0
         LIMIT #{startIdx}, #{rowCount}
     </select>
     
