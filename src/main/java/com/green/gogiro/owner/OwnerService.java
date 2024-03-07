@@ -243,12 +243,12 @@ public class OwnerService {
             if (voList.isEmpty()) {
                 return vo;
             }
-                menuList = mapper.selButcherPickupMenu(dto);
                 vo.setOwnerReservationList(voList);
                 for (OwnerNewReservationVo reservationVo : voList) {
                     pk.add(reservationVo.getIreser().intValue());
                     map.put(reservationVo.getIreser().intValue(), reservationVo);
                 }
+                menuList = mapper.selButcherPickupMenu(pk);
                 for (SelButcherPickupMenuProcVo vo1 : menuList) {
                     map.get(vo1.getIreser()).getPickupList().add(vo1);
                 }

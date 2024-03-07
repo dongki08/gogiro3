@@ -72,9 +72,14 @@
         ON a.ipickup = b.ipickup
         JOIN t_but_menu c
         ON c.ibut_menu = b.ibut_menu
-        WHERE a.ibutcher = #{ishop}
+        <where>
+        a.ipickup in (
+            <foreach collection="ireser" item="ireser" separator=",">
+            #{ireser}
+            </foreach>
+            )
         AND a.confirm = 0
-        LIMIT #{startIdx}, #{rowCount}
+        </where>
     </select>
     
     <insert id="insStoreRegistrationPics">

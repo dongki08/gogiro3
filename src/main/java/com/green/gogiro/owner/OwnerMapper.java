@@ -24,7 +24,7 @@ public interface OwnerMapper {
 
     List<OwnerNewReservationVo> selButcherPickup(LimitIdx ishop);
 
-    List<SelButcherPickupMenuProcVo> selButcherPickupMenu(LimitIdx ishop);
+    List<SelButcherPickupMenuProcVo> selButcherPickupMenu(List<Integer> ireser);
 
     int selPickupCount(long ishop);
 
